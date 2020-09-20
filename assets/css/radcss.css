@@ -48,9 +48,26 @@
     position: absolute;
     width: 50px;
     opacity:1;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-align: center;
     font-size: larger;
+}
+.arrowUp {
+    /* animation: bouncing 1s infinite ease-in-out; */
+    top: 14%;/*3vh;*/
+    /* display: block; */
+    height: 50px;
+    left: 50%;
+    margin-left: -25px;
+    position: absolute;
+    width: 50px;
+    opacity:0;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: larger;
+}
+.arrowUp.invoiceOpen{
+    opacity:1;
 }
   #landing #header{
       /*height:98vh*/
@@ -86,7 +103,9 @@
 .svg_white{
     fill:rgba(255, 255, 255, 0.65);
 }
-
+#mainLogo .svgLink .svgLinkIcon{
+    fill:rgba(255, 255, 255, 0.95);
+}
 .svgLink{
     fill:var(--brand-purple);
 }

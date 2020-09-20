@@ -72,7 +72,7 @@
 						-->
 					</div>
 				</div>
-				<div class="shrinkCompen shrinkCompen_top"></div>
+				<div class="shrinkCompen shrinkCompen_top"><i style="color:white;" class="arrowUp fas fa-chevron-up"></i></div>
 				<div id="navAndMain" class="whiteBG">
 					
 				<!-- Nav --><!--
@@ -274,6 +274,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
+				
 					function shrinkDeadSpace(toShrink){
 						if(toShrink){
 							$('#landing').addClass('shrunk')//98vh
@@ -282,6 +283,12 @@
 							$('#intro').addClass('invoiceOpen')
 							//$('#navAndMain').removeClass('whiteBG')
 							$('#pdfViewer').addClass('invoiceOpen')
+							setTimeout(function(){
+								console.log('[fadsingArrowIn] deadSpaceShrunk',deadSpaceShrunk) 
+								if(deadSpaceShrunk==true){
+									$('.arrowUp').addClass('invoiceOpen')
+								}
+							}, 5000);
 							deadSpaceShrunk = true
 							console.log('[shrinkDeadSpace] deadSpaceShrunk shrunk',deadSpaceShrunk);
 						return true
@@ -291,14 +298,22 @@
 							//$('#navAndMain').addClass('whiteBG')
 							$('#pdfViewer').removeClass('invoiceOpen')
 							$('#intro').removeClass('invoiceOpen')
+
+							
+							
+								$('.arrowUp').removeClass('invoiceOpen')
+							 
+
 							deadSpaceShrunk = false
 							console.log('[shrinkDeadSpace] deadSpaceShrunk deshrunk',(!deadSpaceShrunk));
 						return false
 						}
 					}
+
 $(document).ready(function() {
 	console.log('$ready')
 	//
+
 	var scroll = 0
 	var deadSpaceShrunk = false
 	$(document).on( 'scroll', function(){
