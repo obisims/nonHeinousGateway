@@ -54,12 +54,12 @@
 }
 .arrowUp {
     /* animation: bouncing 1s infinite ease-in-out; */
-    top: 14%;/*3vh;*/
+    top: 8px;/*3vh;*/
     /* display: block; */
     height: 50px;
     left: 50%;
     margin-left: -25px;
-    position: absolute;
+    position: relative; /*absolute;*/
     width: 50px;
     opacity:0;
     transition: all 0.3s ease;

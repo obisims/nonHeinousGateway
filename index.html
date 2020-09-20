@@ -313,6 +313,26 @@
 $(document).ready(function() {
 	console.log('$ready')
 	//
+	
+
+	$( ".arrowUp" ).click(function() {
+		console.log('[clicked] arrowUp')
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		});
+		
+	});
+	$( ".arrow" ).click(function() {
+		console.log('[clicked] arrowDown')
+		window.scrollTo({
+			top: document.body.scrollHeight,
+			left: 0,
+			behavior: 'smooth'
+		});
+		  window.scrollTo(0,);
+	});
 
 	var scroll = 0
 	var deadSpaceShrunk = false
