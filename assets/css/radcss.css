@@ -1,0 +1,87 @@
+/* Variables */
+:root {
+    --brand-red: #f15b58;
+    --brand-purple: #291a2b;
+   /* --logo-image: url("https://storage.googleapis.com/stripe-sample-images/KAVHOLM.svg");
+    */
+
+    /*
+     var(--accent-color);
+    */
+  }
+
+#navAndMain{
+   /* position: relative;*/
+    width: 100% !important;
+    position: unset;
+    overflow: visible;
+    z-index:999;
+}
+#main #intro{
+    padding: 10px;
+    background-color: #d1d1d1;
+    height:91vh;
+}   
+#pdfViewer{
+    width:100%;
+    z-index:999;
+}
+.arrow {
+    /* animation: bouncing 1s infinite ease-in-out; */
+    bottom: 3vh;
+    /* display: block; */
+    height: 50px;
+    left: 50%;
+    margin-left: -25px;
+    position: absolute;
+    width: 50px;
+    opacity:1;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-size: larger;
+}
+  #landing #header{
+      /*height:98vh*/
+      padding-top: 25vh;
+      z-index: -1;
+  }
+  #landing{
+    height:98vh;
+    transition: all 0.8s ease;
+}
+#landing.shrunk{
+    height:200px;
+    opacity:0;
+    pointer-events: none;
+}
+#landing.shrunk .arrow{
+    opacity:0;
+}
+.shrinkCompen{
+    height:0vh;
+    transition: all 0.8s ease;
+}
+.shrinkCompen.shrinkCompen_top.unshrunk{
+    height:4.5vh;
+}
+.shrinkCompen.shrinkCompen_bottom.unshrunk{
+    height:4.5vh;
+}
+  #mainLogo .svgLink{
+    fill:white;
+}
+
+.svg_white{
+    fill:white;
+}
+
+.svgLink{
+    fill:var(--brand-purple);
+}
+a .svgLink:hover,a .svgLink:focus{
+    fill:var(--brand-red);
+}
+body,html{
+    background-color:#291a2b!important;
+}
+
