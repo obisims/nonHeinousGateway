@@ -16,15 +16,27 @@
     position: unset;
     overflow: visible;
     z-index:999;
+    background: transparent;
+    background: white;
 }
+
 #main #intro{
     padding: 10px;
-    background-color: #d1d1d1;
+    background: transparent;
     height:91vh;
+    transition: all 0.2s ease;
 }   
+#main #intro.invoiceOpen{
+    background-color: #d1d1d1;
+}
 #pdfViewer{
     width:100%;
     z-index:999;
+    opacity:0;
+    transition: all 0.8s ease;
+}
+#pdfViewer.invoiceOpen{
+    opacity:1;
 }
 .arrow {
     /* animation: bouncing 1s infinite ease-in-out; */
@@ -67,12 +79,12 @@
 .shrinkCompen.shrinkCompen_bottom.unshrunk{
     height:4.5vh;
 }
-  #mainLogo .svgLink{
+  #mainLogo{
     fill:white;
 }
 
 .svg_white{
-    fill:white;
+    fill:rgba(255, 255, 255, 0.65);
 }
 
 .svgLink{
@@ -85,3 +97,20 @@ body,html{
     background-color:#291a2b!important;
 }
 
+#dynamoFooter{
+font-size: xx-small;
+text-align: center;
+}
+.svgLinkIcon{
+    fill:rgba(255, 255, 255, 0.65);
+}
+.svgLinkIcon:hover,.svgLinkIcon:focus{
+    fill:rgba(255, 255, 255, 1);
+}
+.svgLinkIcon:active{
+    fill:--brand-red;
+}
+.faAdjust{
+    top: 4px;
+    position: relative;
+}
