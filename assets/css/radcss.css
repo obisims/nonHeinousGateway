@@ -2,6 +2,7 @@
 :root {
     --brand-red: #f15b58;
     --brand-purple: #291a2b;
+    --google-grey:#d1d1d1;
    /* --logo-image: url("https://storage.googleapis.com/stripe-sample-images/KAVHOLM.svg");
     */
  --animate-duration: 1s;
@@ -117,8 +118,12 @@
 a .svgLink:hover,a .svgLink:focus{
     fill:var(--brand-red);
 }
+
 body,html{
     background-color:#291a2b;
+  
+        
+    
 }
 
 #dynamoFooter{
@@ -187,33 +192,64 @@ text-align: center;
     top: 0;
     z-index: -1;
    
+    -webkit-transition: all 1000ms linear;
+    -ms-transition: all 1000ms linear;
+    transition: all 100ms linear;
   }
   
   
   
+  #duotone::before {
+    background-color: var(--brand-purple);/*rgb(25, 37, 80);*/
+    content: '';
+    display: block;
+    width: 100%;
+    
+    height: 100%;
+    mix-blend-mode: hard-light;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0 ;
+    /*backdrop-filter:grayscale(1);*/
+    backdrop-filter:brightness(92%) blur(2px);
+  }
+    #duotone.shrunkMode::before {
+        background-color:var(--google-grey);
+
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 100ms linear;
+   
+  }
   #duotone::after {
-    background-color: #291a2b;/*rgb(25, 37, 80);*/
+    background-color:var(--google-grey);/*rgb(25, 37, 80);*/
     content: '';
     display: block;
     width: 100%;
     height: 100%;
-    mix-blend-mode: lighten;
+    mix-blend-mode: screen;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1     ;
-    /*backdrop-filter:grayscale(1);*/
-    backdrop-filter:brightness(140%);
+    z-index: -1 ;
+    opacity:1;
+    filter: contrast(0.15)
+    /*backdrop-filter:grayscale(1);
+    backdrop-filter:brightness(140%);*/
   }
+
 
   #duotone.shrunkMode::after {
-    background-color: #d1d1d1;/*rgb(25, 37, 80);*/
-    -webkit-transition: background-color 500ms linear;
-    -ms-transition: background-color 500ms linear;
-    transition: background-color 500ms linear;
+      background-color:var(--google-grey);
+
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+  
+   /*  rgb(25, 37, 80);*/
+  
   }
-
-
-  body {
-    background: none;
+body{
+    background:none;
 }
