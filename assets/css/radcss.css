@@ -264,5 +264,6 @@ body{
 
 #pdfIframe{
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     overflow:hidden;
 }
