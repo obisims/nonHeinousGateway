@@ -120,7 +120,7 @@
 						<!-- Introduction -->
 							<section id="intro" class="main">
 								<span id="pdfViewer">
-									<iframe src="https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&amp;pid=explorer&amp;efh=false&amp;a=v&amp;chrome=false&amp;embedded=true" width="100%" height="100%" frameborder="0"></iframe>
+									<iframe defer id="pdfIframe" width="100%" height="100%" frameborder="0" data-src="https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&amp;pid=explorer&amp;efh=false&amp;a=v&amp;chrome=false&amp;embedded=true"></iframe>
 									
 								</span>
 								<!--<div class="spotlight">
@@ -395,6 +395,18 @@ var ShrinkStuffAt = 0.1//150
 var shrinkToHeight = 50
 var ExpandStuffAt = 0.75// percentage of shrinkToHeight 0.25 // vh
 
+var iFrameIsLoaded = false;
+$(window).scroll(function() {
+    var height = $(window).scrollTop();
+    if(deadSpaceShrunk==true) {
+        if(!iFrameIsLoaded){
+            var iframe = $("#pdfIframe");
+            iframe.attr("src", iframe.data("src"));
+            iFrameIsLoaded = true;
+        }
+    }
+});
+
 
 var windowHeight = 0
 $(document).ready(function() {
@@ -402,9 +414,6 @@ $(document).ready(function() {
 	//
 
 	
-	$('#duotone').css("background", `url(` + randomProperty(all_backgrounds.base) + `) no-repeat center center fixed`)
-				$('#duotone').css("background-size", "cover");
-
 	
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')
@@ -463,6 +472,9 @@ $(document).ready(function() {
 			deadSpaceShrunk = shrinkDeadSpace(false)
 		}
 	});
+
+	$('#duotone').css("background", `url(` + randomProperty(all_backgrounds.lineart) + `) no-repeat center center fixed`)
+				$('#duotone').css("background-size", "cover");
 
 })
 
