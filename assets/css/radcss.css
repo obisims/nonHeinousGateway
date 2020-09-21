@@ -34,7 +34,7 @@
     background-color: #d1d1d1;
 }
 #pdfViewer{
-    
+    -webkit-overflow-scrolling: touch;
     width:100%;
     z-index:999;
     opacity:0;
@@ -268,5 +268,6 @@ body{
 
 #pdfIframe{
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     overflow:hidden;
 }
