@@ -133,3 +133,8 @@ text-align: center;
     top: 4px;
     position: relative;
 }
+
+.button .faAdjust{
+    /*top: 0.23em;*/
+    font-size: 1.6em;
+}
