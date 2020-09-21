@@ -89,12 +89,15 @@
 						</footer>-->
 					</section>
 					<div id="preHeader">
-						<i style="color:white;" class="arrow fas fa-chevron-down"></i>
+						<i class="scrollArrow arrow fas fa-chevron-down"></i>
 						<!--<img class="arrow" src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-128.png" />		
 						-->
 					</div>
 				</div>
-				<div class="shrinkCompen shrinkCompen_top"><i style="color:white;" class="arrowUp fas fa-chevron-up"></i></div>
+				<div class="shrinkCompen shrinkCompen_top">
+					<i class="scrollArrow arrowUp fas fa-chevron-up"></i>
+					
+				</div>
 				<div id="navAndMain" class="whiteBG">
 					
 				<!-- Nav --><!--
@@ -302,18 +305,26 @@
 
 var animationEnd = 'webkitAnimationEnd mozAnimationEnd oanimationend animationend';
 
-const animateCSS = (element, animation, prefix = 'animate__') =>
+const animateCSS = (element, animation,speed, prefix = 'animate__') =>
     // We create a Promise and return it
     new Promise((resolve, reject) => {
         const animationName = `${prefix}${animation}`;
         //const node = document.querySelector(element);
         const $elem = $(element)
         // $($elem).removeClass('hidden-load')
-        //node.classList.add(`${prefix}animated`, animationName);
-        $elem.addClass(`${prefix}animated ${animationName}`).one(animationEnd, function() {
-            $(this).removeClass(`${prefix}animated ${animationName}`)
-            resolve('Animation ended');
-        })
+		//node.classList.add(`${prefix}animated`, animationName);
+		if(!speed){
+			$elem.addClass(`${prefix}animated ${animationName}`).one(animationEnd, function() {
+            	$(this).removeClass(`${prefix}animated ${animationName}`)
+            	resolve('Animation ended');
+        	})
+		}else{
+			$elem.addClass(`${prefix}animated ${animationName} ${prefix}${speed}`).one(animationEnd, function() {
+            	$(this).removeClass(`${prefix}animated ${animationName} ${prefix}${speed}`)
+            	resolve('Animation ended');
+        	})
+		}
+        
         // When the animation ends, we clean the classes and resolve the Promise
 
         /*
@@ -359,6 +370,11 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 									})
 								}else if(deadSpaceShrunk==true){
 									$('.arrowUp').addClass('invoiceOpen')
+									animateCSS('.arrowUp', 'fadeInUp').then((message) => {
+										// Do something after the animation
+										console.log('we fadeIn')
+										//$('.mobileNavButton').show()
+									})
 								}
 							}, 5000);
 
@@ -377,7 +393,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 							//$('#button_stripe').removeClass('hidden-load')
 							animateCSS('iframe', 'slideInUp').then((message) => {
 								// Do something after the animation
-								console.log('we fadeIn')
+								console.log('iframe slideInUp')
 							
 							})		
 								
@@ -406,9 +422,9 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 
 							deadSpaceShrunk = false
 							$('#duotone').toggleClass('shrunkMode')
-							animateCSS('iframe', 'slideOutDown').then((message) => {
+							animateCSS('iframe', 'slideOutDown','fasts').then((message) => {
 								// Do something after the animation
-								console.log('we fadeIn')
+								console.log('iframe backOutDown')
 								
 							})		
 							console.log('[shrinkDeadSpace] deadSpaceShrunk deshrunk',(!deadSpaceShrunk,' <',vhInPixels_shrinkAt));

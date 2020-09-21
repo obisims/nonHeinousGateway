@@ -23,7 +23,7 @@
 }
 
 #main #intro{
-    padding: 10px;
+    padding: 0px;
     background: transparent;
     height:93vh;
     transition: all 0.2s ease;
@@ -73,10 +73,20 @@
     transition: all 0.3s ease;
     text-align: center;
     font-size: larger;
+    color:var(--brand-purple);
 }
 .arrowUp.invoiceOpen{
     opacity:1;
 }
+
+
+     
+
+
+
+
+
+
   #landing #header{
       /*height:98vh*/
       padding-top: 15vh;
@@ -130,9 +140,12 @@ a .svgLink:hover,a .svgLink:focus{
 
 body,html{
     background-color:#291a2b;
-  
+  height:100%;
         
     
+}
+#wrapper{
+    height:100%;
 }
 
 #dynamoFooter{
@@ -339,7 +352,6 @@ body{
   
   }
 
- 
 
 
 
