@@ -71,11 +71,12 @@
 }
   #landing #header{
       /*height:98vh*/
-      padding-top: 25vh;
+      padding-top: 15vh;
       z-index: -1;
   }
   #landing{
     height:98vh;
+    min-height: 500px;
     transition: all 0.8s ease;
 }
 #landing.shrunk{
