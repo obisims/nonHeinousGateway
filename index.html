@@ -438,7 +438,7 @@ var scroll = 0
 var deadSpaceShrunk = false
 var ShrinkStuffAt = 0.1//150
 var shrinkToHeight = 50
-var ExpandStuffAt = 0.75// percentage of shrinkToHeight 0.25 // vh
+var ExpandStuffAt = 0.025// 0.75// percentage of shrinkToHeight 0.25 // vh
 
 var innerHeight;
 /*i.... like, really wanna know if it's mobile */
@@ -519,8 +519,16 @@ $(document).ready(function() {
 		scroll = document.documentElement.scrollTop || document.body.scrollTop
 		//console.log('[scroll] scroll: ',scroll);
 		windowHeight = $(window).height()
-		vhInPixels_expandAt = shrinkToHeight - (windowHeight*ExpandStuffAt); // (windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
+		vhInPixels_expandAt =  shrinkToHeight - (windowHeight*ExpandStuffAt); // shrinkToHeight -(ShrinkStuffAt*ExpandStuffAt) //(windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
 		vhInPixels_shrinkAt = (windowHeight * ShrinkStuffAt);
+		var sortingOutHeights = {
+			window:windowHeight,
+			ExpandStuffAt:ExpandStuffAt,
+			ShrinkStuffAt:ShrinkStuffAt,
+			expandAt:vhInPixels_expandAt,
+			shrinkAt:vhInPixels_shrinkAt
+		}
+		console.log('[onScroll] sortingOutHeights',sortingOutHeights)
 		var scrollster = {
 			//scroll:scroll,
 		//	shrunk:deadSpaceShrunk,
