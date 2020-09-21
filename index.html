@@ -353,12 +353,13 @@ const animateCSS = (element, animation,speed, prefix = 'animate__') =>
 						if(toShrink==true){
 							$('#landing').addClass('shrunk')//98vh
 							$('.shrinkCompen').addClass('unshrunk')
-							
-							$('#intro').addClass('invoiceOpen')
+							var $intro = $('#intro')
+							$intro.addClass('invoiceOpen')
 							//$('#navAndMain').removeClass('whiteBG')
 							$('#pdfViewer').addClass('invoiceOpen')
-							
-							
+							if(isMobile==true)$intro.css('height','83vh')
+
+							/*ANIMATE BACKTO TOP ARROWS */
 							setTimeout(function(){
 								console.log('[fadsingArrowIn] deadSpaceShrunk',deadSpaceShrunk) 
 								if(deadSpaceShrunk==true&&isMobile){
@@ -476,6 +477,7 @@ $(document).ready(function() {
 	
 	console.log('$ready')
 	//
+	
 	if(isMobile==true)window.scrollTo(0,1)
 	innerHeight = window.innerHeight
 	
