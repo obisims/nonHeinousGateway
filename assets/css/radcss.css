@@ -140,12 +140,9 @@ a .svgLink:hover,a .svgLink:focus{
 
 body,html{
     background-color:#291a2b;
-  height:100%;
+  
         
     
-}
-#wrapper{
-    height:100%;
 }
 
 #dynamoFooter{
