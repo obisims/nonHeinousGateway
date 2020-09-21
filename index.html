@@ -519,7 +519,7 @@ $(document).ready(function() {
 		scroll = document.documentElement.scrollTop || document.body.scrollTop
 		//console.log('[scroll] scroll: ',scroll);
 		windowHeight = $(window).height()
-		vhInPixels_expandAt = shrinkToHeight - (shrinkToHeight*ExpandStuffAt); // (windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
+		vhInPixels_expandAt = shrinkToHeight - (windowHeight*ExpandStuffAt); // (windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
 		vhInPixels_shrinkAt = (windowHeight * ShrinkStuffAt);
 		var scrollster = {
 			//scroll:scroll,
@@ -528,11 +528,11 @@ $(document).ready(function() {
 			expandAt:vhInPixels_expandAt,
 			//shrinkToHeight:shrinkToHeight
 		}
-		var heightser = {
-			innerHeight:innerHeight,
-			windowHeight:windowHeight
-		}
-		console.log('[scroll] heightser: ',heightser);
+		//var heightser = {
+		//	innerHeight:innerHeight,
+		//	windowHeight:windowHeight
+		//}
+		//console.log('[scroll] heightser: ',heightser);
 		//actionAtScroll = 150 // 250
 		
 		if(scroll>vhInPixels_shrinkAt&&deadSpaceShrunk==false){
