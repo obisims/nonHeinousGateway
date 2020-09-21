@@ -271,3 +271,7 @@ body{
     -webkit-overflow-scrolling: touch;
     overflow:hidden;
 }
+
+#pdfIframe div[role="toolbar"] {
+    display: none;
+}
