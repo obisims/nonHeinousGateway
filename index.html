@@ -351,7 +351,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 							setTimeout(function(){
 								console.log('[fadsingArrowIn] deadSpaceShrunk',deadSpaceShrunk) 
 								if(deadSpaceShrunk==true&&isMobile){
-									$('.mobileNavButton').toggleClass('show')
+									$('.mobileNavButton').addClass('show')
 									animateCSS('.mobileNavButton', 'fadeInLeft').then((message) => {
 										// Do something after the animation
 										console.log('we fadeIn')
@@ -396,7 +396,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 								animateCSS('.mobileNavButton', 'fadeOutLeft').then((message) => {
 									// Do something after the animation
 									console.log('we fadeIn')
-									$('.mobileNavButton').toggleClass('show')
+									$('.mobileNavButton').removeClass('show')
 								})
 							}else{
 								$('.arrowUp').removeClass('invoiceOpen')
