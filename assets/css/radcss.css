@@ -139,7 +139,7 @@ text-align: center;
     font-size: 1.6em;
 }
 .surcharge{
-   
+    font-size: x-small;
     display: block;
     opacity:1;
     transition: all 0.3s ease;
