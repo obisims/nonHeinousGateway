@@ -39,9 +39,26 @@
 							<h2>Magna veroeros</h2>
 						</header>-->
 						<ul class="actions special">
-							<li><a href="#" class="button"><span> <span style="font-weight:700;">Bank</span> Transfer </span></a><div><sup>0% surcharge</sup></div></li>
-							<li><a href="#" class="button"><span>Pay with <span style="font-weight:700;"> Ƀ</span></span></a><div><sup>0% surcharge</sup></div></li>
-							<li><a href="#" class="button primary"><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span></a><div><sup>1.75% + $0.30 surch</sup></div></li>
+							<li>
+								<a href="#" class="button"><span> <span style="font-weight:700;">Direct</span> Deposit</span></a>
+								<div class="surcharge notActive"><sup>0% surcharge</sup></div>
+								
+							</li>
+							<li>
+								<a href="#" class="button"><span>Pay with <span style="font-weight:700;"> Ƀ</span></span></a>
+								<div class="surcharge notActive"><sup>0% surcharge</sup></div>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#" class="button primary"><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span></a>
+								<div class="surcharge notActive"><sup>1.75% + $0.30 surch</sup></div>
+							</li>
 						</ul>
 						<!--<ul class="features">
 							<li>
@@ -315,6 +332,10 @@ $(document).ready(function() {
 	console.log('$ready')
 	//
 	
+	$( ".button" ).hover(function() {
+		console.log('[hover] button')
+		$(this).next().toggleClass('notActive')
+	})
 
 	$( ".arrowUp" ).click(function() {
 		console.log('[clicked] arrowUp')
