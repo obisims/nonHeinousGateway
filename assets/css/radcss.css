@@ -28,17 +28,21 @@
     height:93vh;
     transition: all 0.2s ease;
     overflow:hidden;
+    -webkit-overflow-scrolling: touch;
 }   
 #main #intro.invoiceOpen{
     background-color: #d1d1d1;
 }
 #pdfViewer{
-    -webkit-overflow-scrolling: touch;
+    
     width:100%;
     z-index:999;
     opacity:0;
     transition: all 0.8s ease;
 }
+
+
+
 #pdfViewer.invoiceOpen{
     opacity:1;
 }
@@ -264,6 +268,5 @@ body{
 
 #pdfIframe{
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
     overflow:hidden;
 }
