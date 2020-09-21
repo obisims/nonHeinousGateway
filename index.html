@@ -402,7 +402,9 @@ $(window).scroll(function() {
         if(!iFrameIsLoaded){
             var iframe = $("#pdfIframe");
             iframe.attr("src", iframe.data("src"));
-            iFrameIsLoaded = true;
+			iFrameIsLoaded = true;
+
+			
         }
     }
 });
