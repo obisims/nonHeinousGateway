@@ -28,13 +28,13 @@
     height:93vh;
     transition: all 0.2s ease;
     overflow:hidden;
-    -webkit-overflow-scrolling: touch;
+    
 }   
 #main #intro.invoiceOpen{
     background-color: #d1d1d1;
 }
 #pdfViewer{
-    -webkit-overflow-scrolling: touch;
+    
     width:100%;
     z-index:999;
     opacity:0;
@@ -267,11 +267,84 @@ body{
 }
 
 #pdfIframe{
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch !important;
     overflow:hidden;
 }
 
-#pdfIframe div[role="toolbar"] {
-    display: none;
+
+
+
+#mobileNav{
+    display: inline-block;
+   /* background-color: var(--brand-purple);*/
+    background-color: rgba(0,0,0,0);
+   
+    top: 30px;
+    position: fixed;
+    left: 32px;
+
 }
+.mobileNavButton{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 0px;
+    margin-right: 10px;
+   
+    transition: background-color .3s, 
+      opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+    
+}
+.mobileNavButton:hover {
+    cursor: pointer;
+    background-color: #333;
+  }
+  .mobileNavButton:active {
+    background-color: #555;
+  }
+  .mobileNavButton.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+#mobile_scrollToTop_UP {
+  
+    /*background-color: var(--brand-purple);/*rgba(0,0,0,0.5);*/
+    background-color: rgba(41, 26, 43, 0.8);
+  }
+  #mobile_scrollToTop_UP::after {
+    content: "\f106";
+  }
+
+ 
+  #mobile_scrollToTop_Another {
+  
+    /*background-color: var(--brand-purple);*/
+    background-color: rgba(41, 26, 43, 0.8);
+  }
+  #mobile_scrollToTop_Another::after {
+    content: "\f571";
+  
+  }
+
+ 
+
+
+
+
+
+
+
+

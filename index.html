@@ -346,12 +346,31 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 							$('#intro').addClass('invoiceOpen')
 							//$('#navAndMain').removeClass('whiteBG')
 							$('#pdfViewer').addClass('invoiceOpen')
+							
+							
 							setTimeout(function(){
 								console.log('[fadsingArrowIn] deadSpaceShrunk',deadSpaceShrunk) 
 								if(deadSpaceShrunk==true){
 									$('.arrowUp').addClass('invoiceOpen')
+									$('.mobileNavButton').toggleClass('show')
+									animateCSS('.mobileNavButton', 'fadeInLeft').then((message) => {
+										// Do something after the animation
+										console.log('we fadeIn')
+										//$('.mobileNavButton').show()
+									})
 								}
 							}, 5000);
+
+
+
+
+
+				
+
+
+
+
+
 							deadSpaceShrunk = true
 							$('#duotone').toggleClass('shrunkMode')
 							//$('#button_stripe').removeClass('hidden-load')
@@ -408,7 +427,13 @@ $(window).scroll(function() {
         }
     }
 });
-
+const scrollToTop = () => {
+  const c = document.documentElement.scrollTop || document.body.scrollTop;
+  if (c > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, c - c / 8);
+  }
+};
 
 var windowHeight = 0
 $(document).ready(function() {
@@ -422,14 +447,21 @@ $(document).ready(function() {
 		$(this).next().toggleClass('notActive')
 	})
 
+	
+	$( "#mobile_scrollToTop_UP" ).click(function() {
+		console.log('[clicked] mobile arrowUp')
+		scrollToTop()
+	});
 	$( ".arrowUp" ).click(function() {
 		console.log('[clicked] arrowUp')
+		scrollToTop()
+		/*
 		window.scrollTo({
 			top: 0,
 			left: 0,
 			behavior: 'smooth'
 		});
-		
+		*/
 	});
 	$( ".arrow" ).click(function() {
 		console.log('[clicked] arrowDown')
@@ -466,12 +498,19 @@ $(document).ready(function() {
 			// and scroll if above shrink threshold (scroll=100, threshold=75) 
 			//then shrink the space  // obj{height: 50} // new scrolll is scroll-50
 			deadSpaceShrunk = shrinkDeadSpace(true)
+			
+			
 		} else if(scroll<vhInPixels_expandAt&&deadSpaceShrunk==true){
 			console.log('[scroll] expanding: ',scroll,scrollster);
 			//if space is NOT there
 			// and scroll is BELOW shrink threshold (scroll=50, threshold=75)
 			//then shrink the space
 			deadSpaceShrunk = shrinkDeadSpace(false)
+			animateCSS('.mobileNavButton', 'fadeOutLeft').then((message) => {
+								// Do something after the animation
+								console.log('we fadeIn')
+								$('.mobileNavButton').toggleClass('show')
+							})
 		}
 	});
 
@@ -492,5 +531,19 @@ $(document).ready(function() {
 					<div id="duotone" class="hidden-load">
 						<!--animate__animated animate__slideInRight animate__slow-->
 					 </div>
+						 
+					 <div id="mobileNav">
+						 <a id="mobile_scrollToTop_UP" class="mobileNavButton"></a>
+						 <a id="mobile_scrollToTop_Another" class="mobileNavButton"></a>
+					</div>
+					 
+					<!--
+
+				<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+					 <script>addBackToTop({
+					   diameter: 56,
+					   backgroundColor: 'rgb(255, 82, 82)',
+					   textColor: '#fff'
+					 })</script>	--> 
 	</body>
 </html>
