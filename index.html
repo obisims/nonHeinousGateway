@@ -11,10 +11,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/radcss.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-
+	
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<div id="landing">
@@ -289,12 +293,53 @@
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/radgrounder.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
 			<script>
 				
+
+var animationEnd = 'webkitAnimationEnd mozAnimationEnd oanimationend animationend';
+
+const animateCSS = (element, animation, prefix = 'animate__') =>
+    // We create a Promise and return it
+    new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`;
+        //const node = document.querySelector(element);
+        const $elem = $(element)
+        // $($elem).removeClass('hidden-load')
+        //node.classList.add(`${prefix}animated`, animationName);
+        $elem.addClass(`${prefix}animated ${animationName}`).one(animationEnd, function() {
+            $(this).removeClass(`${prefix}animated ${animationName}`)
+            resolve('Animation ended');
+        })
+        // When the animation ends, we clean the classes and resolve the Promise
+
+        /*
+        function handleAnimationEnd() {
+          node.classList.remove(`${prefix}animated`, animationName);
+          resolve('Animation ended');
+        }
+        node.addEventListener('animationend', handleAnimationEnd, {once: true});
+        */
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
 					function shrinkDeadSpace(toShrink){
-						if(toShrink){
+						if(toShrink==true){
 							$('#landing').addClass('shrunk')//98vh
 							$('.shrinkCompen').addClass('unshrunk')
 							
@@ -308,12 +353,21 @@
 								}
 							}, 5000);
 							deadSpaceShrunk = true
-							console.log('[shrinkDeadSpace] deadSpaceShrunk shrunk',deadSpaceShrunk);
+							$('#duotone').toggleClass('shrunkMode')
+							//$('#button_stripe').removeClass('hidden-load')
+							animateCSS('iframe', 'slideInUp').then((message) => {
+								// Do something after the animation
+								console.log('we fadeIn')
+							
+							})		
+								
+							console.log('[shrinkDeadSpace] deadSpaceShrunk shrunk',deadSpaceShrunk,' >',vhInPixels_expandAt);
 						return true
 						}else{
 							$('#landing').removeClass('shrunk')//98vh
 							$('.shrinkCompen').removeClass('unshrunk')
 							//$('#navAndMain').addClass('whiteBG')
+							
 							$('#pdfViewer').removeClass('invoiceOpen')
 							$('#intro').removeClass('invoiceOpen')
 
@@ -323,14 +377,34 @@
 							 
 
 							deadSpaceShrunk = false
-							console.log('[shrinkDeadSpace] deadSpaceShrunk deshrunk',(!deadSpaceShrunk));
+							$('#duotone').toggleClass('shrunkMode')
+							animateCSS('iframe', 'slideOutDown').then((message) => {
+								// Do something after the animation
+								console.log('we fadeIn')
+								
+							})		
+							console.log('[shrinkDeadSpace] deadSpaceShrunk deshrunk',(!deadSpaceShrunk,' <',vhInPixels_shrinkAt));
 						return false
 						}
 					}
+var vhInPixels_expandAt = 0
+var vhInPixels_shrinkAt = 0
+var scroll = 0
+var deadSpaceShrunk = false
+var ShrinkStuffAt = 0.1//150
+var shrinkToHeight = 50
+var ExpandStuffAt = 0.75// percentage of shrinkToHeight 0.25 // vh
 
+
+var windowHeight = 0
 $(document).ready(function() {
 	console.log('$ready')
 	//
+
+	
+	$('#duotone').css("background", `url(` + randomProperty(all_backgrounds.HOME) + `) no-repeat center center fixed`)
+				$('#duotone').css("background-size", "cover");
+
 	
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')
@@ -353,21 +427,56 @@ $(document).ready(function() {
 			left: 0,
 			behavior: 'smooth'
 		});
-		  window.scrollTo(0,);
+		//  window.scrollTo(0,);
+		
 	});
-
-	var scroll = 0
-	var deadSpaceShrunk = false
+	
 	$(document).on( 'scroll', function(){
+		
+
 		scroll = document.documentElement.scrollTop || document.body.scrollTop
-		console.log('[scroll]',scroll);
-		var actionAtScroll = 150 // 250
-		if(scroll>actionAtScroll&&deadSpaceShrunk==false){deadSpaceShrunk = shrinkDeadSpace(true)
-		} else if(scroll<actionAtScroll&&deadSpaceShrunk==true)deadSpaceShrunk = shrinkDeadSpace(false)
+		console.log('[scroll] scroll: ',scroll);
+		windowHeight = $(window).height()
+		vhInPixels_expandAt = shrinkToHeight - (shrinkToHeight*ExpandStuffAt); // (windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
+		vhInPixels_shrinkAt = (windowHeight * ShrinkStuffAt);
+		var scrollster = {
+			//scroll:scroll,
+		//	shrunk:deadSpaceShrunk,
+			shrinkAt:vhInPixels_shrinkAt,//,
+			expandAt:vhInPixels_expandAt,
+			//shrinkToHeight:shrinkToHeight
+		}
+		
+		//actionAtScroll = 150 // 250
+		
+		if(scroll>vhInPixels_shrinkAt&&deadSpaceShrunk==false){
+			console.log('[scroll] shrinking: ',scroll,scrollster);
+			//if space is there // obj{height: 100}
+			// and scroll if above shrink threshold (scroll=100, threshold=75) 
+			//then shrink the space  // obj{height: 50} // new scrolll is scroll-50
+			deadSpaceShrunk = shrinkDeadSpace(true)
+		} else if(scroll<vhInPixels_expandAt&&deadSpaceShrunk==true){
+			console.log('[scroll] expanding: ',scroll,scrollster);
+			//if space is NOT there
+			// and scroll is BELOW shrink threshold (scroll=50, threshold=75)
+			//then shrink the space
+			deadSpaceShrunk = shrinkDeadSpace(false)
+		}
 	});
 
 })
+
+
+
+
+
+
+
+
 				//$('#landing').css('height','100vh')
 				</script>
+					<div id="duotone" class="hidden-load">
+						<!--animate__animated animate__slideInRight animate__slow-->
+					 </div>
 	</body>
 </html>

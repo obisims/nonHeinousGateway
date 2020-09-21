@@ -4,12 +4,13 @@
     --brand-purple: #291a2b;
    /* --logo-image: url("https://storage.googleapis.com/stripe-sample-images/KAVHOLM.svg");
     */
-
+ --animate-duration: 1s;
     /*
      var(--accent-color);
     */
   }
 
+  
 #navAndMain{
    /* position: relative;*/
     width: 100% !important;
@@ -25,6 +26,7 @@
     background: transparent;
     height:91vh;
     transition: all 0.2s ease;
+    overflow:hidden;
 }   
 #main #intro.invoiceOpen{
     background-color: #d1d1d1;
@@ -76,11 +78,13 @@
   }
   #landing{
     height:98vh;
-    min-height: 500px;
+    /*min-height: 500px;*/
     transition: all 0.8s ease;
 }
 #landing.shrunk{
-    height:200px;
+   /*height:200px;*/
+   height: 50px;
+     /*height:0.5vh;*/
     opacity:0;
     pointer-events: none;
 }
@@ -114,7 +118,7 @@ a .svgLink:hover,a .svgLink:focus{
     fill:var(--brand-red);
 }
 body,html{
-    background-color:#291a2b!important;
+    background-color:#291a2b;
 }
 
 #dynamoFooter{
@@ -156,4 +160,60 @@ text-align: center;
     ul.icons {
         display: none;
     }
+}
+
+
+
+
+
+
+#duotone {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
+}
+
+#duotone {
+   /* background: #291a2b;  url('https://i.gifer.com/7gS5.gif') no-repeat center center fixed; */
+    background-size: cover;
+
+    width: 100%;
+    height: 100%;
+    animation-fill-mode: forwards;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+   
+  }
+  
+  
+  
+  #duotone::after {
+    background-color: #291a2b;/*rgb(25, 37, 80);*/
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: lighten;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1     ;
+    /*backdrop-filter:grayscale(1);*/
+    backdrop-filter:brightness(140%);
+  }
+
+  #duotone.shrunkMode::after {
+    background-color: #d1d1d1;/*rgb(25, 37, 80);*/
+    -webkit-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+  }
+
+
+  body {
+    background: none;
 }
