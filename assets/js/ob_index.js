@@ -45,7 +45,7 @@ function shrinkDeadSpace(toShrink){
             console.log('[shrinkDeadSpace][InvoiceUI] Invoice Mobile UI loading...') 
             
                 $('.mobileNavButton').addClass('show')
-                animateCSS('.mobileNavButton', 'fadeInLeft',null,null,'animateCSSHide').then((message) => {
+                animateCSS('.mobileNavButton', 'slideInLeft').then((message) => {
                     // Do something after the animation
                     console.log('[shrinkDeadSpace][InvoiceUI] Invoice Mobile Nav Bar loaded') //$('.mobileNavButton').show()
                 })
@@ -62,7 +62,8 @@ function shrinkDeadSpace(toShrink){
 
         }, 5000);
         /////////////////////////////////
-
+        $('#landing_section').fadeOut()
+        $('#header').fadeOut()
         
         //deadSpaceShrunk = true
         $('#duotone').addClass('shrunkMode')
@@ -116,15 +117,20 @@ function shrinkDeadSpace(toShrink){
         $('#pdfViewer').removeClass('invoiceOpen')
         $('#intro').removeClass('invoiceOpen')
         $('#navAndMain').removeClass('invoiceOpen')
+       
+        $('#landing_section').fadeIn()
+        $('#header').fadeIn()
+        
         
         /* LOAD OUT UI */        
         if(isMobile){
-            animateCSS('.mobileNavButton', 'fadeOutLeft',null,null,'animateCSSHide').then((message) => {
-                $('.mobileNavButton').removeClass('show')
+            $('.mobileNavButton').removeClass('show')
+            /*animateCSS('.mobileNavButton', 'slideOutLeft').then((message) => {
+                //$('.mobileNavButton').removeClass('show')
                 // Do something after the animation
                 console.log('mobileNav faded out')
               //  $('.mobileNavButton').hide()
-            })
+            })*/
         }else{
             $('.arrowUp').removeClass('invoiceOpen')
         }

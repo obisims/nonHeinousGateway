@@ -159,7 +159,7 @@ body,html{
    /*height:200px;*/
    /*height:0.5vh;*/
    height: 50px;
-    opacity:0;
+    /*opacity:0;*/
     pointer-events: none;
 }
 #landing.shrunk.isMobile{
@@ -346,8 +346,24 @@ body{
     overflow:hidden;
 }
 
+#mobileInvoiceHeader{
+    text-align: center;
+    color: var(--brand-purple);
+    font-size: xx-large;
+    font-weight: 800;
+    font-family: sans-serif;
+    opacity:0;
+    transition: opacity 0.4s ease;
+}
 
+#landing.isMobile.shrunk #mobileInvoiceHeader{
+    opacity:1;
+}
 
+#mobileInvoiceHeader:before {
+    content: "THX-1138";
+   
+ }
 
 #mobileNav{
     /*display: inline-block;*/
@@ -370,8 +386,7 @@ body{
     border-radius: 2px;/*0 */
     /*margin-right: 10px;*/
    margin-bottom: 10px;/* */
-    transition: background-color .3s, /* */
-      opacity .5s, visibility .5s;/* */
+    transition: background-color .3s,opacity .8s, visibility .8s;
     opacity: 0;/* 0*/
     visibility: hidden;/* */
     z-index: 1000;/* */
@@ -394,11 +409,9 @@ body{
   .mobileNavButton.show {
     opacity: 1;
     visibility: visible;
+    transition: background-color .3s,opacity .8s, visibility .8s;
   }
-  .mobileNavButton.show.animateCSSHide {
-    opacity: 0;
-    visibility: hidden;
-  }
+
   
 
 
