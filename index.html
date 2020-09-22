@@ -98,8 +98,11 @@
 					<i class="scrollArrow arrowUp fas fa-chevron-up"></i>
 				</div>
 			<!-- INVOICE VIEW -->
-				<div id="navAndMain" class="whiteBG">
+				<div id="navAndMain" class="iFrameNotLoaded whiteBG">
 				<!-- Main -->
+					<div id="binderCover">
+						<div><img src="images/loader.svg" /></div>
+					</div>
 					<div id="main">
 						<!-- Introduction -->
 							<section id="intro" class="main">
@@ -108,6 +111,7 @@
 								</span>
 							</section>
 					</div>
+				
 				</div>
 			<!-- SPACERS / Footer -->
 				<footer id="dynamoFooter" class="shrinkCompen shrinkCompen_bottom">
@@ -145,18 +149,25 @@
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/Tocca.js"></script><!-- testing -->
+			<!-- my scripts -->
 			<script src="assets/js/radgrounder.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/stateSwitcher.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/ob_utils.js"></script>
 			<script src="assets/js/ob_index.js"></script>
+			
+
+
 		<!-- OverlayJazz -->
 			<div id="duotone" class="hidden-load">
 			</div>
 			<div id="mobileNav">
 				<a id="mobile_scrollToTop_UP" class="mobileNavButton"></a>
 				<a id="mobile_scrollToTop_Another" class="mobileNavButton"></a>
+				<a id="mobile_scrollToTop_Share" class="mobileNavButton"></a>
+				<a id="mobile_scrollToTop_Print" class="mobileNavButton"></a>
 			</div>
 	</body>
 </html>
