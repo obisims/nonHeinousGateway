@@ -396,7 +396,7 @@ const animateCSS = (element, animation,speed, prefix = 'animate__') =>
 
 
 							//deadSpaceShrunk = true
-							$('#duotone').toggleClass('shrunkMode')
+							$('#duotone').addClass('shrunkMode')
 							//$('#button_stripe').removeClass('hidden-load')
 							animateCSS('iframe', 'slideInUp').then((message) => {
 								// Do something after the animation
@@ -428,7 +428,7 @@ const animateCSS = (element, animation,speed, prefix = 'animate__') =>
 							 
 
 							//sdeadSpaceShrunk = false
-							$('#duotone').toggleClass('shrunkMode')
+							$('#duotone').removeClass('shrunkMode')
 							animateCSS('iframe', 'slideOutDown','fasts').then((message) => {
 								// Do something after the animation
 								console.log('iframe backOutDown')
