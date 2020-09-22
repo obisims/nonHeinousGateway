@@ -485,13 +485,13 @@ $(window).scroll(function() {
     }
 });
 
-/*function scrollToTop(){
+function scrollToTop(){
 	window.scrollTo({
-			top: 0,
+			top: -10,
 			left: 0,
 			behavior: 'smooth'
 		});
-}*/
+}/*
 const scrollToTop = () => {
   const c = document.documentElement.scrollTop || document.body.scrollTop;
   if (c > 0) {
@@ -499,7 +499,7 @@ const scrollToTop = () => {
     window.scrollTo(0, c - c / 8);
   }
 };
-
+*/
 $(document).ready(function() {
 	
 	console.log('$ready')
@@ -524,6 +524,7 @@ $(document).ready(function() {
 	});
 	$( ".arrowUp" ).click(function() {
 		console.log('[clicked] arrowUp')
+		shrinkDeadSpace(false)
 		scrollToTop()
 		/*
 		window.scrollTo({
@@ -535,11 +536,12 @@ $(document).ready(function() {
 	});
 	$( ".arrow" ).click(function() {
 		console.log('[clicked] arrowDown')
-		window.scrollTo({
+		shrinkDeadSpace(true)
+		/*window.scrollTo({
 			top: document.body.scrollHeight,
 			left: 0,
 			behavior: 'smooth'
-		});
+		});*/
 		//  window.scrollTo(0,);
 		
 	});
@@ -618,11 +620,14 @@ $(document).ready(function() {
 			//switch the expandAt height to a percentage of the filler
 			//vhInPixels_expandAt = shrinkToHeight*ExpandStuffAt
 			//vhInPixels_expandAt = 1
-			vhInPixels_expandAt = 0
+			//vhInPixels_expandAt = 0
 			//find out what mobile difference in vh is in sh
 			//93<83
 			// 
 			// (elemHeights.screen.vh*7) add ir somewhere
+
+			///OH!!! fucking overscroll!, so we can just use minueses?
+			vhInPixels_expandAt = 0
 
 		}
 		//if(vhInPixels_expandAt<=0)vhInPixels_expandAt = shrinkToHeight*0.1
@@ -659,7 +664,7 @@ $(document).ready(function() {
 			deadSpaceShrunk = shrinkDeadSpace(true)
 			
 			
-		} else if(scroll<vhInPixels_expandAt&&deadSpaceShrunk==true){
+		} else if(scroll<=vhInPixels_expandAt&&deadSpaceShrunk==true){
 			console.log('[scroll] expanding: ',scroll,scrollster);
 			//if space is NOT there
 			// and scroll is BELOW shrink threshold (scroll=50, threshold=75)
