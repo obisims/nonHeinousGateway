@@ -1,6 +1,51 @@
 let all_backgrounds = new Object()
 all_backgrounds.base = new Object()
 
+
+
+function loadBackgroundGif(backgroundsObject,elemToApplyTo,backgroundSettings){
+    //loadBackgroundGif(all_backgrounds.lineart,'#duotone')
+
+
+    /* background : url( + randomProperty(all_backgrounds.lineart) + )  */
+    var selectedImage = randomProperty(backgroundsObject)
+    var backgroundSettings = backgroundSettings || {
+        /*  background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;
+            background: lightblue url("img_tree.gif") no-repeat fixed center;
+            It does not matter if one of the values above are missing, e.g. background:#ff0000 url(smiley.gif); is allowed.    
+            https://www.w3schools.com/cssref/css3_pr_background.asp
+         */
+        //color:'', //hex //#fff /* Used if the image is unavailable  no fallback on duo? */
+        image:`url("${selectedImage}")`,// url("paper.gif"); // https://www.w3schools.com/cssref/pr_background-image.asp
+        position:'center center',//size // center center;  Center the image  /* left top, left center, left bottom, right top, right center, right bottom, center top, center center, center bottom */ https://www.w3schools.com/cssref/pr_background-position.asp
+        size:'cover', /* Resize the background image to cover the entire container */ //"auto", "cover" and "contain"
+        repeat:'no-repeat',// //no-repeat
+        //origin:'',// // background-origin: content-box; // https://www.w3schools.com/cssref/css3_pr_background-origin.asp
+        attachment:'fixed', // // background-attachment: fixed;
+        //clip:'', // // background-clip: padding-box;
+    }
+	//$('#duotone').css("background", `url(` + randomProperty(backgroundsObject) + `) no-repeat center center fixed`)
+    //$('#duotone').css("background-size", "cover");
+    var css = backgroundSettings.image
+    if(backgroundSettings.position)css+= ` ${backgroundSettings.position}`
+    if(backgroundSettings.position&&backgroundSettings.size)css+='/'
+    if(backgroundSettings.size)css+= ` ${backgroundSettings.size}`
+    if(backgroundSettings.repeat)css+= ` ${backgroundSettings.repeat}`
+    if(backgroundSettings.attachment)css+= ` ${backgroundSettings.attachment}`
+    //apply
+    var elemToApplyTo = elemToApplyTo || '#duotone'
+    $(elemToApplyTo).css("background", css);
+    //return
+    var backgroundLoaded = {
+        selectedImage:selectedImage,
+        backgroundSettings:backgroundSettings,
+        selectedFrom:backgroundsObject,
+        css:css
+    }
+    console.log('[loadBackgroundGif]',backgroundLoaded)
+return backgroundLoaded
+}
+
 //function to add BGS to groups
 function addToBGS(toBGGroup, backGround, fromBGGroup) {
   //  console.log('[addToBGS]',{toBGGroup:toBGGroup, backGround:backGround, fromBGGroup:fromBGGroup})

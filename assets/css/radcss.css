@@ -227,7 +227,9 @@ text-align: center;
     z-index: -1;
 
   }
-  
+  #duotone.shrunkMode{
+    height:90%;
+  }
   
   
   #duotone::before {
@@ -250,7 +252,7 @@ text-align: center;
   }
     #duotone.shrunkMode::before {
         background-color:var(--google-grey);
-
+       
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
