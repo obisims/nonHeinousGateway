@@ -53,8 +53,53 @@ const animateCSS = (element, animation,speed, addExtraClass,removeExtraClass,pre
 
 
 /*////////////////////////////////////////
-//////////////
+//////////GET SCREEN HEIGHT INFO
 */////////////////////////////////////////
+function getScreenHeights(){
+    screenHeight = window.screen.height // 896 <-this one seems to have the piuxels from the adress bar aswell... that should help with the weird scroll calcs
+		innerHeight = window.innerHeight //  719 //originally i was using this one
+		scroll = document.documentElement.scrollTop || document.body.scrollTop
+		//console.log('[scroll] scroll: ',scroll);
+		windowHeight = $(window).height() // 719 aswell, seems same as innerHeight
+		
+		var elemHeights = {/*vh and px vals 0.5 = 50vh */
+			shrunkSpacer:{px:50},
+			shrinkCompenA:{vh:0.035},
+			main:{vh:0.83},//93vh on desktop main intro
+			shrinkCompenB:{vh:0.035},
+			window:{vh:1,px:windowHeight},
+			screen:{vh:screenHeight/windowHeight,px:screenHeight}
+		}
+		
+		/*function vhConvert(vh,converter){
+			var screenHeight = screenHeight
+		}*/
+		elemHeights.shrunkSpacer.vh = elemHeights.shrunkSpacer.px/windowHeight
+
+		elemHeights.shrinkCompenA.px = windowHeight*elemHeights.shrinkCompenA.vh
+		elemHeights.main.px = windowHeight*elemHeights.main.vh
+		elemHeights.shrinkCompenB.px = windowHeight*elemHeights.shrinkCompenB.vh
+		elemHeights.main.px = windowHeight*elemHeights.main.vh
+
+		elemHeights.full = elemHeights['shrunkSpacer'].px+elemHeights['shrinkCompenA'].px+elemHeights['main'].px+elemHeights['shrinkCompenB'].px
+
+		elemHeights.shrunkSpacer.sh = elemHeights.shrunkSpacer.px/screenHeight
+		elemHeights.shrinkCompenA.sh = elemHeights.shrinkCompenA.px/screenHeight
+		elemHeights.main.sh = elemHeights.main.px/screenHeight
+		elemHeights.shrinkCompenB.sh = elemHeights.shrinkCompenB.px/screenHeight
+/*		
+		elemHeights.shrunkSpacer.sh = screenHeight*elemHeights.shrunkSpacer.vh
+		elemHeights.shrinkCompenA.sh = screenHeight*elemHeights.shrinkCompenA.vh
+		elemHeights.main.sh = screenHeight*elemHeights.main.vh
+		elemHeights.shrinkCompenB.sh = screenHeight*elemHeights.shrinkCompenB.vh
+*/
+
+		console.log('[getScreenHeights]',scroll,elemHeights)
+		
+return elemHeights
+}
+
+
 /////////////////////////////////////////
 //////////////////////////////////////////
 
