@@ -204,6 +204,8 @@ function shrinkDeadSpace(toShrink){
         //* ANIMATE AND LOAD IFRAME*//
         //?? //deadSpaceShrunk==true
         animateCSS('iframe', 'slideInUp').then((message) => {
+            var scrollingElement = (document.scrollingElement || document.body);
+            scrollingElement.scrollTop = scrollingElement.scrollHeight;
             console.log('[shrinkDeadSpace][iFrame][animation] Slid Up')
             // Do something after the animation
             console.log('[shrinkDeadSpace][iFrame] check if loaded:',stateSettings.status.iFrameLoaded)
@@ -236,11 +238,7 @@ function shrinkDeadSpace(toShrink){
             }else{
                 console.log('[shrinkDeadSpace][iFrame][load] iFrame already loaded')
             }
-            var nowHeights = getScreenHeights()
-            var scrollingTo = nowHeights.shrinkCompenA.px+nowHeights.shrunkSpacer.px// document.body.scrollHeight
-            
-            console.log('[shrinkDeadSpace] scrollTo down to',scrollingTo)
-            scrollTo(scrollingTo, 100);
+           
         })	
         deadSpaceShrunk==true
         stateSettings.status.deadSpace = 'shrunk'
