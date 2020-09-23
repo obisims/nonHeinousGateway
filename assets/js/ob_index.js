@@ -87,14 +87,19 @@ function shrinkDeadSpace(toShrink){
                         
                         iframe.onreadystatechange = function(){
                         if (iframe.readyState == "complete"){
-                            $('#binderCover').remove()
-                            $('#intro').addClass('invoiceOpen')
+                           //$('#binderCover').remove()
+                           $('#pdfIframe').removeClass('unloaded')
+                           $('#iFrameLoadSpinner').addClass('shrinkOut')
+                           
+                           $('#intro').addClass('invoiceOpen')
                         }
                         };
                     } else {
                         iframe.onload = function(){
-                            $('#binderCover').remove()
-                            $('#intro').addClass('invoiceOpen')
+                           // $('#binderCover').remove()
+                           $('#pdfIframe').removeClass('unloaded')
+                           $('#iFrameLoadSpinner').addClass('shrinkOut')
+                           $('#intro').addClass('invoiceOpen')
                         };
                     }
                 console.log('[shrinkDeadSpace][iFrame][load] iFrame Loaded for first time:',true)

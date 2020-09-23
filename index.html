@@ -104,23 +104,21 @@
 				<div id="navAndMain" class="iFrameNotLoaded whiteBG">
 				<!-- Main -->
 					<div id="binderCover">
-						<div>   <input disabled type="checkbox" id="check">
+						<div>
+							<input disabled type="checkbox" id="check">
 							<span>
-							<label for="check">
-							  <div class="check-icon">
-								
+								<label id="iFrameLoadSpinner" for="check">
+									<div class="check-icon"></div>
+								</label>
+								<!--<div id="tilde">~</div>-->
+							</span>
 						</div>
-							  
-						</label>
-							
-							  <div id="tilde">~</div>
-							</span></div>
 					</div>
 					<div id="main">
 						<!-- Introduction -->
 							<section id="intro" class="main">
 								<span id="pdfViewer">
-									<iframe defer id="pdfIframe" width="100%" height="100%" frameborder="0" data-src="https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false"></iframe>
+									<iframe defer id="pdfIframe" class="unloaded" width="100%" height="100%" frameborder="0" data-src="https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false"></iframe>
 								</span>
 							</section>
 					</div>
