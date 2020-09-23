@@ -353,6 +353,8 @@ body{
     /*font-size: xx-large;*/
     padding-top:3%;
     /*max-width:75%;*/
+    padding-left: 10%;
+    padding-right: 10%;
     display:none;
     line-height: normal;
     font-weight: 900;
@@ -363,11 +365,12 @@ body{
 
 #landing.isMobile.shrunk #mobileInvoiceHeader{
     opacity:1;
+    display:block;
 }
 
 #mobileInvoiceHeader:before {
-    content: "Doppelgänger Doppelgänger Doppelgänger Dudes Pty Ltd";
     content: "obisims.com\ATHX-1138";
+    content: "Doppelgänger Dudes Pty Ltd";
     white-space: pre-wrap;
     
  }
