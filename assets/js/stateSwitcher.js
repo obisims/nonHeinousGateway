@@ -204,8 +204,10 @@ function shrinkDeadSpace(toShrink){
         //* ANIMATE AND LOAD IFRAME*//
         //?? //deadSpaceShrunk==true
         animateCSS('iframe', 'slideInUp').then((message) => {
-            var scrollingElement = (document.scrollingElement || document.body);
-            scrollingElement.scrollTop = scrollingElement.scrollHeight;
+            /* scroll to bottom right after swipe up */
+           // var scrollingElement = (document.scrollingElement);
+            //scrollingElement.scrollTop = scrollingElement.scrollHeight;
+            scrollTo(document.scrollingElement.scrollHeight,100)
             console.log('[shrinkDeadSpace][iFrame][animation] Slid Up')
             // Do something after the animation
             console.log('[shrinkDeadSpace][iFrame] check if loaded:',stateSettings.status.iFrameLoaded)

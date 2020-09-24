@@ -145,6 +145,7 @@ return elemHeights
 
 // Element to move, time in ms to animate
 function scrollTo(element, duration) {
+    console.log('[scrollTo]',{element:element,duration:duration})
     var e = document.documentElement;
     if (e.scrollTop === 0) {
       var t = e.scrollTop;

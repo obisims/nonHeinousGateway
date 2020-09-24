@@ -237,7 +237,23 @@ $(document).ready(function() {
         $('#shrinkMobileBuffer').css('height',(window.screen.height/$(window).height()*7))
         //window.scrollTo(0,1)
         scrollTo(1, 200);
+
+        
     }
+
+/*
+    var mc = new Hammer(document.querySelector('#hammerMe'));
+    // let the pan gesture support all directions.
+    // this will block the vertical scrolling on a touch-device while on the element
+    mc.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
+
+    // listen to events...
+    mc.on("panup pandown", function(ev) {
+        console.log('[HAMMER.JS][PAN DETECTED]',ev.type)
+        //document.getElementById('myElement').textContent = ev.type +" gesture detected.";
+    });
+*/
+
 
     /////////////////////
     /* button commands */
@@ -402,6 +418,16 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 /*  */
 
+/*$('.class').each(function(){
+    var $this = $(this);
+    var h = new Hammer(this);
+    h.on("swiperight", function() {
+        //code to execute
+    }
+});*/
 
+/*$(document.body).hammer().on('release', function(ev){
+    alert(ev.gesture);
+});*/
 /////////////////////////////////////////
 //////////////////////////////////////////
