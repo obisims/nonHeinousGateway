@@ -224,8 +224,13 @@ function shrinkDeadSpace(toShrink){
                            //$('#binderCover').remove()
                            $('#pdfIframe').removeClass('unloaded')
                            $('#iFrameLoadSpinner').addClass('shrinkOut')
-                           
                            $('#intro').addClass('invoiceOpen')
+            
+                            setTimeout(function() {
+                                //$('.invoiceName').removeClass('hidden-load')
+                                $('#binderCover').remove()
+                            }, 400)
+                           
                         }
                         };
                     } else {
@@ -234,6 +239,10 @@ function shrinkDeadSpace(toShrink){
                            $('#pdfIframe').removeClass('unloaded')
                            $('#iFrameLoadSpinner').addClass('shrinkOut')
                            $('#intro').addClass('invoiceOpen')
+                           setTimeout(function() {
+                                //$('.invoiceName').removeClass('hidden-load')
+                                $('#binderCover').remove()
+                            }, 400)
                         };
                     }
                 console.log('[shrinkDeadSpace][iFrame][load] iFrame Loaded for first time:',true)
