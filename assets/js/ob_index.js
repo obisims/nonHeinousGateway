@@ -248,6 +248,7 @@ $(document).ready(function() {
         if(innerHeight<=500){
             /* text fix for tiny phones */
             document.body.style.fontSize = '80%'
+            $('#header').css('padding-top','30%')
         } else if(innerHeight<=700){
             /* text fix for tiny phones */
             document.body.style.fontSize = '90%'
@@ -281,6 +282,13 @@ $(document).ready(function() {
           $("#pay_Crypto.payButton").slideToggle();
           $("#pay_Stripe.payButton").slideToggle();
          $('#paymentOptions').toggleClass('hidePadding');
+         if(innerHeight<=500){
+            /* text fix for tiny phones */
+            $('#header').css('padding-top','15%')
+        } else if(innerHeight<=700){
+            /* text fix for tiny phones */
+        }else{
+        }
           
     }); 
     $("#pay_Crypto.payButton").click(function(){

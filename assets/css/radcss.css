@@ -146,7 +146,8 @@ body,html{
 
   #landing #header{
       /*height:98vh*/
-      /*padding-top: 15vh;*/
+      /*padding-top: 15vh;
+      padding-top: 30%;*/
       padding-top: 35vh;
       z-index: -1;
       transition: padding-top 0.8s ease;
