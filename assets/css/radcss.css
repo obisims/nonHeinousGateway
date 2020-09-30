@@ -148,12 +148,13 @@ body,html{
       /*height:98vh*/
       /*padding-top: 15vh;
       padding-top: 30%;*/
-      padding-top: 35vh;
+      /*padding-top: 35vh;*/
+      padding-top: 10vh;
       z-index: -1;
       transition: padding-top 0.8s ease;
   }
   #landing #header.directDebitShrink{
-    padding-top: 10vh;
+    /*padding-top: 10vh;*/
 }
   
   #landing{

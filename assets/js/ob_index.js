@@ -248,13 +248,13 @@ $(document).ready(function() {
         if(innerHeight<=500){
             /* text fix for tiny phones */
             document.body.style.fontSize = '80%'
-            $('#header').css('padding-top','30%')
+            /*$('#header').css('padding-top','30%')*/
         } else if(innerHeight<=700){
             /* text fix for tiny phones */
-            $('#header').css('padding-top','40%')
+           /* $('#header').css('padding-top','40%')*/
             document.body.style.fontSize = '90%'
         }else{
-            $('#header').css('padding-top','45%')
+            /*$('#header').css('padding-top','45%')*/
             document.body.style.fontSize = '95%'
         }
         
@@ -286,7 +286,7 @@ $(document).ready(function() {
          $('#paymentOptions').toggleClass('hidePadding');
          if(innerHeight<=500){
             /* text fix for tiny phones */
-            $('#header').css('padding-top','15%')
+           /* $('#header').css('padding-top','15%')*/
         } else if(innerHeight<=700){
             /* text fix for tiny phones */
         }else{
