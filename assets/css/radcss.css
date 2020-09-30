@@ -613,7 +613,8 @@ body{
 #mainLogo svg{
   text-align: right;
   POSITION: absolute;
-  padding-top: 15px;
+  /*padding-top: 15px;*/
+  margin-top: -5px;
 }
 
 
@@ -628,6 +629,7 @@ body{
 }
 
 .invoiceHeader_innerWrapper {
+  line-height: 1;
   display: flex;
   text-align: center;
   width: fit-content;
@@ -641,7 +643,9 @@ body{
 }
 
 #landing header#header {
-  padding-bottom: 10px;
+ /* padding-bottom: 10px;*/
+  padding-bottom: 30px;
+
 }
 
 #invoiceTitleContainer.invoiceHeader_box{
@@ -679,7 +683,8 @@ outline:none;
 
 
 ul#paymentOptions {
-  margin-bottom: 0;
+  /*margin-bottom: 0;*/
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 480px){

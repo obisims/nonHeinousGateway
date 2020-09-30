@@ -251,6 +251,8 @@ $(document).ready(function() {
         } else if(innerHeight<=700){
             /* text fix for tiny phones */
             document.body.style.fontSize = '90%'
+        }else{
+            document.body.style.fontSize = '95%'
         }
         
     }
