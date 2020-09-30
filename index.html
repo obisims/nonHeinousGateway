@@ -38,7 +38,7 @@
 							 </a>
 						</span>-->
 					<!-- Title Area -->
-					<h4 style="margin: 0;">Doppelgänger Dudes Pty Ltd</h4>
+					<h4 style="margin: 0 0 10px 0;">Doppelgänger Doppelgänger Dudes Pty Ltd</h4>
 					<div id="invoiceHeader" class="invoiceHeader_wrapper">
 						<div class="invoiceHeader_innerWrapper">
 						  <div class="invoiceHeader_box">
@@ -120,10 +120,11 @@
 								<b>BSB</b> <span>733-039</span><br>
 								<b>Reference</b> <span>THX-1184</span>
 							</div>
-							<div class="pay_instructions_right">
+							<div id="payInstructions" class="pay_instructions_right">
 								<b>Instructions</b><br>
 								<span>Use these account details to<br>transfer a total of <b>$<span class="invoicePrice">666.00</span></b><br>
 									<b><i>Please remember</i></b> to put the Invoice<br>Number inside your transaction refrence.
+								<div><button id="confirm_directDebit" style="font-size: 9px;">Confirm Payment</button></div>
 							</span>
 							</div>
 						</div>
@@ -210,6 +211,7 @@
 			<!-- my scripts -->
 			<script src="assets/js/radgrounder.js"></script>
 			<script src="assets/js/util.js"></script>
+			<script src="assets/js/ob_slack.js"></script>
 			<script src="assets/js/stateSwitcher.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/ob_utils.js"></script>
