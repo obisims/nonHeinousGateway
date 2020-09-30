@@ -568,7 +568,7 @@ console.log('[slack_confirmPayment]',clientName)
 
 
 function GetUserIP(){
-  var ret_ip;
+  var ret;
   $.ajaxSetup({async: false});
   var ipifyKey = 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'
   $.get('https://geo.ipify.org/api/v1?apiKey='+ipifyKey, function(r){ 
