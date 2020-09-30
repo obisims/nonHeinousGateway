@@ -224,7 +224,11 @@ $(document).on( 'scroll', function(){
 $(document).ready(function() {
 	console.log('[$(document).ready]','')
     ///if is mobile chnage base state
-    
+    $('#lastFmWidget').lastfmNowPlaying({
+        apiKey: '2aaee86f01b31b5f99409e37844e4038',
+        members: ['obi_sims']
+    });
+
 	innerHeight = window.innerHeight
 	
     if(isMobile==true){
