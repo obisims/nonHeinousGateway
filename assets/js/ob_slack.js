@@ -546,7 +546,7 @@ function slack_openedPayment(invNum,payMethod){
   var chan = "#obisims-invoices"// document.getElementById('target').value
   // format payload for slack
 
-  var slack_confirmPayment_payload ={
+  var slack_openedPayment_payload ={
     // "text": msg,
      "channel":chan,
      "username":'Invoice Gateway - Opened',
@@ -606,7 +606,7 @@ function slack_openedPayment(invNum,payMethod){
 
 
 
-  var sdata = JSON.stringify(slack_confirmPayment_payload)//formatForSlack(invNum, chan,payMethod,clientName)
+  var sdata = JSON.stringify(slack_openedPayment_payload)//formatForSlack(invNum, chan,payMethod,clientName)
   // log in console
   console.log(sdata)
   // post
