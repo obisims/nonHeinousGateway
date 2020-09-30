@@ -21,9 +21,21 @@ function slack_invoiceLoad(slackPars){
     client:client
   }
   
+
+
+
+
+
+
+
+
+
   
   $.getJSON('https://api.ipstack.com/check?access_key=5881abddbc972045f1878182a8611e63', function(data) {
-    
+  
+
+  })
+  .done(function() {
     var ipData = data//JSON.stringify(data, null, 2) 
     console.log('ipData Grabbed:',ipData);
   
@@ -113,7 +125,7 @@ function slack_invoiceLoad(slackPars){
         }
      ]*/
   };
-
+  
   if(ipData.ip){
     var msgFields = payload['blocks'][0]['fields']
     
@@ -124,15 +136,130 @@ function slack_invoiceLoad(slackPars){
       "type": "mrkdwn",
       "text": "*Location*: "+ipData.location.country_flag_emoji+" "+ipData.city+", "+ipData.region_code
     }];
-
+  
     //msgFields.splice.apply(msgFields, [2, 0].concat(ipArrs));
     msgFields.splice(1, 0, ...ipArrs);
    
   }
     // return json string of payload
     
-
-
+  
+  
+    var sdata = JSON.stringify(payload) || formatForSlack(invNum, chan)
+    $.ajax({
+      // url is what you get from activating the "Incoming WebHooks" slack integration
+      // if you leave, you should see an error message "No Team", status 404
+      url: slackSettings.webhook,//'https://hooks.slack.com/services/XXXXX/XXXXXX/XXXXXX',
+      type: 'POST',
+      processData: true,
+      data : sdata ,
+      success : function(data) {
+        // success will show on page
+        console.log(data)
+      //  $('#result').html(data);
+      },
+      error: function(data){
+        // error will show error object
+        console.log(data)
+      //  $('#result').html("error:"+JSON.stringify(data));
+    }
+    });
+    })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    
+    console.log('getJSON request failed! ' + textStatus);
+  
+    
+      var devices = {
+        true:'mobile',
+        false:'desktop'
+      }
+      
+    var payload ={
+      // "text": msg,
+      "channel":slackPars.chan,
+      "username":'Invoice Gateway - Opened',
+      "icon_emoji":':eye:',
+      "blocks": [
+        
+        {
+          "type": "section",
+          "block_id": "section789",
+          "fields": [
+            {
+              "type": "mrkdwn",
+              "text": '*Invoice*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
+            },
+            {
+              "type": "mrkdwn",
+              "text": "*Device*: "+devices[isMobile]
+            },
+            {
+              "type": "mrkdwn",
+              "text": '*Project*: '+slackPars.project
+            },
+            {
+              "type": "mrkdwn",
+              "text": '*Client*: '+slackPars.client
+            }
+            
+          ]
+        }/*,
+        {
+          "type": "section",
+          "block_id": "section567",
+          "text": {
+            "type": "mrkdwn",
+            "text": "<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
+            "alt_text": "Haunted hotel image"
+          }
+        },
+        {
+          "type": "section",
+          "block_id": "section789",
+          "fields": [
+            {
+              "type": "mrkdwn",
+              "text": "*Average Rating*\n1.0"
+            }
+          ]
+        }*/
+      ]/*,
+      "attachments":[
+        {
+           //"fallback":"Invoice Submitted: <http://url_to_task|THX-1184>",
+           //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
+         //  "color":slackSettings.colors.green,
+           "fields":[
+              {
+                 "title":"IP",
+                 "value":ipData.ip,
+                 "short":true
+              },
+              {
+                "title":"Country",
+                "value":ipData.country_name,
+                "short":true
+             },
+              {
+                "title":"Region",
+                "value":ipData.region_name,
+                "short":true
+             }
+             
+           ]
+        }
+     ]*/
+  };
+  
+    // return json string of payload
+    
+  
+  
     var sdata = JSON.stringify(payload) || formatForSlack(invNum, chan)
     $.ajax({
       // url is what you get from activating the "Incoming WebHooks" slack integration
@@ -154,8 +281,9 @@ function slack_invoiceLoad(slackPars){
     });
 
 
-
-  });
+  })
+  .always(function() { console.log('getJSON request ended!'); });
+ 
 
 
 }
