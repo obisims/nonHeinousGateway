@@ -572,7 +572,7 @@ function GetUserIP(){
   $.ajaxSetup({async: false});
   var ipifyKey = 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'
   $.get('https://geo.ipify.org/api/v1?apiKey='+ipifyKey, function(r){ 
-    ret_ip = r; 
+    ret = r; 
   });
   return ret;
 }
