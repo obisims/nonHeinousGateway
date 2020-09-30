@@ -640,3 +640,11 @@ body{
   opacity: 1;
  /* background-color: #32CD32;*/
 }
+
+#landing header#header {
+  padding-bottom: 10px;
+}
+
+#invoiceTitleContainer.invoiceHeader_box{
+  width: max-content;
+}
