@@ -30,13 +30,14 @@ function slack_invoiceLoad(slackPars){
 
 
 
-  
+  var ipData;
   $.getJSON('https://api.ipstack.com/check?access_key=5881abddbc972045f1878182a8611e63', function(data) {
-  
+    var ipData = data  
+    console.log('ipData Grabbed:',ipData);
 
   })
   .done(function(data) {
-    var ipData = data//JSON.stringify(data, null, 2) 
+   // var ipData = data//JSON.stringify(data, null, 2) 
     console.log('ipData Grabbed:',ipData);
   
     
