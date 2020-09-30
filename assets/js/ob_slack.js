@@ -9,11 +9,11 @@
       yellow:'#F4B400',
       green:'#0F9D58'
     },
-    webhook:'http://hooks.slack.com/services/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'
+    webhook:'https://hooks.slack.com/services/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'
   }
 function slack_invoiceLoad(slackPars){
   var slackPars = slackPars||{
-    invNum : 'THX-1138',
+    invNum : 'THX-1184',
     chan : "#obisims-invoices",
     //ipData:ipData,
     //isMobile:isMobile
@@ -22,7 +22,7 @@ function slack_invoiceLoad(slackPars){
   }
   
   
-  $.getJSON('http://api.ipstack.com/check?access_key=5881abddbc972045f1878182a8611e63', function(data) {
+  $.getJSON('https://api.ipstack.com/check?access_key=5881abddbc972045f1878182a8611e63', function(data) {
     
     var ipData = data//JSON.stringify(data, null, 2) 
     console.log('ipData Grabbed:',ipData);
@@ -89,7 +89,7 @@ function slack_invoiceLoad(slackPars){
       ]/*,
       "attachments":[
         {
-           //"fallback":"Invoice Submitted: <http://url_to_task|THX-1138>",
+           //"fallback":"Invoice Submitted: <http://url_to_task|THX-1184>",
            //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
          //  "color":slackSettings.colors.green,
            "fields":[
@@ -164,7 +164,7 @@ function slack_invoiceLoad(slackPars){
 
 function slack_confirmPayment(invNum,invTotal,payMethod,clientName,projectName){
   // get message to be posted
-  var invNum = invNum||'THX-1138'//document.getElementById('msgInput').value
+  var invNum = invNum||'THX-1184'//document.getElementById('msgInput').value
   // get target channel or team member
   var invTotal = invTotal || 666
   var clientName = clientName || 'Doppelgänger Dudes Pty Ltd'
@@ -278,7 +278,7 @@ console.log('[slack_confirmPayment]',clientName)
 
 function slack_cancelPayment(invNum,payMethod,clientName){
   // get message to be posted
-  var invNum = invNum||'THX-1138'//document.getElementById('msgInput').value
+  var invNum = invNum||'THX-1184'//document.getElementById('msgInput').value
   // get target channel or team member
   //var invTotal = invTotal || 666
   var clientName = clientName || 'Doppelgänger Dudes Pty Ltd'
@@ -326,7 +326,7 @@ console.log('[slack_confirmPayment]',clientName)
      ],*/
      "attachments":[
        {
-          "fallback":"Invoice Gateway Cancelled: <http://url_to_task|THX-1138>",
+          "fallback":"Invoice Gateway Cancelled: <http://url_to_task|THX-1184>",
           //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
           "color":slackSettings.colors.yellow,
           "fields":[
@@ -391,7 +391,7 @@ console.log('[slack_confirmPayment]',clientName)
 
 function slack_openedPayment(invNum,payMethod){
   // get message to be posted
-  var invNum = invNum||'THX-1138'//document.getElementById('msgInput').value
+  var invNum = invNum||'THX-1184'//document.getElementById('msgInput').value
   // get target channel or team member
  // var invTotal = invTotal || 666
  // var clientName = clientName || 'Doppelgänger Dudes Pty Ltd'
@@ -432,7 +432,7 @@ function slack_openedPayment(invNum,payMethod){
     ]
     /* "attachments":[
        {
-          "fallback":"Invoice Submitted: <http://url_to_task|THX-1138>",
+          "fallback":"Invoice Submitted: <http://url_to_task|THX-1184>",
           //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
           "color":slackSettings.colors.green,
           "fields":[
@@ -540,7 +540,7 @@ function slack_confirmPayment_format(invNum, chan,payMethod,clientName){
 
 function slack_postMSG(invNum,invTotal,clientName){
     // get message to be posted
-    var invNum = invNum||'THX-1138'//document.getElementById('msgInput').value
+    var invNum = invNum||'THX-1184'//document.getElementById('msgInput').value
     // get target channel or team member
     var invTotal = invTotal || 666
     var clientName = clientName || 'Doppelgänger Dudes Pty Ltd'
@@ -614,7 +614,7 @@ function slack_postMSG(invNum,invTotal,clientName){
       ],*/
       "attachments":[
         {
-           "fallback":"Invoice Submitted: <http://url_to_task|THX-1138>",
+           "fallback":"Invoice Submitted: <http://url_to_task|THX-1184>",
            //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
            "color":slackSettings.colors.green,
            "fields":[
