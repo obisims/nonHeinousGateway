@@ -53,7 +53,7 @@
 						  </div>
 						</div>
 					</div>
-						<h4>Doppelgänger Dudes Pty Ltd</h4>
+					<h4>Doppelgänger Dudes Pty Ltd</h4>
 						<!--<p><br />
 						built by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a>.</p>
 						-->
@@ -81,33 +81,53 @@
 						<!-- Direct Payment -->
 							<li>
 							<!-- pay button -->
-								<a href="#" class="button"><span> <span style="font-weight:700;">Direct</span> Deposit</span></a>
+								<button id="pay_Direct" class="button payButton"><span> <span style="font-weight:700;">Direct</span> Deposit</span></button>
 								<div class="surcharge notActive">0% surcharge</div>
 								
 							</li>
 						<!-- Crypto Payment -->
 							<li>
 							<!-- pay button -->
-								<a href="#" class="button"><span>Pay with <span style="font-weight:700;"> Ƀ</span></span></a>
+								<button id="pay_Crypto" class="button payButton"><span>Pay with <span style="font-weight:700;"> Ƀ</span></span></button>
 							<!-- service surcharge / notes -->
 								<div class="surcharge notActive">0% surcharge</div>
 							<!-- payments this service accepts -->
-								<ul class="icons">
+								<!--<ul class="icons">
 									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 									<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-								</ul>
+								</ul>-->
 							</li>
 						<!-- Credit Card Payment -->
 							<li>
 							<!-- pay button -->
-								<a href="#" class="button primary"><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span></a>
+								<button id="pay_Stripe" class="button primary payButton"><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span></button>
 							<!-- service surcharge / notes -->
 								<div class="surcharge notActive">1.75% + $0.30 surch</div>
 							</li>
 						</ul>
+					<div id="pay_instructions" style="display: none;">
+						<!--<h3>Direct Debit</h3>
+						<p>please use these bank details and put your invoice number in the notes field</p>
+						--><div id="pay_instructions_wrapper">
+							<div class="pay_instructions_left">
+								<b>Bank</b> <span>Westpac</span><br>
+								<b>Acc Name</b> <span>Obi Sims</span><br>
+								<b>Acc Number</b> <span>866133</span><br>
+								<b>BSB</b> <span>733-039</span><br>
+								<b>Reference</b> <span>THX-1184</span>
+							</div>
+							<div class="pay_instructions_right">
+								<b>Instructions</b><br>
+								<span>Use these account details to<br>transfer a total of <b>$<span class="invoicePrice">666.00</span></b><br>
+									<b><i>Please remember</i></b> to put the Invoice<br>Number inside your transaction refrence.
+							</span>
+							</div>
+						</div>
+						<!--<button>Confirm Deposit</button>-->
+					</div>
 					</section>
 					
 				<!-- Scroll Down Arrow -->

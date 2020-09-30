@@ -243,7 +243,15 @@ $(document).ready(function() {
         $('#shrinkMobileBuffer').css('height',(window.screen.height/$(window).height()*7))
         //window.scrollTo(0,1)
         scrollTo(1, 200);
-
+        //console.log('its Mobile wht height?',innerHeight)
+        
+        if(innerHeight<=500){
+            /* text fix for tiny phones */
+            document.body.style.fontSize = '80%'
+        } else if(innerHeight<=700){
+            /* text fix for tiny phones */
+            document.body.style.fontSize = '90%'
+        }
         
     }
 
@@ -262,6 +270,24 @@ $(document).ready(function() {
 
 
     /////////////////////
+    /* pay commands */
+    $("#pay_Direct.payButton").click(function(){
+        $('#header').toggleClass('directDebitShrink')
+        $("#pay_instructions").slideToggle( "slow", function() {
+            // Animation complete.
+          });
+          $("#pay_Crypto.payButton").slideToggle();
+          $("#pay_Stripe.payButton").slideToggle();
+         $('#paymentOptions').toggleClass('hidePadding');
+          
+    }); 
+    $("#pay_Crypto.payButton").click(function(){
+        alert("pay direct");
+    }); 
+    $("#pay_Stripe.payButton").click(function(){
+        alert("pay direct");
+    }); 
+
     /* button commands */
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')

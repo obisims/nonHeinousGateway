@@ -191,7 +191,7 @@ function shrinkDeadSpace(toShrink){
                 console.log('[shrinkDeadSpace][InvoiceUI] !No UI loaded',uiSettings)
             }
 
-        }, 5000);
+        }, 1000);
         /////////////////////////////////
         $('#landing_section').fadeOut()
         $('#header').fadeOut()

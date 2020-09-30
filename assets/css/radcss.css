@@ -146,9 +146,15 @@ body,html{
 
   #landing #header{
       /*height:98vh*/
-      padding-top: 15vh;
+      /*padding-top: 15vh;*/
+      padding-top: 35vh;
       z-index: -1;
+      transition: padding-top 0.8s ease;
   }
+  #landing #header.directDebitShrink{
+    padding-top: 10vh;
+}
+  
   #landing{
     height:98vh;
     /*min-height: 500px;*/
@@ -246,14 +252,7 @@ text-align: center;
     opacity:0;
     
 }
-@media screen and (max-width: 480px){
-    /*ul.icons {
-        display: none;
-    }*/
-    #paymentOptions li ul.icons{
-        display: none;
-    }
-}
+
 
 
 
@@ -647,4 +646,51 @@ body{
 
 #invoiceTitleContainer.invoiceHeader_box{
   width: max-content;
+}
+
+.payButton:active,.payButton:focus{
+outline:none;
+}
+#paymentOptions li{
+  transition: padding 0.4s ease;
+  }
+#paymentOptions.hidePadding li{
+  padding:0;
+  }
+#pay_instructions_wrapper{
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+}
+#pay_instructions_wrapper .pay_instructions_left,#pay_instructions .pay_instructions_right{
+ /* background: #ccc;
+  padding: 2%;*/
+  padding: 7px;
+}
+#pay_instructions_wrapper .pay_instructions_right{
+
+  text-align: left;
+}
+#pay_instructions_wrapper .pay_instructions_left{
+
+  text-align: right;
+}
+
+
+ul#paymentOptions {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 480px){
+  /*ul.icons {
+      display: none;
+  }*/
+  #paymentOptions li ul.icons{
+      display: none;
+  }
+  #pay_instructions_wrapper .pay_instructions_left b{
+
+    display: block;
+  }
 }
