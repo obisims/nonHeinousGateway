@@ -9,7 +9,7 @@
       yellow:'#F4B400',
       green:'#0F9D58'
     },
-    webhook:'https://hooks.slack.com/services/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'
+    webhook:'https://hooks.slack.com/services/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'
   }
 function slack_invoiceLoad(slackPars){
   var slackPars = slackPars||{
