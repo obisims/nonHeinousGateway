@@ -477,7 +477,7 @@ console.log('[slack_confirmPayment]',clientName)
           "color":slackSettings.colors.yellow,
           "fields":[
              {
-                "title":"Invoice "+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">",
+                "title":"Invoice "+"<https://pay.obisims.com/"+invNum+"|"+invNum+">",
                 "value":clientName,
                 "short":true
              },
