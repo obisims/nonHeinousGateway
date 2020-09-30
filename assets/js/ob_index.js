@@ -251,8 +251,10 @@ $(document).ready(function() {
             $('#header').css('padding-top','30%')
         } else if(innerHeight<=700){
             /* text fix for tiny phones */
+            $('#header').css('padding-top','40%')
             document.body.style.fontSize = '90%'
         }else{
+            $('#header').css('padding-top','45%')
             document.body.style.fontSize = '95%'
         }
         
