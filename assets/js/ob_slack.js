@@ -167,7 +167,7 @@ function slack_invoiceLoad(slackPars){
    // var ipData = data//JSON.stringify(data, null, 2) 
     console.log('ipData done:',ipData);
   
-    
+    if(!data){return}
       var devices = {
         true:'mobile',
         false:'desktop'
