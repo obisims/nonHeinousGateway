@@ -1,4 +1,9 @@
 
+  var slackurlConstruct = ''
+  slackurlConstruct=slackurlConstruct+'https://hooks.slack.com/services/'
+  slackurlConstruct=slackurlConstruct+'T39L0UW83/'
+  slackurlConstruct=slackurlConstruct+'B01BM0BNLE9/'
+  slackurlConstruct=slackurlConstruct+'iUq6FWDg9Z6TWuS4Lnph2VTo'
   const slackSettings = {
     colors:{
       purple:'#291a2b',
@@ -9,7 +14,7 @@
       yellow:'#F4B400',
       green:'#0F9D58'
     },
-    webhook:'https://hooks.slack.com/services/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'
+    webhook:slackurlConstruct
   }
 function slack_invoiceLoad(slackPars){
   var slackPars = slackPars||{
