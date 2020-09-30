@@ -253,7 +253,7 @@ function slack_invoiceLoad(slackPars){
         }
      ]*/
   };
-  
+  if(ipData!=undefined){
   if(ipData.ip){
     var msgFields = payload['blocks'][0]['fields']
     
@@ -268,6 +268,7 @@ function slack_invoiceLoad(slackPars){
     //msgFields.splice.apply(msgFields, [2, 0].concat(ipArrs));
     msgFields.splice(1, 0, ...ipArrs);
    
+  }
   }
     // return json string of payload
     
