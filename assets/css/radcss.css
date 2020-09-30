@@ -9,10 +9,26 @@
     /*
      var(--accent-color);
     */
+    
   }
+  html, body, div, span, applet, object,
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video {
+  font-family: 'Nunito Sans', sans-serif;
+
+}
 html{
     height:100%;
     overflow: visible;
+    
 }
 
 body,html{
@@ -166,6 +182,10 @@ body,html{
 }
   #mainLogo{
     fill:white;
+    
+}
+#mainLogo .svgLink{
+  max-width: 50px;
 }
 #shrinkMobileBuffer{
     height:0vh;
@@ -576,3 +596,47 @@ body{
       height:100%;
       background-color: var(--brand-red);
   }
+
+  #mainLogoContainer{
+   
+
+
+  }
+
+  #invoiceHeader{
+    font-size: 3.25em;
+    color:white;
+  }
+
+  #invoiceHeader #invoiceTitle {
+    font-weight: 700;
+}
+#mainLogo svg{
+  text-align: right;
+  POSITION: absolute;
+  padding-top: 15px;
+}
+
+
+.invoiceHeader_wrapper {
+ /* background-color: #f1f1f1;*/
+ 
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.invoiceHeader_innerWrapper {
+  display: flex;
+  text-align: center;
+  width: fit-content;
+}
+
+.invoiceHeader_box {
+  display: inline-block;
+  padding: 0px 33px;
+  opacity: 1;
+ /* background-color: #32CD32;*/
+}
