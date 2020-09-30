@@ -35,7 +35,7 @@ function slack_invoiceLoad(slackPars){
   
 
   })
-  .done(function() {
+  .done(function(data) {
     var ipData = data//JSON.stringify(data, null, 2) 
     console.log('ipData Grabbed:',ipData);
   
