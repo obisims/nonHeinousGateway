@@ -204,11 +204,7 @@ var ipData;
               {
                 "type": "mrkdwn",
                 "text": '*Invoice*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
-              },
-              {
-                "type": "mrkdwn",
-                "text": '*IP*: '+"<http://api.ipstack.com/"+GetUserIP().ip+"?access_key=5881abddbc972045f1878182a8611e63|"+justIP+">" //+ "<https://pay.obisims.com/"+justIP+"|"+justIP+">"
-              },
+              }
               {
                 "type": "mrkdwn",
                 "text": "*Device*: "+devices[isMobile]
@@ -275,6 +271,22 @@ var ipData;
       ]*/
     };
     
+
+    if(ipData!=undefined){
+      if(ipData.ip){
+        var msgFields = payload['blocks'][0]['fields']
+        
+        ipArrs = [{
+          "type": "mrkdwn",
+          "text": '*IP*: '+"<http://api.ipstack.com/"+ipData.ip+"?access_key=5881abddbc972045f1878182a8611e63|"+justIP+">" //+ "<https://pay.obisims.com/"+justIP+"|"+justIP+">"
+        }];
+      
+        //msgFields.splice.apply(msgFields, [2, 0].concat(ipArrs));
+        msgFields.splice(1, 0, ...ipArrs);
+       
+      }
+      }
+              
       // return json string of payload
       
     
