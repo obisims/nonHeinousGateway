@@ -441,11 +441,13 @@ var invoiceSettings = {
     }
 }
 
+invoiceSettings.DOMAIN = window.location.origin + window.location.pathname
+
 if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
 if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
 if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
 if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
-
+//stripe_checkout=paid
 
 
 var allHeights = getScreenHeights()

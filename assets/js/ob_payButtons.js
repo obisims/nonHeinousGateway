@@ -38,7 +38,11 @@ $(document).ready(function() {
         handleCheckout(this)
     })
 
-
+    if(urlParams['stripe_checkout']=='paid'){
+        postSlackNotification_purchase_complete('Stripe')
+    }else if(urlParams['stripe_checkout']=='canceled'){
+        postSlackNotification_purchase_cancelled('Stripe')
+    }
 
 
 
@@ -187,13 +191,12 @@ $(document).ready(function() {
                 stripe.redirectToCheckout({
                     mode: 'payment',
                     lineItems: items,
-                    successUrl: invoiceSettings.DOMAIN + 'success.html?payment=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
-                    cancelUrl: invoiceSettings.DOMAIN + 'canceled.html?payment=canceled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
+                    successUrl: invoiceSettings.DOMAIN + /*success.html*/'?stripe_checkout=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
+                    cancelUrl: invoiceSettings.DOMAIN + /*canceled.html*/'?stripe_checkout=canceled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
                 }).catch(function(rejected) {
                     console.log('[stripe] rejected',rejected);
-                
                 }).then(handleResult);
-                
+
                 break;
             case 'Coinbase':
                 //opens coinbase checkout toggleDepositInstructions()
