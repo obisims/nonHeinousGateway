@@ -731,7 +731,7 @@ function slack_openedPayment(invNum,payMethod){
      "channel":chan,
      "username":'Invoice Gateway - Opened',
      "icon_emoji":':eye:',
-     "text":slackPars.invNum+' | '+payMethod+' transaction created',
+     "text":invNum+' | '+payMethod+' transaction created',
      "blocks": [
         
       {
