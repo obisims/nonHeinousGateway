@@ -16,6 +16,12 @@
     },
     webhook:slackurlConstruct
   }
+
+
+
+
+
+
 function slack_invoiceLoad(slackPars){
   var slackPars = slackPars||{
     invNum : 'THX-1184',
@@ -26,13 +32,6 @@ function slack_invoiceLoad(slackPars){
     client:client
   }
   
-
-
-
-
-
-
-
 
 var ipData;
 
@@ -46,6 +45,10 @@ var ipData;
       var ipifyKey = 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'
       $.get('https://geo.ipify.org/api/v1?apiKey='+ipifyKey, function(newIpInfo){ 
         ipData = newIpInfo
+        if(ipData==undefined){
+         // ipData = ipData || new Object()
+         // ipData.ip = GetUserIP().ip;
+        }
       });
 
 //  var ipData = newIpInfo//GetUserIP();
@@ -60,36 +63,35 @@ var ipData;
   if(ipData!=undefined){
     if(ipData.ip!=undefined){
   
-   
+ //     fallback":"Invoice Submitted: <http://url_to_task|THX-1184>",
+      //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
+
+
     var payload ={
       // "text": msg,
       "channel":slackPars.chan,
-      "username":'Invoice Gateway - Opened',
+      "username":'Invoice Gateway - Opened1',
       "icon_emoji":':eye:',
+      "text":slackPars.invNum+' | opened',
       "blocks": [
-        
         {
           "type": "section",
-          "block_id": "section789",
-          "fields": [
-            {
-              "type": "mrkdwn",
-              "text": '*Invoice*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
-            },
-            {
-              "type": "mrkdwn",
-              "text": "*Device*: "+devices[isMobile]
-            },
-            {
-              "type": "mrkdwn",
-              "text": '*Project*: '+slackPars.project
-            },
-            {
-              "type": "mrkdwn",
-              "text": '*Client*: '+slackPars.client
-            }
-            
-          ]
+          "text": {
+            "type": "mrkdwn",
+            "text":'*Invoice2*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
+          }
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Device*: "+devices[isMobile]
+        },
+        {
+          "type": "mrkdwn",
+          "text": '*Project*: '+slackPars.project
+        },
+        {
+          "type": "mrkdwn",
+          "text": '*Client*: '+slackPars.client
         }/*,
         {
           "type": "section",
@@ -195,6 +197,7 @@ var ipData;
         "channel":slackPars.chan,
         "username":'Invoice Gateway - Opened',
         "icon_emoji":':eye:',
+        "text":slackPars.invNum+' opened',
         "blocks": [
           
           {
@@ -344,6 +347,7 @@ var ipData;
       "channel":slackPars.chan,
       "username":'Invoice Gateway - Opened',
       "icon_emoji":':eye:',
+      "text":slackPars.invNum+' opened',
       "blocks": [
         
         {
@@ -490,6 +494,7 @@ console.log('[slack_confirmPayment]',clientName)
      "channel":chan,
      "username":'Invoice Gateway',
      "icon_emoji":':dollar:',
+     "text":slackPars.invNum+' confirmed via '+payMethod,
      /*"blocks": [
        {
          "type": "section",
@@ -612,6 +617,7 @@ console.log('[slack_confirmPayment]',clientName)
      "channel":chan,
      "username":'Invoice Gateway - Cancelled',
      "icon_emoji":':money_with_wings:',
+     "text":slackPars.invNum+' | '+payMethod+' transaction cancelled',
      /*"blocks": [
        {
          "type": "section",
@@ -725,6 +731,7 @@ function slack_openedPayment(invNum,payMethod){
      "channel":chan,
      "username":'Invoice Gateway - Opened',
      "icon_emoji":':eye:',
+     "text":slackPars.invNum+' | '+payMethod+' transaction created',
      "blocks": [
         
       {
@@ -900,6 +907,7 @@ function slack_postMSG(invNum,invTotal,clientName){
       "channel":chan,
       "username":'Invoice Gateway',
       "icon_emoji":':dollar:',
+      "text":slackPars.invNum,
       /*"blocks": [
         {
           "type": "section",
