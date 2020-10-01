@@ -43,8 +43,12 @@ var ipData;
       console.log('ipData fail:',ipData.success);
 
 
+      var ipifyKey = 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'
+      $.get('https://geo.ipify.org/api/v1?apiKey='+ipifyKey, function(newIpInfo){ 
+        ipData = newIpInfo
+      });
 
-  var ipData = GetUserIP();
+//  var ipData = newIpInfo//GetUserIP();
 
 
 
@@ -53,7 +57,7 @@ var ipData;
     false:'desktop'
   }
     
-  if(ipData!=undefind){
+  if(ipData!=undefined){
     if(ipData.ip!=undefined){
   
    
