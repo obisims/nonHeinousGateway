@@ -207,7 +207,7 @@ var ipData;
               },
               {
                 "type": "mrkdwn",
-                "text": '*IP*: '+"<http://api.ipstack.com/"+justIP+"?access_key=5881abddbc972045f1878182a8611e63|"+justIP+">" //+ "<https://pay.obisims.com/"+justIP+"|"+justIP+">"
+                "text": '*IP*: '+"<http://api.ipstack.com/"+GetUserIP().ip+"?access_key=5881abddbc972045f1878182a8611e63|"+justIP+">" //+ "<https://pay.obisims.com/"+justIP+"|"+justIP+">"
               },
               {
                 "type": "mrkdwn",
