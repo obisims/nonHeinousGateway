@@ -156,7 +156,12 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
       "text": txt //'*'+title+'* | '+value+' transaction cancelled'// | "+clientName
     }
   }*/]
-  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '/*+'some data'*/,'invoice opened\n'+slackPostSettings.invoice.CLIENT_NAME))
+  var devices = {
+    true:'mobile',
+    false:'desktop'
+  }
+ //if(mobile)attachs.push({"title":"Device","value":devices[mobile]})
+  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+devices[mobile]+'','invoice opened\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
   
   var attachs = [
@@ -170,14 +175,11 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
   console.log('[postSlackNotification_gateway_opened] ipInfo',ipInfo)
   if(ipInfo){
     if(ipInfo.ip)attachs.push({"title":"IP","value":"<http://api.ipstack.com/"+ipInfo.ip+"?access_key=5881abddbc972045f1878182a8611e63|"+ipInfo.ip+">"})
-    if(ipInfo.colo)attachs.push({"title":"Region","value":ipInfo.colo})
-    if(ipInfo.loc)attachs.push({"title":"Country","value":ipInfo.loc+' :flag-'+ipInfo.loc+':'})
+    if(ipInfo.colo)attachs.push({"title":"Region","value":ipInfo.colo+', '+ipInfo.loc+' :flag-'+ipInfo.loc+':'})
+    //if(ipInfo.loc)attachs.push({"title":"Country","value":})
   }
-  var devices = {
-    true:'mobile',
-    false:'desktop'
-  }
-  if(mobile)attachs.push({"title":"Device","value":devices[mobile]})
+  
+  
   
   var slackAttachments = [];
   slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.grey,fallback:"Invoice Opened: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},attachs))

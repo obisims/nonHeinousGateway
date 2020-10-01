@@ -231,23 +231,23 @@ $(document).ready(function() {
         })*/
         
         $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
-            console.log('[GetUserIP] data',data)
+           // console.log('[GetUserIP] data',data)
             //return data
             var plainTextData = data
             
             var regex_ip = /^ip=(.*)$/img;
             ipInfo.ip = regex_ip.exec(plainTextData)[1]
-            console.log(ipInfo.ip)//;
+           // console.log(ipInfo.ip)//;
             var regex_loc = /^loc=(.*)$/img;
             var regex_colo = /^colo=(.*)$/img;
             ipInfo.loc = regex_loc.exec(plainTextData)[1]
-            console.log(ipInfo.loc)//;
+           // console.log(ipInfo.loc)//;
             ipInfo.colo = regex_colo.exec(plainTextData)[1];
-            console.log(ipInfo)
+           // console.log(ipInfo)
            // return arr[1]; 
 
             //ipInfo = data //GetUserIP()
-            console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
+           // console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
             postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
           })
        // console.log('[document).ready] ipInfo',ipInfo)
@@ -303,67 +303,7 @@ $(document).ready(function() {
 
 
     /////////////////////
-    /* pay commands */
-    var directDebitOpened = false
-    var directDebitOpened_cancelled = false
-    $("#pay_Direct.payButton").click(function(){
-        
-        $('#header').toggleClass('directDebitShrink')
-        $("#pay_instructions").slideToggle( "slow", function() {
-            // Animation complete.
-          });
-          $("#pay_Crypto.payButton").slideToggle();
-          $("#pay_Stripe.payButton").slideToggle();
-         $('#paymentOptions').toggleClass('hidePadding');
-         //slack_postMSG()
-         
-         if(directDebitOpened==false){
-            postSlackNotification_purchase_initiated('Direct Debit')
-            //slack_openedPayment('THX-1138','Direct Debit')
-            directDebitOpened = true
-            directDebitOpened_transaction = true
-         }else if(directDebitOpened_cancelled==false){
-            //slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
-            postSlackNotification_purchase_cancelled('Direct Debit')
-            directDebitOpened_cancelled = true
-        }
-         
-         if(innerHeight<=500){
-            /* text fix for tiny phones */
-           /* $('#header').css('padding-top','15%')*/
-        } else if(innerHeight<=700){
-            /* text fix for tiny phones */
-        }else{
-        }
-          
-    }); 
-    $('#confirm_directDebit').click(function(){
-        if (window.confirm("Are you sure you want to confirm you have paid?")) { 
-            //slack_confirmPayment('THX-1138',666.666,'Direct Debit','Doppelgänger Dudes Pty Ltd','some project name')
-            postSlackNotification_purchase_complete('Direct Debit')
-             alert("payment confirmed");
-        
-          }else{
-            //slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
-            postSlackNotification_purchase_cancelled('Direct Debit')
-            directDebitOpened_cancelled = true
-          }
-       
-    }); 
-
     
-    $("#pay_Crypto.payButton").click(function(){
-       // slack_openedPayment('THX-1138','Coinbase')
-        postSlackNotification_purchase_initiated('Coinbase')
-        alert("pay crypto");
-        //slack_confirmPayment('THX-1138',666.666,'Crypto','Doppelgänger Dudes Pty Ltd')
-    }); 
-    $("#pay_Stripe.payButton").click(function(){
-        //slack_openedPayment('THX-1138','Stripe')
-        postSlackNotification_purchase_initiated('Stripe')
-        alert("pay credit card");
-        //slack_confirmPayment('THX-1138',666.666,'Credit Card','Doppelgänger Dudes Pty Ltd')
-    }); 
 
     /* button commands */
 	$( ".button" ).hover(function() {
@@ -461,6 +401,53 @@ $(document).ready(function() {
 */////////////////////////////////////////
 
 /* GLOBAL SETTINGS */
+var urlParams = getParams(window.location.href);//encodeURI when creating
+console.log('[urlParams] grabbing',urlParams)
+/*
+urlParam input
+    inv_num = 'xxx-7696'
+    client_name = 'Some Dude'
+    project_name = 'some project name'
+    stripe_price_id = 'price_1HT15bEB9Gfp1i8QEykc8D5k'
+ */
+/*var fakeURL = '?inv_num='+encodeURI('THX-1138')+
+'&client_name='+encodeURI('Some Dude')+
+'&project_name='+encodeURI('some project name')+
+'&stripe_price_id='+encodeURI('price_1HT15bEB9Gfp1i8QEykc8D5k')
+console.log('fakeurl',fakeURL)*/
+
+var invoiceSettings = {
+    DOMAIN:'https://invoice.obisims.com/',
+    invoice:{
+        NUM:'XXX',
+        CLIENT_NAME:'',
+        PROJECT_NAME:''
+    },
+    checkouts:{
+        'Stripe':{
+            price_id:'',
+          //  api:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
+            PUBLISHABLE_KEY:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB'
+        },
+        'Coinbase':{
+            price_id:'',
+            api:'',
+           // url:"https://crypto.obisims.com/"+INVNUM
+        },
+        'Direct Deposit':{
+            price_id:'',
+            api:''
+        }
+    }
+}
+
+if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
+if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
+if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
+if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
+
+
+
 var allHeights = getScreenHeights()
 var gateWaySettings = {
         allHeights:allHeights, //new
