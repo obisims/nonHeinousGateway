@@ -448,7 +448,7 @@ if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_
 if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
 if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
 //stripe_checkout=paid
-
+console.log('[invoiceSettings] set',invoiceSettings)
 
 var allHeights = getScreenHeights()
 var gateWaySettings = {
