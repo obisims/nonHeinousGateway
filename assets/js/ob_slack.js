@@ -204,7 +204,7 @@ var ipData;
               {
                 "type": "mrkdwn",
                 "text": '*Invoice*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
-              }
+              },
               {
                 "type": "mrkdwn",
                 "text": "*Device*: "+devices[isMobile]
@@ -274,7 +274,7 @@ var ipData;
 
     if(ipData!=undefined){
       if(ipData.ip){
-        var msgFields = payload['blocks'][0]['fields']
+       // var msgFields = 
         
         ipArrs = [{
           "type": "mrkdwn",
@@ -282,7 +282,7 @@ var ipData;
         }];
       
         //msgFields.splice.apply(msgFields, [2, 0].concat(ipArrs));
-        msgFields.splice(1, 0, ...ipArrs);
+        payload['blocks'][0]['fields'].splice(1, 0, ...ipArrs);
        
       }
       }
