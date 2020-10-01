@@ -70,7 +70,7 @@ var ipData;
     var payload ={
       // "text": msg,
       "channel":slackPars.chan,
-      "username":'Invoice Gateway - Opened1',
+      "username":'Invoice Gateway - Opened',
       "icon_emoji":':eye:',
       "text":slackPars.invNum+' | opened',
       "blocks": [
@@ -78,7 +78,7 @@ var ipData;
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text":'*Invoice2*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
+            "text":'*Invoice*: '+"<https://pay.obisims.com/"+slackPars.invNum+"|"+slackPars.invNum+">"
           }
         },
         {
@@ -494,7 +494,7 @@ console.log('[slack_confirmPayment]',clientName)
      "channel":chan,
      "username":'Invoice Gateway',
      "icon_emoji":':dollar:',
-     "text":slackPars.invNum+' confirmed via '+payMethod,
+     "text":invNum+' confirmed via '+payMethod,
      /*"blocks": [
        {
          "type": "section",
@@ -534,7 +534,7 @@ console.log('[slack_confirmPayment]',clientName)
           "color":slackSettings.colors.green,
           "fields":[
              {
-              "title":"Invoice Paid <https://pay.obisims.com/"+invNum+"|"+invNum+">",
+              "title":"Invoice Paid "+invNum+"",
                 "value":clientName,
                 "short":true
              },
@@ -617,15 +617,36 @@ console.log('[slack_confirmPayment]',clientName)
      "channel":chan,
      "username":'Invoice Gateway - Cancelled',
      "icon_emoji":':money_with_wings:',
-     "text":slackPars.invNum+' | '+payMethod+' transaction cancelled',
-     /*"blocks": [
+     "text":invNum+' | '+payMethod+' transaction cancelled',
+     "blocks": [
        {
          "type": "section",
          "text": {
            "type": "mrkdwn",
-           "text": invNum
+           "text": '*'+invNum+'* | '+payMethod+' transaction cancelled'// | "+clientName
          }
-       },
+       }
+      ],
+      "attachments":[
+        {
+          //"fallback":"Invoice Gateway Cancelled: <http://url_to_task|THX-1184>",
+          //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
+          "color":slackSettings.colors.yellow,
+          "fields":[
+            {
+              "title":"Cancelled Gateway",
+              "value":payMethod,
+              "short":true
+           },
+           {
+            "title":"Client",
+            "value":clientName,
+            "short":true
+         }
+            
+          ]
+       }]
+  }/*,
        {
          "type": "section",
          "block_id": "section567",
@@ -650,32 +671,21 @@ console.log('[slack_confirmPayment]',clientName)
          ]
        }
      ],*/
-     "attachments":[
+     /*"attachments":[
        {
-          "fallback":"Invoice Gateway Cancelled: <http://url_to_task|THX-1184>",
+          //"fallback":"Invoice Gateway Cancelled: <http://url_to_task|THX-1184>",
           //"pretext":"New open task [Urgent]: <http://url_to_task|Test out Slack message attachments>",
           "color":slackSettings.colors.yellow,
           "fields":[
-             {
-                "title":"Invoice "+"<https://pay.obisims.com/"+invNum+"|"+invNum+">",
-                "value":clientName,
-                "short":true
-             },
-             /*{
-               "title":"Amount",
-               "value":"$"+invTotal.toFixed(2),
-               "short":true
-            },*/
-             {
-               "title":"Method",
-               "value":payMethod,
-               "short":true
+            {
+              "type": "mrkdwn",
+              "text": "*Gateway*: "+payMethod+""
             }
             
           ]
        }
-    ]
- };
+    ]*/
+ 
 
 
 
@@ -907,7 +917,7 @@ function slack_postMSG(invNum,invTotal,clientName){
       "channel":chan,
       "username":'Invoice Gateway',
       "icon_emoji":':dollar:',
-      "text":slackPars.invNum,
+      "text":invNum,
       /*"blocks": [
         {
           "type": "section",

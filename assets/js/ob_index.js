@@ -283,6 +283,7 @@ $(document).ready(function() {
     /////////////////////
     /* pay commands */
     var directDebitOpened = false
+    var directDebitOpened_cancelled = false
     $("#pay_Direct.payButton").click(function(){
         
         $('#header').toggleClass('directDebitShrink')
@@ -297,9 +298,11 @@ $(document).ready(function() {
          if(directDebitOpened==false){
             slack_openedPayment('THX-1138','Direct Debit')
             directDebitOpened = true
-         }else{
-            directDebitOpened = false
-         }
+            directDebitOpened_transaction = true
+         }else if(directDebitOpened_cancelled==false){
+            slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            directDebitOpened_cancelled = true
+        }
          
          if(innerHeight<=500){
             /* text fix for tiny phones */
@@ -317,6 +320,7 @@ $(document).ready(function() {
         $('#payInstructions').html("<b>Payment Confirmed</b><br><span>Thank you very much, a notification has been sent to obi.</span>")
           }else{
             slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            directDebitOpened_cancelled = true
           }
        
     }); 
