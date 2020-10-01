@@ -317,7 +317,7 @@ $(document).ready(function() {
         if (window.confirm("Are you sure you want to confirm you have paid?")) { 
             slack_confirmPayment('THX-1138',666.666,'Direct Debit','Doppelgänger Dudes Pty Ltd','some project name')
        // alert("payment confirmed");
-        $('#payInstructions').html("<b>Payment Confirmed</b><br><span>Thank you very much, a notification has been sent to obi.</span>")
+        
           }else{
             slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
             directDebitOpened_cancelled = true

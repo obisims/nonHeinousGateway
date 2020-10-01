@@ -575,12 +575,14 @@ console.log('[slack_confirmPayment]',clientName)
      data : sdata ,
      success : function(data) {
        // success will show on page
-       console.log('[slackSettings][success]',data)
+       console.log('[slackSettings][confirm payment][success]',data)
+       $('#payInstructions').html("<b>Payment Confirmed</b><br><span>Thank you very much, a notification has been sent to obi.</span>")
      //  $('#result').html(data);
      },
      error: function(data){
        // error will show error object
-       console.log('[slackSettings][failure]',data)
+       console.log('[slackSettings][confirm payment][failure]',data)
+       $('#payInstructions').html("<b>There has been an error</b><br><span>please try on a differnt device and i will fix this.</span>")
      //  $('#result').html("error:"+JSON.stringify(data));
     }
    });
