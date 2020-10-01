@@ -220,15 +220,16 @@ $(document).on( 'scroll', function(){
 
 
 
-
+var ipInfo;
 $(document).ready(function() {
     console.log('[$(document).ready]','')
-    slack_invoiceLoad({
+    /*slack_invoiceLoad({
           invNum : 'THX-1138',
           chan : "#obisims-invoices",
           project:'some project',
           client:'Doppelgänger Doppelgänger Dudes Pty Ltd'
-        })
+        })*/
+        var ipInfo = GetUserIP()
     ///if is mobile chnage base state
     /*
     $('#lastFmWidget').lastfmNowPlaying({
@@ -236,7 +237,7 @@ $(document).ready(function() {
         members: ['obi_sims']
     });
     */
-
+   postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"")
 	innerHeight = window.innerHeight
 	
     if(isMobile==true){
@@ -296,11 +297,13 @@ $(document).ready(function() {
          //slack_postMSG()
          
          if(directDebitOpened==false){
-            slack_openedPayment('THX-1138','Direct Debit')
+            postSlackNotification_purchase_initiated('Direct Debit')
+            //slack_openedPayment('THX-1138','Direct Debit')
             directDebitOpened = true
             directDebitOpened_transaction = true
          }else if(directDebitOpened_cancelled==false){
-            slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            //slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            postSlackNotification_purchase_cancelled('Direct Debit')
             directDebitOpened_cancelled = true
         }
          
@@ -315,11 +318,13 @@ $(document).ready(function() {
     }); 
     $('#confirm_directDebit').click(function(){
         if (window.confirm("Are you sure you want to confirm you have paid?")) { 
-            slack_confirmPayment('THX-1138',666.666,'Direct Debit','Doppelgänger Dudes Pty Ltd','some project name')
-       // alert("payment confirmed");
+            //slack_confirmPayment('THX-1138',666.666,'Direct Debit','Doppelgänger Dudes Pty Ltd','some project name')
+            postSlackNotification_purchase_complete('Direct Debit')
+             alert("payment confirmed");
         
           }else{
-            slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            //slack_cancelPayment('THX-1138','Direct Debit','Doppelgänger Dudes Pty Ltd')
+            postSlackNotification_purchase_cancelled('Direct Debit')
             directDebitOpened_cancelled = true
           }
        
@@ -327,13 +332,15 @@ $(document).ready(function() {
 
     
     $("#pay_Crypto.payButton").click(function(){
-        slack_openedPayment('THX-1138','Coinbase')
+       // slack_openedPayment('THX-1138','Coinbase')
+        postSlackNotification_purchase_initiated('Coinbase')
         alert("pay crypto");
         //slack_confirmPayment('THX-1138',666.666,'Crypto','Doppelgänger Dudes Pty Ltd')
     }); 
     $("#pay_Stripe.payButton").click(function(){
-        slack_openedPayment('THX-1138','Stripe')
-        alert("pay credit acrd");
+        //slack_openedPayment('THX-1138','Stripe')
+        postSlackNotification_purchase_initiated('Stripe')
+        alert("pay credit card");
         //slack_confirmPayment('THX-1138',666.666,'Credit Card','Doppelgänger Dudes Pty Ltd')
     }); 
 
