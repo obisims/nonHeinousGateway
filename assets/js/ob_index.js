@@ -421,7 +421,9 @@ var invoiceSettings = {
     invoice:{
         NUM:'XXX',
         CLIENT_NAME:'',
-        PROJECT_NAME:''
+        PROJECT_NAME:'',
+        DRIVE_ID:'',//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
+        DRIVE_IFRAME_URL:'',//'https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
     },
     checkouts:{
         'Stripe':{
@@ -448,7 +450,35 @@ if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_
 if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
 if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
 //stripe_checkout=paid
+if(urlParams.drive_id){
+    //set drive iframe in global for push into data-src
+    invoiceSettings.invoice.DRIVE_ID = urlParams.drive_id
+    invoiceSettings.invoice.DRIVE_IFRAME_URL = 'https://docs.google.com/viewer?srcid='+urlParams.drive_id+'&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
+    $('#pdfIframe').data('src', invoiceSettings.invoice.DRIVE_IFRAME_URL);
+}
 console.log('[invoiceSettings] set',invoiceSettings)
+
+//TEXT REPLACERS
+if(urlParams.inv_num){
+    $('.replace_invoiceNum').text(invoiceSettings.invoice.NUM)
+}else{
+    $('.replace_invoiceNum').text('THX-1138')
+}
+
+if(urlParams.client_name){
+    $('.replace_clientName').text(invoiceSettings.invoice.CLIENT_NAME)
+}else{
+    $('.replace_clientName').text("Doppelgänger Doppelgänger Dudes Pty Ltd")
+}
+
+
+
+
+
+
+
+
+
 
 var allHeights = getScreenHeights()
 var gateWaySettings = {

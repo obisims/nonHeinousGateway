@@ -150,6 +150,7 @@ $(document).ready(function() {
                 // stripe confirmation through callback // toggleDepositInstructions()
                 if (window.confirm("Have you already processed your payment for via "+thisButton.paymentMode+"?")) { 
                     postSlackNotification_purchase_complete(thisButton.paymentMode) //  alert("Payment confirmed");
+                    $('#payInstructions').html("<b>Payment Confirmed</b><br><span>Thank you very much, a notification has been sent to obi.</span>")
                 }else{
                     postSlackNotification_purchase_cancelled(thisButton.paymentMode) //directDebitOpened_cancelled = true
                 }
