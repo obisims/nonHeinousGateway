@@ -39,7 +39,8 @@
     }
   }
 /*////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////SLACK POST COMMANDS
+////////////////////////////////SLACK POST COMMANDS///////////////////////////////////
+                    https://app.slack.com/block-kit-builder/
 */////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -137,10 +138,10 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
 }
 
 
-function postSlackNotification_gateway_opened(mobile,slackPostSettings){
+function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
   //if(!slackPostSettings){
     //console.log(ipInfo)
-    console.log('[postSlackNotification_gateway_opened] ipInfo',ipInfo)
+   // console.log('[postSlackNotification_gateway_opened] ipInfo',ipInfo)
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Opened'
@@ -155,18 +156,31 @@ function postSlackNotification_gateway_opened(mobile,slackPostSettings){
       "text": txt //'*'+title+'* | '+value+' transaction cancelled'// | "+clientName
     }
   }*/]
-  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+'some data','invoice opened\n'+slackPostSettings.invoice.CLIENT_NAME))
+  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '/*+'some data'*/,'invoice opened\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
-  var slackAttachments = [];
-  slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.grey,fallback:"Transaction created: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},[
-    {"title":"Invoice Opened","value":slackPostSettings.invoice.INV_NUM},
+  
+  var attachs = [
+   // {"title":"Invoice Opened","value":slackPostSettings.invoice.INV_NUM},
    // {"title":"Project","value":slackPostSettings.invoice.PROJECT_NAME},
   //  {"title":"Amount","value":"$"+slackPostSettings.payment.AMOUNT.toFixed(2)},
   //  {"title":"Opened Gateway","value":slackPostSettings.payment.METHOD},
-  {"title":"isMobile","value":mobile},
-  
+  //{"title":"isMobile","value":mobile},
   //  {"title":"Client","value":slackPostSettings.invoice.CLIENT_NAME}
-  ]))
+  ]
+  console.log('[postSlackNotification_gateway_opened] ipInfo',ipInfo)
+  if(ipInfo){
+    if(ipInfo.ip)attachs.push({"title":"IP","value":"<http://api.ipstack.com/"+ipInfo.ip+"?access_key=5881abddbc972045f1878182a8611e63|"+ipInfo.ip+">"})
+    if(ipInfo.colo)attachs.push({"title":"Region","value":ipInfo.colo})
+    if(ipInfo.loc)attachs.push({"title":"Country","value":ipInfo.loc+' :flag-'+ipInfo.loc+':'})
+  }
+  var devices = {
+    true:'mobile',
+    false:'desktop'
+  }
+  if(mobile)attachs.push({"title":"Device","value":devices[mobile]})
+  
+  var slackAttachments = [];
+  slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.grey,fallback:"Invoice Opened: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},attachs))
   postSlackNotification(slackPostSettings,slackBlocks,slackAttachments)
 }
 
@@ -243,32 +257,7 @@ function postSlackNotification_gateway_opened(mobile,slackPostSettings){
 /*////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////SLACK POST UTILS
 */////////////////////////////////////////////////////////////////////////////////////
-function old_GetUserIP(){
-  console.log('[GetUserIP] getting...')
-  var ret;
- // $.ajaxSetup({async: false});
-  var ipifyKey = 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'
-  $.get('https://geo.ipify.org/api/v1?apiKey='+ipifyKey, function(r){ 
-    ret = r; 
-    console.log('[GetUserIP] ret',ret)
-    return ret;
-  });
-}
-function GetUserIP(){
-  console.log('[GetUserIP] getting...')
-  $(function () {
-    $.ajax({
-        url: "https://geo.ipify.org/api/v1",
-        dataType: "jsonp",
-        data: {apiKey: 'at_dGnbGW3mDHKUWyngwdcwS3T2NrW7B'},//, ipAddress: ip
-        success: function(data) {
-          console.log('[GetUserIP] data',data)
-          return data;
-          //  $("body").append("<pre>"+ JSON.stringify(data,"",2)+"</pre>");
-        }
-    });
- });
-}
+
 
 
 function slack_quickBlock(value,addendum){

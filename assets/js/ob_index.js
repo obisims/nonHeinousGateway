@@ -220,7 +220,7 @@ $(document).on( 'scroll', function(){
 
 
 
-var ipInfo;
+var ipInfo = new Object();
 $(document).ready(function() {
     console.log('[$(document).ready]','')
     /*slack_invoiceLoad({
@@ -229,7 +229,28 @@ $(document).ready(function() {
           project:'some project',
           client:'Doppelgänger Doppelgänger Dudes Pty Ltd'
         })*/
-        var ipInfo = GetUserIP()
+        
+        $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+            console.log('[GetUserIP] data',data)
+            //return data
+            var plainTextData = data
+            
+            var regex_ip = /^ip=(.*)$/img;
+            ipInfo.ip = regex_ip.exec(plainTextData)[1]
+            console.log(ipInfo.ip)//;
+            var regex_loc = /^loc=(.*)$/img;
+            var regex_colo = /^colo=(.*)$/img;
+            ipInfo.loc = regex_loc.exec(plainTextData)[1]
+            console.log(ipInfo.loc)//;
+            ipInfo.colo = regex_colo.exec(plainTextData)[1];
+            console.log(ipInfo)
+           // return arr[1]; 
+
+            //ipInfo = data //GetUserIP()
+            console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
+            postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
+          })
+       // console.log('[document).ready] ipInfo',ipInfo)
     ///if is mobile chnage base state
     /*
     $('#lastFmWidget').lastfmNowPlaying({
@@ -237,7 +258,7 @@ $(document).ready(function() {
         members: ['obi_sims']
     });
     */
-   postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"")
+   
 	innerHeight = window.innerHeight
 	
     if(isMobile==true){
