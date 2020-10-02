@@ -142,9 +142,10 @@ $(document).ready(function() {
         switch(thisButton.paymentMode) {
             case 'Direct Debit':
                 // stripe confirmation through callback // toggleDepositInstructions()
-                if (window.confirm("Have you already processed your payment for $"+invoiceSettings.invoice.TOTAL.toFixed(2)+" via "+thisButton.paymentMode+"?")) { 
+                console.log('[button clicked] invoiceSettings',invoiceSettings)
+                if (window.confirm("Have you already processed your payment for $"+urlParams.inv_total+" via "+thisButton.paymentMode+"?")) { 
                     var confirmDate = new Date()
-                    console.log('[button clicked] invoiceSettings',invoiceSettings)
+                  //  console.log('[button clicked] invoiceSettings',invoiceSettings)
                     invoiceSettings.payStatus = {
                         STATUS:'PAID',
                         METHOD:thisButton.paymentMode,
