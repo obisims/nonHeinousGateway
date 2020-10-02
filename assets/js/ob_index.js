@@ -308,7 +308,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
            //files: filesArray,
            url:pdfUrl,
            title: invoiceSettings.invoice.NUM,
-           text: 'obi sims invoice gateway.',
+           //text: 'obi sims invoice gateway.',
          })
          .then(() => console.log('Share was successful.'))
          .catch(function(error){
