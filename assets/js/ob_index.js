@@ -291,19 +291,17 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     /////////////////////
     /* MOBILE UI BUTTONS */
     
-    $('#mobile_scrollToTop_Download').click(function(){
+    $('#mobile_UI_Download').click(function(){
         window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
     })
-    $('#mobile_scrollToTop_Download').click(function(){
+    $('#mobile_UI_Share').click(function(){
          /* Copy the text inside the text field */
        // document.execCommand("copy");
         copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
         /* Alert the copied text */
-        alert("Copied the text: " + copyText.value);  
+        alert("link copied to clipboard");  
     })
-
-   
 
 
     /* button commands */
