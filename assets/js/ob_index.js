@@ -481,10 +481,10 @@ if(urlParams.drive_id){
 console.log('[invoiceSettings] set',invoiceSettings)
 
 //TEXT REPLACERS
-if(urlParams.inv_num){
-    $('.replace_invoiceNum').text(invoiceSettings.invoice.NUM)
+if(urlParams.inv){
+    $('.replace_invoiceNum').text(invoiceSettings.invoice.NUM )
 }else{
-    $('.replace_invoiceNum').text('THX-1138')
+    $('.replace_invoiceNum').text('ERR-1138')
 }
 
 if(urlParams.client_name){
@@ -496,7 +496,7 @@ if(urlParams.client_name){
 if(urlParams.inv_total){
     $('.replace_invoiceTotal').text(invoiceSettings.invoice.TOTAL)
 }else{
-    $('.replace_invoiceTotal').text(666.66)
+    $('.replace_invoiceTotal').text("0.00")
 }
 
 
