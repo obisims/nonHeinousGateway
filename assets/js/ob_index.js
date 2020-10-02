@@ -337,41 +337,31 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
        */
     })
     $('#mobile_UI_Download').click(function(){
-         /* Copy the text inside the text field */
-       // document.execCommand("copy");
-       // copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
-       var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        
-        //var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-       if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-        navigator.share({
-          files: filesArray,
-          //url:pdfUrl,
-          title: invoiceSettings.invoice.NUM,
-          text: 'obi sims invoice gateway.',
-        })
-        .then(() => console.log('Share was successful.'))
-        .catch((error) => console.log('Sharing failed', error));
-      } else {
-        console.log(`Your system doesn't support sharing files.`);
-      }
-/*
-       navigator
-        .share({
-            title: document.title,
-            text: 'Invoice '+invoiceSettings.invoice.NUM,
-            url: "https://pay.obisims.com/"+invoiceSettings.invoice.NUM,//window.location.href
-        })
-        .then(() => console.log('[#mobile_UI_Share] Successful share! 🎉'))
-        .catch(function(err) {
-            console.error('[#mobile_UI_Share] err',err)
-            if(err)if (prompt("Copy "+invoiceSettings.invoice.NUM+" link to clipboard\n","pay.obisims.com/"+invoiceSettings.invoice.NUM)){ console.log('url copied') }
-            //alert("pay.obisims.com/"+invoiceSettings.invoice.NUM);  
-            //prompt("Copy to clipboard: Ctrl+C, Enter", oArg.Document);
-            
-        });
+        var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+        /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
+        this one opens the doc in google docs on android
+        opens a new page with [df]
         */
-        /* Alert the copied text */
+        //window.location.href = downloadURL
+        //window.open(downloadURL, 'Download')
+        var googlePdfViewerUrl = 'https://drive.google.com/file/d/'+invoiceSettings.invoice.DRIVE_ID+'/view'
+        //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
+        var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
+       // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+       if(navigator.share){
+            navigator.share({title: invoiceSettings.invoice.NUM, url: downloadURL})
+            .then(() => console.log('Share was successful.'))
+            .catch(function(error){
+            console.log('Sharing failed', error)
+            if(error)window.open(downloadURL, '_blank');//downloadURL
+            
+            });
+       }else{
+           //if fake desktop or old mobile?
+           window.open(downloadURL, '_blank');//downloadURL
+           
+       }
+       
         
     })
 
