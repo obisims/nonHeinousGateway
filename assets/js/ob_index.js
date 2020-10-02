@@ -304,7 +304,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
          /* Copy the text inside the text field */
        // document.execCommand("copy");
         //copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
-        gdrive_s.showSettingsDialog()
+       
         /* Alert the copied text */
         alert("link shared?");  
     })
