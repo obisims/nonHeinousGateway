@@ -1,3 +1,4 @@
+//const { geteuid } = require("process");
 
 
 
@@ -139,18 +140,18 @@ if(urlParams.stripe_checkout){
     $('.pay_instructions_right').html(
         '<b>Payment Method</b> <span>'+invoiceSettings.payStatus.METHOD+'</span><br>'+
         '<b>Project</b> <span>'+invoiceSettings.invoice.PROJECT_NAME+'</span><br>'+
-        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL+'</span><br>'
+        '<b>Amount</b> <span>$'+invoiceSettings.payStatus.AMOUNT+'</span><br>'
     )
 
     $('#pay_instructions_footer').addClass('receipt')
     $('#pay_instructions_footer').html(
-        '<b>Receipt Num</b> <span id="receiptNum">'+uuidv4()+'</span><br>'+
-        '<b>Confirmed at</b> <span>'+new Date().toLocaleTimeString('en-AU')+'</span>'
+        '<b>Receipt Num</b> <span id="receiptNum">'+tempInvoiceSettings.payStatus.RECEIPT+'</span><br>'+//uuidv4()
+        '<b>Confirmed at</b> <span>'+new Date(invoiceSettings.payStatus.TIME).toLocaleTimeString('en-AU')+'</span>'
        // '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
     )
 
     $('#payInstructions').html(
-        '<b>Payment Confirmed</b><br>'+
+        '<b>Payment Confirmed<br></b>'+
         '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
     )
 
@@ -205,7 +206,7 @@ if(urlParams.stripe_checkout){
                         METHOD:paymentMethod,
                         AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
                         TIME:confirmDate,
-                        RECEIPT:invoiceSettings.checkouts[paymentMethod].price_id
+                        RECEIPT: uuidv4() //invoiceSettings.checkouts[paymentMethod].price_id
                     }
                     
                     postSlackNotification_purchase_complete(paymentMethod) //  alert("Payment confirmed");
@@ -223,13 +224,14 @@ if(urlParams.stripe_checkout){
                         METHOD:'Stripe',
                         AMOUNT:new Number(urlParams.stripe_price).toFixed(2),
                         TIME:confirmDate,
-                        RECEIPT:invoiceSettings.checkouts['Stripe'].price_id
+                        RECEIPT: uuidv4() //invoiceSettings.checkouts['Stripe'].price_id
                     }
                     //if(urlParams.stripe_checkout=='paid'){
                         //stripe_checkout='paid' 
                     //}
                     postSlackNotification_purchase_complete('Stripe') //  alert("Payment confirmed");
                     showApproved_state(invoiceSettings)
+                    $('#pay_Direct').remove()
                     toggleDepositInstructions()
 
 
@@ -243,11 +245,11 @@ if(urlParams.stripe_checkout){
                         METHOD:'Coinbase',
                         AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
                         TIME:confirmDate,
-                        RECEIPT:invoiceSettings.checkouts['Coinbase'].price_id
+                        RECEIPT: uuidv4()// invoiceSettings.checkouts['Coinbase'].price_id
                     }
                     
                     postSlackNotification_purchase_complete('Coinbase') //  alert("Payment confirmed");
-                    showApproved_state()
+                    showApproved_state(invoiceSettings)
                 break;
             //   default:
                 // code block
