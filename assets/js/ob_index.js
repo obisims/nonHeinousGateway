@@ -3,6 +3,8 @@ index functions
 
 */
 
+//const { Console } = require("console");
+
 /*////////////////////////////////////////
 //////////////
 */////////////////////////////////////////
@@ -434,7 +436,7 @@ var invoiceSettings = {
         ipInfo:''
     },
     invoice:{
-        NUM:(urlParams.inv||'THX-1184'),
+        NUM:urlParams.inv,
         TOTAL:(urlParams.inv_total||0),
         CLIENT_NAME:urlParams.client_name,
         PROJECT_NAME:urlParams.project_name,
@@ -498,6 +500,45 @@ if(urlParams.inv_total){
 }else{
     $('.replace_invoiceTotal').text("0.00")
 }
+
+console.log('[invoiceSettings]',invoiceSettings)
+
+/*////////////////////////////////////////////////////////////////////
+//////////////////////////SLACK GLOBALS
+*/////////////////////////////////////////////////////////////////////
+//invoiceSettings.payStatus
+console.log('[invoiceSettings]',invoiceSettings)
+var global_slackPostSettings = {
+  message:{
+    NOTIFICATION_SUMMARY:invoiceSettings.invoice.NUM+' | '+'VALUE'+' info'
+  },
+  settings:{
+    CHANNEL:"#obisims-invoices",
+    USERNAME:'Invoice Gateway',
+    AVATAR:':eye:'
+  },
+  payment:{
+    METHOD:'',
+    AMOUNT:invoiceSettings.invoice.TOTAL
+  },
+  invoice:{
+    INV_NUM:invoiceSettings.invoice.NUM,
+    CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
+    PROJECT_NAME:invoiceSettings.invoice.PROJECT_NAME
+  }
+}
+
+/*////////////////////////////////////////////////////////////////////
+//////////////////////////PAY GLOBALS
+*/////////////////////////////////////////////////////////////////////
+
+var paySettings = {
+    DOMAIN:invoiceSettings.domain,
+    stripe:{
+        PUBLISHABLE_KEY:invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY//||'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB'
+    }
+}
+var stripe = Stripe(invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY);
 
 
 

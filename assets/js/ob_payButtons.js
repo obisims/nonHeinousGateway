@@ -1,12 +1,5 @@
 
 
-var paySettings = {
-    DOMAIN:invoiceSettings.domain,
-    stripe:{
-        PUBLISHABLE_KEY:invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY//||'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB'
-    }
-}
-var stripe = Stripe(invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY);
 
 // Handle any errors from Checkout
 var handleResult = function(result) {

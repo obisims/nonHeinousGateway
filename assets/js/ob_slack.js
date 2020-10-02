@@ -19,26 +19,7 @@
     },
     webhook:slackurlConstruct
   }
-  invoiceSettings.payStatus
-  var global_slackPostSettings = {
-    message:{
-      NOTIFICATION_SUMMARY:invoiceSettings.invoice.NUM+' | '+'VALUE'+' info'
-    },
-    settings:{
-      CHANNEL:"#obisims-invoices",
-      USERNAME:'Invoice Gateway',
-      AVATAR:':eye:'
-    },
-    payment:{
-      METHOD:'',
-      AMOUNT:invoiceSettings.invoice.TOTAL
-    },
-    invoice:{
-      INV_NUM:invoiceSettings.invoice.NUM,
-      CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
-      PROJECT_NAME:invoiceSettings.invoice.PROJECT_NAME
-    }
-  }
+  
 /*////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////SLACK POST COMMANDS///////////////////////////////////
                     https://app.slack.com/block-kit-builder/
