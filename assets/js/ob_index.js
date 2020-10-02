@@ -315,9 +315,10 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         .then(() => console.log('[#mobile_UI_Share] Successful share! 🎉'))
         .catch(function(err) {
             console.error('[#mobile_UI_Share] err',err)
+            if(err)if (prompt("Copy "+invoiceSettings.invoice.NUM+" link to clipboard\n","pay.obisims.com/"+invoiceSettings.invoice.NUM)){ console.log('url copied') }
             //alert("pay.obisims.com/"+invoiceSettings.invoice.NUM);  
             //prompt("Copy to clipboard: Ctrl+C, Enter", oArg.Document);
-            if (prompt("Invoice "+invoiceSettings.invoice.NUM),"pay.obisims.com/"+invoiceSettings.invoice.NUM){ console.log('url copied') }
+            
         });
         /* Alert the copied text */
         
