@@ -316,9 +316,11 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
             .then(() => console.log('Share was successful.'))
             .catch(function(error){
             console.log('Sharing failed', error)
+                ///THIS IS HAPPENING ON IOS AFTER ANY SHARE
+
             /// if error show pdfviewer url in new window (don't think this one actually runs)
            // if(error)window.open(googlePdfViewerUrl, '_blank');//downloadURL
-            alert('no share available')
+            //alert('no share available')
             });
        }else{
            /// if no share then
