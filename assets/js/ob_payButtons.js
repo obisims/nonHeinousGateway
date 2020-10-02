@@ -225,9 +225,9 @@ if(urlParams.stripe_checkout){
                         TIME:confirmDate,
                         RECEIPT:invoiceSettings.checkouts['Stripe'].price_id
                     }
-                    if(urlParams.stripe_checkout=='paid'){
-                        stripe_checkout=paid 
-                    }
+                    //if(urlParams.stripe_checkout=='paid'){
+                        //stripe_checkout='paid' 
+                    //}
                     postSlackNotification_purchase_complete('Stripe') //  alert("Payment confirmed");
                     showApproved_state(invoiceSettings)
                     toggleDepositInstructions()
