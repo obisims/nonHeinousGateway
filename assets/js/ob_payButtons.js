@@ -204,7 +204,7 @@ if(urlParams.stripe_checkout){
             case 'Stripe':
                 // stripe confirmation through callback // toggleDepositInstructions()
                 var confirmDate = new Date()
-                  //  console.log('[button clicked] invoiceSettings',invoiceSettings)
+                   console.log('[button clicked] invoiceSettings',invoiceSettings)
                     invoiceSettings.payStatus = {
                         STATUS:'PAID',
                         METHOD:'Stripe',
