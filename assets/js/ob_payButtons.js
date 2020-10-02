@@ -132,7 +132,9 @@ if(urlParams.stripe_checkout){
  })
 
 
- function showApproved_state(){
+ function showApproved_state(tempInvoiceSettings){
+     //if(!tempInvoiceSettings)
+     invoiceSettings = tempInvoiceSettings||invoiceSettings
     $('#confirm_directDebit').remove()
     $('.pay_instructions_right').html(
         '<b>Payment Method</b> <span>'+invoiceSettings.payStatus.METHOD+'</span><br>'+
@@ -207,7 +209,7 @@ if(urlParams.stripe_checkout){
                     }
                     
                     postSlackNotification_purchase_complete(paymentMethod) //  alert("Payment confirmed");
-                    showApproved_state()
+                    showApproved_state(invoiceSettings)
                 }else{
                     postSlackNotification_purchase_cancelled(paymentMethod) //directDebitOpened_cancelled = true
                 }
