@@ -155,6 +155,7 @@ if(urlParams.stripe_checkout){
 
  function handleCheckout(thisButton,override){
   //  var thisButton = button
+  var buttonProps = new Object()
   if(override){
       console.log('[handleCheckout] override',override)
     buttonProps.id = invoiceSettings.checkouts[override].price_id
@@ -168,7 +169,7 @@ if(urlParams.stripe_checkout){
      //var id = $thisButton.id
      //var $thisButton = $(thisButton)
      console.log('[$payButton click] $thisButton',thisButton)
-     var buttonProps = new Object()
+    
     buttonProps.id = thisButton.id
     buttonProps.paymentMode = thisButton.dataset.paymentMode
     buttonProps.checkout = thisButton.dataset.checkout
