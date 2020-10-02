@@ -224,7 +224,7 @@ $(document).on( 'scroll', function(){
 
 var ipInfo = new Object();
 $(document).ready(function() {
-    console.warn('[$(document).ready]','version 0.10')
+    console.warn('[$(document).ready]','version 0.11')
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
 $('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
@@ -323,7 +323,8 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
            window.open(googlePdfViewerUrl, '_blank');//downloadURL
            
        }
-       
+       //postSlackNotification_gateway_share()
+       postSlackNotification_gateway_share(""+stateSettings.status.isMobile+"",ipInfo)
        /*if (navigator.canShare) {
          navigator.share({
            //files: filesArray,
@@ -361,7 +362,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
        //android (if logged into gsuite/have gdocs) open gDocs
        window.open(downloadURL, '_blank')
 
-
+       postSlackNotification_gateway_download(""+stateSettings.status.isMobile+"",ipInfo)
        /*if(navigator.share){
             navigator.share({title: invoiceSettings.invoice.NUM, file: downloadURL})
             .then(() => console.log('Share was successful.'))
