@@ -348,22 +348,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
         var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
        // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-       var myParams = ''
-       //{myParams}
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', googlePdfViewerUrl, true);
-       xhr.responseType = 'blob';
- 
-       xhr.onload = function(e) {
-         if (this['status'] == 200) {          
-           var blob = new Blob([this['response']], {type: 'application/pdf'});
-           var url = URL.createObjectURL(blob);
-           var printWindow = window.open(url, '', 'width=800,height=500');
-           printWindow.print()
-         }
-       };
- 
-       xhr.send();
+       window.open(downloadURL, '_blank')
        /*if(navigator.share){
             navigator.share({title: invoiceSettings.invoice.NUM, file: downloadURL})
             .then(() => console.log('Share was successful.'))
