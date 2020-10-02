@@ -57,7 +57,7 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
   //stripe surcharge 
   var receiptPrice = slackPostSettings.payment.AMOUNT //'588.99'
   if(payMethod=='Stripe'){
-    receiptPrice = slackPostSettings.checkouts['Stripe'].price //'599.99'
+    receiptPrice = urlParams.stripe_price //slackPostSettings.checkouts['Stripe'].price //'599.99'
   }else{
 
   }
