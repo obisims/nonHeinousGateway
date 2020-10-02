@@ -304,7 +304,11 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
        // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
        if(navigator.share){
-            navigator.share({title: invoiceSettings.invoice.NUM, url: payUrl})
+            navigator.share({
+                title: invoiceSettings.invoice.NUM,
+                url: payUrl,
+                text:invoiceSettings.invoice.NUM
+            })
             .then(() => console.log('Share was successful.'))
             .catch(function(error){
             console.log('Sharing failed', error)
