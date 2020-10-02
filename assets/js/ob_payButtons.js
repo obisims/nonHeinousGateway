@@ -50,7 +50,8 @@ if(urlParams.stripe_checkout){
     /// stripe cancelled
     ///am i already checking this somewhere?
     //i was
-    postSlackNotification_purchase_cancelled('Stripe')
+    console.log('[checking params for callback] STRIPE','PAID')
+    handleCheckout(null,'Stripe')//postSlackNotification_purchase_cancelled('Stripe')
     }
     
 }
