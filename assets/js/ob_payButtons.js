@@ -153,9 +153,16 @@ if(urlParams.stripe_checkout){
 
  }
 
- function handleCheckout(thisButton){
+ function handleCheckout(thisButton,override){
   //  var thisButton = button
-     console.log('[$payButton click] click this',thisButton)
+  if(overide){
+      console.log('[handleCheckout] override',override)
+    buttonProps.id = invoiceSettings.checkouts[override].price_id
+    buttonProps.paymentMode = override
+    buttonProps.checkout = 'confirm'
+  }else{
+    console.log('[handleCheckout] thisButton',thisButton)
+    console.log('[$payButton click] click this',thisButton)
     // var checkoutMode = $thisButton.dataset.checkoutMode
     // var paymentMode = $thisButton.dataset.paymentMode
      //var id = $thisButton.id
@@ -166,7 +173,9 @@ if(urlParams.stripe_checkout){
     buttonProps.paymentMode = thisButton.dataset.paymentMode
     buttonProps.checkout = thisButton.dataset.checkout
     console.log('[$payButton click] buttonProps',buttonProps)
-    handleCheckoutButtons(buttonProps)
+  }
+    
+    handleCheckoutButtons(buttonProps,override)
 }
 
  function handleCheckoutButtons(thisButton,override) {
