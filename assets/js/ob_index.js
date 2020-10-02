@@ -308,7 +308,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
             navigator.share({
                 title: invoiceSettings.invoice.NUM,
                 url: payUrl,
-                text:invoiceSettings.invoice.NUM
+               // text:invoiceSettings.invoice.NUM
             })
             .then(() => console.log('Share was successful.'))
             .catch(function(error){
