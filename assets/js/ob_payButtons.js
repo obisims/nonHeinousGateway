@@ -41,6 +41,23 @@ $(document).ready(function() {
 /* REAL END! check for callback */
 var urlParams = getParams(window.location.href);//encodeURI when creating
 
+//* check for stripe callback */
+console.log('[checking params for callback]',{urlParams:urlParams})
+if(urlParams.stripe_checkout){
+    if(urlParams.stripe_checkout=='paid'){
+        console.log('[checking params for callback] STRIPE','PAID')
+        handleCheckout(null,'Stripe')
+        
+    }else if(urlParams.stripe_checkout=='canceled'){
+        console.log('[checking params for callback] STRIPE','CANCELED')
+    /// stripe cancelled
+    ///am i already checking this somewhere?
+    //i was
+   postSlackNotification_purchase_cancelled('Stripe')
+    }
+    
+}
+//* check for coinbase callback */
 console.log('[checking params for callback]',{urlParams:urlParams})
 if(urlParams.stripe_checkout){
     if(urlParams.stripe_checkout=='paid'){
@@ -295,7 +312,8 @@ if(urlParams.stripe_checkout){
             case 'Coinbase':
                 //opens coinbase checkout toggleDepositInstructions()
                 postSlackNotification_purchase_initiated(thisButton.paymentMode)
-                window.location.href = invoiceSettings.checkouts['Coinbase'].url //"https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
+                //window.location.href = invoiceSettings.checkouts['Coinbase'].url //"https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
+                window.open(invoiceSettings.checkouts['Coinbase'].url , '_blank');
                 //https://commerce.coinbase.com/charges/K7MJAEP3
                 break;
             //   default:

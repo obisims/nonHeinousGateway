@@ -136,13 +136,41 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
   slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+payMethod,'transaction created\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
   var slackAttachments = [];
-  slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.yellow,fallback:"Transaction created: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},[
+   //should put warning here for no callback
+  if(slackPostSettings.payment.METHOD=='Coinbase')slackAttachments.push({
+    "fallback": "Warning: no callback for crypto",
+    "color": slackSettings.colors.red,
+   // "pretext": "Optional text that appears above the attachment block",
+   // "author_name": "Bobby Tables",
+   // "author_link": "http://flickr.com/bobby/",
+   // "author_icon": "http://flickr.com/icons/bobby.jpg",
+   // "title": "Slack API Documentation",
+   // "title_link": "https://api.slack.com/",
+   // "text": "Optional text that appears within the attachment",
+   // "fields": [
+   //     {
+   //         "title": "Priority",
+   //         "value": "High",
+   //         "short": false
+   //     }
+   // ],
+   // "image_url": "http://my-website.com/path/to/image.jpg",
+   // "thumb_url": "http://example.com/path/to/thumb.png",
+    "footer": "Warning: no callback for crypto",
+    "footer_icon": ':warning:',//"https://platform.slack-edge.com/img/default_application_icon.png",
+   // "ts": 123456789
+})
+
+  
+  var tmpAttchments = [
     {"title":"Transaction Created","value":slackPostSettings.invoice.INV_NUM},
   //  {"title":"Project","value":slackPostSettings.invoice.PROJECT_NAME},
   //  {"title":"Amount","value":"$"+slackPostSettings.payment.AMOUNT.toFixed(2)},
     {"title":"Opened Gateway","value":slackPostSettings.payment.METHOD+' '+slackSettings.methodEmojis[postSettings.payment.METHOD]},
   //  {"title":"Client","value":slackPostSettings.invoice.CLIENT_NAME}
-  ]))
+  ]
+ 
+  slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.yellow,fallback:"Transaction created: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},tmpAttchments))
   postSlackNotification(slackPostSettings,slackBlocks,slackAttachments)
 }
 

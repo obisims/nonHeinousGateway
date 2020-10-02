@@ -222,12 +222,47 @@ $(document).on( 'scroll', function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var ipInfo = new Object();
 
 
 
 $(document).ready(function() {
-    console.warn('[$(document).ready]','version 0.168')
+
+    console.warn('[$(document).ready]','version 0.171')
+
+
+
+
+
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
 $('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
@@ -527,7 +562,12 @@ $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     invoiceSettings.user.ipInfo = ipInfo
      //ipInfo = data //GetUserIP()
     // console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
-     postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
+    if(urlParams){
+        if(!urlParams.stripe_checkout){
+            postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
+        }
+    }
+     
    })
 
 var invoiceSettings = {
