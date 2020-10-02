@@ -297,13 +297,14 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         this one opens the doc in google docs on android
         opens a new page with [df]
         */
-        window.location.href = downloadURL
+        //window.location.href = downloadURL
+        window.open(downloadURL, 'Download')
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
     })
     $('#mobile_UI_Share').click(function(){
          /* Copy the text inside the text field */
        // document.execCommand("copy");
-        //copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
+        copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
        
         /* Alert the copied text */
         alert("link shared?");  
