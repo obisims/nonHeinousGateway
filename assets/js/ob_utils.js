@@ -4,6 +4,13 @@ function uuidv4() {
   );
 }
 
+function copyToClipboard(txt){
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val(txt).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
 
 
 function scrollToTop(){
