@@ -157,8 +157,8 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
     }
   }*/]
   var devices = {
-    true:'mobile',
-    false:'desktop'
+    true:':iphone: mobile',
+    false:':computer: desktop'
   }
  //if(mobile)attachs.push({"title":"Device","value":devices[mobile]})
   slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+devices[mobile]+'','invoice opened\n'+slackPostSettings.invoice.CLIENT_NAME))

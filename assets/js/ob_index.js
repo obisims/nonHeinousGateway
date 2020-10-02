@@ -420,6 +420,7 @@ var invoiceSettings = {
     DOMAIN:'https://invoice.obisims.com/',
     invoice:{
         NUM:'XXX',
+        TOTAL:0,
         CLIENT_NAME:'',
         PROJECT_NAME:'',
         DRIVE_ID:'',//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
@@ -446,6 +447,7 @@ var invoiceSettings = {
 invoiceSettings.DOMAIN = window.location.origin + window.location.pathname
 
 if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
+if(urlParams.inv_total)invoiceSettings.invoice.TOTAL = urlParams.inv_total
 if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
 if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
 if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
@@ -469,6 +471,12 @@ if(urlParams.client_name){
     $('.replace_clientName').text(invoiceSettings.invoice.CLIENT_NAME)
 }else{
     $('.replace_clientName').text("Doppelgänger Doppelgänger Dudes Pty Ltd")
+}
+
+if(urlParams.inv_total){
+    $('.replace_invoiceTotal').text(invoiceSettings.invoice.TOTAL)
+}else{
+    $('.replace_invoiceTotal').text(666.66)
 }
 
 
