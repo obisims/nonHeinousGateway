@@ -201,11 +201,15 @@ $(document).ready(function() {
                     quantity: 1
                 }];
 
-                
-                var paramsToPass = 'inv_num='+encodeURI(urlParams.inv_num)+
+
+                var paramsToPass = 'inv='+encodeURI(urlParams.inv)+
+                '&inv_total='+encodeURI(urlParams.inv_total)+
                 '&client_name='+encodeURI(urlParams.client_name)+
                 '&project_name='+encodeURI(urlParams.project_name)+
-                '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)
+                '&stripe_price='+encodeURI(urlParams.stripe_price)+
+                '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
+                '&drive_id='+encodeURI(urlParams.drive_id)
+                
                // console.log('fakeurl',fakeURL)
 
                 stripe.redirectToCheckout({
