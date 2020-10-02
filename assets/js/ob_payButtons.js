@@ -155,7 +155,7 @@ if(urlParams.stripe_checkout){
 
  function handleCheckout(thisButton,override){
   //  var thisButton = button
-  if(overide){
+  if(override){
       console.log('[handleCheckout] override',override)
     buttonProps.id = invoiceSettings.checkouts[override].price_id
     buttonProps.paymentMode = override
