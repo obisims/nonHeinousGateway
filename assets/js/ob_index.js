@@ -303,7 +303,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
         
         var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+        if (navigator.canShare && navigator.canShare({ url:pdfUrl })) {
          navigator.share({
            //files: filesArray,
            url:pdfUrl,
@@ -317,7 +317,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
              
             });
        } else {
-         alert.log(`Your system doesn't support sharing files.`);
+         alert(`Your system doesn't support sharing files.`);
        }
     })
     $('#mobile_UI_Share').click(function(){
