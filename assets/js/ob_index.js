@@ -350,13 +350,20 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
        // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
        var myParams = ''
        //{myParams}
-        $http.post(downloadURL, {responseType: 'arraybuffer'})
-        .success(function (data) {
-            var file = new Blob([data], {type: 'application/pdf'});
-            var fileURL = URL.createObjectURL(file);
-            window.open(fileURL);
-        });
-        
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', googlePdfViewerUrl, true);
+       xhr.responseType = 'blob';
+ 
+       xhr.onload = function(e) {
+         if (this['status'] == 200) {          
+           var blob = new Blob([this['response']], {type: 'application/pdf'});
+           var url = URL.createObjectURL(blob);
+           var printWindow = window.open(url, '', 'width=800,height=500');
+           printWindow.print()
+         }
+       };
+ 
+       xhr.send();
        /*if(navigator.share){
             navigator.share({title: invoiceSettings.invoice.NUM, file: downloadURL})
             .then(() => console.log('Share was successful.'))
