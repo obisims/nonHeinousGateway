@@ -39,7 +39,7 @@
 function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
  // if(!slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
-    postSettings.settings.AVATAR = ':receipt:'//':dollar:'
+    postSettings.settings.AVATAR = ':bank:'//':receipt:'//':dollar:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Paid'
     postSettings.message.NOTIFICATION_SUMMARY = "Invoice Paid: "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
