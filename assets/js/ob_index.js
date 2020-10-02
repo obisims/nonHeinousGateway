@@ -306,10 +306,11 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
          /* Copy the text inside the text field */
        // document.execCommand("copy");
        // copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
-        var filesArray = ['https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf']
+        var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
         navigator.share({
-          files: filesArray,
+          //files: filesArray,
+          url:pdfUrl,
           title: invoiceSettings.invoice.NUM,
           text: 'obi sims invoice gateway.',
         })
