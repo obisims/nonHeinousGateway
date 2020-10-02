@@ -230,6 +230,7 @@ if(urlParams.stripe_checkout){
                     }
                     postSlackNotification_purchase_complete('Stripe') //  alert("Payment confirmed");
                     showApproved_state(invoiceSettings)
+                    toggleDepositInstructions()
 
 
                 break;
