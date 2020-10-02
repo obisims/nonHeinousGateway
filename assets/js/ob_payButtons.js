@@ -38,6 +38,7 @@ $(document).ready(function() {
     }
 */
 /* REAL END! check for callback */
+var urlParams = getParams(window.location.href);//encodeURI when creating
 
 if(urlParams.stripe_checkout){
     if(stripe_checkout=='paid'){
@@ -187,7 +188,7 @@ if(urlParams.stripe_checkout){
                         METHOD:paymentMethod,
                         AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
                         TIME:confirmDate,
-                        RECEIPT:invoiceSettings.checkouts['Direct Debit'].price_id
+                        RECEIPT:invoiceSettings.checkouts[paymentMethod].price_id
                     }
                     
                     postSlackNotification_purchase_complete(paymentMethod) //  alert("Payment confirmed");

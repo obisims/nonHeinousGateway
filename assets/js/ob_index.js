@@ -223,8 +223,11 @@ $(document).on( 'scroll', function(){
 
 
 var ipInfo = new Object();
+
+
+
 $(document).ready(function() {
-    console.warn('[$(document).ready]','version 0.13')
+    console.warn('[$(document).ready]','version 0.14')
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
 $('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
@@ -430,17 +433,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
 
-/* REAL END! check for callback */
 
-if(urlParams.stripe_checkout){
-    if(stripe_checkout=='paid'){
-        handleCheckout(null,'Stripe')
-    }else if(stripe_checkout=='canceled'){
-    /// stripe cancelled
-    ///am i already checking this somewhere?
-    }
-    
-}
 
 
 
@@ -563,7 +556,7 @@ var invoiceSettings = {
             surcharge:'1.75% + $0.30 surch'
         },
         'Coinbase':{
-            price_id:'K7MJAEP3',
+            price_id:'PRICE_ID needs to be grabbed',
             gateway:'https://commerce.coinbase.com/charges/',
             url:"https://crypto.obisims.com/" + (urlParams.inv||'THX-1184'),
             surcharge:'0% surcharge'
