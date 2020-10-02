@@ -303,13 +303,19 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
         var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
        // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-       navigator.share({title: invoiceSettings.invoice.NUM, url: payUrl})
-        .then(() => console.log('Share was successful.'))
-        .catch(function(error){
-           console.log('Sharing failed', error)
-           if(error)window.open(downloadURL, '_blank');
-           
-          });
+       if(navigator.share){
+            navigator.share({title: invoiceSettings.invoice.NUM, url: payUrl})
+            .then(() => console.log('Share was successful.'))
+            .catch(function(error){
+            console.log('Sharing failed', error)
+            if(error)window.open(downloadURL, '_blank');
+            
+            });
+       }else{
+           //if fake desktop or old mobile?
+           window.open(downloadURL, '_blank');
+       }
+       
        /*if (navigator.canShare) {
          navigator.share({
            //files: filesArray,
@@ -333,7 +339,9 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
          /* Copy the text inside the text field */
        // document.execCommand("copy");
        // copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
-        var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+       var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+        
+        //var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
         navigator.share({
           files: filesArray,
