@@ -224,7 +224,7 @@ $(document).on( 'scroll', function(){
 
 var ipInfo = new Object();
 $(document).ready(function() {
-    console.warn('[$(document).ready]','version 0.12')
+    console.warn('[$(document).ready]','version 0.13')
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
 $('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
@@ -428,6 +428,27 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 
     /* Load BG at end */
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
+
+
+/* REAL END! check for callback */
+
+if(urlParams.stripe_checkout){
+    if(stripe_checkout=='paid'){
+        handleCheckout(null,'Stripe')
+    }else if(stripe_checkout=='canceled'){
+    /// stripe cancelled
+    ///am i already checking this somewhere?
+    }
+    
+}
+
+
+
+
+
+
+
+
 })
 /////////////////////////////////////////
 //////////////////////////////////////////
@@ -478,6 +499,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 
 /* GLOBAL SETTINGS */
 var urlParams = getParams(window.location.href);//encodeURI when creating
+
 console.log('[urlParams] grabbing',urlParams)
 /*
 urlParam input
@@ -556,8 +578,11 @@ var invoiceSettings = {
 }
 
 
-
-
+if(urlParams.stripe_price)invoiceSettings.checkouts['Stripe'].price = urlParams.stripe_price
+if(urlParams.inv_total){
+    invoiceSettings.checkouts['Direct Debit'].price = urlParams.inv_total
+    invoiceSettings.checkouts['Coinbase'].price = urlParams.inv_total
+}
 //if(urlParams.inv)invoiceSettings.invoice.NUM = urlParams.inv
 //if(urlParams.inv_total)invoiceSettings.invoice.TOTAL = urlParams.inv_total
 //if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
@@ -593,6 +618,7 @@ if(urlParams.inv_total){
 }
 
 console.log('[invoiceSettings]',invoiceSettings)
+
 
 /*////////////////////////////////////////////////////////////////////
 //////////////////////////SLACK GLOBALS

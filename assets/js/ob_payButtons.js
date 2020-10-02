@@ -30,14 +30,26 @@ $(document).ready(function() {
      $('#confirm_directDebit').click(function(){
         handleCheckout(this)
     })
-
+/*
     if(urlParams['stripe_checkout']=='paid'){
         postSlackNotification_purchase_complete('Stripe')
     }else if(urlParams['stripe_checkout']=='canceled'){
         postSlackNotification_purchase_cancelled('Stripe')
     }
+*/
+/* REAL END! check for callback */
 
-
+if(urlParams.stripe_checkout){
+    if(stripe_checkout=='paid'){
+        handleCheckout(null,'Stripe')
+    }else if(stripe_checkout=='canceled'){
+    /// stripe cancelled
+    ///am i already checking this somewhere?
+    //i was
+    postSlackNotification_purchase_cancelled('Stripe')
+    }
+    
+}
 
 /*
 
@@ -113,6 +125,29 @@ $(document).ready(function() {
 
 
  })
+
+
+ function showApproved_state(){
+    $('#confirm_directDebit').remove()
+    $('.pay_instructions_right').html(
+        '<b>Payment Method</b> <span>'+invoiceSettings.payStatus.METHOD+'</span><br>'+
+        '<b>Project</b> <span>'+invoiceSettings.invoice.PROJECT_NAME+'</span><br>'+
+        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL+'</span><br>'
+    )
+
+    $('#pay_instructions_footer').addClass('receipt')
+    $('#pay_instructions_footer').html(
+        '<b>Receipt Num</b> <span id="receiptNum">'+uuidv4()+'</span><br>'+
+        '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
+    )
+
+    $('#payInstructions').html(
+        '<b>Payment Confirmed</b><br>'+
+        '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
+    )
+
+ }
+
  function handleCheckout(thisButton){
   //  var thisButton = button
      console.log('[$payButton click] click this',thisButton)
@@ -129,59 +164,71 @@ $(document).ready(function() {
     handleCheckoutButtons(buttonProps)
 }
 
- function handleCheckoutButtons(thisButton) {
+ function handleCheckoutButtons(thisButton,override) {
     /*thisButton  {
         id: $thisButton.id,
         paymentMode: $thisButton.dataset.paymentMode,
         checkout: $thisButton.dataset.checkoutMode
     }*/
+    var paymentMethod = override||thisButton.paymentMode
     console.log('[handleCheckoutButtons] buttonData',thisButton.checkout,thisButton)
     //which checkout stage?
-    if(thisButton.checkout=='confirm'){
-        postSlackNotification_purchase_initiated(thisButton.paymentMode)
-        switch(thisButton.paymentMode) {
+    if(thisButton.checkout=='confirm'||override){
+        postSlackNotification_purchase_initiated(paymentMethod)
+        switch(paymentMethod) {
             case 'Direct Debit':
                 // stripe confirmation through callback // toggleDepositInstructions()
                 console.log('[button clicked] invoiceSettings',invoiceSettings)
-                if (window.confirm("Have you already processed your payment for $"+urlParams.inv_total+" via "+thisButton.paymentMode+"?")) { 
+                if (window.confirm("Have you already processed your payment for $"+urlParams.inv_total+" via "+paymentMethod+"?")) { 
                     var confirmDate = new Date()
                   //  console.log('[button clicked] invoiceSettings',invoiceSettings)
                     invoiceSettings.payStatus = {
                         STATUS:'PAID',
-                        METHOD:thisButton.paymentMode,
+                        METHOD:paymentMethod,
                         AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
                         TIME:confirmDate,
                         RECEIPT:invoiceSettings.checkouts['Direct Debit'].price_id
                     }
                     
-                    postSlackNotification_purchase_complete(thisButton.paymentMode) //  alert("Payment confirmed");
-                    $('#confirm_directDebit').remove()
-                    $('.pay_instructions_right').html(
-                        '<b>Payment Method</b> <span>Direct Debit</span><br>'+
-                        '<b>Project</b> <span>'+invoiceSettings.invoice.PROJECT_NAME+'</span><br>'+
-                        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL+'</span><br>'
-                    )
-
-                    $('#pay_instructions_footer').addClass('receipt')
-                    $('#pay_instructions_footer').html(
-                        '<b>Receipt Num</b> <span id="receiptNum">'+uuidv4()+'</span><br>'+
-                        '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
-                    )
-
-                    $('#payInstructions').html(
-                        '<b>Payment Confirmed</b><br>'+
-                        '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
-                    )
+                    postSlackNotification_purchase_complete(paymentMethod) //  alert("Payment confirmed");
+                    showApproved_state()
                 }else{
-                    postSlackNotification_purchase_cancelled(thisButton.paymentMode) //directDebitOpened_cancelled = true
+                    postSlackNotification_purchase_cancelled(paymentMethod) //directDebitOpened_cancelled = true
                 }
                 break;
             case 'Stripe':
                 // stripe confirmation through callback // toggleDepositInstructions()
+                var confirmDate = new Date()
+                  //  console.log('[button clicked] invoiceSettings',invoiceSettings)
+                    invoiceSettings.payStatus = {
+                        STATUS:'PAID',
+                        METHOD:'Stripe',
+                        AMOUNT:new Number(urlParams.stripe_price).toFixed(2),
+                        TIME:confirmDate,
+                        RECEIPT:invoiceSettings.checkouts['Stripe'].price_id
+                    }
+                    if(urlParams.stripe_checkout=='paid'){
+                        stripe_checkout=paid 
+                    }
+                    postSlackNotification_purchase_complete('Stripe') //  alert("Payment confirmed");
+                    showApproved_state()
+
+
                 break;
             case 'Coinbase':
                 // coinbase confirmation through callback  //  toggleDepositInstructions()
-                
+                var confirmDate = new Date()
+                  //  console.log('[button clicked] invoiceSettings',invoiceSettings)
+                    invoiceSettings.payStatus = {
+                        STATUS:'PAID',
+                        METHOD:'Coinbase',
+                        AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
+                        TIME:confirmDate,
+                        RECEIPT:invoiceSettings.checkouts['Coinbase'].price_id
+                    }
+                    
+                    postSlackNotification_purchase_complete('Coinbase') //  alert("Payment confirmed");
+                    showApproved_state()
                 break;
             //   default:
                 // code block

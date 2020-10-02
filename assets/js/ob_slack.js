@@ -20,7 +20,7 @@
     methodEmojis:{
       'Direct Debit':':dollar:',//:bank:
       'Stripe':':credit_card:',
-      'Coinbase':':coin:'
+      'Coinbase':'Ƀ'
     },
     webhook:slackurlConstruct
   }
@@ -64,6 +64,10 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
   ]))
   postSlackNotification(slackPostSettings,slackBlocks,slackAttachments)
 }
+
+
+
+
 
 
 function postSlackNotification_purchase_cancelled(payMethod,slackPostSettings){
