@@ -31,7 +31,7 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':dollar:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Paid'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Paid: <https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+global_slackPostSettings.invoice.INV_NUM+">"
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Paid: "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
  // }
   var slackPostSettings = postSettings || slackPostSettings
@@ -61,7 +61,7 @@ function postSlackNotification_purchase_cancelled(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':money_with_wings:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Cancelled'
-    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Cancelled: <https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+global_slackPostSettings.invoice.INV_NUM+">"
+    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Cancelled: "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
@@ -96,7 +96,7 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Transaction Created'
-    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Created: <https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+global_slackPostSettings.invoice.INV_NUM+">"
+    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Created: "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
@@ -128,7 +128,7 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Opened'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Opened: <https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+global_slackPostSettings.invoice.INV_NUM+">"
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Opened: "+global_slackPostSettings.invoice.INV_NUM+""
   //  postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings

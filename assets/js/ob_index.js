@@ -468,7 +468,7 @@ var invoiceSettings = {
 
 
 
-//if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
+//if(urlParams.inv)invoiceSettings.invoice.NUM = urlParams.inv
 //if(urlParams.inv_total)invoiceSettings.invoice.TOTAL = urlParams.inv_total
 //if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
 //if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
