@@ -224,7 +224,7 @@ $(document).on( 'scroll', function(){
 
 var ipInfo = new Object();
 $(document).ready(function() {
-    console.warn('[$(document).ready]','version 0.11')
+    console.warn('[$(document).ready]','version 0.12')
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
 $('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)

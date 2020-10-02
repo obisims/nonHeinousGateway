@@ -138,7 +138,7 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
     //console.log(ipInfo)
    // console.log('[postSlackNotification_gateway_opened] ipInfo',ipInfo)
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
-    postSettings.settings.AVATAR = ':admission_tickets: '//':eye:'
+    postSettings.settings.AVATAR = ':admission_tickets:'//':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Opened'
     postSettings.message.NOTIFICATION_SUMMARY = "Invoice Opened: "+global_slackPostSettings.invoice.INV_NUM+""
   //  postSettings.payment.METHOD = payMethod
