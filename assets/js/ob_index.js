@@ -503,15 +503,16 @@ console.log('[invoiceSettings] set',invoiceSettings)
 
 //TEXT REPLACERS
 if(urlParams.inv){
-    $('.replace_invoiceNum').text(invoiceSettings.invoice.NUM )
+    $('.replace_invoiceNum').text(urlParams.inv )//invoiceSettings.invoice.NUM
 }else{
     $('.replace_invoiceNum').text('ERR-1138')
 }
 
 if(urlParams.client_name){
-    $('.replace_clientName').text(invoiceSettings.invoice.CLIENT_NAME)
+    $('.replace_clientName').text(urlParams.client_name)//invoiceSettings.invoice.CLIENT_NAME
+    $('#mobileInvoiceHeader').attr('data-before', urlParams.client_name);
 }else{
-    $('.replace_clientName').text("Doppelgänger Doppelgänger Dudes Pty Ltd")
+    $('.replace_clientName').text("EXAMPLE NAME")//Doppelgänger Doppelgänger Dudes Pty Ltd
 }
 
 if(urlParams.inv_total){
