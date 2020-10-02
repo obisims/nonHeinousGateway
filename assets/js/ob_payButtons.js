@@ -149,7 +149,7 @@ $(document).ready(function() {
                     invoiceSettings.payStatus = {
                         STATUS:'PAID',
                         METHOD:thisButton.paymentMode,
-                        AMOUNT:invoiceSettings.invoice.TOTAL,
+                        AMOUNT:new Number(invoiceSettings.invoice.TOTAL).toFixed(2),
                         TIME:confirmDate,
                         RECEIPT:invoiceSettings.checkouts['Direct Debit'].price_id
                     }
@@ -159,7 +159,7 @@ $(document).ready(function() {
                     $('.pay_instructions_right').html(
                         '<b>Payment Method</b> <span>Direct Debit</span><br>'+
                         '<b>Project</b> <span>'+invoiceSettings.invoice.PROJECT_NAME+'</span><br>'+
-                        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL.toFixed(2)+'</span><br>'
+                        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL+'</span><br>'
                     )
 
                     $('#pay_instructions_footer').addClass('receipt')

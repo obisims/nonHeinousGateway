@@ -48,7 +48,7 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
   slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.green,fallback:"Invoice Submitted: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},[
     {"title":"Invoice Paid","value":slackPostSettings.invoice.INV_NUM},
     {"title":"Project","value":slackPostSettings.invoice.PROJECT_NAME},
-    {"title":"Amount","value":"$"+slackPostSettings.payment.AMOUNT.toFixed(2)},
+    {"title":"Amount","value":"$"+slackPostSettings.payment.AMOUNT},//.toFixed(2)
     {"title":"Method","value":slackPostSettings.payment.METHOD},
     {"title":"Receipt","value":invoiceSettings.payStatus.RECEIPT}
   ]))
