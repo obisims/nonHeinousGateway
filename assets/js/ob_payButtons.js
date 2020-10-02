@@ -6,7 +6,7 @@ var paySettings = {
         PUBLISHABLE_KEY:invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY//||'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB'
     }
 }
-var stripe = Stripe(paySettings.stripe.PUBLISHABLE_KEY);
+var stripe = Stripe(invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY);
 
 // Handle any errors from Checkout
 var handleResult = function(result) {
@@ -135,6 +135,7 @@ $(document).ready(function() {
     console.log('[$payButton click] buttonProps',buttonProps)
     handleCheckoutButtons(buttonProps)
 }
+
  function handleCheckoutButtons(thisButton) {
     /*thisButton  {
         id: $thisButton.id,
@@ -149,8 +150,33 @@ $(document).ready(function() {
             case 'Direct Debit':
                 // stripe confirmation through callback // toggleDepositInstructions()
                 if (window.confirm("Have you already processed your payment for via "+thisButton.paymentMode+"?")) { 
+                    var confirmDate = new Date()
+                    invoiceSettings.payStatus = {
+                        STATUS:'PAID',
+                        METHOD:thisButton.paymentMode,
+                        AMOUNT:invoiceSettings.invoice.TOTAL,
+                        TIME:confirmDate,
+                        RECEIPT:invoiceSettings.checkouts['Direct Debit'].price_id
+                    }
+                    
                     postSlackNotification_purchase_complete(thisButton.paymentMode) //  alert("Payment confirmed");
-                    $('#payInstructions').html("<b>Payment Confirmed</b><br><span>Thank you very much, a notification has been sent to obi.</span>")
+                    $('#confirm_directDebit').remove()
+                    $('.pay_instructions_right').html(
+                        '<b>Payment Method</b> <span>Direct Debit</span><br>'+
+                        '<b>Project</b> <span>'+invoiceSettings.invoice.PROJECT_NAME+'</span><br>'+
+                        '<b>Amount</b> <span>$'+invoiceSettings.invoice.TOTAL.toFixed(2)+'</span><br>'
+                    )
+
+                    $('#pay_instructions_footer').addClass('receipt')
+                    $('#pay_instructions_footer').html(
+                        '<b>Receipt Num</b> <span id="receiptNum">'+uuidv4()+'</span><br>'+
+                        '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
+                    )
+
+                    $('#payInstructions').html(
+                        '<b>Payment Confirmed</b><br>'+
+                        '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
+                    )
                 }else{
                     postSlackNotification_purchase_cancelled(thisButton.paymentMode) //directDebitOpened_cancelled = true
                 }
@@ -202,7 +228,8 @@ $(document).ready(function() {
             case 'Coinbase':
                 //opens coinbase checkout toggleDepositInstructions()
                 postSlackNotification_purchase_initiated(thisButton.paymentMode)
-                window.location.href = "https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
+                window.location.href = invoiceSettings.checkouts['Coinbase'].url //"https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
+                //https://commerce.coinbase.com/charges/K7MJAEP3
                 break;
             //   default:
                 // code block

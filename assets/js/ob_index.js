@@ -223,33 +223,17 @@ $(document).on( 'scroll', function(){
 var ipInfo = new Object();
 $(document).ready(function() {
     console.log('[$(document).ready]','')
+    $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
+$('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Deposit'].surcharge)
+$('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
+
     /*slack_invoiceLoad({
           invNum : 'THX-1138',
           chan : "#obisims-invoices",
           project:'some project',
           client:'Doppelgänger Doppelgänger Dudes Pty Ltd'
         })*/
-        
-        $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
-           // console.log('[GetUserIP] data',data)
-            //return data
-            var plainTextData = data
-            
-            var regex_ip = /^ip=(.*)$/img;
-            ipInfo.ip = regex_ip.exec(plainTextData)[1]
-           // console.log(ipInfo.ip)//;
-            var regex_loc = /^loc=(.*)$/img;
-            var regex_colo = /^colo=(.*)$/img;
-            ipInfo.loc = regex_loc.exec(plainTextData)[1]
-           // console.log(ipInfo.loc)//;
-            ipInfo.colo = regex_colo.exec(plainTextData)[1];
-           // console.log(ipInfo)
-           // return arr[1]; 
-
-            //ipInfo = data //GetUserIP()
-           // console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
-            postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
-          })
+       
        // console.log('[document).ready] ipInfo',ipInfo)
     ///if is mobile chnage base state
     /*
@@ -415,42 +399,78 @@ urlParam input
 '&project_name='+encodeURI('some project name')+
 '&stripe_price_id='+encodeURI('price_1HT15bEB9Gfp1i8QEykc8D5k')
 console.log('fakeurl',fakeURL)*/
+ 
+$.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+    // console.log('[GetUserIP] data',data)
+     //return data
+     var plainTextData = data
+     
+     var regex_ip = /^ip=(.*)$/img;
+     ipInfo.ip = regex_ip.exec(plainTextData)[1]
+    // console.log(ipInfo.ip)//;
+     var regex_loc = /^loc=(.*)$/img;
+     var regex_colo = /^colo=(.*)$/img;
+     ipInfo.loc = regex_loc.exec(plainTextData)[1]
+    // console.log(ipInfo.loc)//;
+     ipInfo.colo = regex_colo.exec(plainTextData)[1];
+    // console.log(ipInfo)
+    // return arr[1]; 
+    invoiceSettings.user.ipInfo = ipInfo
+     //ipInfo = data //GetUserIP()
+    // console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
+     postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
+   })
 
 var invoiceSettings = {
-    DOMAIN:'https://invoice.obisims.com/',
+    DOMAIN:(window.location.origin + window.location.pathname||'https://invoice.obisims.com/'),
+    payStatus:{
+        STATUS:'UNPAID',
+        METHOD:'',
+        AMOUNT:0,
+        TIME:'',
+        RECEIPT:''
+    },
+    user:{
+        ipInfo:''
+    },
     invoice:{
-        NUM:'XXX',
-        TOTAL:0,
-        CLIENT_NAME:'',
-        PROJECT_NAME:'',
-        DRIVE_ID:'',//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
+        NUM:(urlParams.inv||'THX-1184'),
+        TOTAL:(urlParams.inv_total||0),
+        CLIENT_NAME:urlParams.client_name,
+        PROJECT_NAME:urlParams.project_name,
+        DRIVE_ID:urlParams.drive_id,//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
         DRIVE_IFRAME_URL:'',//'https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
     },
     checkouts:{
         'Stripe':{
-            price_id:'',
-          //  api:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
-            PUBLISHABLE_KEY:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB'
+            price_id:urlParams.stripe_price_id,
+            //  api:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
+            PUBLISHABLE_KEY:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
+            surcharge:'1.75% + $0.30 surch'
         },
         'Coinbase':{
-            price_id:'',
-            api:'',
+            price_id:'K7MJAEP3',
+            gateway:'https://commerce.coinbase.com/charges/',
+            url:"https://crypto.obisims.com/" + (urlParams.inv||'THX-1184'),
+            surcharge:'0% surcharge'
            // url:"https://crypto.obisims.com/"+INVNUM
         },
         'Direct Deposit':{
-            price_id:'',
-            api:''
+            price_id:uuidv4(),
+           // api:'',
+            surcharge:'0% surcharge'
         }
     }
 }
 
-invoiceSettings.DOMAIN = window.location.origin + window.location.pathname
 
-if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
-if(urlParams.inv_total)invoiceSettings.invoice.TOTAL = urlParams.inv_total
-if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
-if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
-if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
+
+
+//if(urlParams.inv_num)invoiceSettings.invoice.NUM = urlParams.inv_num
+//if(urlParams.inv_total)invoiceSettings.invoice.TOTAL = urlParams.inv_total
+//if(urlParams.client_name)invoiceSettings.invoice.CLIENT_NAME = urlParams.client_name
+//if(urlParams.project_name)invoiceSettings.invoice.PROJECT_NAME = urlParams.project_name
+//if(urlParams.stripe_price_id)invoiceSettings.checkouts['Stripe'].price_id = urlParams.stripe_price_id
 //stripe_checkout=paid
 if(urlParams.drive_id){
     //set drive iframe in global for push into data-src

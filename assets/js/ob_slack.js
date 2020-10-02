@@ -19,9 +19,10 @@
     },
     webhook:slackurlConstruct
   }
+  invoiceSettings.payStatus
   var global_slackPostSettings = {
     message:{
-      NOTIFICATION_SUMMARY:'THX-1184'+' | '+'VALUE'+' info'
+      NOTIFICATION_SUMMARY:invoiceSettings.invoice.NUM+' | '+'VALUE'+' info'
     },
     settings:{
       CHANNEL:"#obisims-invoices",
@@ -29,13 +30,13 @@
       AVATAR:':eye:'
     },
     payment:{
-      METHOD:'Direct Debit',
-      AMOUNT:666.666
+      METHOD:'',
+      AMOUNT:invoiceSettings.invoice.TOTAL
     },
     invoice:{
-      INV_NUM:'THX-1184',
-      CLIENT_NAME:'Doppelgänger Doppelgänger Dudes Pty Ltd',
-      PROJECT_NAME:'Some Project'
+      INV_NUM:invoiceSettings.invoice.NUM,
+      CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
+      PROJECT_NAME:invoiceSettings.invoice.PROJECT_NAME
     }
   }
 /*////////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +68,8 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
     {"title":"Invoice Paid","value":slackPostSettings.invoice.INV_NUM},
     {"title":"Project","value":slackPostSettings.invoice.PROJECT_NAME},
     {"title":"Amount","value":"$"+slackPostSettings.payment.AMOUNT.toFixed(2)},
-    {"title":"Method","value":slackPostSettings.payment.METHOD}
+    {"title":"Method","value":slackPostSettings.payment.METHOD},
+    {"title":"Receipt","value":invoiceSettings.payStatus.RECEIPT}
   ]))
   postSlackNotification(slackPostSettings,slackBlocks,slackAttachments)
 }

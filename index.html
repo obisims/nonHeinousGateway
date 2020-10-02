@@ -89,7 +89,7 @@
 									data-checkout="open"
 								><span><span style="font-weight:700;">Direct</span> Deposit</span>
 								</button>
-								<div class="surcharge notActive">0% surcharge</div>
+								<div id="surcharge_directDebit" class="surcharge notActive">/div>
 							</li>
 						<!-- Crypto Payment -->
 							<li>
@@ -102,7 +102,7 @@
 								><span>Pay with <span style="font-weight:700;"> Ƀ</span></span>
 								</button>
 							<!-- service surcharge / notes -->
-								<div class="surcharge notActive">0% surcharge</div>
+								<div id="surcharge_coinbase" class="surcharge notActive"></div>
 							<!-- payments this service accepts -->
 								<!--<ul class="icons">
 									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
@@ -123,33 +123,48 @@
 								><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span>
 								</button>
 							<!-- service surcharge / notes -->
-								<div class="surcharge notActive">1.75% + $0.30 surch</div>
+								<div id="surcharge_stripe" class="surcharge notActive"></div>
 							</li>
 						</ul>
-						
+						<script>
+							
+							
+							</script>
 					<div id="pay_instructions" style="display: none;">
 						<!--<h3>Direct Debit</h3>
 						<p>please use these bank details and put your invoice number in the notes field</p>
-						--><div id="pay_instructions_wrapper">
-							<div class="pay_instructions_left">
-								<b>Bank</b> <span>Westpac</span><br>
-								<b>Acc Name</b> <span>Obi Sims</span><br>
-								<b>Acc Number</b> <span>866133</span><br>
-								<b>BSB</b> <span>733-039</span><br>
-								<b>Reference</b> <span>THX-1184</span>
+						-->
+						<div>
+							<div id="pay_instructions_wrapper">
+								<div id="payInstructions" class="pay_instructions_left">
+									<b>Instructions</b><br>
+									<span>Use these account details to<br>transfer a total of <b>$<span class="invoicePrice replace_invoiceTotal">666.00</span></b><br>
+										<b><i>Please remember</i></b> to put the Invoice<br>Number inside your transaction refrence.
+										<!--<div>
+											<button
+												id="confirm_directDebit"
+												style="font-size: 9px;"
+												data-payment-mode="Direct Debit" 
+												data-checkout="confirm"
+											>Confirm Payment</button>
+										</div>-->
+									</span>
+								</div>
+								<div class="pay_instructions_right">
+									<b>Bank</b> <span>Westpac</span><br>
+									<b>Acc Name</b> <span>Obi Sims</span><br>
+									<b>Acc Number</b> <span>866133</span><br>
+									<b>BSB</b> <span>733-039</span><br>
+									<b>Reference</b> <span class="replace_invoiceNum">THX-1184</span>
+								</div>
 							</div>
-							<div id="payInstructions" class="pay_instructions_right">
-								<b>Instructions</b><br>
-								<span>Use these account details to<br>transfer a total of <b>$<span class="invoicePrice replace_invoiceTotal">666.00</span></b><br>
-									<b><i>Please remember</i></b> to put the Invoice<br>Number inside your transaction refrence.
-								<div>
-									<button
-										id="confirm_directDebit"
-										style="font-size: 9px;"
-										data-payment-mode="Direct Debit" 
-										data-checkout="confirm"
-									>Confirm Payment</button></div>
-							</span>
+							<div id="pay_instructions_footer">
+								<button
+									id="confirm_directDebit"
+									style="font-size: 9px;"
+									data-payment-mode="Direct Debit" 
+									data-checkout="confirm"
+								>Confirm Payment</button>
 							</div>
 						</div>
 						<!--<button>Confirm Deposit</button>-->

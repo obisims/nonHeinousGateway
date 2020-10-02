@@ -680,9 +680,12 @@ outline:none;
 }
 #pay_instructions_wrapper .pay_instructions_left{
 
-  text-align: right;
+  text-align: left;
 }
+#pay_instructions_footer.receipt{
+  font-size:80%
 
+}
 
 ul#paymentOptions {
   /*margin-bottom: 0;*/
