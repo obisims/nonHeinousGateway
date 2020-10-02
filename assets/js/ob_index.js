@@ -291,7 +291,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     /////////////////////
     /* MOBILE UI BUTTONS */
     
-    $('#mobile_UI_Download').click(function(){
+    $('#mobile_UI_Share').click(function(){
         var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
         /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
         this one opens the doc in google docs on android
@@ -303,7 +303,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
         
         var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        if (navigator.canShare && navigator.canShare({ url:pdfUrl })) {
+        if (navigator.canShare) {
          navigator.share({
            //files: filesArray,
            url:pdfUrl,
@@ -317,10 +317,11 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
              
             });
        } else {
-         alert(`Your system doesn't support sharing files.`);
+         window.open(downloadURL, '_blank');
+         //alert(`Your system doesn't support sharing files.`);
        }
     })
-    $('#mobile_UI_Share').click(function(){
+    $('#mobile_UI_Download').click(function(){
          /* Copy the text inside the text field */
        // document.execCommand("copy");
        // copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
