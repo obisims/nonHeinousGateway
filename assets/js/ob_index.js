@@ -226,7 +226,7 @@ var ipInfo = new Object();
 $(document).ready(function() {
     console.log('[$(document).ready]','')
     $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
-$('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Deposit'].surcharge)
+$('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
 $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 
     /*slack_invoiceLoad({
@@ -546,7 +546,7 @@ var invoiceSettings = {
             surcharge:'0% surcharge'
            // url:"https://crypto.obisims.com/"+INVNUM
         },
-        'Direct Deposit':{
+        'Direct Debit':{
             price_id:uuidv4(),
            // api:'',
             surcharge:'0% surcharge'
