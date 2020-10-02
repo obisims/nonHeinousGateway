@@ -143,7 +143,8 @@ if(urlParams.stripe_checkout){
     $('#pay_instructions_footer').addClass('receipt')
     $('#pay_instructions_footer').html(
         '<b>Receipt Num</b> <span id="receiptNum">'+uuidv4()+'</span><br>'+
-        '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
+        '<b>Confirmed at</b> <span>'+new Date().toLocaleTimeString('en-AU')+'</span>'
+       // '<b>Confirmed at</b> <span>'+confirmDate.toLocaleTimeString('en-AU')+'</span>'
     )
 
     $('#payInstructions').html(
