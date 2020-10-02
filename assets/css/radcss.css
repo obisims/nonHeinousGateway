@@ -442,23 +442,23 @@ body{
     background-color: rgba(41, 26, 43, 0.8);*/
   }
   #mobile_scrollToTop_UP::after {
-    content: "\f106";
+    /*content: "\f106";*/
   }
 
  
   #mobile_scrollToTop_Another::after {
-    content: "\f571";
-    /*background-color: var(--brand-purple);
+    /*content: "\f571";
+    background-color: var(--brand-purple);
     background-color: rgba(41, 26, 43, 0.8);*/
   }
 
   #mobile_scrollToTop_Share::after {
-    content: "\f14d";
-    /*f1e0*/
+    /* content: "\f14d";
+   f1e0*/
   }
   #mobile_scrollToTop_Download::after {
-    content: "\f0c7";
-    /*//f56d*/
+    /* content: "\f0c7";
+   //f56d*/
   }
 
 
