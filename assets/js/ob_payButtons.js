@@ -41,9 +41,9 @@ $(document).ready(function() {
 var urlParams = getParams(window.location.href);//encodeURI when creating
 
 if(urlParams.stripe_checkout){
-    if(stripe_checkout=='paid'){
+    if(urlParams.stripe_checkout=='paid'){
         handleCheckout(null,'Stripe')
-    }else if(stripe_checkout=='canceled'){
+    }else if(urlParams.stripe_checkout=='canceled'){
     /// stripe cancelled
     ///am i already checking this somewhere?
     //i was
