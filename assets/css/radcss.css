@@ -453,10 +453,12 @@ body{
   }
 
   #mobile_scrollToTop_Share::after {
-    content: "\f1e0";
+    content: "\f14d";
+    /*f1e0*/
   }
-  #mobile_scrollToTop_Print::after {
-    content: "\f02f";
+  #mobile_scrollToTop_Download::after {
+    content: "\f0c7";
+    /*//f56d*/
   }
 
 

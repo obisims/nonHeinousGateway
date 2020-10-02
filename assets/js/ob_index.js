@@ -289,8 +289,12 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 
 
     /////////////////////
+    /* MOBILE UI BUTTONS */
     
-
+    $('#mobile_scrollToTop_Download').click(function(){
+        window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
+        //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
+    })
     /* button commands */
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')
