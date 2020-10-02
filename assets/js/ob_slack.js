@@ -24,6 +24,7 @@
     },
     webhook:slackurlConstruct
   }
+  
  /*
   var methodEmojis = {
     'Direct Debit':':dollar:',//:bank:
@@ -41,7 +42,7 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':bank:'//':receipt:'//':dollar:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Paid'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Paid: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Paid 🏦 "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
  // }
   var slackPostSettings = postSettings || slackPostSettings
@@ -52,7 +53,7 @@ function postSlackNotification_purchase_complete(payMethod,slackPostSettings){
       "text": txt //'*'+title+'* | '+value+' transaction cancelled'// | "+clientName
     }
   }*/]
-  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+payMethod,'invoice paid\n'+slackPostSettings.invoice.CLIENT_NAME))
+  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+slackSettings.methodEmojis[postSettings.payment.METHOD]+' '+payMethod,'invoice paid\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
   //stripe surcharge 
   var receiptPrice = slackPostSettings.payment.AMOUNT //'588.99'
@@ -85,7 +86,7 @@ function postSlackNotification_purchase_cancelled(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':money_with_wings:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Cancelled'
-    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Cancelled: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Cancelled 💸 "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
@@ -96,7 +97,7 @@ function postSlackNotification_purchase_cancelled(payMethod,slackPostSettings){
       "text": txt //'*'+title+'* | '+value+' transaction cancelled'// | "+clientName
     }
   }*/]
-  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+payMethod,'transaction cancelled\n'+slackPostSettings.invoice.CLIENT_NAME))
+  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+slackSettings.methodEmojis[postSettings.payment.METHOD]+' '+payMethod,'transaction cancelled\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
   var slackAttachments = [];
   slackAttachments.push(slack_quickAttachment({short:true,color:slackSettings.colors.red,fallback:"Transaction Cancelled: <https://pay.obisims.com/"+slackPostSettings.invoice.INV_NUM+"|"+slackPostSettings.invoice.INV_NUM+">"},[
@@ -120,8 +121,9 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':memo:'//':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Transaction Created'
-    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Created: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Transaction Created 📝 "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
+    
   //}
   var slackPostSettings = postSettings || slackPostSettings
   var slackBlocks =  [/*{
@@ -133,7 +135,7 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
   }*/]
 
  
-  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+payMethod,'transaction created\n'+slackPostSettings.invoice.CLIENT_NAME))
+  slackBlocks.push(slack_quickBlock("<https://pay.obisims.com/"+global_slackPostSettings.invoice.INV_NUM+"|"+'*'+slackPostSettings.invoice.INV_NUM+'*'+">"+': '+slackSettings.methodEmojis[postSettings.payment.METHOD]+' '+payMethod,'transaction created\n'+slackPostSettings.invoice.CLIENT_NAME))
   //slackBlocks.push(slack_quickBlock('*Title*'+': '+'Value ','invoice paid'))
   var slackAttachments = [];
    //should put warning here for no callback
@@ -166,7 +168,7 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
    // ],
    // "image_url": "http://my-website.com/path/to/image.jpg",
    // "thumb_url": "http://example.com/path/to/thumb.png",
-    "footer": ":warning: Warning: No Callback for Crypto Checkout",
+    "footer": "⚠️ Warning: No Callback for Crypto Checkout",//:warning:
     //"footer_icon": ':warning:',//"https://platform.slack-edge.com/img/default_application_icon.png",
    // "ts": 123456789
 })
@@ -184,7 +186,7 @@ function postSlackNotification_gateway_opened(mobile,ipInfo,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':admission_tickets:'//':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Opened'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Opened: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Opened 🎟️ "+global_slackPostSettings.invoice.INV_NUM+""
   //  postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
@@ -238,7 +240,7 @@ function postSlackNotification_gateway_share(mobile,ipInfo,slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':calling:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Shared'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Shared: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Shared 📲 "+global_slackPostSettings.invoice.INV_NUM+""
   //  postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
@@ -299,7 +301,7 @@ function postSlackNotification_gateway_download(mobile,ipInfo,slackPostSettings)
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
     postSettings.settings.AVATAR = ':page_with_curl:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Downloaded'
-    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Downloaded: "+global_slackPostSettings.invoice.INV_NUM+""
+    postSettings.message.NOTIFICATION_SUMMARY = "Invoice Downloaded 📃 "+global_slackPostSettings.invoice.INV_NUM+""
   //  postSettings.payment.METHOD = payMethod
   //}
   var slackPostSettings = postSettings || slackPostSettings
