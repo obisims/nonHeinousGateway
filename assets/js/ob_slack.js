@@ -104,7 +104,7 @@ function postSlackNotification_purchase_cancelled(payMethod,slackPostSettings){
 function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
   //if(!slackPostSettings){
     var postSettings = new Object(slackPostSettings||global_slackPostSettings)
-    postSettings.settings.AVATAR = ':red_envelope:'//':eye:'
+    postSettings.settings.AVATAR = ':memo:'//':eye:'
     postSettings.settings.USERNAME = 'Invoice Gateway - Transaction Created'
     postSettings.message.NOTIFICATION_SUMMARY = "Transaction Created: "+global_slackPostSettings.invoice.INV_NUM+""
     postSettings.payment.METHOD = payMethod
