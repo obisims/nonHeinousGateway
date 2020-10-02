@@ -317,7 +317,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
             console.error('[#mobile_UI_Share] err',err)
             //alert("pay.obisims.com/"+invoiceSettings.invoice.NUM);  
             //prompt("Copy to clipboard: Ctrl+C, Enter", oArg.Document);
-            if (prompt("pay.obisims.com/"+invoiceSettings.invoice.NUM)){ console.log('url copied') }
+            if (prompt("Invoice "+invoiceSettings.invoice.NUM),"pay.obisims.com/"+invoiceSettings.invoice.NUM){ console.log('url copied') }
         });
         /* Alert the copied text */
         
