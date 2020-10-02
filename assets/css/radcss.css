@@ -382,7 +382,7 @@ body{
 
 #mobileInvoiceHeader:before {
     /*content: "obisims.com\ATHX-1138";*/
-    content: attr(data-before),/*"Doppelgänger Dudes Pty Ltd";*/
+    content: attr(data-before);/*"Doppelgänger Dudes Pty Ltd";*/
     /*replace_clientName*/
     white-space: pre-wrap;
     
