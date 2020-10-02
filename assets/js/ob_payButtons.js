@@ -171,7 +171,7 @@ if(urlParams.stripe_checkout){
         '<b>Payment Confirmed<br></b>'+
         '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
     )
-
+    $('#pay_Direct').remove()
  }
 
  function handleCheckout(thisButton,override){
@@ -248,7 +248,7 @@ if(urlParams.stripe_checkout){
                     //}
                     postSlackNotification_purchase_complete('Stripe') //  alert("Payment confirmed");
                     showApproved_state(invoiceSettings)
-                    $('#pay_Direct').remove()
+                    
                     toggleDepositInstructions()
 
 
