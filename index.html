@@ -18,7 +18,17 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 		/>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
+		<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+		<script type="text/javascript">
+			gdrive_init = function() {
+				gdrive_s = new gapi.drive.share.ShareClient();
+				gdrive_s.setOAuthToken('<OAUTH_TOKEN>');
+					gdrive_s.setItemIds(['<FILE_ID>']);
+			}
+			window.onload = function() {
+				gapi.load('drive-share', gdrive_init);
+			}
+		</script>
 	</head>
 	<body class="is-preload">
 	
