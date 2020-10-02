@@ -40,10 +40,13 @@ $(document).ready(function() {
 /* REAL END! check for callback */
 var urlParams = getParams(window.location.href);//encodeURI when creating
 
+console.log('[checking params for callback]',{urlParams:urlParams})
 if(urlParams.stripe_checkout){
     if(urlParams.stripe_checkout=='paid'){
+        console.log('[checking params for callback] STRIPE','PAID')
         handleCheckout(null,'Stripe')
     }else if(urlParams.stripe_checkout=='canceled'){
+        console.log('[checking params for callback] STRIPE','CANCELED')
     /// stripe cancelled
     ///am i already checking this somewhere?
     //i was
