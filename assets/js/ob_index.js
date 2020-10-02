@@ -301,13 +301,14 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //window.open(downloadURL, 'Download')
         
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
-        
-        var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        if (navigator.canShare) {
+        var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
+       // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+       navigator.share({title: invoiceSettings.invoice.NUM, url: payUrl});
+       /*if (navigator.canShare) {
          navigator.share({
            //files: filesArray,
-           url:pdfUrl,
-           title: invoiceSettings.invoice.NUM,
+           url:payUrl,
+         //  title: invoiceSettings.invoice.NUM,
            //text: 'obi sims invoice gateway.',
          })
          .then(() => console.log('Share was successful.'))
@@ -320,6 +321,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
          window.open(downloadURL, '_blank');
          //alert(`Your system doesn't support sharing files.`);
        }
+       */
     })
     $('#mobile_UI_Download').click(function(){
          /* Copy the text inside the text field */
@@ -328,8 +330,8 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
         navigator.share({
-          //files: filesArray,
-          url:pdfUrl,
+          files: filesArray,
+          //url:pdfUrl,
           title: invoiceSettings.invoice.NUM,
           text: 'obi sims invoice gateway.',
         })
