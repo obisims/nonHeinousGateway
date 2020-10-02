@@ -299,8 +299,26 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         */
         //window.location.href = downloadURL
         //window.open(downloadURL, 'Download')
-        window.open(downloadURL, '_blank');
+        
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
+        
+        var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
+        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+         navigator.share({
+           //files: filesArray,
+           url:pdfUrl,
+           title: invoiceSettings.invoice.NUM,
+           text: 'obi sims invoice gateway.',
+         })
+         .then(() => console.log('Share was successful.'))
+         .catch(function(error){
+             console.log('Sharing failed', error)
+             if(error)window.open(downloadURL, '_blank');
+             
+            });
+       } else {
+         alert.log(`Your system doesn't support sharing files.`);
+       }
     })
     $('#mobile_UI_Share').click(function(){
          /* Copy the text inside the text field */
