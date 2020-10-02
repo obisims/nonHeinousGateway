@@ -306,6 +306,19 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
          /* Copy the text inside the text field */
        // document.execCommand("copy");
        // copyToClipboard('https://pay.obisims.com/'+invoiceSettings.invoice.NUM)
+        var filesArray = ['https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf']
+       if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+        navigator.share({
+          files: filesArray,
+          title: invoiceSettings.invoice.NUM,
+          text: 'obi sims invoice gateway.',
+        })
+        .then(() => console.log('Share was successful.'))
+        .catch((error) => console.log('Sharing failed', error));
+      } else {
+        console.log(`Your system doesn't support sharing files.`);
+      }
+/*
        navigator
         .share({
             title: document.title,
@@ -320,6 +333,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
             //prompt("Copy to clipboard: Ctrl+C, Enter", oArg.Document);
             
         });
+        */
         /* Alert the copied text */
         
     })
