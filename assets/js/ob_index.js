@@ -299,7 +299,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         */
         //window.location.href = downloadURL
         //window.open(downloadURL, 'Download')
-        
+        var googlePdfViewerUrl = 'https://drive.google.com/file/d/'+invoiceSettings.invoice.DRIVE_ID+'/view'
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
         var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
        // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
@@ -308,12 +308,13 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
             .then(() => console.log('Share was successful.'))
             .catch(function(error){
             console.log('Sharing failed', error)
-            if(error)window.open(downloadURL, '_blank');
+            if(error)window.open(googlePdfViewerUrl, '_blank');//downloadURL
             
             });
        }else{
            //if fake desktop or old mobile?
-           window.open(downloadURL, '_blank');
+           window.open(googlePdfViewerUrl, '_blank');//downloadURL
+           
        }
        
        /*if (navigator.canShare) {
