@@ -298,7 +298,8 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         opens a new page with [df]
         */
         //window.location.href = downloadURL
-        window.open(downloadURL, 'Download')
+        //window.open(downloadURL, 'Download')
+        window.open(downloadURL, '_blank');
         //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
     })
     $('#mobile_UI_Share').click(function(){
