@@ -257,7 +257,7 @@ var ipInfo = new Object();
 
 $(document).ready(function() {
 
-    console.warn('[$(document).ready]','version 0.175')
+    console.warn('[$(document).ready]','version 0.19')
 
 
 
@@ -297,9 +297,6 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
        time += 500;
    });
 
-   $( "#book" ).fadeIn( "slow", function() {
-    // Animation complete
-  });
    
 	innerHeight = window.innerHeight
 	
