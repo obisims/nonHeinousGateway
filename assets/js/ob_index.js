@@ -283,19 +283,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     });
     */
 
-   var $payButtons = $('#paymentOptions li button.payButton');
-
-   var time = 500;
- 
-   $payButtons.each(function() {
-       setTimeout( function(){
-           //addPositioningClass($(this));
-           $(this).fadeIn( "slow", function() {
-            // Animation complete
-            });
-        }, time)
-       time += 500;
-   });
+  
 
    
 	innerHeight = window.innerHeight
@@ -490,7 +478,19 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
 
+    var $payButtons = $('#paymentOptions li .button.payButton');
 
+    var time = 500;
+  
+    $payButtons.each(function() {
+        setTimeout( function(){
+            //addPositioningClass($(this));
+            $(this).fadeIn( "slow", function() {
+             // Animation complete
+             });
+         }, time)
+        time += 500;
+    });
 
 
 
