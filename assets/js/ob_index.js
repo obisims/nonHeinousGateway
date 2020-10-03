@@ -478,8 +478,9 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
 
-    var $payButtons = $('#paymentOptions li .button.payButton');
-
+    //var $payButtons = $('.button.payButton');
+    var $payButtons = $('ul#paymentOptions li .button.payButton').fadeIn()
+/*
     var time = 500;
   console.log('[onReady] fade payButtons in')
     $payButtons.each(function() {
@@ -493,7 +494,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         time += 500;
     });
 
-
+*/
 
 
 
