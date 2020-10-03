@@ -168,7 +168,7 @@ function postSlackNotification_purchase_initiated(payMethod,slackPostSettings){
    // ],
    // "image_url": "http://my-website.com/path/to/image.jpg",
    // "thumb_url": "http://example.com/path/to/thumb.png",
-    "footer": "⚠️ Warning: No Callback for Crypto Checkout",//:warning:
+    "footer": "! Warning: No Callback for Crypto Checkout",//:warning://⚠️ 
     //"footer_icon": ':warning:',//"https://platform.slack-edge.com/img/default_application_icon.png",
    // "ts": 123456789
 })

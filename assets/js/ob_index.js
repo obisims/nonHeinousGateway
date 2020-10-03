@@ -335,6 +335,11 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         this one opens the doc in google docs on android
         opens a new page with [df]
         */
+       $('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
+   var fbxhr = new XMLHttpRequest ();
+fbxhr.open ("POST", "https://graph.facebook.com", true);
+fbxhr.setRequestHeader ("Content-type", "application / x-www-form-urlencoded");
+fbxhr.send ("id = "+"https:"+"&scrape=true");
         //window.location.href = downloadURL
         //window.open(downloadURL, 'Download')
         var googlePdfViewerUrl = 'https://drive.google.com/file/d/'+invoiceSettings.invoice.DRIVE_ID+'/view'
