@@ -282,6 +282,24 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         members: ['obi_sims']
     });
     */
+
+   var $payButtons = $('#paymentOptions li button.payButton');
+
+   var time = 500;
+ 
+   $payButtons.each(function() {
+       setTimeout( function(){
+           //addPositioningClass($(this));
+           $(this).fadeIn( "slow", function() {
+            // Animation complete
+            });
+        }, time)
+       time += 500;
+   });
+
+   $( "#book" ).fadeIn( "slow", function() {
+    // Animation complete
+  });
    
 	innerHeight = window.innerHeight
 	

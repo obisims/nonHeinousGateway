@@ -656,7 +656,9 @@ body{
 #invoiceTitleContainer.invoiceHeader_box{
   width: max-content;
 }
-
+.payButton{
+  display:none;
+}
 .payButton:active,.payButton:focus{
 outline:none;
 }
