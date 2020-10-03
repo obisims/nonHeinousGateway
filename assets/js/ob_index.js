@@ -481,9 +481,10 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     var $payButtons = $('#paymentOptions li .button.payButton');
 
     var time = 500;
-  
+  console.log('[onReady] fade payButtons in')
     $payButtons.each(function() {
         setTimeout( function(){
+            console.log('[onReady] fade payButton',$(this))
             //addPositioningClass($(this));
             $(this).fadeIn( "slow", function() {
              // Animation complete
