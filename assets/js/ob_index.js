@@ -479,7 +479,23 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
     //var $payButtons = $('.button.payButton');
-    var $payButtons = $('ul#paymentOptions li .button.payButton').fadeIn()
+    var $payButtons = $('ul#paymentOptions li .button.payButton')//.fadeIn()
+    //$payButtons.each(function() {
+   // })
+   setTimeout(function() {
+    $('ul#paymentOptions li .button.payButton').each(function(index,button){
+        console.log(button)
+        //$(button).fadeIn()
+        setTimeout(function() {
+            //$(button).fadeIn('slow')
+            $(button).fadeIn( 1500, function() {
+                // Animation complete
+                });
+        }, 750*(index+1)) // or just index, depends on your needs
+    })
+   },500)
+   
+
 /*
     var time = 500;
   console.log('[onReady] fade payButtons in')
