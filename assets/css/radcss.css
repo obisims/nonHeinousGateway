@@ -657,7 +657,7 @@ body{
   width: max-content;
 }
 .payButton{
-  display:none;
+  opacity:0;
 }
 .payButton:active,.payButton:focus{
 outline:none;
