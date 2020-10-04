@@ -690,10 +690,21 @@ outline:none;
 
 }
 
+
 ul#paymentOptions {
   /*margin-bottom: 0;*/
   margin-bottom: 20px;
 }
+
+#buttonPayIcons img.socialIconSet{
+  height: 10px;
+  margin: 0 2px 0 2px;
+}
+img.socialIconSet {
+  height: 14px;
+  margin: 0 6px 0 6px;
+}
+
 
 @media screen and (max-width: 480px){
   /*ul.icons {
@@ -707,3 +718,4 @@ ul#paymentOptions {
     display: block;
   }
 }
+

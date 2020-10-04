@@ -756,6 +756,7 @@ if(urlParams.date_due){
     //$('#mobileInvoiceHeader').attr('data-before', urlParams.date_due);
 }else{
     $('#dueTimer').text("No due date set")//Doppelgänger Doppelgänger Dudes Pty Ltd
+    //$('#dueTimer').remove()
 }
 
 

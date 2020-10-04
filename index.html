@@ -41,10 +41,9 @@
 						</span>-->
 					<!-- Title Area -->
 					<span id="headerOrnament" style="line-height: 1; display: inline-block;">
-						<span style="color:white;" class="replace_clientName">{{ CLIENT NAME }}</span>
-						<span id="dueTimer" style="font-size: 75%;">due in over a week</span>
+						<span style="color:white;" class="replace_clientName"></span><br>
+						<span id="dueTimer" style="font-size: 75%;"></span>
 					</span>
-
 					<div id="invoiceHeader" class="invoiceHeader_wrapper">
 						<div class="invoiceHeader_innerWrapper">
 						  <div class="invoiceHeader_box">
@@ -97,7 +96,10 @@
 									style="display: none;"
 								><span><span style="font-weight:700;">Direct</span> Deposit</span>
 								</button>
-								<div id="surcharge_directDebit" class="surcharge notActive">/div>
+								
+								<br><span id="buttonPayIcons">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_directDeposit.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+								</span><br><div id="surcharge_directDebit" class="surcharge active"></div>
 							</li>
 						<!-- Crypto Payment -->
 							<li>
@@ -111,7 +113,7 @@
 								><span>Pay with <span style="font-weight:700;"> Ƀ</span></span>
 								</button>
 							<!-- service surcharge / notes -->
-								<div id="surcharge_coinbase" class="surcharge notActive"></div>
+								
 							<!-- payments this service accepts -->
 								<!--<ul class="icons">
 									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
@@ -120,6 +122,16 @@
 									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 									<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
 								</ul>-->
+								<br>
+								<span id="buttonPayIcons">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_bitcoin_BTC.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_lastFm.svg'">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_bitcoinCash_BCC.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_spotify.svg'">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_daicoin_DAI.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_pintrest.svg'">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_etherium_ETH.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_obisims.svg'">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_litecoin_LTC.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_behance.svg'">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_coinbase_usdcoin_USDC.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+								</span>
+								<br><div id="surcharge_coinbase" class="surcharge active"></div>
 							</li>
 						<!-- Credit Card Payment -->
 							<li>
@@ -133,7 +145,15 @@
 								><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span>
 								</button>
 							<!-- service surcharge / notes -->
-								<div id="surcharge_stripe" class="surcharge notActive"></div>
+								
+								<br><span id="buttonPayIcons">
+									<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_stripe_ jcb.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_stripe_americanexpress.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_stripe_applePay.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_stripe_mastercard.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_payIcon_stripe_visa.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+								</span>
+								<br><div id="surcharge_stripe" class="surcharge active"></div>
 							</li>
 						</ul>
 						<script>
@@ -179,6 +199,30 @@
 						</div>
 						<!--<button>Confirm Deposit</button>-->
 					</div>
+
+					<span style="line-height: 2; display: inline-block;">
+					<!-- LANDING FOOTER -->
+					
+					<div  style="display: inline;">
+						
+							
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_coinbase.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_drive.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_github.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_stripe.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+						</div>
+					<div id="landing_socialIcons" style="display: inline;">
+						<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_lastFm.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_lastFm.svg'">
+						<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_spotify.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_spotify.svg'">
+						<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_pintrest.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_pintrest.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_obisims.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_obisims.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_behance.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_behance.svg'">
+							<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_instagram.svg" onerror="this.onerror=null; this.src='images/paymentIcons/masterLogos_social_instagram.svg'">
+						</div>
+						<br>
+						<span style="font-size: 75%;">obisims.com</span>
+					</span>
+
 					</section>
 					
 				<!-- Scroll Down Arrow -->

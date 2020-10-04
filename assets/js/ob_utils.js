@@ -1,3 +1,44 @@
+
+function dueTimer_kickStart(daysUntilDue,nowDate){
+	return dueTimer(moment(nowDate||moment()).add(daysUntilDue||14,'days'))//,time_now
+}
+//.toLowerCase()
+function dueTimer(dueDate,nowTime){
+	var response = ''
+	var nowDate = nowTime||moment()
+	var daysUntilDue = dueDate.diff(nowDate,'days')
+	console.log(daysUntilDue)	
+	var timer = dueDate.calendar(nowDate,{
+			sameDay: '[Today]',
+			nextDay: '[Tomorrow]',
+			nextWeek: "dddd [the] Do",//'dddd'
+			lastDay: '[Yesterday]',
+			lastWeek: '[Last] dddd',
+			sameElse: "ddd Do [of] MMM 'YY",//ddd Do MMM 'YY ///'dd - MM - YYYY'
+	})
+	response = timer
+	if(daysUntilDue==7){
+		response = 'in a Week'
+	} else if(daysUntilDue>1&&daysUntilDue<7){
+		response = ''+moment(dueDate).format('dddd')//+', in '+daysUntilDue+' days'
+	}else if(daysUntilDue>=15){
+		response = 'in more than a Fortnight'
+	}else if(daysUntilDue>=14){
+		response = 'in a Fortnight'
+	} else if(daysUntilDue>7&&daysUntilDue<14){
+		response = 'next '+moment(dueDate).format('dddd')
+	} else if(daysUntilDue>7){
+		response = 'in Over a Week'
+	}
+/*	var daysOff = dueDate.diff(nowDate, 'days')
+console.log(daysOff)
+	//if over 7 days left
+	if(daysOff>=7)response = 'in over a week'// =1
+	*/
+return response//+ ' | '+daysUntilDue
+}
+
+
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
