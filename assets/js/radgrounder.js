@@ -199,7 +199,20 @@ all_backgrounds.base = {
     abstract_blackBG_retro_theDiscoFly : 'https://i.gifer.com/8Tin.gif',
     abstract_blackBG_retro_redhotmoon : 'https://i.gifer.com/3YUz.gif',
     abstract_blackAndWhiteBG_retro_vhsLinesOnaZebra : 'https://i.gifer.com/3SEg.gif',
-    abstract_darkBG_retro_lineArtKinda_reverseRain : 'https://i.gifer.com/3Y1B.gif'
+    abstract_darkBG_retro_lineArtKinda_reverseRain : 'https://i.gifer.com/3Y1B.gif',
+
+
+    weird_old_medical : 'https://media0.giphy.com/media/l4Ep98nbQvNj9sN0I/giphy.gif',
+    weird_old_hotdog_composured : 'https://ello.co/marcrodriguez',
+    weird_old_gasmask_secretary : 'https://media4.giphy.com/media/l1IBi0fHI5qZ1huQ8/giphy.gif',
+    lineart_eyes_beatbouncing_kelidescope : 'https://media.giphy.com/media/VdVxcUMZR25Sn5OdyA/giphy.gif',
+    weird_eyedartingaround : 'https://media.giphy.com/media/3ohs4CacylzFaHjMM8/giphy.gif',
+    //name : 'gif',
+    //name : 'gif',
+
+    
+    
+    
 }
 var BG_BASE = all_backgrounds.base
 /* 
@@ -414,12 +427,13 @@ var CHILL = all_backgrounds.CHILL
 /* */ addToBGS(ERROR, 'anime_handEye')
 /* */ addToBGS(ERROR, 'aesth_catCrash_anime')
 /* */ addToBGS(ERROR, 'abstract_blackBG_lineArt_spinningCross')
+/* */ addToBGS(ERROR, 'weird_old_medical')
+/* */ addToBGS(ERROR, 'weird_old_hotdog_composured')
+/* */ addToBGS(ERROR, 'weird_old_gasmask_secretary')
+/* */ addToBGS(ERROR, 'weird_eyedartingaround')
 /* */ addToBGS(ERROR, '')
 /* */ addToBGS(ERROR, '')
 /* */ addToBGS(ERROR, '')
-
-
-
 
 
 
@@ -487,6 +501,7 @@ var LINEART = all_backgrounds.lineart
 /* */ addToBGS(LINEART, 'abstract_blackBG_lineArt_star')
 
 /* */ addToBGS(LINEART, 'abstract_blackhole')
+/* */ addToBGS(LINEART, 'lineart_eyes_beatbouncing_kelidescope')
 
 
 

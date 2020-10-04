@@ -40,7 +40,11 @@
 							 </a>
 						</span>-->
 					<!-- Title Area -->
-					<h4 style="margin: 0 0 10px 0;" class="replace_clientName">{{ CLIENT NAME }}</h4>
+					<span id="headerOrnament" style="line-height: 1; display: inline-block;">
+						<span style="color:white;" class="replace_clientName">{{ CLIENT NAME }}</span>
+						<span id="dueTimer" style="font-size: 75%;">due in over a week</span>
+					</span>
+
 					<div id="invoiceHeader" class="invoiceHeader_wrapper">
 						<div class="invoiceHeader_innerWrapper">
 						  <div class="invoiceHeader_box">
@@ -51,7 +55,9 @@
 							</a>
 						  </div>
 						  <div id="invoiceTitleContainer" class="invoiceHeader_box">
-							<span>|&nbsp;<span id="invoiceTitle" class="invoiceNum replace_invoiceNum">{{ INV NUM }}</span></span>
+							<span><!--|&nbsp;-->
+								<span id="invoiceTitle" class="invoiceNum replace_invoiceNum">{{ INV NUM }}</span>
+							</span>
 						  </div>
 						</div>
 					</div>
@@ -248,6 +254,7 @@
 		<script src="assets/js/jquery.scrolly.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/moment.js"></script>
 		<!--<script src="assets/js/lastfmnowplaying.js"></script>
 			<script src="assets/js/Tocca.js"></script> testing 
 			<script src="assets/js/hammer.min.js"></script>-->
