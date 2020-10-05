@@ -543,10 +543,12 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                     $('#landingFooterObi').fadeIn( 1500, function() {
                         // Animation complete
                         setTimeout(function() {
-                            $('#landingScrollDownButton').fadeIn(1500)
-                            $('#landingFooterObi_mobile').fadeIn(1500,function(){
+                            //$('#navAndMain').slideDown(1900)
+                            $('#landing').removeClass('pushInvoiceDown')
+                            //slide-up
+                            $('#landingScrollDownButton').slideDown(1900)
+                            $('#landingFooterObi_mobile').fadeIn(1900)
                             
-                            })
                         },1*buttonTime) 
                     });
                        
