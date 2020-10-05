@@ -257,7 +257,7 @@ var ipInfo = new Object();
 
 $(document).ready(function() {
 
-    console.warn('[$(document).ready]','version 0.19')
+    console.warn('[$(document).ready]','version 0.2')
 
 
 
@@ -759,9 +759,9 @@ function dueTimer(dueDate,nowTime){
 			response = prefix+' this Week'
 		}else if(daysUntilDue==7){// Exactly a week off
 			response = prefix+'in a Week'
-		}else if(daysUntilDue<14){// Under 2 weeks
+		}else if(daysUntilDue<13){// Under 2 weeks
 			response = prefix+'next Week'
-		}else if(daysUntilDue==14){// exactly 2 weeks
+		}else if(daysUntilDue<=14){// exactly 2 weeks
 			response = prefix+'in a Fortnight'
 		}else{// over 2 weeks
 			response = prefix+'in more than a Fortnight'
