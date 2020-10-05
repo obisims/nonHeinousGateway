@@ -302,7 +302,7 @@ if(urlParams.coinbase_checkout){
                 '&project_name='+encodeURI(urlParams.project_name)+
                 '&stripe_price='+encodeURI(urlParams.stripe_price)+
                 '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
-                '&drive_id='+encodeURI(urlParams.drive_id)
+                '&drive_id='+encodeURI(urlParams.drive_id)+
                 '&date_due='+encodeURI(urlParams.date_due)
                 
                // console.log('fakeurl',fakeURL)
@@ -347,7 +347,8 @@ function toggleDepositInstructions(){
         //$('#pay_instructions img').data('block', 'something');
         //$('#pay_instructions img').attr('src', 'something.jpg');
         //$(this).data('lockHover', true);
-       
+        
+        $('#landingFooterObi_mobile').slideToggle( "slow", function() { /* Animation complete.*/});
         var buttonLockdown = $pay_Direct.attr('data-lockhover')
         if(buttonLockdown=="false"){
             $pay_Direct.html('<b>Back</b>')
