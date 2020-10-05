@@ -353,13 +353,14 @@ function toggleDepositInstructions(){
             $pay_Direct.html('<b>Back</b>')
         }else{
             $pay_Direct.html(payDirectOriginalHtml)
+            $('#paymentOptions li .buttonPayFooter').slideUp()
         }
         $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')
         
 
         var $payInstruction = $("#pay_instructions")
         $("#pay_instructions").slideToggle( "slow", function() { /* Animation complete.*/});
-        $('#paymentOptions li .buttonPayFooter').slideUp()
+        
         var $payCrypto = $('#pay_Crypto.payButton')
         var $payStripe = $('#pay_Stripe.payButton')
        
