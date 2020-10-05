@@ -243,29 +243,7 @@ text-align: center;
     /*top: 0.23em;*/
     font-size: 1.6em;
 }
-.surcharge{
-    font-size: x-small;
-    display: block;
-    opacity:1;
-    transition: all 0.3s ease;
-}
-.surcharge.notActive{
-    display: none;
-    opacity:0;
-    
-}
-#buttonPayIcons {
-  /*font-size: x-small;
-  display: block;*/
-  opacity:1;
-  transition: all 0.3s ease;
-}
-#buttonPayIcons.notActive{
-  display: none;
-  opacity:0;
-  
-}
- 
+
 
 
 
@@ -718,7 +696,18 @@ ul#paymentOptions.li{
 
 } 
 
-#buttonPayIcons img.socialIconSet{
+.surcharge{
+  font-size: x-small;
+  display: block;
+  opacity:1;
+  transition: all 0.3s ease;
+}
+.surcharge.notActive{
+  display: none;
+  opacity:0;
+  
+}
+#buttonPayIcons img{
   height: 10px;
   margin: 0 2px 0 2px;
 }
@@ -727,11 +716,22 @@ img.socialIconSet {
   margin: 0 6px 0 6px;
 }
 
+#buttonPayIcons {
+/*font-size: x-small;
+display: block;*/
+opacity:1;
+transition: all 0.3s ease;
+}
+#buttonPayIcons.notActive{
+display: none;
+opacity:0;
+
+}
+
 img.socialIconSet:hover {
   filter: url(#obiBrandFilter-red);
 }
 #landingFooterObi{
-
 
 }
 
