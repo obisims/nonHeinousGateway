@@ -179,6 +179,15 @@ if(urlParams.coinbase_checkout){
  function handleCheckout(thisButton,override){
   //  var thisButton = button
   
+  if(isFacebookApp()){
+    // your action here if user using Facebook in-app browser
+ alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
+$('#confirm_directDebit').html('open in another broswer to confirm')
+ return 
+}
+   
+
+
   var buttonProps = new Object()
   if(override){
       console.log('[handleCheckout] override',override)
