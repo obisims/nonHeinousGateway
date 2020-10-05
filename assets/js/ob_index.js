@@ -476,7 +476,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 		});
 		*/
 	});
-	$( ".arrow" ).click(function() {
+	$( "#landingScrollDownButton" ).click(function() {
         console.log('[clicked] arrowDown')
         var nowHeights = getScreenHeights()
         var scrollingTo = nowHeights.shrinkCompenA.px+nowHeights.shrunkSpacer.px// document.body.scrollHeight
