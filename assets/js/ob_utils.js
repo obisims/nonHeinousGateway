@@ -4,7 +4,18 @@ function isFacebookApp() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1)||(ua.indexOf('Instagram') > -1);
 }
-
+function isiOS() {
+  return [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform)
+  // iPad on iOS 13 detection
+  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
 
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
