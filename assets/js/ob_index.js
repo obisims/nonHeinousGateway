@@ -284,7 +284,10 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     */
 
   
-
+   if(isFacebookApp()){
+    // your action here if user using Facebook in-app browser
+   alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
+ }
    
 	innerHeight = window.innerHeight
 	
