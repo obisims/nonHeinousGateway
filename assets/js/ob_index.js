@@ -297,13 +297,15 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 }
    
 	innerHeight = window.innerHeight
-	
+    $('#wrapper_landingFooterObi_mobile').slideDown()
+    
     if(isMobile==true){
         //$(window).height()
+        $('#landingFooterObi_mobile .mobile_UI_Share').fadeIn()
         //window.screen.height
         //$('#intro').addClass('isMobile')
         //if(isMobile==true){
-        $('#wrapper_landingFooterObi_mobile').fadeIn()
+        
         //}
         $('#landing').addClass('isMobile')
         //(elemHeights.screen.vh*7)+50
@@ -540,9 +542,14 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                 
                     $('#landingFooterObi').fadeIn( 1500, function() {
                         // Animation complete
-                    
-                        });
-                        $('#landingFooterObi_mobile').fadeIn(1500)
+                        setTimeout(function() {
+                            $('#landingScrollDownButton').fadeIn(1500)
+                            $('#landingFooterObi_mobile').fadeIn(1500,function(){
+                            
+                            })
+                        },1*buttonTime) 
+                    });
+                       
                 },(buttonIndex+2)*buttonTime) 
             },buttonTime)
         });
