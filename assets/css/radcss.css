@@ -206,7 +206,7 @@ body,html{
     
 }
 #mainLogo .svgLink{
-  max-width: 50px;
+  max-width: 30px;
 }
 #shrinkMobileBuffer{
     height:0vh;
@@ -616,13 +616,13 @@ body{
   }
 
   #invoiceHeader #invoiceTitle {
-    font-weight: 700;
+    font-weight: 600;
 }
 #mainLogo svg{
   text-align: right;
   POSITION: absolute;
   /*padding-top: 15px;*/
-  margin-top: -5px;
+  margin-top: 4px;
 }
 
 
@@ -645,7 +645,7 @@ body{
 
 .invoiceHeader_box {
   display: inline-block;
-  padding: 0px 33px;
+  padding: 0px 23px;
   opacity: 1;
  /* background-color: #32CD32;*/
 }
