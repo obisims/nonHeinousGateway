@@ -179,8 +179,8 @@ if(urlParams.coinbase_checkout){
  function handleCheckout(thisButton,override){
   //  var thisButton = button
   
-
-   
+  
+  
 
 
   var buttonProps = new Object()
