@@ -171,7 +171,9 @@ if(urlParams.stripe_checkout){
         '<b>Payment Confirmed<br></b>'+
         '<span>Thank you very much,<br>a notification has been sent to obi.</span>'
     )
-    $('#pay_Direct').remove()
+    //$('#pay_Direct').remove()
+    $('#paymentOptions').remove()
+    
  }
 
  function handleCheckout(thisButton,override){
@@ -296,6 +298,7 @@ if(urlParams.stripe_checkout){
                 '&stripe_price='+encodeURI(urlParams.stripe_price)+
                 '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
                 '&drive_id='+encodeURI(urlParams.drive_id)
+                '&date_due='+encodeURI(urlParams.date_due)
                 
                // console.log('fakeurl',fakeURL)
 
@@ -328,14 +331,41 @@ if(urlParams.stripe_checkout){
 
 var directDebitOpened = false
 var directDebitOpened_cancelled = false
+
+
+var payDirectOriginalHtml;// = $pay_Direct.html()
 function toggleDepositInstructions(){
-            
+    var $pay_Direct =  $('#pay_Direct')
+        if(!payDirectOriginalHtml)payDirectOriginalHtml=$pay_Direct.html()
         $('#header').toggleClass('directDebitShrink')
-        $("#pay_instructions").slideToggle( "slow", function() {
-            // Animation complete.
-        });
-        $("#pay_Crypto.payButton").slideToggle();
-        $("#pay_Stripe.payButton").slideToggle();
+        //$("#pay_instructions").data
+        //$('#pay_instructions img').data('block', 'something');
+        //$('#pay_instructions img').attr('src', 'something.jpg');
+        //$(this).data('lockHover', true);
+       
+        var buttonLockdown = $pay_Direct.attr('data-lockhover')
+        if(buttonLockdown=="false"){
+            $pay_Direct.html('<b>Back</b>')
+        }else{
+            $pay_Direct.html(payDirectOriginalHtml)
+        }
+        $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')
+        
+
+        var $payInstruction = $("#pay_instructions")
+        $("#pay_instructions").slideToggle( "slow", function() { /* Animation complete.*/});
+
+        var $payCrypto = $('#pay_Crypto.payButton')
+        var $payStripe = $('#pay_Stripe.payButton')
+       
+        $payCrypto.parent().animate({
+            width: "toggle"
+        });//slideToggle();
+        $payStripe.parent().animate({
+            width: "toggle"
+        });//slideToggle();
+
+
         $('#paymentOptions').toggleClass('hidePadding');
             if(directDebitOpened==false){
                // postSlackNotification_purchase_initiated('Direct Debit')

@@ -254,6 +254,18 @@ text-align: center;
     opacity:0;
     
 }
+#buttonPayIcons {
+  /*font-size: x-small;
+  display: block;*/
+  opacity:1;
+  transition: all 0.3s ease;
+}
+#buttonPayIcons.notActive{
+  display: none;
+  opacity:0;
+  
+}
+ 
 
 
 
@@ -692,9 +704,19 @@ outline:none;
 
 
 ul#paymentOptions {
-  /*margin-bottom: 0;*/
-  margin-bottom: 20px;
+  margin-bottom: 0;
+ /* margin-bottom: 20px;*/
 }
+
+ul#paymentOptions.li{
+    float:left;
+    overflow: hidden;
+}
+.buttonPayFooter{
+  
+  display: none;
+
+} 
 
 #buttonPayIcons img.socialIconSet{
   height: 10px;
@@ -703,6 +725,14 @@ ul#paymentOptions {
 img.socialIconSet {
   height: 14px;
   margin: 0 6px 0 6px;
+}
+
+img.socialIconSet:hover {
+  filter: url(#obiBrandFilter-red);
+}
+#landingFooterObi{
+
+
 }
 
 

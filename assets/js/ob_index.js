@@ -430,10 +430,33 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
     /* button commands */
+    /* pay show button */
+ 
+   // $('.buttonPayFooter').slideUp( "slow", function() {
+        // Animation complete.
+     // });
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')
-		$(this).next().toggleClass('notActive')
-	})
+       // $(this).next().toggleClass('notActive')
+       var $parent = $(this).parent()
+       $parent.find('.buttonPayFooter').slideDown()
+       //$parent.find('#buttonPayIcons').toggleClass('notActive')
+       
+        //$( "#book" )
+       // $parent.find('.surcharge').toggleClass('notActive')
+    }, function() {
+       // $(this).data('lockHover', true);
+        if($(this).attr('data-lockhover')=='true'){
+
+        }else{
+
+            $(this).parent().find('.buttonPayFooter').slideUp()
+        }
+      })
+    
+
+
+
 	$( "#mobile_scrollToTop_UP" ).click(function() {
 		console.log('[clicked] mobile arrowUp')
         shrinkDeadSpace(false)
@@ -479,23 +502,33 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
     //var $payButtons = $('.button.payButton');
-    var $payButtons = $('ul#paymentOptions li .button.payButton')//.fadeIn()
+    //var $payButtons = $('ul#paymentOptions li .button.payButton')//.fadeIn()
     //$payButtons.each(function() {
    // })
+  
    setTimeout(function() {
+       const buttonTime = 750
+       var buttonIndex = 0
     $('ul#paymentOptions li .button.payButton').each(function(index,button){
+        buttonIndex++
         console.log(button)
         //$(button).fadeIn()
         setTimeout(function() {
             //$(button).fadeIn('slow')
             $(button).fadeIn( 1500, function() {
                 // Animation complete
+                //loadInFooter()
                 });
-        }, 750*(index+1)) // or just index, depends on your needs
+        }, buttonTime*(index+1)) // or just index, depends on your needs
     })
+    setTimeout(function() { //for footer
+        $('#landingFooterObi').fadeIn( 1500, function() {
+            // Animation complete
+            });
+        },(buttonIndex+2)*buttonTime)  
    },500)
    
-
+  
 /*
     var time = 500;
   console.log('[onReady] fade payButtons in')
