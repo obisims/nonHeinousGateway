@@ -42,7 +42,7 @@
 				<div id="landing" >
 				<div id="mobileInvoiceHeader" data-before="obisims.com"></div>
 				<!-- Header -->
-					<header id="header" class="alt animate__animated animate__slideInDown animate__slow animate__delay-3s">
+					<header id="header" class="alt" ><!--animate__animated animate__slideInDown animate__slow animate__delay-3s-->
 					<!-- Logo --><!--
 						<span class="logo"><img src="images/logo.svg" alt="" />
 							 mb add contact card
@@ -54,27 +54,28 @@
 							 </a>
 						</span>-->
 					<!-- Title Area -->
-					<span id="headerOrnament" style="line-height: 1; display: inline-block;">
-						<span style="color:white;" class="replace_clientName"></span><br>
-						<span id="dueTimer" style="font-size: 75%;"></span>
-					</span>
-					<div id="invoiceHeader" class="invoiceHeader_wrapper">
-						<div class="invoiceHeader_innerWrapper">
-						  <div class="invoiceHeader_box">
-							<a id="mainLogo" class="hidden-load" target="_blank" href="https://obisims.com/">
-								<svg  class="svgLink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.3 29">
-									<path class="svgLinkIcon" d="M17.7 22.2l2.7 2c-1.2 2.2-3.2 4.8-6 4.8 -1.5 0-3.1-1-4.6-2 -1.5-1-2.7-2-3.6-2 -1.3 0-2.4 1.2-3.6 3.3L0 26.4c1.4-2.1 3.2-4.9 6.1-4.9 2 0 3.5 1 4.8 2 1.3 1 2.4 2 3.3 2C15.8 25.6 16.5 24.1 17.7 22.2M3.8 9.9c0-3.5 2.8-6.5 6.4-6.5 3.5 0 6.4 2.9 6.4 6.5 0 3.5-2.8 6.5-6.3 6.5C6.6 16.4 3.8 13.4 3.8 9.9M20.1 9.9c0-5.6-4.4-9.9-9.9-9.9S0.2 4.3 0.2 9.9c0 5.6 4.4 9.9 9.9 9.9S20.1 15.5 20.1 9.9"/>
-								</svg>
-							</a>
-						  </div>
-						  <div id="invoiceTitleContainer" class="invoiceHeader_box">
-							<span><!--|&nbsp;-->
-								<span id="invoiceTitle" class="invoiceNum replace_invoiceNum">{{ INV NUM }}</span>
+						<div id="headerSlideInWrapper"  style="opacity:0;">
+							<span id="headerOrnament" style="line-height: 1; display: inline-block;">
+								<span style="color:white;" class="replace_clientName"></span><br>
+								<span id="dueTimer" style="font-size: 75%;"></span>
 							</span>
-						  </div>
+							<div id="invoiceHeader" class="invoiceHeader_wrapper" >
+								<div class="invoiceHeader_innerWrapper">
+								<div class="invoiceHeader_box">
+									<a id="mainLogo" class="hidden-load" target="_blank" href="https://obisims.com/">
+										<svg  class="svgLink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.3 29">
+											<path class="svgLinkIcon" d="M17.7 22.2l2.7 2c-1.2 2.2-3.2 4.8-6 4.8 -1.5 0-3.1-1-4.6-2 -1.5-1-2.7-2-3.6-2 -1.3 0-2.4 1.2-3.6 3.3L0 26.4c1.4-2.1 3.2-4.9 6.1-4.9 2 0 3.5 1 4.8 2 1.3 1 2.4 2 3.3 2C15.8 25.6 16.5 24.1 17.7 22.2M3.8 9.9c0-3.5 2.8-6.5 6.4-6.5 3.5 0 6.4 2.9 6.4 6.5 0 3.5-2.8 6.5-6.3 6.5C6.6 16.4 3.8 13.4 3.8 9.9M20.1 9.9c0-5.6-4.4-9.9-9.9-9.9S0.2 4.3 0.2 9.9c0 5.6 4.4 9.9 9.9 9.9S20.1 15.5 20.1 9.9"/>
+										</svg>
+									</a>
+								</div>
+								<div id="invoiceTitleContainer" class="invoiceHeader_box">
+									<span><!--|&nbsp;-->
+										<span id="invoiceTitle" class="invoiceNum replace_invoiceNum">{{ INV NUM }}</span>
+									</span>
+								</div>
+								</div>
+							</div>
 						</div>
-					</div>
-					
 						<!--<p><br />
 						built by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a>.</p>
 						-->

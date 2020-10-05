@@ -447,20 +447,19 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
      // });
 	$( ".button" ).hover(function() {
 		console.log('[hover] button')
-       // $(this).next().toggleClass('notActive')
-       var $parent = $(this).parent()
-       $parent.find('.buttonPayFooter').slideDown()
-       //$parent.find('#buttonPayIcons').toggleClass('notActive')
-       
-        //$( "#book" )
-       // $parent.find('.surcharge').toggleClass('notActive')
+       //var $parent = $(this).parent()
+       //$parent.find('.buttonPayFooter').slideDown()
+      
+       if($(this).attr('data-lockhover')!='true'){
+            $(this).parent().find('.buttonPayFooter').slideDown() 
+        }else{
+           
+        }
+        
     }, function() {
        // $(this).data('lockHover', true);
-        if($(this).attr('data-lockhover')=='true'){
-
-        }else{
-
-            $(this).parent().find('.buttonPayFooter').slideUp()
+        if($(this).attr('data-lockhover')!='true'){
+            $(this).parent().find('.buttonPayFooter').slideUp()  
         }
       })
     
@@ -517,25 +516,36 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
    // })
   
    setTimeout(function() {
-       const buttonTime = 750
-       var buttonIndex = 0
-    $('ul#paymentOptions li .button.payButton').each(function(index,button){
-        buttonIndex++
-        console.log(button)
-        //$(button).fadeIn()
-        setTimeout(function() {
-            //$(button).fadeIn('slow')
-            $(button).fadeIn( 1500, function() {
-                // Animation complete
-                //loadInFooter()
-                });
-        }, buttonTime*(index+1)) // or just index, depends on your needs
-    })
-    setTimeout(function() { //for footer
-        $('#landingFooterObi').fadeIn( 1500, function() {
-            // Animation complete
-            });
-        },(buttonIndex+2)*buttonTime)  
+        const buttonTime = 750
+        var buttonIndex = 0
+        $('#headerSlideInWrapper').fadeTo( "fast" , 1, function() {
+            // Animation complete.
+            setTimeout(function() {
+                $('ul#paymentOptions li .button.payButton').each(function(index,button){
+                    buttonIndex++
+                    console.log(button)
+                    //$(button).fadeIn()
+                    setTimeout(function() {
+                        //$(button).fadeIn('slow')
+                        $(button).fadeIn( 1500, function() {
+                            // Animation complete
+                            //loadInFooter()
+                            });
+                    }, buttonTime*(index+1)) // or just index, depends on your needs
+                })
+                setTimeout(function() { //for footer
+                
+                    $('#landingFooterObi').fadeIn( 1500, function() {
+                        // Animation complete
+                    
+                        });
+                },(buttonIndex+2)*buttonTime) 
+            },buttonTime)
+        });
+        //$('#headerOrnament').slideDown(1000)
+        //$('#invoiceHeader').slideDown(1000)
+
+
    },500)
    
   

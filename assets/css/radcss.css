@@ -680,6 +680,13 @@ outline:none;
 
 }
 
+a {
+  color:white;
+}
+a:hover{
+  color:var(--brand-red);
+  font-weight: bold;
+}
 
 ul#paymentOptions {
   margin-bottom: 0;
@@ -714,6 +721,7 @@ ul#paymentOptions.li{
 img.socialIconSet {
   height: 14px;
   margin: 0 6px 0 6px;
+  transition: height 0.3s ease;
 }
 
 #buttonPayIcons {
@@ -730,7 +738,9 @@ opacity:0;
 
 img.socialIconSet:hover {
   filter: url(#obiBrandFilter-red);
+  height: 16px;
 }
+
 #landingFooterObi{
 
 }
