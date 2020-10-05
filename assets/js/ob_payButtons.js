@@ -178,6 +178,7 @@ if(urlParams.coinbase_checkout){
 
  function handleCheckout(thisButton,override){
   //  var thisButton = button
+  
   var buttonProps = new Object()
   if(override){
       console.log('[handleCheckout] override',override)
@@ -217,7 +218,7 @@ if(urlParams.coinbase_checkout){
             case 'Direct Debit':
                 // stripe confirmation through callback // toggleDepositInstructions()
                 console.log('[button clicked] invoiceSettings',invoiceSettings)
-                if (window.confirm("Have you already processed your payment for $"+urlParams.inv_total+" via "+paymentMethod+"?")) { 
+                if (confirm("Have you already processed your payment for $"+urlParams.inv_total+" via "+paymentMethod+"?")) { 
                     var confirmDate = new Date()
                   //  console.log('[button clicked] invoiceSettings',invoiceSettings)
                     invoiceSettings.payStatus = {
