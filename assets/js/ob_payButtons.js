@@ -359,7 +359,7 @@ function toggleDepositInstructions(){
 
         var $payInstruction = $("#pay_instructions")
         $("#pay_instructions").slideToggle( "slow", function() { /* Animation complete.*/});
-
+        $('#paymentOptions li .buttonPayFooter').slideUp()
         var $payCrypto = $('#pay_Crypto.payButton')
         var $payStripe = $('#pay_Stripe.payButton')
        
