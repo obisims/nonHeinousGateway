@@ -302,6 +302,9 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         //$(window).height()
         //window.screen.height
         //$('#intro').addClass('isMobile')
+        //if(isMobile==true){
+        $('#wrapper_landingFooterObi_mobile').fadeIn()
+        //}
         $('#landing').addClass('isMobile')
         //(elemHeights.screen.vh*7)+50
         $('#intro').css('height','83vh')
@@ -342,7 +345,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
     /////////////////////
     /* MOBILE UI BUTTONS */
     
-    $('#mobile_UI_Share').click(function(){
+    $('.mobile_UI_Share').click(function(){
         var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
         /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
         this one opens the doc in google docs on android
@@ -402,7 +405,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
        }
        */
     })
-    $('#mobile_UI_Download').click(function(){
+    $('.mobile_UI_Download').click(function(){
         var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
         /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
         this one opens the doc in google docs on android
@@ -466,7 +469,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
 
-	$( "#mobile_scrollToTop_UP" ).click(function() {
+	$( ".mobile_scrollToTop_UP" ).click(function() {
 		console.log('[clicked] mobile arrowUp')
         shrinkDeadSpace(false)
        // scrollToTop()
@@ -539,6 +542,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                         // Animation complete
                     
                         });
+                        $('#landingFooterObi_mobile').fadeIn(1500)
                 },(buttonIndex+2)*buttonTime) 
             },buttonTime)
         });

@@ -232,7 +232,7 @@ text-align: center;
     fill:rgba(255, 255, 255, 1);
 }
 .svgLinkIcon:active{
-    fill:--brand-red;
+  /*  fill:--brand-red;*/
 }
 .faAdjust{
     top: 4px;
@@ -716,7 +716,10 @@ ul#paymentOptions.li{
 }
 #buttonPayIcons img{
   height: 10px;
-  margin: 0 2px 0 2px;
+  margin: 0 3px 0 0x;
+}
+#landingFooterObi_mobile a {
+  margin: 0 16px 0px 0px;
 }
 img.socialIconSet {
   height: 14px;
