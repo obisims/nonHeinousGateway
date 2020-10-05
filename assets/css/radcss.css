@@ -133,22 +133,21 @@ body,html{
 }
 .arrowUp {
     /* animation: bouncing 1s infinite ease-in-out; */
-    top: 8px;/*3vh;*/
-    /* display: block; */
+    top: -6px;/*8px;/*3vh;*/
+     
     height: 50px;
-    left: 50%;
+    /*left: 50%;*/
    /* margin-left: -.875em;-25px*/
     position: relative; /*absolute;*/
     width: 50px;
-    opacity:0;
-    transition: all 0.3s ease;
+    opacity:1;
+   display:none;
     text-align: center;
     font-size: larger;
     color:var(--brand-purple);
 }
-.arrowUp.invoiceOpen{
-    opacity:1;
-}
+/*.shrinkCompen.shrinkCompen_top.unshrunk*/
+
 
 
      
@@ -196,6 +195,7 @@ body,html{
 
 .shrinkCompen{
     height:0vh;
+    text-align: center;
     transition: all 0.8s ease;
 }
 .shrinkCompen.shrinkCompen_top.unshrunk{
@@ -248,8 +248,25 @@ padding-top: 5px;
 
 
 #dynamoFooter span a img.footerIcon {
-  height: 8px;
- 
+  height: 10px;
+  margin-bottom: -2px;
+}
+#dynamoFooter span a img.footerIcon.larger {
+  height: 15px;
+  margin-bottom: -5px;
+}
+
+.svg-icon svg {
+  height:1em;
+  width:1em;
+}
+.svg-icon svg {
+  height:1em;
+  width:1em;
+}
+.svg-icon.svg-baseline svg {
+  top: .125em;
+  position: relative;
 }
 
 

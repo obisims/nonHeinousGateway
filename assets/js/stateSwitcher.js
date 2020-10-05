@@ -156,7 +156,7 @@ function shrinkDeadSpace(toShrink){
 
         //$('.shrinkCompen.shrinkCompen_top.unshrunk').css('height','')
 
-
+        $('#landingScrollDownButton').fadeOut()
         if(stateSettings.status.iFrameLoaded==true)$('#intro').addClass('invoiceOpen')
         
         //$('#navAndMain').removeClass('whiteBG')
@@ -182,11 +182,12 @@ function shrinkDeadSpace(toShrink){
                 })
             }else if(uiSettings.deadSpace_state_now=='shrunk'){
             console.log('[shrinkDeadSpace][InvoiceUI] Invoice Desktop UI loading...') 
-                $('.arrowUp').addClass('invoiceOpen')
-                animateCSS('.arrowUp', 'fadeInUp').then((message) => {
+                //$('.arrowUp').addClass('invoiceOpen')
+                $('.arrowUp').fadeIn(600)
+                //animateCSS('.arrowUp', 'fadeInUp').then((message) => {
                     // Do something after the animation
-                    console.log('[shrinkDeadSpace][InvoiceUI] Invoice Desktop arrowUp loaded')////$('.mobileNavButton').show()
-                })
+                  //  console.log('[shrinkDeadSpace][InvoiceUI] Invoice Desktop arrowUp loaded')////$('.mobileNavButton').show()
+                //})
             }else{
                 console.log('[shrinkDeadSpace][InvoiceUI] !No UI loaded',uiSettings)
             }
@@ -200,7 +201,9 @@ function shrinkDeadSpace(toShrink){
         $('#duotone').addClass('shrunkMode')
         console.log('[shrinkDeadSpace] #duotone addClass','shrunkMode')
         //$('#button_stripe').removeClass('hidden-load')
-
+        //$('.arrowUp').fadOut()
+        //$('.arrowUp').removeClass('invoiceOpen')
+       
         //* ANIMATE AND LOAD IFRAME*//
         //?? //deadSpaceShrunk==true
         animateCSS('iframe', 'slideInUp').then((message) => {
@@ -264,7 +267,7 @@ function shrinkDeadSpace(toShrink){
         $('#landing').removeClass('shrunk')//98vh
         $('.shrinkCompen').removeClass('unshrunk')
         //$('#navAndMain').addClass('whiteBG')
-        
+        $('#landingScrollDownButton').fadeIn()
         $('#pdfViewer').removeClass('invoiceOpen')
         $('#intro').removeClass('invoiceOpen')
         $('#navAndMain').removeClass('invoiceOpen')
@@ -283,11 +286,12 @@ function shrinkDeadSpace(toShrink){
               //  $('.mobileNavButton').hide()
             })*/
         }else{
-            $('.arrowUp').removeClass('invoiceOpen')
+            //$('.arrowUp').removeClass('invoiceOpen')
+           
         }
         
         $('#duotone').removeClass('shrunkMode')
-
+        $('.arrowUp').fadeOut(600)
         animateCSS('iframe', 'slideOutDown').then((message) => {
             // Do something after the animation
             console.log('iframe backOutDown')
