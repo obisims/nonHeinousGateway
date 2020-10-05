@@ -290,9 +290,10 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
  //}
  if(isFacebookApp()){
     // your action here if user using Facebook in-app browser
-    $('#confirm_directDebit').html('open in another broswer to confirm')
+    $('#confirm_directDebit').html('open in another browser to confirm').prop('disabled', true);
  alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
- return 
+ //$('.enableOnInput')
+ //return 
 }
    
 	innerHeight = window.innerHeight
