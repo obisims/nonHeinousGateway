@@ -578,6 +578,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 */
 
+//var creation_date = invoiceSettings.date.ISSUED
 
 
 
@@ -588,8 +589,56 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 //////////////////////////////////////////
 
 
-
-
+    
+    
+    
+    
+    
+    function animateProgressBar(elems,value,time){
+    console.log('[animateProgressBar]',[elems,value,time])
+    var animated = []
+     $(elems).each(function () {
+     var $this = $(this)
+            $percent = $this.data('width');// * value/10;
+            animated.push({percent:$percent,value:value,$this,$this})
+            $this.animate({
+                width: $percent + "%"
+            }, {
+                duration: time
+            });
+        });
+    }
+    
+    
+    
+    function progressTheProgressBar(elems,time,completionPercentage,dates){
+    console.log('[progressTheProgressBar]',[elems,completionPercentage,time])
+      var elems = elems||'.bar span'
+       var progressBarSettings = {
+     //  animationTime:time,//5000
+       moment:{},
+       }
+       progressBarSettings.animationTime = time||3000
+     if(completionPercentage){progressBarSettings.completionPercentage=completionPercentage}
+    
+         progressBarSettings.moment.creation_date = moment(dates.creation_date)||moment()
+      progressBarSettings.moment.record_time = moment(dates.record_time)||moment()
+      progressBarSettings.moment.completion_date = moment(dates.completion_date)||moment()
+        for(key in progressBarSettings.moment)progressBarSettings[key] = progressBarSettings.moment[key].format('ll')
+    
+     var dateCalucalted_percentage_complete = (progressBarSettings.moment.record_time - progressBarSettings.moment.creation_date) / (progressBarSettings.moment.completion_date - progressBarSettings.moment.creation_date) * 100;
+     console.log('dateCalucalted_percentage_complete',dateCalucalted_percentage_complete)
+     var dateCalucalted_percentage_rounded = (Math.round(dateCalucalted_percentage_complete * 100) / 100); 
+     // percentage rounded to 2 decimal points
+    progressBarSettings.completionPercentage=dateCalucalted_percentage_rounded
+    console.log('completionPercentage',dateCalucalted_percentage_rounded)
+    $(elems).data('width',progressBarSettings.completionPercentage) 
+    
+      animateProgressBar(elems,progressBarSettings.completionPercentage,progressBarSettings.animationTime)
+     
+      
+     return progressBarSettings
+    }
 
 
 
@@ -673,7 +722,7 @@ $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     }
      
    })
-
+   
 var invoiceSettings = {
     DOMAIN:(window.location.origin + window.location.pathname||'https://invoice.obisims.com/'),
     payStatus:{
@@ -693,6 +742,11 @@ var invoiceSettings = {
         PROJECT_NAME:urlParams.project_name,
         DRIVE_ID:urlParams.drive_id,//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
         DRIVE_IFRAME_URL:'',//'https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
+    },
+    date:{
+        ISSUED:moment(urlParams.date_issued,'DDMMYYYY'),
+        DUE:moment(urlParams.date_due,'DDMMYYYY'),
+        PROGRESS:0,
     },
     checkouts:{
         'Stripe':{
@@ -749,6 +803,8 @@ if(urlParams.inv){
 if(urlParams.client_name){
     $('.replace_clientName').text(urlParams.client_name)//invoiceSettings.invoice.CLIENT_NAME
     $('#mobileInvoiceHeader').attr('data-before', urlParams.client_name);
+
+    
 }else{
     $('.replace_clientName').text("EXAMPLE NAME")//Doppelgänger Doppelgänger Dudes Pty Ltd
 }
@@ -817,9 +873,22 @@ return response//+ ' | '+daysUntilDue
 
 if(urlParams.date_due){
     var due_date = moment(urlParams.date_due,'DDMMYYYY')//DD-MM-YY
+    var due_issued = moment(urlParams.date_issued,'DDMMYYYY')//DD-MM-YY
     var timer = dueTimer(due_date)
     $('#dueTimer').text(timer) //urlParams.date_due //invoiceSettings.invoice.CLIENT_NAME
     //$('#mobileInvoiceHeader').attr('data-before', urlParams.date_due);
+
+    var progressBarSettings = {
+        moment:{
+          creation_date:due_issued,//invoiceSettings.date.ISSUED,
+          record_time:moment(),
+          completion_date:due_date,//invoiceSettings.date.DUE,
+        }
+      };
+       var progressBar = progressTheProgressBar('.progressBar span.progressBar_progress',3000,null,progressBarSettings.moment)
+      console.log('[progressBar]',{progressBar:progressBar})
+      
+
 }else{
     $('#dueTimer').text("No due date set")//Doppelgänger Doppelgänger Dudes Pty Ltd
     //$('#dueTimer').remove()

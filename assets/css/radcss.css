@@ -1,8 +1,9 @@
 /* Variables */
 :root {
-    --brand-red: #f15b58;
-    --brand-purple: #291a2b;
-    --google-grey:#d1d1d1;
+    --brand-red: #f15b58;/*RGBA(241,91,88,1)*/
+    --brand-purple: #291a2b;/*RGBA(41,26,43,1)*/
+    --google-grey:#d1d1d1;/*RGBA(209,209,209,1)*/
+   
    /* --logo-image: url("https://storage.googleapis.com/stripe-sample-images/KAVHOLM.svg");
     */
  --animate-duration: 1s;
@@ -28,7 +29,7 @@ section, summary, time, mark, audio, video {
 html{
     height:100%;
     overflow: visible;
-    
+    color:var(--google-grey);
 }
 
 body,html{
@@ -45,7 +46,7 @@ body,html{
     overflow: visible;
     z-index:999;
    /* background: transparent;*/
-    background: white;
+    background: var(--google-grey);
     /*transition: width 0.4s ease,
                 margin 0.4s ease;*/
                 
@@ -205,8 +206,16 @@ body,html{
     height:3.5vh;
 }
   #mainLogo{
-    fill:white;
+    fill:white;/*var(--google-grey);*/
+   
     
+}
+#mainLogo{
+  
+}
+#mainLogo img.socialIconSet{
+  height:  67px;
+  filter: url(#obiBrandFilter-white);
 }
 #mainLogo .svgLink{
   max-width: 30px;
@@ -227,16 +236,16 @@ body,html{
 
 
 .svg_white{
-    fill:rgba(255, 255, 255, 0.65);
+    fill:rgba(209, 209, 209, 0.65);
 }
 #mainLogo .svgLink .svgLinkIcon{
-    fill:rgba(255, 255, 255, 0.95);
+    fill:rgba(209, 209, 209, 0.95);
 }
 .svgLink{
     fill:var(--brand-purple);
 }
 a .svgLink:hover,a .svgLink:focus{
-    fill:var(--brand-red);
+    fill:white;/*var(--brand-red);*/
 }
 
 
@@ -271,10 +280,10 @@ padding-top: 5px;
 
 
 .svgLinkIcon{
-    fill:rgba(255, 255, 255, 0.65);
+    fill:rgba(209, 209, 209, 0.65);
 }
 .svgLinkIcon:hover,.svgLinkIcon:focus{
-    fill:rgba(255, 255, 255, 1);
+    fill:rgba(209, 209, 209, 1);
 }
 .svgLinkIcon:active{
   /*  fill:--brand-red;*/
@@ -418,7 +427,7 @@ body{
 #mobileInvoiceHeader:before {
     /*content: "obisims.com\ATHX-1138";*/
     content: attr(data-before);/*"Doppelgänger Dudes Pty Ltd";*/
-    /*replace_clientName*/
+    
     white-space: pre-wrap;
     
  }
@@ -545,7 +554,7 @@ body{
     height: 125px;
     width: 125px;
     display: inline-block;
-    border: 20px solid rgba(255,255,255,0.0);
+    border: 20px solid rgba(41, 26, 43,0.0);
     border-radius: 50%;
     border-left-color:var(--google-grey);
     animation: rotate 1.2s linear infinite;
@@ -633,7 +642,7 @@ body{
       left:0;
       width: 100%;
       height:100%;
-      background-color: var(--brand-red);
+      background-color: var(--brand-purple);
   }
 
   #mainLogoContainer{
@@ -644,11 +653,12 @@ body{
 
   #invoiceHeader{
     font-size: 3.25em;
-    color:white;
+    color:var(--google-grey);
   }
 
   #invoiceHeader #invoiceTitle {
-    font-weight: 600;
+    font-weight: 700;
+    color:white;
 }
 #mainLogo svg{
   text-align: right;
@@ -677,7 +687,8 @@ body{
 
 .invoiceHeader_box {
   display: inline-block;
-  padding: 0px 23px;
+  /*padding: 0 10px 0px 0;*/
+  padding: 0 5px 0px 0px;
   opacity: 1;
  /* background-color: #32CD32;*/
 }
@@ -726,10 +737,10 @@ outline:none;
 }
 
 a {
-  color:white;
+  color:var(--google-grey);
 }
 a:hover{
-  color:var(--brand-red);
+  color:white;/*var(--brand-red);*/
   font-weight: bold;
 }
 
@@ -790,9 +801,12 @@ display: none;
 opacity:0;
 
 }
-
+img{
+  filter: url(#obiBrandFilter-grey);
+}
 img.socialIconSet:hover {
-  filter: url(#obiBrandFilter-red);
+  /*filter: url(#obiBrandFilter-red);*/
+  filter: url(#obiBrandFilter-white);
   height: 16px;
 }
 
@@ -814,3 +828,52 @@ img.socialIconSet:hover {
   }
 }
 
+
+
+
+
+/*/////////////////////// /////////////////////// /
+                   PROGRESS BAR 
+//////////////////////// ///////////////////////*/
+.progressBar_wrapper{
+  text-align: center;
+}
+.progressBar {
+  text-align: left;
+  width: 75%;/*100*/
+  font-size: 0px;
+  background: var(--brand-purple);/*#484850*/
+  padding: 0px;
+  border-radius: 30px;
+  margin: 2px auto 0px auto;
+  border: 1px solid rgba(41, 26, 43,0.75); 
+  box-shadow: 
+    /*inset 0 1px 0 rgba(255,255,255,0.25),*/
+    inset 0 0 3px rgba(41, 26, 43,0.3),
+		0 1px 1px rgba(256,256,256,0.45),
+    inset 0 3px 6px rgba(41, 26, 43,0.5);
+  position: relative;
+}
+.progressBar_progress {
+  width: 0%;
+  height: 4px;/*20px;*/
+  border-radius: 25px 3px 3px 25px;
+  background-color: var(--google-grey);/*hsla(131, 55%, 45%, 1);*/
+  position: relative;
+  box-shadow: 
+    /* This is the top gradient for the color bar */
+    inset 0 5px 0 rgba(255,255,255,0.2),
+    inset 0 1px 1px rgba(41, 26, 43,0.125);
+  cursor: pointer;
+  margin: 0 0px;
+  border-right: 1px solid rgba(41, 26, 43,0.75);
+}
+/*/////////////////////// ///////////////////////*/
+
+
+
+
+.replace_clientName{
+  font-size: 75%;   
+  color:white;
+}
