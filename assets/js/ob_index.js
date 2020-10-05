@@ -546,7 +546,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                             //$('#navAndMain').slideDown(1900)
                             $('#landing').removeClass('pushInvoiceDown')
                             //slide-up
-                            $('#landingScrollDownButton').slideDown(1900)
+                            $('#landingScrollDownButton').fadeIn(1700)
                             $('#landingFooterObi_mobile').fadeIn(1900)
                             
                         },1*buttonTime) 
