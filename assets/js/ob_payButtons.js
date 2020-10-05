@@ -28,9 +28,9 @@ $(document).ready(function() {
      $('.payButton').click(function(){
          handleCheckout(this)
      })
-     $('#confirm_directDebit').click(function(){
-        handleCheckout(this)
-    })
+    // $('#confirm_directDebit').click(function(){
+      //  handleCheckout(this)
+    //})
 /*
     if(urlParams['stripe_checkout']=='paid'){
         postSlackNotification_purchase_complete('Stripe')
@@ -55,21 +55,21 @@ if(urlParams.stripe_checkout){
     //i was
    postSlackNotification_purchase_cancelled('Stripe')
     }
-    
+   
 }
 //* check for coinbase callback */
 console.log('[checking params for callback]',{urlParams:urlParams})
-if(urlParams.stripe_checkout){
-    if(urlParams.stripe_checkout=='paid'){
-        console.log('[checking params for callback] STRIPE','PAID')
-        handleCheckout(null,'Stripe')
+if(urlParams.coinbase_checkout){
+    if(urlParams.coinbase_checkout=='paid'){
+        console.log('[checking params for callback] COINBASE','PAID')
+        handleCheckout(null,'Coinbase')
         
-    }else if(urlParams.stripe_checkout=='canceled'){
-        console.log('[checking params for callback] STRIPE','CANCELED')
+    }else if(urlParams.coinbase_checkout=='canceled'){
+        console.log('[checking params for callback] COINBASE','CANCELED')
     /// stripe cancelled
     ///am i already checking this somewhere?
     //i was
-   postSlackNotification_purchase_cancelled('Stripe')
+   postSlackNotification_purchase_cancelled('Coinbase')
     }
     
 }
