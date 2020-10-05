@@ -352,9 +352,10 @@ function toggleDepositInstructions(){
         var buttonLockdown = $pay_Direct.attr('data-lockhover')
         if(buttonLockdown=="false"){
             $pay_Direct.html('<b>Back</b>')
+            
         }else{
+            $('#paymentOptions li .buttonPayFooter').slideUp()
             $pay_Direct.html(payDirectOriginalHtml)
-            //$('#paymentOptions li .buttonPayFooter').slideUp()
         }
         $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')
         
