@@ -544,7 +544,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                         // Animation complete
                         setTimeout(function() {
                             //$('#navAndMain').slideDown(1900)
-                            $('#landing').removeClass('pushInvoiceDown')
+                            //$('#landing').removeClass('pushInvoiceDown')
                             //slide-up
                             $('#landingScrollDownButton').fadeIn(1700)
                             $('#landingFooterObi_mobile').fadeIn(1900)
