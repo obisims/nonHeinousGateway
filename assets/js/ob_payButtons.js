@@ -353,7 +353,7 @@ function toggleDepositInstructions(){
         if(buttonLockdown=="false"){
            $pay_Direct.attr('data-lockhover','true')
             $pay_Direct.html('<b>Back</b>')
-           $('#paymentOptions li .buttonPayFooter').slideDown()
+           $('#paymentOptions li #pay_Direct_footer.buttonPayFooter').slideDown()
         }else{
             if(stateSettings.status.isMobile==true){
                 $('#paymentOptions li .buttonPayFooter').hide()
