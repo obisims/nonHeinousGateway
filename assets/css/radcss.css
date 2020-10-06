@@ -345,6 +345,7 @@ padding-top: 5px;
     left: 0;
     z-index: 0 ;
     /*backdrop-filter:grayscale(1);*/
+    -webkit-backdrop-filter: brightness(92%) blur(3px);
     backdrop-filter:brightness(92%) blur(3px);
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
@@ -854,6 +855,7 @@ img.socialIconSet:hover {
 .progressBar {
   text-align: left;
   width: 75%;/*100*/
+  -webkit-filter: blur(0px);
   filter: blur(0px);
   font-size: 0px;
   background: rgba(41, 26, 43,0.05);/*#484850*/
@@ -886,6 +888,7 @@ img.socialIconSet:hover {
 }
 /*/////////////////////// ///////////////////////*/
 .progressBar.blurred {
+  -webkit-filter: blur(10px);
   filter: blur(10px);
 }
 
