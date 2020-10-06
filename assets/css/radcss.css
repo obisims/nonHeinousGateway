@@ -181,6 +181,7 @@ body,html{
 #landing.shrunk{
    /*height:200px;*/
    /*height:0.5vh;*/
+   min-height: 0px;
    overflow: hidden;
    height: 50px;
     /*opacity:0;*/
