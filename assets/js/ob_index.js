@@ -452,25 +452,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
    // $('.buttonPayFooter').slideUp( "slow", function() {
         // Animation complete.
      // });
-     function showDueDateString(){
-        var $dueTimer = $('#dueTimer')
-        var slidData =$dueTimer.data('slid')
-         console.log('[showDueDateString]',$(this))
-        if(slidData=='down'){
-            console.log('[showDueDateString] BLOCK slidData',slidData)
-            return
-        }
-        
-       
-       
-       if($dueTimer.data('slide-lock')!='true'&&$dueTimer.data('slid')=='up'){
-        console.log('[showDueDateString] SUCCEED slidData',slidData)
-        $dueTimer.data('slid','down')
-            $dueTimer.slideDown()
-        }else{
-            console.log('[showDueDateString] BLOCK slidData',slidData)
-        }
-     }
+   
      function hideDueDateString(){
         var slidData = $('#dueTimer').data('slid')
         console.log('[hideDueDateString]',$(this))
@@ -508,6 +490,12 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         
      })
      $('#headerOrnament .replace_clientName').click(function(){
+        slider_DownElemToggle('#dueTimer',false)
+        setTimeout(function() {
+            slider_DownElemToggle('#dueTimer',true)
+        },6000)
+        
+         /*
         var slidData = $('#dueTimer').attr('data-slid')
         console.log('[slidData CLICK] slidData CLICK ',slidData)
         switch(slidData) {
@@ -521,39 +509,152 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
               // code block
               console.log('[slidData CLICK] BLOCK slidData',slidData)
           }
-        
+        */
      })
   
 
 
+     function showDueDateString(elem){
+        var $dueTimer = $(elem||'#dueTimer')
+        var slidData =$dueTimer.data('slid')
+         console.log('[showDueDateString] showing',$(this))
+       // if(slidData=='down'){
+       //     console.log('[showDueDateString] BLOCK slidData',slidData)
+       //     return
+       // }
+       
+       //if($dueTimer.data('slide-lock')!='true'&&$dueTimer.data('slid')=='up'){
+        console.log('[showDueDateString] SUCCEED slidData',slidData)
+        $dueTimer.attr('slider-show',true)
+       //     $dueTimer.slideDown()
+      //  }else{
+      //      console.log('[showDueDateString] BLOCK slidData',slidData)
+      //  }
+     }
 
-     var payButtonHover_over = function(){
-        showDueDateString()
-        //alert('hover')
-    //
-    }
-    var payButtonHover_out = function(){
-        //
-        hideDueDateString()
-        //alert('off')
-    }
 
+
+     function slider_elem_Show(elem){
+
+     }
+     function slider_elem_Hide(elem){
+
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+    /* HOVER ELEM TOGGLE ACTION */
+     function slider_DownElemToggle(elem,override){
+         overriders = {
+             //flip the override bc it'll be acting as state
+             true:'false',
+             false:'true'
+         }
+         override = overriders[override]
+         /* variables */
+         var $elem = $(elem)
+         var slider_state = $elem.attr('slider-show')
+         var slider_lock = $elem.attr('slider-lock')
+         if(!slider_state){
+            $elem.attr('slider-show',false)
+            slider_state = $(elem).attr('slider-show')// switch to fresh $
+         }
+         if(!slider_lock){
+            $elem.attr('slider-lock',false)
+            slider_lock = $(elem).attr('slider-lock') // switch to fresh $ 
+         }
+         console.log('[slideDownElemToggle] started','state',{state:slider_state,lock:slider_lock},$elem)
+        /* check state */
+       //if(slider_state==true){console.log('[slideDownElemToggle] BLOCKED','initial check state ',slider_state); return }
+         /* check lock */
+         if(slider_lock==true){
+             console.log('[slideDownElemToggle] BLOCKED','initial check lock',slider_lock);
+             return
+            }
+         /* !run the fucking toggle! */
+         var switchRunner = override||slider_state
+         console.log('[slideDownElemToggle] switch',switchRunner)
+         switch(switchRunner) {
+            case 'true':
+                /* if state is shown */
+                //alert('hide due date')
+                //hideDueDateString(elem)
+                $elem.slideDown()
+                $elem.attr('slider-state',false)
+                
+              break;
+            case 'false':
+                /* if state is hidden */
+               // alert('show due date')
+                $elem.slideUp()
+                $elem.attr('slider-state',true)
+               // showDueDateString(elem)
+              break;
+            default:
+              // code block
+              //console.log('[slidData CLICK] BLOCK slidData',slidData)
+          }
+         //
+         //return $(elem).attr('slider-show')
+     }
+
+     /////////
+     var dueDate_over = function(){
+         console.log('[payButtonHover][hover] over')
+         slider_DownElemToggle('#dueTimer',false)//slider_DownElemToggle('#dueTimer',)
+    }
+    var dueDate_out = function(){
+        console.log('[payButtonHover][hover] out')
+        slider_DownElemToggle('#dueTimer',true)
+    }
     var hoverConfig_showDueDate = {    
-        over: payButtonHover_over, // function = onMouseOver callback (REQUIRED)    
+        over: dueDate_over, // function = onMouseOver callback (REQUIRED)    
         timeout: 3000, // 500/number = milliseconds delay before onMouseOut    
-        interval: 500,//5000 // number = milliseconds delay before trying to call over    
-        out: payButtonHover_out // function = onMouseOut callback (REQUIRED)    
+        interval: 50,//5000 // number = milliseconds delay before trying to call over    
+        out: dueDate_out // function = onMouseOut callback (REQUIRED)    
    };
    /* https://briancherne.github.io/jquery-hoverIntent/ */
-   $('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
+   //$('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
    $('#invoiceTitle').hoverIntent( hoverConfig_showDueDate )
-
+   $('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
+   $('.progressBar_wrapper .progressBar').hoverIntent( hoverConfig_showDueDate )
+   $('#mainLogo').hoverIntent( hoverConfig_showDueDate )
   //  $('#headerOrnament .replace_clientName').hover(function(){showDueDateString()},function(){hideDueDateString()})
     // $('.progressBar_wrapper .progressBar').hover(function(){showDueDateString()},function(){hideDueDateString()})
     //$('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
     
+
+    var payButton_over = function(){
+   
+        var buttonSuffix_id = $(this).attr('id')
+        console.log('[payButton][hover] over',buttonSuffix_id)
+       // alert('payButton over')
+        slider_DownElemToggle('#'+buttonSuffix_id+'_footer',false)//slider_DownElemToggle('#dueTimer',)
+   }
+   var payButton_out = function(){
+      
+       var buttonSuffix_id = $(this).attr('id')
+       console.log('[payButton][hover] out',buttonSuffix_id)
+      // alert('payButton over')
+       slider_DownElemToggle('#'+buttonSuffix_id+'_footer',true)//slider_DownElemToggle($(this),true)
+   }
+   var hoverConfig_showpayButton = {    
+       over: payButton_over, // function = onMouseOver callback (REQUIRED)    
+       timeout: 200, // 500/number = milliseconds delay before onMouseOut    
+       interval: 100,//5000 // number = milliseconds delay before trying to call over    
+       out: payButton_out // function = onMouseOut callback (REQUIRED)    
+  };
+  $( "button.button.payButton" ).hoverIntent( hoverConfig_showpayButton )
     
-    
 
 
 
@@ -562,6 +663,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
 
+/*
 
 
 
@@ -585,7 +687,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
           break;
         case 'Direct Debit':
           //  hideDueDateString()
-          
+          $('#landingFooterObi div a.logo_obisims img.socialIconSet').addClass('whiteSvgFilter')
           break;
         case 'Coinbase':
            // hideDueDateString()
@@ -611,6 +713,9 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
        
       })
     
+
+
+*/
 
 
 
@@ -711,12 +816,12 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                       
                       var $dueTimer = $('#dueTimer')
                         $dueTimer.removeClass('initialHide')
-                        $dueTimer.data('slide-lock',true)
+                        $dueTimer.data('slider-lock',true)
                         $dueTimer.slideDown()
                         $dueTimer.data('slid','down')
                         setTimeout(function() { 
                             $dueTimer.slideUp()
-                            $dueTimer.data('slide-lock',false)
+                            $dueTimer.data('slider-lock',false)
                         },6000)
 
                       $('#landingFooterObi').fadeIn( 1500, function() {

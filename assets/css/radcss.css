@@ -820,8 +820,8 @@ img.socialIconSet:hover {
   height: 16px;
 }
 
-#landingFooterObi{
-
+#landingFooterObi div a img.socialIconSet.whiteSvgFilter {
+  height: 16px;
 }
 
 
