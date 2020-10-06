@@ -1,5 +1,58 @@
 
 
+
+    
+    
+    function animateProgressBar(elems,value,time){
+      console.log('[animateProgressBar]',[elems,value,time])
+      var animated = []
+       $(elems).each(function () {
+       var $this = $(this)
+              $percent = $this.data('width');// * value/10;
+              animated.push({percent:$percent,value:value,$this,$this})
+              $this.animate({
+                  width: $percent + "%"
+              }, {
+                  duration: time
+              });
+          });
+      }
+      
+      
+      
+      function progressTheProgressBar(elems,time,completionPercentage,dates){
+      
+        var elems = elems||'.bar span'
+         var progressBarSettings = {
+       //  animationTime:time,//5000
+         moment:{},
+         }
+         progressBarSettings.animationTime = time||3000
+       if(completionPercentage){progressBarSettings.completionPercentage=completionPercentage}
+      if(dates){
+        console.log('[progressTheProgressBar]',[elems,completionPercentage,time])
+        progressBarSettings.moment.creation_date = moment(dates.creation_date)||moment()
+        progressBarSettings.moment.record_time = moment(dates.record_time)||moment()
+        progressBarSettings.moment.completion_date = moment(dates.completion_date)||moment()
+          for(key in progressBarSettings.moment)progressBarSettings[key] = progressBarSettings.moment[key].format('ll')
+      
+       var dateCalucalted_percentage_complete = (progressBarSettings.moment.record_time - progressBarSettings.moment.creation_date) / (progressBarSettings.moment.completion_date - progressBarSettings.moment.creation_date) * 100;
+       console.log('dateCalucalted_percentage_complete',dateCalucalted_percentage_complete)
+       var dateCalucalted_percentage_rounded = (Math.round(dateCalucalted_percentage_complete * 100) / 100); 
+      // percentage rounded to 2 decimal points
+      progressBarSettings.completionPercentage=dateCalucalted_percentage_rounded
+      }
+        
+       
+      console.log('completionPercentage',dateCalucalted_percentage_rounded)
+      $(elems).data('width',progressBarSettings.completionPercentage) 
+      
+        animateProgressBar(elems,progressBarSettings.completionPercentage,progressBarSettings.animationTime)
+       
+        
+       return progressBarSettings
+      }
+
 function isFacebookApp() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1)||(ua.indexOf('Instagram') > -1);

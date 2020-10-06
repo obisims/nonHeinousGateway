@@ -24,7 +24,7 @@ canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
   font-family: 'Nunito Sans', sans-serif;
-
+ /* text-transform: lowercase;*/
 }
 html{
     height:100%;
@@ -214,7 +214,7 @@ body,html{
   
 }
 #mainLogo img.socialIconSet{
-  height:  67px;
+  height:  67px;/**/
   filter: url(#obiBrandFilter-white);
 }
 #mainLogo .svgLink{
@@ -655,8 +655,11 @@ body{
     font-size: 3.25em;
     color:var(--google-grey);
   }
-
+.upperCase{
+  text-transform: uppercase;
+}
   #invoiceHeader #invoiceTitle {
+    text-transform: uppercase;
     font-weight: 700;
     color:white;
 }
@@ -694,9 +697,9 @@ body{
 }
 
 #landing header#header {
- /* padding-bottom: 10px;*/
-  padding-bottom: 30px;
-
+ /* padding-bottom: 30px;
+ padding-bottom: 10px;*/
+ padding-bottom: 0px;
 }
 
 #invoiceTitleContainer.invoiceHeader_box{
@@ -786,10 +789,17 @@ ul#paymentOptions.li{
 }
 img.socialIconSet {
   height: 14px;
-  margin: 0 3px 0px 3px;
+  margin: 0 3px 0px 3px;/**/
   transition: height 0.3s ease;
+  
 }
+.whiteSvgFilter{
+  filter: url(#obiBrandFilter-white);
+}
+.buttonPayFooter #buttonPayIcons img{
+  filter: url(#obiBrandFilter-white);
 
+}
 #buttonPayIcons {
 /*font-size: x-small;
 display: block;*/
@@ -841,8 +851,9 @@ img.socialIconSet:hover {
 .progressBar {
   text-align: left;
   width: 75%;/*100*/
+  filter: blur(0px);
   font-size: 0px;
-  background: var(--brand-purple);/*#484850*/
+  background: rgba(41, 26, 43,0.05);/*#484850*/
   padding: 0px;
   border-radius: 30px;
   margin: 2px auto 0px auto;
@@ -853,6 +864,8 @@ img.socialIconSet:hover {
 		0 1px 1px rgba(256,256,256,0.45),
     inset 0 3px 6px rgba(41, 26, 43,0.5);
   position: relative;
+  transition: all 3s ease;
+  
 }
 .progressBar_progress {
   width: 0%;
@@ -869,11 +882,22 @@ img.socialIconSet:hover {
   border-right: 1px solid rgba(41, 26, 43,0.75);
 }
 /*/////////////////////// ///////////////////////*/
-
+.progressBar.blurred {
+  filter: blur(10px);
+}
 
 
 
 .replace_clientName{
-  font-size: 75%;   
+  font-size: 80%;   
   color:white;
+}
+
+#dueTimer{
+  opacity:1;
+  transition: opacity 1.8s ease;
+}
+#dueTimer.initialHide{
+  opacity:0;
+ 
 }

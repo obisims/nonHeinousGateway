@@ -83,10 +83,10 @@
 						</span>-->
 					<!-- Title Area -->
 						<div id="headerSlideInWrapper"  style="opacity:0;">
-							<span id="headerOrnament" style="line-height: 1; display: inline-block;">
-								<span class="replace_clientName" style="font-size: 75%;"></span><br>
-								<span class="progressBar_wrapper"><div class="progressBar"><span class="progressBar_progress" data-width="0"></span></div></span>
-								<span id="dueTimer" style="font-size: 75%;    text-transform: lowercase;"></span>
+							<span id="headerOrnament" style="line-height: 1.7; display: inline-block;">
+								<span class="replace_clientName" style="text-transform: lowercase;font-size: 75%;"></span><br>
+								<span class="progressBar_wrapper" style="opacity:0"><div class="progressBar blurred" ><span class="progressBar_progress" data-width="0"></span></div></span>
+								<span id="dueTimer" data-slid="up" class="initialHide" style="font-size: 80%;text-transform: lowercase;display:none;"></span>
 								
 							</span>
 							<div id="invoiceHeader" class="invoiceHeader_wrapper" >
@@ -161,7 +161,7 @@
 									data-payment-mode="Coinbase" 
 									data-checkout="open"
 									style="display: none;"
-								><span>Pay with <span style="font-weight:700;"> Ƀ</span></span>
+								><span>Pay with <span class="upperCase" style="font-weight:700;"> Ƀ</span></span>
 								</button>
 							<!-- service surcharge / notes -->
 								
@@ -251,6 +251,7 @@
 							<div id="pay_instructions_footer">
 								<button
 									id="confirm_directDebit"
+									class="button primary payButton" 
 									style="font-size: 9px; margin-bottom: 10px;"
 									data-payment-mode="Direct Debit" 
 									data-checkout="confirm"
@@ -265,36 +266,36 @@
 						<!-- LANDING FOOTER -->
 						<div id="littleBittaPadding" style="height:15px;"></div>
 						<div  style="display: inline;">
-							<a href="https://commerce.coinbase.com/?lang=en" target="_blank">
+							<a class="logo_coinbase" href="https://commerce.coinbase.com/?lang=en" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_coinbase.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_coinbase.png'">
 							</a>
-							<a href="https://stripe.com/en-au" target="_blank">
+							<a class="logo_stripe" href="https://stripe.com/en-au" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_stripe.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_stripe.png'">
 							</a>
-							<a href="https://github.com/obisims/nonHeinousGateway/commits?author=obisims" target="_blank"><!--https://github.com/obisims-->
+							<a class="logo_github" href="https://github.com/obisims/nonHeinousGateway/commits?author=obisims" target="_blank"><!--https://github.com/obisims-->
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_github.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_github.png'">
 							</a>
-							<a href="https://gsuite.google.com.au/intl/en_au/" target="_blank">
+							<a class="logo_drive" href="https://gsuite.google.com.au/intl/en_au/" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_platform_drive.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_drive.png'">
 							</a>
 						</div>
 						<div id="landing_socialIcons" style="display: inline;">
-							<a href="https://www.last.fm/user/obi_sims" target="_blank">
+							<a class="logo_lastfm" href="https://www.last.fm/user/obi_sims" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_lastFm.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_lastFm.png'">
 							</a>
-							<a href="https://open.spotify.com/user/12121388895?si=2NXLmZs_QQ6FQZNDfnUT1w" target="_blank">
+							<a class="logo_spotify" href="https://open.spotify.com/user/12121388895?si=2NXLmZs_QQ6FQZNDfnUT1w" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_spotify.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_spotify.png'">
 							</a>
-							<a href="https://www.pinterest.com.au/kidkenobi/" target="_blank">
+							<a class="logo_pintrest" href="https://www.pinterest.com.au/kidkenobi/" target="_blank">
 								<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_pintrest.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_pintrest.png'">
 							</a>
-							<a href="https://obisims.com/" target="_blank">
+							<a class="logo_obisims" href="https://obisims.com/" target="_blank">
 									<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_obisims.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_obisims.png'">
 							</a>
-							<a href="https://www.behance.net/obisims" target="_blank">
+							<a class="logo_behance" href="https://www.behance.net/obisims" target="_blank">
 									<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_behance.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_behance.png'">
 							</a>
-							<a href="https://www.instagram.com/obi_sims/" target="_blank">
+							<a class="logo_instagram" href="https://www.instagram.com/obi_sims/" target="_blank">
 									<img class="socialIconSet" src="images/paymentIcons/masterLogos_social_instagram.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_instagram.png'">
 							</a>
 							</div>

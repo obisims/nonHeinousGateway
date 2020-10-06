@@ -282,6 +282,8 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         members: ['obi_sims']
     });
     */
+   var progressBar = progressTheProgressBar('.progressBar span.progressBar_progress',1900,0)
+   console.log('[progressBar]',{progressBar:progressBar})
 
   
   // if(isFacebookApp()){
@@ -442,7 +444,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
        
         
     })
-
+    
 
     /* button commands */
     /* pay show button */
@@ -450,22 +452,121 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
    // $('.buttonPayFooter').slideUp( "slow", function() {
         // Animation complete.
      // });
-	$( ".button" ).hover(function() {
+     function showDueDateString(){
+        var $dueTimer = $('#dueTimer')
+        var slidData =$dueTimer.data('slid')
+         console.log('[showDueDateString]',$(this))
+        if(slidData=='down'){
+            console.log('[showDueDateString] BLOCK slidData',slidData)
+            return
+        }
+        
+       
+       
+       if($dueTimer.data('slide-lock')!=true&&$dueTimer.data('slid')=='up'){
+        console.log('[showDueDateString] SUCCEED slidData',slidData)
+        $dueTimer.data('slid','down')
+            $dueTimer.slideDown()
+        }else{
+            console.log('[showDueDateString] BLOCK slidData',slidData)
+        }
+     }
+     function hideDueDateString(){
+        var slidData = $('#dueTimer').data('slid')
+        console.log('[hideDueDateString]',$(this))
+        if(slidData!='down'){
+            console.log('[hideDueDateString] BLOCK slidData',slidData)
+            return
+        }
+        setTimeout(function() {
+            var $dueTimer = $('#dueTimer')
+
+            if($dueTimer.data('slid')=='down')
+            if($dueTimer.data('slide-lock')!=true){
+                $dueTimer.data('slid','up')
+                console.log('[hideDueDateString] SUCCEED slidData',slidData)
+                $dueTimer.slideUp()
+                
+            } else{
+                console.log('[hideDueDateString] BLOCK slidData',slidData)
+            }  
+        },6000) 
+     }
+     $('.progressBar_wrapper .progressBar').click(function(){
+        var slidData = $('#dueTimer').data('slid')
+        switch(slidData) {
+            case 'up':
+                hideDueDateString()
+              break;
+            case 'down':
+                showDueDateString()
+              break;
+            default:
+              // code block
+              console.log('[hideDueDateString] BLOCK slidData',slidData)
+          }
+        
+     })
+     $('#headerOrnament .replace_clientName').click(function(){
+        var slidData = $('#dueTimer').data('slid')
+        console.log('[slidData CLICK] slidData CLICK ',slidData)
+        switch(slidData) {
+            case 'up':
+                showDueDateString()
+              break;
+            case 'down':
+                hideDueDateString()
+              break;
+            default:
+              // code block
+              console.log('[slidData CLICK] BLOCK slidData',slidData)
+          }
+        
+     })
+  
+    $('#headerOrnament .replace_clientName').hover(function(){showDueDateString()},function(){hideDueDateString()})
+    // $('.progressBar_wrapper .progressBar').hover(function(){showDueDateString()},function(){hideDueDateString()})
+    $('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
+    
+     $( ".button" ).hover(function() {
 		console.log('[hover] button')
        //var $parent = $(this).parent()
        //$parent.find('.buttonPayFooter').slideDown()
-      
        if($(this).attr('data-lockhover')!='true'){
-            $(this).parent().find('.buttonPayFooter').slideDown() 
-        }else{
            
-        }
+            $(this).parent().find('.buttonPayFooter').slideDown()//.data('lockhover','true') 
+            //$pay_Direct
+        }//else{}
+  
+       switch($(this).data('payment-mode')) {
+        case 'Stripe':
+            //showDueDateString()
+           // $(this).parent().find('.buttonPayFooter').slideDown()
+           $('#landingFooterObi div a.logo_stripe img.socialIconSet').addClass('whiteSvgFilter')
+          break;
+        case 'Direct Debit':
+          //  hideDueDateString()
+          
+          break;
+        case 'Coinbase':
+           // hideDueDateString()
+           $('#landingFooterObi div a.logo_coinbase img.socialIconSet').addClass('whiteSvgFilter')
+            break;
+        default:
+          // code block
+         // console.log('[slidData CLICK] BLOCK slidData',slidData)
+      }
         
     }, function() {
        // $(this).data('lockHover', true);
-        if($(this).attr('data-lockhover')!='true'){
+       setTimeout(function() {
+        if($(this).attr('data-lockhover')=='false'){
             $(this).parent().find('.buttonPayFooter').slideUp()  
         }
+        $('#landingFooterObi div a img.socialIconSet').removeClass('whiteSvgFilter')
+       },600)
+      
+       
       })
     
 
@@ -525,7 +626,9 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         var buttonIndex = 0
         $('#headerSlideInWrapper').fadeTo( "fast" , 1, function() {
             // Animation complete.
+           
             setTimeout(function() {
+                
                 $('ul#paymentOptions li .button.payButton').each(function(index,button){
                     buttonIndex++
                     console.log(button)
@@ -537,15 +640,53 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
                             //loadInFooter()
                             });
                     }, buttonTime*(index+1)) // or just index, depends on your needs
+                    
                 })
-                setTimeout(function() { //for footer
+              
+                //$('.progressBar').fadeIn()
+                var __progress = '.progressBar span.progressBar_progress'
+                var $progress = $(__progress)
                 
-                    $('#landingFooterObi').fadeIn( 1500, function() {
+                
+                $('.progressBar_wrapper').fadeIn()
+                var progressBarSettings = {
+                    moment:{
+                      creation_date:due_issued,//invoiceSettings.date.ISSUED,
+                      record_time:moment(),
+                      completion_date:due_date,//invoiceSettings.date.DUE,
+                    }
+                  };
+                  
+                 // $('.preLoadLineBreak_removeMe').remove()
+                 
+                 
+                   var progressBar = progressTheProgressBar(__progress,3000,null,progressBarSettings.moment)
+                   $('.progressBar_wrapper .progressBar').removeClass('blurred')
+                  console.log('[progressBar]',{progressBar:progressBar})
+                setTimeout(function() { //for footer
+                    
+                      //$('#dueTimer').fadeIn()
+                      
+                      var $dueTimer = $('#dueTimer')
+                        $dueTimer.removeClass('initialHide')
+                        $dueTimer.data('slide-lock',true)
+                        $dueTimer.slideDown()
+                        $dueTimer.data('slid','down')
+                        setTimeout(function() { 
+                            $dueTimer.slideUp()
+                            $dueTimer.data('slide-lock',false)
+                        },6000)
+
+                      $('#landingFooterObi').fadeIn( 1500, function() {
                         // Animation complete
+                        
                         setTimeout(function() {
                             //$('#navAndMain').slideDown(1900)
                             //$('#landing').removeClass('pushInvoiceDown')
                             //slide-up
+                           
+      
+                              
                             $('#landingScrollDownButton').fadeIn(1700)
                             $('#landingFooterObi_mobile').fadeIn(1900)
                             
@@ -592,53 +733,6 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     
     
     
-    
-    
-    function animateProgressBar(elems,value,time){
-    console.log('[animateProgressBar]',[elems,value,time])
-    var animated = []
-     $(elems).each(function () {
-     var $this = $(this)
-            $percent = $this.data('width');// * value/10;
-            animated.push({percent:$percent,value:value,$this,$this})
-            $this.animate({
-                width: $percent + "%"
-            }, {
-                duration: time
-            });
-        });
-    }
-    
-    
-    
-    function progressTheProgressBar(elems,time,completionPercentage,dates){
-    console.log('[progressTheProgressBar]',[elems,completionPercentage,time])
-      var elems = elems||'.bar span'
-       var progressBarSettings = {
-     //  animationTime:time,//5000
-       moment:{},
-       }
-       progressBarSettings.animationTime = time||3000
-     if(completionPercentage){progressBarSettings.completionPercentage=completionPercentage}
-    
-         progressBarSettings.moment.creation_date = moment(dates.creation_date)||moment()
-      progressBarSettings.moment.record_time = moment(dates.record_time)||moment()
-      progressBarSettings.moment.completion_date = moment(dates.completion_date)||moment()
-        for(key in progressBarSettings.moment)progressBarSettings[key] = progressBarSettings.moment[key].format('ll')
-    
-     var dateCalucalted_percentage_complete = (progressBarSettings.moment.record_time - progressBarSettings.moment.creation_date) / (progressBarSettings.moment.completion_date - progressBarSettings.moment.creation_date) * 100;
-     console.log('dateCalucalted_percentage_complete',dateCalucalted_percentage_complete)
-     var dateCalucalted_percentage_rounded = (Math.round(dateCalucalted_percentage_complete * 100) / 100); 
-     // percentage rounded to 2 decimal points
-    progressBarSettings.completionPercentage=dateCalucalted_percentage_rounded
-    console.log('completionPercentage',dateCalucalted_percentage_rounded)
-    $(elems).data('width',progressBarSettings.completionPercentage) 
-    
-      animateProgressBar(elems,progressBarSettings.completionPercentage,progressBarSettings.animationTime)
-     
-      
-     return progressBarSettings
-    }
 
 
 
@@ -873,21 +967,14 @@ return response//+ ' | '+daysUntilDue
 
 if(urlParams.date_due){
     var due_date = moment(urlParams.date_due,'DDMMYYYY')//DD-MM-YY
+    invoiceSettings.date.DUE = due_date
     var due_issued = moment(urlParams.date_issued,'DDMMYYYY')//DD-MM-YY
+    invoiceSettings.date.ISSUED = due_issued
     var timer = dueTimer(due_date)
     $('#dueTimer').text(timer) //urlParams.date_due //invoiceSettings.invoice.CLIENT_NAME
     //$('#mobileInvoiceHeader').attr('data-before', urlParams.date_due);
 
-    var progressBarSettings = {
-        moment:{
-          creation_date:due_issued,//invoiceSettings.date.ISSUED,
-          record_time:moment(),
-          completion_date:due_date,//invoiceSettings.date.DUE,
-        }
-      };
-       var progressBar = progressTheProgressBar('.progressBar span.progressBar_progress',3000,null,progressBarSettings.moment)
-      console.log('[progressBar]',{progressBar:progressBar})
-      
+    /* IF DUE DATE IS PRESENT */
 
 }else{
     $('#dueTimer').text("No due date set")//Doppelgänger Doppelgänger Dudes Pty Ltd

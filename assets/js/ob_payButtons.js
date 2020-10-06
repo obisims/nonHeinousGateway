@@ -351,17 +351,20 @@ function toggleDepositInstructions(){
         $('#landingFooterObi_mobile').slideToggle( "slow", function() { /* Animation complete.*/});
         var buttonLockdown = $pay_Direct.attr('data-lockhover')
         if(buttonLockdown=="false"){
+            $pay_Direct.attr('data-lockhover','true')
             $pay_Direct.html('<b>Back</b>')
-            
+            $('#paymentOptions li .buttonPayFooter').slideDown()
         }else{
-            $('#paymentOptions li .buttonPayFooter').slideUp()
-            $pay_Direct.html(payDirectOriginalHtml)
+           // $('#paymentOptions li .buttonPayFooter').slideUp()
+           $pay_Direct.html(payDirectOriginalHtml)
+           $pay_Direct.attr('data-lockhover','false')
+         //  $pay_Direct.attr('data-lockhover','false')
         }
-        $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')
+       // $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')
         
 
+       $("#pay_instructions").slideToggle( "slow", function() { /* Animation complete.*/});
         var $payInstruction = $("#pay_instructions")
-        $("#pay_instructions").slideToggle( "slow", function() { /* Animation complete.*/});
         
         var $payCrypto = $('#pay_Crypto.payButton')
         var $payStripe = $('#pay_Stripe.payButton')
