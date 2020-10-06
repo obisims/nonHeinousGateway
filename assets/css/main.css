@@ -1923,10 +1923,11 @@ input, select, textarea {
 	input[type="button"],
 	button,
 	.button {
-		background-color: rgba(41,26,43, 0.35);
+		background-color: rgba(41,26,43, 0.05);
+		backdrop-filter: blur(5px);
 		/*box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 		box-shadow: inset 0 0 0 1px rgba(41,26,43, 1);*/
-		box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.15);
+		box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.35);
 		color: #ffffff !important;
 	}
 
@@ -1938,8 +1939,18 @@ input, select, textarea {
 			/*background-color: rgba(255, 255, 255, 0.075);*/
 			background-color: rgba(41,26,43, 0.65);
 			/*box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.35);*/
-			box-shadow: inset 0 0 0 1px rgba(241,91,88, 0.35);
-			
+			/*box-shadow: inset 0 0 0 1px rgba(241,91,88, 0.35);*/
+			box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.05);
+		}
+		@media (hover:none), (hover:on-demand) {
+			input[type="submit"]:hover,
+			input[type="reset"]:hover,
+			input[type="button"]:hover,
+			button:hover,
+			.button:hover{ /* suppress hover effect on devices that don't support hover fully*/
+				background-color: rgba(41,26,43, 0.05);
+				box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.35);
+			}
 		}
 		input[type="submit"][data-lockhover="true"]:hover,
 		input[type="reset"][data-lockhover="true"]:hover,
@@ -1948,11 +1959,12 @@ input, select, textarea {
 		.button[data-lockhover="true"]:hover {
 			/*background-color: rgba(255, 255, 255, 0.075);*/
 			background-color: rgba(41,26,43, 0.65);
-			/*box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.35);*/
-			box-shadow: inset 0 0 0 1px rgba(41,26,43, 0.35);
+			/*box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.35);
+			box-shadow: inset 0 0 0 1px rgba(41,26,43, 0.35);*/
+			box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.05);
 			
 		}
-
+		
 		input[type="submit"]:active,
 		input[type="reset"]:active,
 		input[type="button"]:active,
@@ -1960,7 +1972,8 @@ input, select, textarea {
 		.button:active {
 			/*background-color: rgba(255, 255, 255, 0.2);*/
 			background-color: rgba(41,26,43, 0.2);
-			box-shadow: inset 0 0 0 1px rgba(41,26,43, 0.85);
+			
+			/*box-shadow: inset 0 0 0 1px rgba(41,26,43, 0.85);*/
 		}
 
 		input[type="submit"].icon:before,
@@ -1982,7 +1995,7 @@ input, select, textarea {
 			box-shadow: none;
 			/*
 	box-shadow: inset 0 0 0 1px rgba(209,209,209, 0.3);*/
-	box-shadow: inset 0 0 0 1px rgba(241,91,88, 0.35);
+	box-shadow: inset 0 0 0 1px rgba(241,91,88, 0.85);
 			color: #ffffff !important;
 			
 		}
