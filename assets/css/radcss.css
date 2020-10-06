@@ -829,11 +829,13 @@ img.socialIconSet:hover {
   height: 16px;
 }
 
+/* SMALL SCREENS */
 
 @media screen and (max-width: 480px){
   /*ul.icons {
       display: none;
   }*/
+  
   #paymentOptions li ul.icons{
       display: none;
   }
@@ -842,7 +844,11 @@ img.socialIconSet:hover {
     display: block;
   }
 }
-
+@media screen and (max-height: 650px){
+  #landing #header {
+    padding-top: 2vh;
+  }
+}
 
 
 
