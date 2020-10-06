@@ -345,7 +345,7 @@ padding-top: 5px;
     left: 0;
     z-index: 0 ;
     /*backdrop-filter:grayscale(1);*/
-    backdrop-filter:brightness(92%) blur(2px);
+    backdrop-filter:brightness(92%) blur(3px);
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
@@ -734,9 +734,12 @@ outline:none;
 
   text-align: left;
 }
+#pay_instructions_footer{
+  display: inline-block;
+}
 #pay_instructions_footer.receipt{
-  font-size:80%
-
+  font-size:80%;
+ 
 }
 
 a {
@@ -900,4 +903,23 @@ img.socialIconSet:hover {
 #dueTimer.initialHide{
   opacity:0;
  
+}
+
+#pay_instructions_footer button.payButton{/*confirm_directDebit*/
+  display: inline;
+}
+
+@media screen and (max-width: 480px) {
+  /* mobile button variation */
+  #paymentOptions.hidePadding{
+    padding: 0 7vw 0px 7vw;
+  }
+  #paymentOptions.hidePadding li{
+    display:flex;
+    justify-content: center;
+  }
+  #paymentOptions.hidePadding li .buttonPayFooter{
+    padding-top: 5px;
+    
+  }
 }

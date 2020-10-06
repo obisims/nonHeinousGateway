@@ -355,7 +355,11 @@ function toggleDepositInstructions(){
             $pay_Direct.html('<b>Back</b>')
            $('#paymentOptions li .buttonPayFooter').slideDown()
         }else{
-            $('#paymentOptions li .buttonPayFooter').slideUp()
+            if(stateSettings.status.isMobile==true){
+                $('#paymentOptions li .buttonPayFooter').hide()
+            } else{
+                $('#paymentOptions li .buttonPayFooter').slideUp()
+            }
            $pay_Direct.html(payDirectOriginalHtml)
           $pay_Direct.attr('data-lockhover','false')
          //  $pay_Direct.attr('data-lockhover','false')
