@@ -478,10 +478,10 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
             console.log('[hideDueDateString] BLOCK slidData',slidData)
             return
         }
-        setTimeout(function() {
+        //setTimeout(function() {
             var $dueTimer = $('#dueTimer')
 
-            if($dueTimer.data('slid')=='down')
+           // if($dueTimer.data('slid')=='down'){}
             if($dueTimer.data('slide-lock')!=true){
                 $dueTimer.data('slid','up')
                 console.log('[hideDueDateString] SUCCEED slidData',slidData)
@@ -490,10 +490,10 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
             } else{
                 console.log('[hideDueDateString] BLOCK slidData',slidData)
             }  
-        },6000) 
+        //},6000) 
      }
-     $('.progressBar_wrapper .progressBar').click(function(){
-        var slidData = $('#dueTimer').data('slid')
+     $('#invoiceTitleContainer span #invoiceTitle').click(function(){
+        var slidData = $('#dueTimer').attr('data-slid')
         switch(slidData) {
             case 'up':
                 hideDueDateString()
@@ -508,7 +508,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         
      })
      $('#headerOrnament .replace_clientName').click(function(){
-        var slidData = $('#dueTimer').data('slid')
+        var slidData = $('#dueTimer').attr('data-slid')
         console.log('[slidData CLICK] slidData CLICK ',slidData)
         switch(slidData) {
             case 'up':
@@ -524,10 +524,47 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         
      })
   
-    $('#headerOrnament .replace_clientName').hover(function(){showDueDateString()},function(){hideDueDateString()})
+
+
+
+     var payButtonHover_over = function(){
+        showDueDateString()
+        //alert('hover')
+    //
+    }
+    var payButtonHover_out = function(){
+        //
+        hideDueDateString()
+        //alert('off')
+    }
+
+    var hoverConfig_showDueDate = {    
+        over: payButtonHover_over, // function = onMouseOver callback (REQUIRED)    
+        timeout: 3000, // 500/number = milliseconds delay before onMouseOut    
+        interval: 500,//5000 // number = milliseconds delay before trying to call over    
+        out: payButtonHover_out // function = onMouseOut callback (REQUIRED)    
+   };
+   /* https://briancherne.github.io/jquery-hoverIntent/ */
+   $('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
+   $('#invoiceTitle').hoverIntent( hoverConfig_showDueDate )
+
+  //  $('#headerOrnament .replace_clientName').hover(function(){showDueDateString()},function(){hideDueDateString()})
     // $('.progressBar_wrapper .progressBar').hover(function(){showDueDateString()},function(){hideDueDateString()})
-    $('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
+    //$('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
     
+    
+    
+
+
+
+
+
+
+
+
+
+
+
      $( ".button" ).hover(function() {
          //var $parent = $(this).parent()
          var $this = $(this)
