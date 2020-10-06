@@ -351,13 +351,13 @@ function toggleDepositInstructions(){
         $('#landingFooterObi_mobile').slideToggle( "slow", function() { /* Animation complete.*/});
         var buttonLockdown = $pay_Direct.attr('data-lockhover')
         if(buttonLockdown=="false"){
-        //    $pay_Direct.attr('data-lockhover','true')
+           $pay_Direct.attr('data-lockhover','true')
             $pay_Direct.html('<b>Back</b>')
-          //  $('#paymentOptions li .buttonPayFooter').slideDown()
+           $('#paymentOptions li .buttonPayFooter').slideDown()
         }else{
-           // $('#paymentOptions li .buttonPayFooter').slideUp()
+            $('#paymentOptions li .buttonPayFooter').slideUp()
            $pay_Direct.html(payDirectOriginalHtml)
-        //   $pay_Direct.attr('data-lockhover','false')
+          $pay_Direct.attr('data-lockhover','false')
          //  $pay_Direct.attr('data-lockhover','false')
         }
        // $pay_Direct.attr('data-lockhover', buttonLockdown == 'true' ? 'false' : 'true')

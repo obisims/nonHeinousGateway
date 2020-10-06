@@ -463,7 +463,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         
        
        
-       if($dueTimer.data('slide-lock')!=true&&$dueTimer.data('slid')=='up'){
+       if($dueTimer.data('slide-lock')!='true'&&$dueTimer.data('slid')=='up'){
         console.log('[showDueDateString] SUCCEED slidData',slidData)
         $dueTimer.data('slid','down')
             $dueTimer.slideDown()
@@ -529,16 +529,18 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     $('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
     
      $( ".button" ).hover(function() {
-		console.log('[hover] button')
-       //var $parent = $(this).parent()
+         //var $parent = $(this).parent()
+         var $this = $(this)
+         var data_LockHover = $this.attr('data-lockhover')
+         console.log('[button][hover] data_LockHover',data_LockHover)
        //$parent.find('.buttonPayFooter').slideDown()
-       if($(this).attr('data-lockhover')!='true'){
+       if(data_LockHover!='true'){
            
-            $(this).parent().find('.buttonPayFooter').slideDown()//.data('lockhover','true') 
+            $this.parent().find('.buttonPayFooter').slideDown()//.data('lockhover','true') 
             //$pay_Direct
         }//else{}
   
-       switch($(this).data('payment-mode')) {
+       switch($this.attr('data-payment-mode')) {
         case 'Stripe':
             //showDueDateString()
            // $(this).parent().find('.buttonPayFooter').slideDown()
@@ -559,12 +561,15 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         
     }, function() {
        // $(this).data('lockHover', true);
-       setTimeout(function() {
-        if($(this).attr('data-lockhover')=='false'){
-            $(this).parent().find('.buttonPayFooter').slideUp()  
+       //setTimeout(function() {
+           var $this = $(this)
+           var data_LockHover = $this.attr('data-lockhover')
+           console.log('[button][hover][off] data_LockHover',data_LockHover,$this)
+        if(data_LockHover!='true'){
+            $this.parent().find('.buttonPayFooter').slideUp()  
         }
         $('#landingFooterObi div a img.socialIconSet').removeClass('whiteSvgFilter')
-       },600)
+      // },600)
       
        
       })
