@@ -474,43 +474,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
             }  
         //},6000) 
      }
-     $('#invoiceTitleContainer span #invoiceTitle').click(function(){
-        var slidData = $('#dueTimer').attr('data-slid')
-        switch(slidData) {
-            case 'up':
-                hideDueDateString()
-              break;
-            case 'down':
-                showDueDateString()
-              break;
-            default:
-              // code block
-              console.log('[hideDueDateString] BLOCK slidData',slidData)
-          }
-        
-     })
-     $('#headerOrnament .replace_clientName').click(function(){
-        slider_DownElemToggle('#dueTimer',false)
-        setTimeout(function() {
-            slider_DownElemToggle('#dueTimer',true)
-        },6000)
-        
-         /*
-        var slidData = $('#dueTimer').attr('data-slid')
-        console.log('[slidData CLICK] slidData CLICK ',slidData)
-        switch(slidData) {
-            case 'up':
-                showDueDateString()
-              break;
-            case 'down':
-                hideDueDateString()
-              break;
-            default:
-              // code block
-              console.log('[slidData CLICK] BLOCK slidData',slidData)
-          }
-        */
-     })
+   
   
 
 
@@ -531,20 +495,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
       //      console.log('[showDueDateString] BLOCK slidData',slidData)
       //  }
      }
-
-
-
-     function slider_elem_Show(elem){
-
-     }
-     function slider_elem_Hide(elem){
-
-    }
     
-
-
-
-
 
 
 
@@ -623,14 +574,24 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         out: dueDate_out // function = onMouseOut callback (REQUIRED)    
    };
    /* https://briancherne.github.io/jquery-hoverIntent/ */
+   //$('#invoiceTitle').hoverIntent( hoverConfig_showDueDate )
    //$('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
-   $('#invoiceTitle').hoverIntent( hoverConfig_showDueDate )
-   $('#headerOrnament .replace_clientName').hoverIntent( hoverConfig_showDueDate )
-   $('.progressBar_wrapper .progressBar').hoverIntent( hoverConfig_showDueDate )
-   $('#mainLogo').hoverIntent( hoverConfig_showDueDate )
-  //  $('#headerOrnament .replace_clientName').hover(function(){showDueDateString()},function(){hideDueDateString()})
-    // $('.progressBar_wrapper .progressBar').hover(function(){showDueDateString()},function(){hideDueDateString()})
-    //$('#invoiceTitleContainer span #invoiceTitle').hover(function(){showDueDateString()},function(){hideDueDateString()})
+   //$('.progressBar_wrapper .progressBar').hoverIntent( hoverConfig_showDueDate )
+   //$('#mainLogo').hoverIntent( hoverConfig_showDueDate )
+   $('#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName,#mainLogo').hoverIntent( hoverConfig_showDueDate )
+    
+ 
+   $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
+    var elem = '#dueTimer'
+    $(elem).attr('slider-lock',true)
+    slider_DownElemToggle(elem,false)
+  setTimeout(function() {
+    var elem = '#dueTimer'
+    $(elem).attr('slider-lock',false)
+      slider_DownElemToggle(elem,true)
+  },6000)
+});
+
     
 
     var payButton_over = function(){
@@ -638,6 +599,25 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         var buttonSuffix_id = $(this).attr('id')
         console.log('[payButton][hover] over',buttonSuffix_id)
        // alert('payButton over')
+
+       switch($(this).attr('data-payment-mode')) {
+        case 'Stripe':
+            //showDueDateString()
+           // $(this).parent().find('.buttonPayFooter').slideDown()
+           $('#landingFooterObi div a.logo_stripe img.socialIconSet').addClass('whiteSvgFilter')
+          break;
+        case 'Direct Debit':
+          //  hideDueDateString()
+          $('#landingFooterObi div a.logo_obisims img.socialIconSet').addClass('whiteSvgFilter')
+          break;
+        case 'Coinbase':
+           // hideDueDateString()
+           $('#landingFooterObi div a.logo_coinbase img.socialIconSet').addClass('whiteSvgFilter')
+            break;
+        default:
+          // code block
+         // console.log('[slidData CLICK] BLOCK slidData',slidData)
+      }
         slider_DownElemToggle('#'+buttonSuffix_id+'_footer',false)//slider_DownElemToggle('#dueTimer',)
    }
    var payButton_out = function(){
@@ -645,6 +625,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
        var buttonSuffix_id = $(this).attr('id')
        console.log('[payButton][hover] out',buttonSuffix_id)
       // alert('payButton over')
+      $('#landingFooterObi div a img.socialIconSet').removeClass('whiteSvgFilter')
        slider_DownElemToggle('#'+buttonSuffix_id+'_footer',true)//slider_DownElemToggle($(this),true)
    }
    var hoverConfig_showpayButton = {    
@@ -725,7 +706,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
        // scrollToTop()
         scrollTo(1, 400);
 	});
-	$( ".arrowUp" ).click(function() {
+	$( "#landingScrollUpButton" ).click(function() {
 		console.log('[clicked] arrowUp')
 		shrinkDeadSpace(false)
         //scrollToTop()
@@ -737,7 +718,8 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 			behavior: 'smooth'
 		});
 		*/
-	});
+    });
+    
 	$( "#landingScrollDownButton" ).click(function() {
         console.log('[clicked] arrowDown')
         var nowHeights = getScreenHeights()
