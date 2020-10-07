@@ -283,12 +283,13 @@ if(urlParams.coinbase_checkout){
             //what happens if they chose that payment option
             case 'Direct Debit':
                 //opens direct debit instructions
+                
                 if(!urlParams.polipay_id){
                     toggleDepositInstructions()
                 }else{
                     //poliPay intergration
                     postSlackNotification_purchase_initiated(thisButton.paymentMode)
-                    window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
+                    poliPay_workflow()//window.open();//window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
                 }
                 break;
             case 'Stripe':
@@ -409,3 +410,172 @@ function toggleDepositInstructions(){
               
       //  }); 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PoliPay Intergration */
+
+
+function poliPay_workflow(settings){
+    settings = settings || {
+      NUM:invoiceSettings.invoice.NUM,
+      CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
+      AMOUNT:invoiceSettings.payStatus.AMOUNT,
+    }
+    var poliPay = poliPay_initiateTransaction(settings)
+     /*{
+          "Success": true,
+          "NavigateURL": "https://txn.apac.paywithpoli.com/?Token=GU9Uwhr3alXaY0z3aGbY8jKTvVllsK0%2f",
+          "ErrorCode": 0,
+          "ErrorMessage": null,
+          "TransactionRefNo": "996182419382"
+      }*/
+  //  var poliPay_url = poliPay.NavigateURL
+  // var poliPay_url_params = poliPay_url.split('.com/?')[1]
+  // var poliPay_url_token = poliPay_url_params.split('Token=')[1]
+  // var poliPay_success = poliPay.Success
+  // var poliPay_TransactionRefNo = poliPay.TransactionRefNo
+    
+  //  INVOICE_DATA.payment = INVOICE_DATA.payment || new Object()
+   // INVOICE_DATA.payment['PoliPay'] = {
+   //   id:poliPay_TransactionRefNo,
+   //   url:poliPay_url,
+   //   data:poliPay
+   // }
+    
+  //  console.log('[poliLink] generated',poliPay_url)
+    
+    // return poliPay_url
+    }
+
+
+
+
+function poliPay_initiateTransaction(settings){
+    /*https://obisims.postman.co/build/workspace/My-Workspace~b3ef1536-ac6f-4459-84e8-a50ba37b8207/request/12631611-bf80817d-7daf-4586-b3ba-558627ec0f5e*/
+    var auth = settings // || global_payDeets('PoliPay')
+    /*https://www.polipayments.com/CreatePOLiLink*/
+    var paramsToPass = '&inv='+encodeURI(urlParams.inv)+
+                '&inv_total='+encodeURI(urlParams.inv_total)+
+                '&client_name='+encodeURI(urlParams.client_name)+
+                '&project_name='+encodeURI(urlParams.project_name)+
+                '&stripe_price='+encodeURI(urlParams.stripe_price)+
+                '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
+                '&drive_id='+encodeURI(urlParams.drive_id)+
+                '&date_due='+encodeURI(urlParams.date_due)+
+                '&polipay_id='+encodeURI(urlParams.polipay_id)
+                
+
+    var poliPayOptions = 
+    {
+      "Amount":settings.AMOUNT.toFixed(2),
+      "CurrencyCode":"AUD",
+      "MerchantReference":settings.NUM,
+      "MerchantHomepageURL":"https://obisims.com",
+      "SuccessURL":"http://pay.obisims.com/"+settings.NUM+"?response=Success"+paramsToPass,
+      "FailureURL":"http://pay.obisims.com/"+settings.NUM+"?response=Error"+paramsToPass,
+      "CancellationURL":"http://pay.obisims.com/"+settings.NUM+"?response=Cancel"+paramsToPass,
+      "NotificationURL":"http://pay.obisims.com/"
+    }
+    /*var poliPayOptions = {
+      // mandatory
+      "LinkType":"0",//0 = Simple 1 = Variable 2 = Discounted
+      "Amount":""+INVOICE_DATA.items.TOTAL.toFixed(2)+"",// * "1.2" string dollar decimals
+      "RecipientName":""+INVOICE_DATA.client.NAME+"",// * // "false" // The display name of the customer receiving the POLiLink email
+      "RecipientEmail":"false",// * // my.customer@customers.com
+      "ConfirmationEmail":"true",
+      "CurrencyCode":"AUD",
+      "MerchantData":""+INVOICE_DATA.NUM+"",//Merchant Reff THX-1234 Client Name
+      "MerchantReference":""+INVOICE_DATA.NUM+"",// * //
+      "AllowCustomerReference":"false",
+      "MultiPayment":"false",
+      //"DueDate":moment(INVOICE_DATA.date.ISSUED).format('YYYY-MM-DD'),//2014-05-24
+      "AllowPartialPayment":"false",
+      //"AllowOverPayment":"true",
+      //"Schedule":"",
+      "ViaEmail":"false",
+      "LinkExpiry":moment(INVOICE_DATA.date.ISSUED).format('YYYY-MM-DD hh:mm:ss[+10]')//"2020-10-24 16:00:00+11",//Must be a date later than today's date. Format is as: “2020-10-24 16:00:00+11”
+    }*/
+      
+     // var payload = poliPayOptions //new Object()
+      //if(productOptions)payload.name = productOptions.name
+      
+     var params = {
+        method: "POST",
+        muteHttpExceptions: true,
+        headers: {
+          Authorization: "Basic " + auth.apiKey,
+          'Content-Type': "application/json",
+        },
+        payload: encodeURI(poliPayOptions) //{name: "My SaaS Platform", type: "service"}
+      };
+      
+      $.ajax({
+            type: 'GET',
+            url: 'url',
+            dataType: 'json',
+            //whatever you need
+            headers: {
+                "Authorization": 'Basic '+invoiceSettings.checkouts['Direct Debit'].apikey
+            },
+            success: function (data){
+                var responseBody = JSON.parse(data)
+                console.log('[poliPay_initiateTransaction] data',responseBody)
+                window.open(responseBody.NavigateURL)
+            },
+        });
+ 
+    
+     // var response = UrlFetchApp.fetch(auth.api+'/v2/Transaction/Initiate', params)
+     // var responseCode = response.getResponseCode()
+      
+      
+      //var responseBody = JSON.parse(response.getContentText())
+      /*{
+          "Success": true,
+          "NavigateURL": "https://txn.apac.paywithpoli.com/?Token=GU9Uwhr3alXaY0z3aGbY8jKTvVllsK0%2f",
+          "ErrorCode": 0,
+          "ErrorMessage": null,
+          "TransactionRefNo": "996182419382"
+      }*/
+    
+   // return responseBody
+    }

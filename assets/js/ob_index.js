@@ -992,9 +992,18 @@ var invoiceSettings = {
         },
         'Direct Debit':{
             price_id:uuidv4(),
-           // api:'',
+            api:'https://poliapi.apac.paywithpoli.com/api',
             surcharge:'0% surcharge',
-            url:"https://poli.to/"+urlParams.polipay_id
+            url:"https://poli.to/"+urlParams.polipay_id,
+            apikey:'UzYxMDUyMzQ6NXIhQVBeOHQ5aSQ=',
+            data:{
+                /*Docs: http://www.polipaymentdeveloper.com/doku.php
+                Merchant Url: https://consoles.apac.paywithpoli.com */
+                  'Merchant Name':'OBI SIMS',
+                  'Merchant Code':'S6105234',
+                  'Currency Code':'AUD',
+                  'Country Code':'AU'
+                  },
         }
     }
 }
