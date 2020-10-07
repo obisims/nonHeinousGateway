@@ -257,7 +257,7 @@ var ipInfo = new Object();
 
 $(document).ready(function() {
 
-    console.warn('[$(document).ready]','version 0.21')
+    console.warn('[$(document).ready]','version 0.215')
 
 
 
