@@ -283,7 +283,13 @@ if(urlParams.coinbase_checkout){
             //what happens if they chose that payment option
             case 'Direct Debit':
                 //opens direct debit instructions
-                toggleDepositInstructions()
+                if(!urlParams.polipay_id){
+                    toggleDepositInstructions()
+                }else{
+                    //poliPay intergration
+                    postSlackNotification_purchase_initiated(thisButton.paymentMode)
+                    window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
+                }
                 break;
             case 'Stripe':
                 //opens stripe checkout // toggleDepositInstructions()
@@ -303,7 +309,8 @@ if(urlParams.coinbase_checkout){
                 '&stripe_price='+encodeURI(urlParams.stripe_price)+
                 '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
                 '&drive_id='+encodeURI(urlParams.drive_id)+
-                '&date_due='+encodeURI(urlParams.date_due)
+                '&date_due='+encodeURI(urlParams.date_due)+
+                '&polipay_id='+encodeURI(urlParams.polipay_id)
                 
                // console.log('fakeurl',fakeURL)
 

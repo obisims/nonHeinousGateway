@@ -608,6 +608,10 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
           break;
         case 'Direct Debit':
           //  hideDueDateString()
+          if(urlParams.polipay_id){
+                $('#landingFooterObi div a.logo_polipay img.socialIconSet').addClass('whiteSvgFilter')
+            break; 
+            }
           $('#landingFooterObi div a.logo_obisims img.socialIconSet').addClass('whiteSvgFilter')
           break;
         case 'Coinbase':
@@ -988,7 +992,8 @@ var invoiceSettings = {
         'Direct Debit':{
             price_id:uuidv4(),
            // api:'',
-            surcharge:'0% surcharge'
+            surcharge:'0% surcharge',
+            url:"https://poli.to/"+urlParams.polipay_id
         }
     }
 }
