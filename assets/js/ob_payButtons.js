@@ -508,7 +508,7 @@ function poliPay_initiateTransaction(settings){
 
     var poliPayOptions = 
     {
-      "Amount":settings.AMOUNT.toFixed(2),
+      "Amount":settings.AMOUNT,
       "CurrencyCode":"AUD",
       "MerchantReference":settings.NUM,
       "MerchantHomepageURL":"https://obisims.com",
