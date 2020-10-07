@@ -538,7 +538,7 @@ function poliPay_initiateTransaction(settings){
       
      // var payload = poliPayOptions //new Object()
       //if(productOptions)payload.name = productOptions.name
-      
+      /*
      var params = {
         method: "POST",
         muteHttpExceptions: true,
@@ -548,13 +548,13 @@ function poliPay_initiateTransaction(settings){
         },
         payload: JSON.stringify(poliPayOptions) //{name: "My SaaS Platform", type: "service"}
       };
-      
+      */
       $.ajax({
             type: 'GET',
             url: 'url',
             dataType: 'json',
             //whatever you need
-            data:encodeURI(poliPayOptions),
+            data:JSON.stringify(poliPayOptions),
             headers: {
                 "Authorization": 'Basic '+invoiceSettings.checkouts['Direct Debit'].apikey
             },
