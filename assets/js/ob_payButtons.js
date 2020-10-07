@@ -458,7 +458,7 @@ function poliPay_workflow(settings){
     settings = settings || {
       NUM:invoiceSettings.invoice.NUM,
       CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
-      AMOUNT:invoiceSettings.payStatus.AMOUNT,
+      AMOUNT:url.params.inv_total,//invoiceSettings.payStatus.AMOUNT,
     }
     console.log('[poliPay_workflow] initiated',settings)
     var poliPay = poliPay_initiateTransaction(settings)
@@ -546,7 +546,7 @@ function poliPay_initiateTransaction(settings){
           Authorization: "Basic " + auth.apiKey,
           'Content-Type': "application/json",
         },
-        payload: encodeURI(poliPayOptions) //{name: "My SaaS Platform", type: "service"}
+        payload: JSON.stringify(poliPayOptions) //{name: "My SaaS Platform", type: "service"}
       };
       
       $.ajax({
