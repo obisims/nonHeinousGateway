@@ -550,6 +550,7 @@ function poliPay_initiateTransaction(settings){
         payload: JSON.stringify(poliPayOptions) //{name: "My SaaS Platform", type: "service"}
       };
       */
+     //var authKey = 
       $.ajax({
             type: 'POST',
             url: 'url',
@@ -557,7 +558,7 @@ function poliPay_initiateTransaction(settings){
             //whatever you need
             data:JSON.stringify(poliPayOptions),
             headers: {
-                "Authorization": 'Basic '+invoiceSettings.checkouts['Direct Debit'].apikey
+                "Authorization": make_base_auth(invoiceSettings.checkouts['Direct Debit'].data['Merchant Code'], invoiceSettings.checkouts['Direct Debit'].data['Authentication Code'])
             },
             success: function (data){
                 var responseBody = JSON.parse(data)
@@ -565,7 +566,7 @@ function poliPay_initiateTransaction(settings){
                 window.open(responseBody.NavigateURL)
             },
             error: function(message,message2){
-                console.log("[poliPay_initiateTransaction] data failed",message,message2);
+                console.log("[poliPay_initiateTransaction] data failed",JSON.parse(message),message2);
             },
         });
  

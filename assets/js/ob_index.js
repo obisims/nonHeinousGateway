@@ -1001,13 +1001,14 @@ var invoiceSettings = {
                 Merchant Url: https://consoles.apac.paywithpoli.com */
                   'Merchant Name':'OBI SIMS',
                   'Merchant Code':'S6105234',
+                  'Authentication Code':'5r!AP^8t9i$',
                   'Currency Code':'AUD',
                   'Country Code':'AU'
                   },
         }
     }
 }
-
+//invoiceSettings.checkouts['Direct Debit'].apikey = make_base_auth(invoiceSettings.checkouts['Direct Debit'].data['Merchant Code'], invoiceSettings.checkouts['Direct Debit'].data['Authentication Code'])
 
 if(urlParams.stripe_price)invoiceSettings.checkouts['Stripe'].price = urlParams.stripe_price
 if(urlParams.inv_total){
