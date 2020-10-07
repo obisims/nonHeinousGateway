@@ -460,6 +460,7 @@ function poliPay_workflow(settings){
       CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
       AMOUNT:invoiceSettings.payStatus.AMOUNT,
     }
+    console.log('[poliPay_workflow] initiated',settings)
     var poliPay = poliPay_initiateTransaction(settings)
      /*{
           "Success": true,
@@ -553,6 +554,7 @@ function poliPay_initiateTransaction(settings){
             url: 'url',
             dataType: 'json',
             //whatever you need
+            data:encodeURI(poliPayOptions),
             headers: {
                 "Authorization": 'Basic '+invoiceSettings.checkouts['Direct Debit'].apikey
             },
