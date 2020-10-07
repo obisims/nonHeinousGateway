@@ -610,6 +610,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
           //  hideDueDateString()
           if(urlParams.polipay_id){
                 $('#landingFooterObi div a.logo_polipay img.socialIconSet').addClass('whiteSvgFilter')
+                $('#landingFooterObi div a.logo_auspost img.socialIconSet').addClass('whiteSvgFilter')
             break; 
             }
           $('#landingFooterObi div a.logo_obisims img.socialIconSet').addClass('whiteSvgFilter')
