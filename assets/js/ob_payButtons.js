@@ -553,7 +553,7 @@ function poliPay_initiateTransaction(settings){
      //var authKey = 
       $.ajax({
             type: 'POST',
-            url: 'url',
+            url: invoiceSettings.checkouts['Direct Debit'].api+'/v2/Transaction/Initiate',
             dataType: 'json',
             //whatever you need
             data:JSON.stringify(poliPayOptions),
