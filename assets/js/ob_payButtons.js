@@ -564,6 +564,9 @@ function poliPay_initiateTransaction(settings){
                 console.log('[poliPay_initiateTransaction] data',responseBody)
                 window.open(responseBody.NavigateURL)
             },
+            error: function(message,message2){
+                console.log("[poliPay_initiateTransaction] data failed",message,message2);
+            },
         });
  
     
