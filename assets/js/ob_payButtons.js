@@ -551,7 +551,7 @@ function poliPay_initiateTransaction(settings){
       };
       */
       $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: 'url',
             dataType: 'json',
             //whatever you need
