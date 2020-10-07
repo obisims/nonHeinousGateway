@@ -992,7 +992,7 @@ var invoiceSettings = {
         },
         'Direct Debit':{
             price_id:uuidv4(),
-            api:'https://poliapi.apac.paywithpoli.com/api',
+            api:'http://poliapi.apac.paywithpoli.com/api',
             surcharge:'0% surcharge',
             url:"https://poli.to/"+urlParams.polipay_id,
             apikey:'UzYxMDUyMzQ6NXIhQVBeOHQ5aSQ=',
