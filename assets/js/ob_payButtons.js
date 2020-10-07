@@ -554,7 +554,8 @@ function poliPay_initiateTransaction(settings){
       $.ajax({
             type: 'POST',
             url: invoiceSettings.checkouts['Direct Debit'].api+'/v2/Transaction/Initiate',
-            dataType: 'jsonp',
+            dataType: 'json',
+            crossDomain: true,
             //whatever you need
             data:JSON.stringify(poliPayOptions),
             headers: {
