@@ -458,8 +458,9 @@ function poliPay_workflow(settings){
     settings = settings || {
       NUM:invoiceSettings.invoice.NUM,
       CLIENT_NAME:invoiceSettings.invoice.CLIENT_NAME,
-      AMOUNT:url.params.inv_total,//invoiceSettings.payStatus.AMOUNT,
+      AMOUNT:urlParams.inv_total,//invoiceSettings.payStatus.AMOUNT,
     }
+    
     console.log('[poliPay_workflow] initiated',settings)
     var poliPay = poliPay_initiateTransaction(settings)
      /*{
