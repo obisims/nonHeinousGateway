@@ -190,7 +190,19 @@ $(document).on( 'scroll', function(){
         //shrinkToHeight:shrinkToHeight
     }
    
-
+    if(scroll<0){
+        //if overscroll then
+       // $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
+            var elem = '#dueTimer'
+            $(elem).attr('slider-lock',true)
+            slider_DownElemToggle(elem,false)
+            setTimeout(function() {
+                var elem = '#dueTimer'
+                $(elem).attr('slider-lock',false)
+                slider_DownElemToggle(elem,true)
+            },2000)
+        //});
+    }
     console.log('[scroll]',scroll,{stateSettings:stateSettings,scrollster:scrollster,elemHeights:elemHeights})
     
     if(scroll>sortingOutHeights.shrinkAt&&stateSettings.status.deadSpace == 'full'){
@@ -582,15 +594,15 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     
  
    $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
-    var elem = '#dueTimer'
-    $(elem).attr('slider-lock',true)
-    slider_DownElemToggle(elem,false)
-  setTimeout(function() {
-    var elem = '#dueTimer'
-    $(elem).attr('slider-lock',false)
-      slider_DownElemToggle(elem,true)
-  },6000)
-});
+        var elem = '#dueTimer'
+        $(elem).attr('slider-lock',true)
+        slider_DownElemToggle(elem,false)
+        setTimeout(function() {
+            var elem = '#dueTimer'
+            $(elem).attr('slider-lock',false)
+            slider_DownElemToggle(elem,true)
+        },6000)
+    });
 
     
 

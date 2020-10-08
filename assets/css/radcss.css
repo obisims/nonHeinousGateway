@@ -31,7 +31,9 @@ html{
     overflow: visible;
     color:var(--google-grey);
 }
-
+body{
+  overscroll-behavior-y: contain;
+}
 body,html{
     background-color:#291a2b; 
 }
@@ -412,7 +414,7 @@ padding-top: 5px;
 body{
     background:none;
     overscroll-behavior-x: none;/*leftRight | ,none*/
-    overscroll-behavior-y: none;/*upDown*/
+    overscroll-behavior-y: contain;/*upDown*/
 }
 
 #pdfIframe{
