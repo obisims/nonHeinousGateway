@@ -4,6 +4,7 @@
 
 // Handle any errors from Checkout
 var handleResult = function(result) {
+    loadOutEverythingtoUrl()
     console.log('[stripe] handleResult',result);
    /* if (result.error) {
         console.log('[stripe] checkout error',result);
@@ -329,6 +330,7 @@ if(urlParams.coinbase_checkout){
                 //opens coinbase checkout toggleDepositInstructions()
                 postSlackNotification_purchase_initiated(thisButton.paymentMode)
                 //window.location.href = invoiceSettings.checkouts['Coinbase'].url //"https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
+                //loadOutEverythingtoUrl(invoiceSettings.checkouts['Coinbase'].url,true)
                 window.open(invoiceSettings.checkouts['Coinbase'].url , '_blank');
                 //https://commerce.coinbase.com/charges/K7MJAEP3
                 break;

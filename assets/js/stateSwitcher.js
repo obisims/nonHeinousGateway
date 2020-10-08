@@ -95,6 +95,57 @@ function organiseHeights(){
 
 
 
+/*////////////////////////////////////////
+//////////////
+*/////////////////////////////////////////
+
+var loadOutEverything_breaks = 70
+//var loadOutEverything_time = 0
+var loadOutEverything_timeCount = 1 
+
+
+
+function loadOutEverythingtoUrl(url,ifNewWindow){
+    
+    setTimeout(function(){ 
+        loadOutEverything_timeCount++
+        //load out landing menu buttons
+        $('#landingFooterObi #wrapper_landingFooterObi_mobile').addClass('animate__animated animate__backOutDown')// animate__delay-2s
+        setTimeout(function(){  
+            loadOutEverything_timeCount++
+            $('#landingFooterObi span a,#landingFooterObi span').fadeOut()
+            setTimeout(function(){  
+                loadOutEverything_timeCount++
+                $('#landingFooterObi').fadeOut()//.addClass('animate__animated animate__backOutDown')//div
+                setTimeout(function(){  
+                    loadOutEverything_timeCount++
+                    $('#paymentOptions li').addClass('animate__animated animate__backOutDown')
+                    setTimeout(function(){  
+                        loadOutEverything_timeCount++
+                        $('#header').addClass('animate__animated animate__backOutUp')
+                        $('#landingScrollDownButton').addClass('animate__animated animate__backOutUp')
+                        $('#landingScrollDownButton svg').fadeOut()
+                        $('#navAndMain').addClass('animate__animated animate__backOutDown')
+                        setTimeout(function(){
+                            loadOutEverything_timeCount++
+                            if(url&&ifNewWindow==true){
+                                window.open(url, '_blank')
+                            }else if(url){
+                                window.open(url)
+                            }
+                            
+                        }, loadOutEverything_breaks*loadOutEverything_timeCount);
+                    }, loadOutEverything_breaks*loadOutEverything_timeCount);
+                }, loadOutEverything_breaks*loadOutEverything_timeCount);
+            }, loadOutEverything_breaks*loadOutEverything_timeCount);
+        }, loadOutEverything_breaks*loadOutEverything_timeCount);
+    }, loadOutEverything_breaks*loadOutEverything_timeCount);
+   
+
+}/////////////////////////////////////////
+//////////////////////////////////////////
+
+
 
 
 
@@ -309,4 +360,14 @@ function shrinkDeadSpace(toShrink){
 
 /////////////////////////////////////////
 //////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
