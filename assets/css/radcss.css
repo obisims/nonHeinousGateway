@@ -29,10 +29,8 @@ section, summary, time, mark, audio, video {
 html{
     height:100%;
     overflow: visible;
+    
     color:var(--google-grey);
-}
-body{
-  overscroll-behavior-y: contain;
 }
 body,html{
     background-color:#291a2b; 
@@ -414,7 +412,7 @@ padding-top: 5px;
 body{
     background:none;
     overscroll-behavior-x: none;/*leftRight | ,none*/
-    overscroll-behavior-y: contain;/*upDown*/
+    overscroll-behavior-y: none;/*upDown*/ /* contain */
 }
 
 #pdfIframe{

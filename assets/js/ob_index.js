@@ -190,19 +190,7 @@ $(document).on( 'scroll', function(){
         //shrinkToHeight:shrinkToHeight
     }
    
-    if(scroll<0){
-        //if overscroll then
-       // $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
-            var elem = '#dueTimer'
-            $(elem).attr('slider-lock',true)
-            slider_DownElemToggle(elem,false)
-            setTimeout(function() {
-                var elem = '#dueTimer'
-                $(elem).attr('slider-lock',false)
-                slider_DownElemToggle(elem,true)
-            },2000)
-        //});
-    }
+    
     console.log('[scroll]',scroll,{stateSettings:stateSettings,scrollster:scrollster,elemHeights:elemHeights})
     
     if(scroll>sortingOutHeights.shrinkAt&&stateSettings.status.deadSpace == 'full'){
@@ -221,6 +209,20 @@ $(document).on( 'scroll', function(){
         // and scroll is BELOW shrink threshold (scroll=50, threshold=75)
         //then shrink the space
         shrinkDeadSpace(false)
+     
+            //if overscroll then
+           // $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
+                var elem = '#dueTimer'
+                $(elem).attr('slider-lock',true)
+                slider_DownElemToggle(elem,false)
+                setTimeout(function() {
+                    var elem = '#dueTimer'
+                    $(elem).attr('slider-lock',false)
+                    slider_DownElemToggle(elem,true)
+                },2000)
+                
+            //});
+        
         //stateSettings.status.deadSpace = 'full'
        // console.log('[!GLOBAL SET!][scroll]','deadSpaceShrunk:',deadSpaceShrunk)
     }
