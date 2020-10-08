@@ -1050,6 +1050,8 @@ if(urlParams.client_name){
 if(!urlParams.polipay_id){
     $('.logo_auspost').remove()
     $('.logo_polipay').remove()
+   // urlParams.polipay_id
+    $('.ifNoPoliPay').remove()
 }else{
     $('#pay_Direct.payButton span').html(`Pay with <span class="logo_auspost">
     <img class="whiteSvgFilter" src="images/paymentIcons/masterLogos_platform_auspost.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_auspost.png'">
@@ -1270,7 +1272,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     $('.removeOnMobile').remove()
     
 }else{
-    $('.removeOnDesktop').remove()
+    $('.removeOnDesktop:not(.ifNoPoliPay)').remove()
 }
 
 
