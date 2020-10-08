@@ -946,7 +946,10 @@ img.socialIconSet:hover {
   margin: 0px 0px -3px 0px;
   transition: all 0.3s ease;
 }
-
+.primary.payButton#confirm_directDebit{
+  font-size: initial;
+  margin-bottom: 10px;
+}
 @media screen and (max-width: 480px) {
   /* mobile button variation */
   #paymentOptions.hidePadding{
@@ -960,10 +963,14 @@ img.socialIconSet:hover {
     width: 80%;
 
   }
+  #confirm_directDebit.payButton {
+    width: 100%;
+  } 
   #paymentOptions.hidePadding li .buttonPayFooter{
     padding-top: 5px;
     
   }
+
 }
 div#payInstructions p {
  /* max-width: 60vw;*/
