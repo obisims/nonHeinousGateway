@@ -196,7 +196,11 @@
 									data-payment-mode="Stripe" 
 									data-checkout="open"
 									style="display: none;"
-								><span>Pay with <span style="font-weight:700;"></span><span><i class="fab fa-stripe fa-2x faAdjust" ></i></span></span></span>
+								><span>
+									Pay with  <span class="logo_stripe">
+											<img class="whiteSvgFilter" src="images/paymentIcons/masterLogos_platform_stripe.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_stripe.png'">
+									</span>
+								</span>
 								</button>
 							<!-- service surcharge / notes -->
 							<div id="pay_Stripe_footer" class="buttonPayFooter">
@@ -359,33 +363,32 @@
 			<!-- SPACERS / Footer -->
 				<footer id="dynamoFooter" class="shrinkCompen shrinkCompen_bottom">
 					<span>
-						
-						
-						This is a
-						<a href="https://stripe.com/en-au" target="_blank">
-							<img class="footerIcon" src="images/paymentIcons/masterLogos_platform_polipay.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_polipay.png'">
-						</a>, 
-						<a href="https://www.polipayments.com/" target="_blank">
+						<span class="removeOnMobile">This is a digital invoice gateway with payments by </span>
+						<a class="logo_auspost" href="https://www.polipayments.com/" target="_blank">
 							<img class="footerIcon" src="images/paymentIcons/masterLogos_platform_auspost.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_auspost.png'">
+						</a>
+						<a class="logo_polipay" href="https://stripe.com/en-au" target="_blank">
+							<img class="footerIcon" src="images/paymentIcons/masterLogos_platform_polipay.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_polipay.png'">
 						</a>
 						<a href="https://www.polipayments.com/" target="_blank">
 							<img class="footerIcon" src="images/paymentIcons/masterLogos_platform_stripe.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_stripe.png'">
 						</a>
-						 and
+						<span class="removeOnMobile"> and </span>
 						<a href="https://commerce.coinbase.com/?lang=en" target="_blank">
 							<img class="footerIcon" src="images/paymentIcons/masterLogos_platform_coinbase.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_platform_coinbase.png'">
 						</a>
-						gateway by
-						<a href="https://obisims.com">
+						<span class="removeOnMobile">designed by</span>
+						<a class="removeOnMobile" href="https://obisims.com">
 							<strong>obisims.com</strong>
-						</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-						<a href="https://obisims.com/" target="_blank">
-							<img class="footerIcon larger" src="images/paymentIcons/masterLogos_social_obisims.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_obisims.png'">
+						</a>&nbsp;<span class="removeOnMobile">|&nbsp;</span>
+						<a class="logo_obisims" href="https://obisims.com/" target="_blank">
+							<img class="footerIcon" src="images/paymentIcons/masterLogos_social_obisims.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_obisims.png'">
 						</a>
-						&nbsp;&nbsp;
-						<a href="https://open.spotify.com/user/12121388895?si=2NXLmZs_QQ6FQZNDfnUT1w" target="_blank">
-							<img class="footerIcon larger" src="images/paymentIcons/masterLogos_social_spotify.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_spotify.png'">
+						<span class="removeOnMobile">&nbsp;</span>
+						<a class="logo_spotify" href="https://open.spotify.com/user/12121388895?si=2NXLmZs_QQ6FQZNDfnUT1w" target="_blank">
+							<img class="footerIcon" src="images/paymentIcons/masterLogos_social_spotify.svg" onerror="this.onerror=null; this.src='images/paymentIcons/fallbacks/masterLogos_social_spotify.png'">
 						</a>
+						&nbsp;<span class="removeOnMobile">|&nbsp;</span>terms and conditions&nbsp;|&nbsp;credits
 					 </span>
 				</footer>	
 			</div>

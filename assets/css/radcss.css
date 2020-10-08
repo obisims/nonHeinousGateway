@@ -259,12 +259,25 @@ padding-top: 5px;
 
 #dynamoFooter span a img.footerIcon {
   height: 10px;
+  transition: all 0.3s ease;
   margin-bottom: -2px;
 }
+#dynamoFooter span a:hover {
+  transition: all 0.3s ease;
+  font-size: 110%;
+}
+#dynamoFooter span a img.footerIcon:hover {
+  filter: url(#obiBrandFilter-white);
+  height: 11px;
+  margin: 0px 0 -2px 0;
+
+}
+
 #dynamoFooter span a img.footerIcon.larger {
   height: 15px;
   margin-bottom: -5px;
 }
+
 
 .svg-icon svg {
   height:1em;
@@ -924,6 +937,16 @@ img.socialIconSet:hover {
   display: inline;
 }
 
+.payButton span span.logo_auspost img.footerIcon {
+  margin: 0px 0px -2px 1px;
+  height: 13px;
+} 
+.payButton span span img {
+  height: 16px;
+  margin: 0px 0px -3px 0px;
+  transition: all 0.3s ease;
+}
+
 @media screen and (max-width: 480px) {
   /* mobile button variation */
   #paymentOptions.hidePadding{
@@ -937,4 +960,25 @@ img.socialIconSet:hover {
     padding-top: 5px;
     
   }
+}
+
+
+.logo_obisims img.socialIconSet {
+  height: 20px;
+  margin: 0px 3px -4px 3px;
+  transition: all 0.3s ease;
+}
+.logo_obisims img.socialIconSet:hover {
+  height: 23px;
+  filter: url(#obiBrandFilter-white);
+  margin: 0px 3px -5px 3px;
+}
+#dynamoFooter span a.logo_obisims img.footerIcon {
+  height: 11px;
+  margin: 0px 0 -3px 0;
+  transition: all 0.3s ease;
+}
+#dynamoFooter span a.logo_obisims img.footerIcon:hover {
+  height: 13px;
+  margin: 0px 0 -3px 0;
 }
