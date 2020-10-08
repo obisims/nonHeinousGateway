@@ -98,9 +98,8 @@ function organiseHeights(){
 /*////////////////////////////////////////
 //////////////
 */////////////////////////////////////////
-
-var loadOutEverything_breaks = 70
-//var loadOutEverything_time = 0
+var loadOutEverything_breaks_BASE = 70
+var loadOutEverything_breaks = new Number(loadOutEverything_breaks_BASE)
 var loadOutEverything_timeCount = 1 
 
 function loadEverythingIn(){
@@ -112,6 +111,8 @@ function loadEverythingIn(){
     $('#landingScrollDownButton').removeClass('animate__animated animate__backOutUp')
     $('#landingScrollDownButton svg').fadeIn()
     $('#navAndMain').removeClass('animate__animated animate__backOutDown')
+    //loadOutEverything_breaks = new Number(loadOutEverything_breaks_BASE)
+    //loadOutEverything_timeCount = 1 
 }
 
 function loadOutEverythingtoUrl(url,ifNewWindow){
@@ -145,7 +146,8 @@ function loadOutEverythingtoUrl(url,ifNewWindow){
                             }else if(url){
                                 window.open(url)
                             }
-                            
+                            loadOutEverything_breaks = new Number(loadOutEverything_breaks_BASE)
+                            loadOutEverything_timeCount = 1 
                         }, loadOutEverything_breaks*loadOutEverything_timeCount);
                     }, loadOutEverything_breaks*loadOutEverything_timeCount);
                 }, loadOutEverything_breaks*loadOutEverything_timeCount);
