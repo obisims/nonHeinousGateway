@@ -212,7 +212,7 @@ $(document).on( 'scroll', function(){
      
             //if overscroll then
            // $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
-                var elem = '#dueTimer'
+               /* var elem = '#dueTimer'
                 $(elem).attr('slider-lock',true)
                 slider_DownElemToggle(elem,false)
                 setTimeout(function() {
@@ -220,7 +220,7 @@ $(document).on( 'scroll', function(){
                     $(elem).attr('slider-lock',false)
                     slider_DownElemToggle(elem,true)
                 },2000)
-                
+                */
             //});
         
         //stateSettings.status.deadSpace = 'full'
