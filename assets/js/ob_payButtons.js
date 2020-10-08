@@ -4,7 +4,7 @@
 
 // Handle any errors from Checkout
 var handleResult = function(result) {
-    loadOutEverythingtoUrl()
+   
     console.log('[stripe] handleResult',result);
    /* if (result.error) {
         console.log('[stripe] checkout error',result);
@@ -290,7 +290,8 @@ if(urlParams.coinbase_checkout){
                 }else{
                     //poliPay intergration
                     postSlackNotification_purchase_initiated(thisButton.paymentMode)
-                    window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');//poliPay_workflow()//window.open();//window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
+                    loadOutEverythingtoUrl(invoiceSettings.checkouts['Direct Debit'].url,true)
+                   // window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');//poliPay_workflow()//window.open();//window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
                 }
                 break;
             case 'Stripe':
@@ -315,7 +316,7 @@ if(urlParams.coinbase_checkout){
                 '&polipay_id='+encodeURI(urlParams.polipay_id)
                 
                // console.log('fakeurl',fakeURL)
-
+               loadOutEverythingtoUrl()
                 stripe.redirectToCheckout({
                     mode: 'payment',
                     lineItems: items,
@@ -331,7 +332,8 @@ if(urlParams.coinbase_checkout){
                 postSlackNotification_purchase_initiated(thisButton.paymentMode)
                 //window.location.href = invoiceSettings.checkouts['Coinbase'].url //"https://crypto.obisims.com/" + invoiceSettings.invoice.NUM;
                 //loadOutEverythingtoUrl(invoiceSettings.checkouts['Coinbase'].url,true)
-                window.open(invoiceSettings.checkouts['Coinbase'].url , '_blank');
+                //window.open(invoiceSettings.checkouts['Coinbase'].url , '_blank');
+                loadOutEverythingtoUrl(invoiceSettings.checkouts['Coinbase'].url,true)
                 //https://commerce.coinbase.com/charges/K7MJAEP3
                 break;
             //   default:

@@ -103,7 +103,16 @@ var loadOutEverything_breaks = 70
 //var loadOutEverything_time = 0
 var loadOutEverything_timeCount = 1 
 
-
+function loadEverythingIn(){
+    $('#landingFooterObi #wrapper_landingFooterObi_mobile').removeClass('animate__animated animate__backOutDown')
+    $('#landingFooterObi span a,#landingFooterObi span').fadeIn()
+    $('#landingFooterObi').fadeIn()
+    $('#paymentOptions li').removeClass('animate__animated animate__backOutDown')
+    $('#header').removeClass('animate__animated animate__backOutUp')
+    $('#landingScrollDownButton').removeClass('animate__animated animate__backOutUp')
+    $('#landingScrollDownButton svg').fadeIn()
+    $('#navAndMain').removeClass('animate__animated animate__backOutDown')
+}
 
 function loadOutEverythingtoUrl(url,ifNewWindow){
     
@@ -130,6 +139,9 @@ function loadOutEverythingtoUrl(url,ifNewWindow){
                             loadOutEverything_timeCount++
                             if(url&&ifNewWindow==true){
                                 window.open(url, '_blank')
+                                setTimeout(function(){
+                                    loadEverythingIn()
+                                },2000)
                             }else if(url){
                                 window.open(url)
                             }
