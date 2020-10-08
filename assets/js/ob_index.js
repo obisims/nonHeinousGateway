@@ -1270,9 +1270,10 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
     stateSettings.status.isMobile = true
     $('.removeOnMobile').remove()
-    
+    $('.pay_instructions_left p.footnote').html($('.pay_instructions_left p.footnote sup'))
 }else{
     $('.removeOnDesktop:not(.ifNoPoliPay)').remove()
+    
 }
 
 

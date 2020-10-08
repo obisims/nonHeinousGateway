@@ -854,7 +854,7 @@ img.socialIconSet:hover {
   }
   #pay_instructions_wrapper .pay_instructions_left b{
 
-    display: block;
+   /* display: block;*/
   }
 }
 @media screen and (max-height: 650px){
@@ -961,7 +961,16 @@ img.socialIconSet:hover {
     
   }
 }
-
+div#payInstructions p {
+ /* max-width: 60vw;*/
+  max-width: 200px;
+  margin: 0 0px 0px 0;
+  padding: 0px 0px 10px 0;
+  line-height: 1.5;
+}
+p.footnote {
+  line-height: 1 !important;
+}
 
 .logo_obisims img.socialIconSet {
   height: 20px;
@@ -981,4 +990,8 @@ img.socialIconSet:hover {
 #dynamoFooter span a.logo_obisims img.footerIcon:hover {
   height: 13px;
   margin: 0px 0 -3px 0;
+}
+
+.pay_instructions_right {
+  min-width: max-content;
 }
