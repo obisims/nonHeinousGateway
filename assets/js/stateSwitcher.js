@@ -107,10 +107,13 @@ function loadEverythingIn(){
     $('#landingFooterObi span a,#landingFooterObi span').fadeIn()
     $('#landingFooterObi').fadeIn()
     $('#paymentOptions li').removeClass('animate__animated animate__backOutDown')
+    
     $('#header').removeClass('animate__animated animate__backOutUp')
     $('#landingScrollDownButton').removeClass('animate__animated animate__backOutUp')
     $('#landingScrollDownButton svg').fadeIn()
     $('#navAndMain').removeClass('animate__animated animate__backOutDown')
+
+    $('#duotone').removeClass('exitMode')
     //loadOutEverything_breaks = new Number(loadOutEverything_breaks_BASE)
     //loadOutEverything_timeCount = 1 
 }
@@ -119,6 +122,7 @@ function loadOutEverythingtoUrl(url,ifNewWindow){
     
     setTimeout(function(){ 
         loadOutEverything_timeCount++
+        $('#duotone').addClass('exitMode')
         //load out landing menu buttons
         $('#landingFooterObi #wrapper_landingFooterObi_mobile').addClass('animate__animated animate__backOutDown')// animate__delay-2s
         setTimeout(function(){  
@@ -130,6 +134,7 @@ function loadOutEverythingtoUrl(url,ifNewWindow){
                 setTimeout(function(){  
                     loadOutEverything_timeCount++
                     $('#paymentOptions li').addClass('animate__animated animate__backOutDown')
+                    
                     setTimeout(function(){  
                         loadOutEverything_timeCount++
                         $('#header').addClass('animate__animated animate__backOutUp')
