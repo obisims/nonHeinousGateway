@@ -289,7 +289,7 @@ if(urlParams.coinbase_checkout){
                 }else{
                     //poliPay intergration
                     postSlackNotification_purchase_initiated(thisButton.paymentMode)
-                    poliPay_workflow()//window.open();//window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
+                    window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');//poliPay_workflow()//window.open();//window.open(invoiceSettings.checkouts['Direct Debit'].url , '_blank');
                 }
                 break;
             case 'Stripe':
@@ -512,10 +512,10 @@ function poliPay_initiateTransaction(settings){
       "CurrencyCode":"AUD",
       "MerchantReference":settings.NUM,
       "MerchantHomepageURL":"https://obisims.com",
-      "SuccessURL":"http://pay.obisims.com/"+settings.NUM+"?response=Success"+paramsToPass,
-      "FailureURL":"http://pay.obisims.com/"+settings.NUM+"?response=Error"+paramsToPass,
-      "CancellationURL":"http://pay.obisims.com/"+settings.NUM+"?response=Cancel"+paramsToPass,
-      "NotificationURL":"http://pay.obisims.com/"
+      "SuccessURL":"https://invoice.obisims.com/"+settings.NUM+"?response=Success"+paramsToPass,
+      "FailureURL":"https://invoice.obisims.com/"+settings.NUM+"?response=Error"+paramsToPass,
+      "CancellationURL":"https://invoice.obisims.com/"+settings.NUM+"?response=Cancel"+paramsToPass,
+      "NotificationURL":"https://invoice.obisims.com/"
     }
     /*var poliPayOptions = {
       // mandatory
