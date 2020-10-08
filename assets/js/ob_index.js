@@ -1268,6 +1268,9 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
     stateSettings.status.isMobile = true
     $('.removeOnMobile').remove()
+    
+}else{
+    $('.removeOnDesktop').remove()
 }
 
 
