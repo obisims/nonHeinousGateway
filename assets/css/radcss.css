@@ -32,10 +32,13 @@ html{
     
     color:var(--google-grey);
 }
-body,html{
-    background-color:#291a2b; 
+
+html{
+  background-color:#291a2b; 
 }
-  
+/*body{
+  background-color:#291a2b; 
+}*/  
 #navAndMain{
 
    /* position: relative;*/

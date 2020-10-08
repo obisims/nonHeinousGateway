@@ -322,7 +322,7 @@ function shrinkDeadSpace(toShrink){
             }else{
                 console.log('[shrinkDeadSpace][iFrame][load] iFrame already loaded')
             }
-           
+        //    document.body.style.backgroundColor = "red";
         })	
         deadSpaceShrunk==true
         stateSettings.status.deadSpace = 'shrunk'
@@ -366,6 +366,7 @@ function shrinkDeadSpace(toShrink){
             // Do something after the animation
             console.log('iframe backOutDown')
             if(isMobile==true&&deadSpaceShrunk==false)window.scrollTo(0,1)
+          //  document.body.style.backgroundColor = "blue";
         })	
         deadSpaceShrunk==false
         stateSettings.status.deadSpace = 'full'
