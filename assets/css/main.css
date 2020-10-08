@@ -1913,7 +1913,7 @@ input, select, textarea {
 			input[type="button"],
 			button,
 			.button {
-				min-width: 0;
+		/*		min-width: 0;*/
 			}
 
 		}

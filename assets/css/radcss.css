@@ -956,6 +956,10 @@ img.socialIconSet:hover {
     display:flex;
     justify-content: center;
   }
+  button.payButton, .button.payButton{
+    width: 80%;
+
+  }
   #paymentOptions.hidePadding li .buttonPayFooter{
     padding-top: 5px;
     
