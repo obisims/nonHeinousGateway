@@ -1021,3 +1021,7 @@ div#payInstructions p.footnote {
 .pay_instructions_right {
   min-width: max-content;
 }
+#SpotifyCurrentlyPlaying{
+
+  font-size: 80%;
+}
