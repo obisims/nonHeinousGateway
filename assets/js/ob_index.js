@@ -763,9 +763,10 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     /* Load BG at end */
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
-
+   // Will execute myCallback every 10  seconds /0.5/
+var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
         //Spotify now playingf intergration
-    spotifyCurrentPlaying()
+    
   
     //var $payButtons = $('.button.payButton');
     //var $payButtons = $('ul#paymentOptions li .button.payButton')//.fadeIn()
@@ -994,9 +995,13 @@ var invoiceSettings = {
         PROGRESS:0,
     },
     extensions:{
+        spotify:{
+            listeningTo:{
+                id:'66cbc0d7e5264f54bc4309341a27c095',
+            }
+        },
         spotifyCurrentPlaying:{
-            apikey:'5a2c8393-b634-4d5a-b162-0a718c80ebb7',
-            url:'https://nowplaying-api.tinyrobot.co/playbackstate?key=5a2c8393-b634-4d5a-b162-0a718c80ebb7'
+            url:'https://script.googleusercontent.com/a/macros/obisims.com/echo?user_content_key=GnQvR5WDEGykUttChBqdqQt9TYkGEZ5C8oT6cslqP4QIDS_9-dQeuM-Tby-Y7lKaeOsxkMWG1rRyzlvwg-DCA8dxAkru4yM1m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP_QkV0V1kJAiVXkuoiB02MygW8HUhyC9CoJH6aBFeEr3duLZzAkVx4r3jBSvxrn0Qmia68HEmp5NvE0LegVgwvSJRZu91jXPHdcy6pr-Oj0FQ&lib=MlE-Q0HeYsdJZt-PpqTlQ6fl5sotwqYbQ'
         }
     },
     checkouts:{
@@ -1324,31 +1329,43 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 function spotifyCurrentPlaying() {
     var apiUrl = invoiceSettings.extensions.spotifyCurrentPlaying.url
-    console.log('[spotifyCurrentPlaying]','initiating...',apiUrl)
+    console.log('[spotifyCurrentPlaying]','initiating...')
  // Your code here
    // Will execute myCallback every 10  seconds /0.5/
 //var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
 
 //console.log('spotifyCurrentPlaying starting',intervalID)
 //$('#SpotifyCurrentlyPlaying').html('Now Playing: '+artist)
-let url = apiUrl;
-
+/*
 fetch(url)
 .then(res => res.json())
 .then((out) => {
   console.log('Checkout this JSON! ', out);
 })
 .catch(err => { throw err });
-/*
+*/
  $.getJSON(apiUrl, function(data) {
     console.log('[spotifyCurrentPlaying]','data',data)
     //var text = `Date: ${data.date}<br>
     //            Time: ${data.time}<br>
     //            Unix time: ${data.milliseconds_since_epoch}`
-                
+    //construct html
+    if(data.is_playing==false)return
+
+    var spotifyData = {
+        context:data.context,
+        currently_playing:'',
+        is_playing:data.is_playing,
+        artistName:data.item.artists[0].name,
+        trackName:data.item.name,
+        progress_ms:data.progress_ms,
+        duration_ms:data.item.duration_ms
+      }
+
+    $('#SpotifyCurrentlyPlaying').html('<b>Now Playing</b>: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2))
 
     //$(".mypanel").html(text);
-    });*/
+    });
 
 }
 
