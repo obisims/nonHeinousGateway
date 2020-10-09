@@ -1356,13 +1356,8 @@ fetch(url)
     //            Time: ${data.time}<br>
     //            Unix time: ${data.milliseconds_since_epoch}`
     //construct html
-    if(data.is_playing==false){
-        console.log('[spotifyCurrentPlaying] not playing',data) 
-    }else{
-        data = JSON.parse(data)
-        
-        pushSpotifyIntoDude(data)
-    }
+    pushSpotifyIntoDude(data)
+   
 
    
     //$(".mypanel").html(text);
@@ -1370,9 +1365,13 @@ fetch(url)
 
 }
 function pushSpotifyIntoDude(data){
+    if(data.is_playing===false){
+        console.log('[spotifyCurrentPlaying] not playing',data)
+        return 
+    }
     var spotifyData = {
         context:data.context,
-        is_playing:data.is_playing,
+       // is_playing:data.is_playing,
         artistName:data.item.artists[0].name,
         trackName:data.item.name,
         progress_ms:data.progress_ms,
@@ -1383,15 +1382,15 @@ function pushSpotifyIntoDude(data){
     
     //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
     var progressIn = (percentagePlayed*10).toFixed(0) // 2
-    var bar_prefix_count = progressIn-1
-    var bar_suffix_count = 10-progressIn
+    var bar_prefix_count = (new Number(progressIn))-1
+    var bar_suffix_count = 10-(new Number(progressIn))
     var bar_prefix = '━'
     var bar_suffix = '─'
     
     var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
-    //$('#SpotifyCurrentlyPlaying').html
+    $('#SpotifyCurrentlyPlaying').html
     console.log('pushing in ',constructPlaybackBar,spotifyData)
-    $('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
+    //$('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
 
 
 }
