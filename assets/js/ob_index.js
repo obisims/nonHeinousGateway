@@ -1335,7 +1335,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 function spotifyCurrentPlaying() {
     var apiUrl = invoiceSettings.extensions.spotifyCurrentPlaying.url
-    console.log('[spotifyCurrentPlaying] v0.3','initiating...')
+    console.log('[spotifyCurrentPlaying] v0.4','initiating...')
  // Your code here
    // Will execute myCallback every 10  seconds /0.5/
 //var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
@@ -1389,7 +1389,9 @@ function pushSpotifyIntoDude(data){
     
     var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
     console.log('pushing in ',constructPlaybackBar,spotifyData)
-    $('#SpotifyCurrentlyPlaying').html(constructPlaybackBar)
+    var constructListener = `${spotifyData.trackName} - ${spotifyData.artistName} `+constructPlaybackBar
+
+    $('#SpotifyCurrentlyPlaying').html(constructListener)
     //$('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
 
 
