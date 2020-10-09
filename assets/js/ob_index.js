@@ -764,6 +764,9 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
 
+        //Spotify now playingf intergration
+    spotifyCurrentPlaying()
+  
     //var $payButtons = $('.button.payButton');
     //var $payButtons = $('ul#paymentOptions li .button.payButton')//.fadeIn()
     //$payButtons.each(function() {
@@ -989,6 +992,12 @@ var invoiceSettings = {
         ISSUED:moment(urlParams.date_issued,'DDMMYYYY'),
         DUE:moment(urlParams.date_due,'DDMMYYYY'),
         PROGRESS:0,
+    },
+    extensions:{
+        spotifyCurrentPlaying:{
+            apikey:'5a2c8393-b634-4d5a-b162-0a718c80ebb7',
+            url:'https://nowplaying-api.tinyrobot.co/playbackstate?key=5a2c8393-b634-4d5a-b162-0a718c80ebb7'
+        }
     },
     checkouts:{
         'Stripe':{
@@ -1304,5 +1313,49 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 /*$(document.body).hammer().on('release', function(ev){
     alert(ev.gesture);
 });*/
+/////////////////////////////////////////
+//////////////////////////////////////////
+
+
+/*////////////////////////////////////////////////////////////////////
+//////////////////////////SPOTIFY CURRENT PLAYING
+*/////////////////////////////////////////////////////////////////////
+
+
+function spotifyCurrentPlaying() {
+    var apiUrl = invoiceSettings.extensions.spotifyCurrentPlaying.url
+    console.log('[spotifyCurrentPlaying]','initiating...',apiUrl)
+ // Your code here
+   // Will execute myCallback every 10  seconds /0.5/
+//var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
+
+//console.log('spotifyCurrentPlaying starting',intervalID)
+//$('#SpotifyCurrentlyPlaying').html('Now Playing: '+artist)
+let url = apiUrl;
+
+fetch(url)
+.then(res => res.json())
+.then((out) => {
+  console.log('Checkout this JSON! ', out);
+})
+.catch(err => { throw err });
+/*
+ $.getJSON(apiUrl, function(data) {
+    console.log('[spotifyCurrentPlaying]','data',data)
+    //var text = `Date: ${data.date}<br>
+    //            Time: ${data.time}<br>
+    //            Unix time: ${data.milliseconds_since_epoch}`
+                
+
+    //$(".mypanel").html(text);
+    });*/
+
+}
+
+
+
+
+
+
 /////////////////////////////////////////
 //////////////////////////////////////////
