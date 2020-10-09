@@ -273,7 +273,12 @@ $(document).ready(function() {
 
     console.warn('[$(document).ready]','version 0.215')
 
-
+ // Will execute myCallback every 10  seconds /0.5/
+ const interval = setInterval(function() {
+    console.log('spotifyCurrentPlaying repeating')
+     // method to be executed;
+     spotifyCurrentPlaying()
+ }, 5000);
 
 
 
@@ -763,12 +768,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     /* Load BG at end */
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
-   // Will execute myCallback every 10  seconds /0.5/
-   const interval = setInterval(function() {
-       console.log('spotifyCurrentPlaying repeating')
-        // method to be executed;
-        spotifyCurrentPlaying()
-    }, 5000);
+  
     
   //  clearInterval(interval);
         //Spotify now playingf intergration
@@ -1398,7 +1398,7 @@ function pushSpotifyIntoDude(data){
     
     var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
     console.log('pushing in ',constructPlaybackBar,spotifyData)
-    var constructListener = ` is listening to <a href="${spotifyData.track.url}" target="_blank">${spotifyData.track.name}</a> - <a href="${spotifyData.artist.url}" target="_blank">${spotifyData.artist.name}</a> `+constructPlaybackBar
+    var constructListener = ` is listening to <a href="${spotifyData.track.url}" target="_blank">${spotifyData.track.name}</a> by <a href="${spotifyData.artist.url}" target="_blank">${spotifyData.artist.name}</a>  `+constructPlaybackBar
 
     $('#SpotifyCurrentlyPlaying').html(constructListener)
     //$('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
