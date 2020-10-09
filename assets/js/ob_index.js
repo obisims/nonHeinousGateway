@@ -764,7 +764,13 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
     var loadBackground = loadBackgroundGif(all_backgrounds.lineart)
 
    // Will execute myCallback every 10  seconds /0.5/
-var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
+   const interval = setInterval(function() {
+       console.log('spotifyCurrentPlaying repeating')
+        // method to be executed;
+        spotifyCurrentPlaying()
+    }, 5000);
+    
+  //  clearInterval(interval);
         //Spotify now playingf intergration
     
   
@@ -1350,20 +1356,25 @@ fetch(url)
     //            Time: ${data.time}<br>
     //            Unix time: ${data.milliseconds_since_epoch}`
     //construct html
-    if(data.is_playing==false)return
+    if(data.is_playing==false){
 
-    var spotifyData = {
-        context:data.context,
-        currently_playing:'',
-        is_playing:data.is_playing,
-        artistName:data.item.artists[0].name,
-        trackName:data.item.name,
-        progress_ms:data.progress_ms,
-        duration_ms:data.item.duration_ms
-      }
+    }else{
+        /*
+        var spotifyData = {
+            context:data.context,
+            currently_playing:'',
+            is_playing:data.is_playing,
+            artistName:data.item.artists[0].name,
+            trackName:data.item.name,
+            progress_ms:data.progress_ms,
+            duration_ms:data.item.duration_ms
+          }
+    */
+        $('#SpotifyCurrentlyPlaying').html('<b>Now Playing</b>: '+data.item.name+' - '+data.item.artists[0].name)//+' '+((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2))
+    
+    }
 
-    $('#SpotifyCurrentlyPlaying').html('<b>Now Playing</b>: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2))
-
+   
     //$(".mypanel").html(text);
     });
 
