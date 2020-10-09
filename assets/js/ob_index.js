@@ -1335,7 +1335,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 function spotifyCurrentPlaying() {
     var apiUrl = invoiceSettings.extensions.spotifyCurrentPlaying.url
-    console.log('[spotifyCurrentPlaying]','initiating...')
+    console.log('[spotifyCurrentPlaying] v0.2','initiating...')
  // Your code here
    // Will execute myCallback every 10  seconds /0.5/
 //var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
@@ -1361,28 +1361,7 @@ fetch(url)
     }else{
         data = JSON.parse(data)
         
-        var spotifyData = {
-            context:data.context,
-            is_playing:data.is_playing,
-            artistName:data.item.artists[0].name,
-            trackName:data.item.name,
-            progress_ms:data.progress_ms,
-            duration_ms:data.item.duration_ms
-          }
-       
-        var percentagePlayed = spotifyData.progress_ms/spotifyData.duration_ms // 0.23 .. 
-        
-        //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
-        var thing = (percentagePlayed*10).toFixed(0) // 2
-        var bar_prefix_count = thing-1
-        var bar_suffix_count = 10-thing
-        var bar_prefix = '━'
-        var bar_suffix = '─'
-        
-        var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
-
-        $('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
-    
+        pushSpotifyIntoDude(data)
     }
 
    
@@ -1390,8 +1369,32 @@ fetch(url)
     });
 
 }
+function pushSpotifyIntoDude(data){
+    var spotifyData = {
+        context:data.context,
+        is_playing:data.is_playing,
+        artistName:data.item.artists[0].name,
+        trackName:data.item.name,
+        progress_ms:data.progress_ms,
+        duration_ms:data.item.duration_ms
+      }
+   
+    var percentagePlayed = spotifyData.progress_ms/spotifyData.duration_ms // 0.23 .. 
+    
+    //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
+    var progressIn = (percentagePlayed*10).toFixed(0) // 2
+    var bar_prefix_count = progressIn-1
+    var bar_suffix_count = 10-progressIn
+    var bar_prefix = '━'
+    var bar_suffix = '─'
+    
+    var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
+    //$('#SpotifyCurrentlyPlaying').html
+    console.log('pushing in ',constructPlaybackBar,spotifyData)
+    $('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
 
 
+}
 
 
 
