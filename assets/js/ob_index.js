@@ -1363,7 +1363,6 @@ fetch(url)
         
         var spotifyData = {
             context:data.context,
-            currently_playing:'',
             is_playing:data.is_playing,
             artistName:data.item.artists[0].name,
             trackName:data.item.name,
@@ -1371,7 +1370,7 @@ fetch(url)
             duration_ms:data.item.duration_ms
           }
        
-        var percentagePlayed = progress_ms/duration_ms // 0.23 .. 
+        var percentagePlayed = spotifyData.progress_ms/spotifyData.duration_ms // 0.23 .. 
         
         //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
         var thing = (percentagePlayed*10).toFixed(0) // 2
