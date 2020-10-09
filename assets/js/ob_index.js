@@ -1360,7 +1360,7 @@ fetch(url)
         console.log('[spotifyCurrentPlaying] not playing',data) 
     }else{
         data = JSON.parse(data)
-        /*
+        
         var spotifyData = {
             context:data.context,
             currently_playing:'',
@@ -1370,8 +1370,19 @@ fetch(url)
             progress_ms:data.progress_ms,
             duration_ms:data.item.duration_ms
           }
-    */
-        $('#SpotifyCurrentlyPlaying').html('<b>Now Playing</b>: '+data.item.name+' - '+data.item.artists[0].name)//+' '+((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2))
+       
+        var percentagePlayed = progress_ms/duration_ms // 0.23 .. 
+        
+        //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
+        var thing = (percentagePlayed*10).toFixed(0) // 2
+        var bar_prefix_count = thing-1
+        var bar_suffix_count = 10-thing
+        var bar_prefix = '━'
+        var bar_suffix = '─'
+        
+        var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
+
+        $('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
     
     }
 
