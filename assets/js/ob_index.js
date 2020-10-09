@@ -1357,8 +1357,9 @@ fetch(url)
     //            Unix time: ${data.milliseconds_since_epoch}`
     //construct html
     if(data.is_playing==false){
-
+        console.log('[spotifyCurrentPlaying] not playing',data) 
     }else{
+        data = JSON.parse(data)
         /*
         var spotifyData = {
             context:data.context,
