@@ -1087,7 +1087,7 @@ var invoiceSettings = {
             }
         },
         spotifyCurrentPlaying:{
-            url:'https://script.googleusercontent.com/a/macros/obisims.com/echo?user_content_key=GnQvR5WDEGykUttChBqdqQt9TYkGEZ5C8oT6cslqP4QIDS_9-dQeuM-Tby-Y7lKaeOsxkMWG1rRyzlvwg-DCA8dxAkru4yM1m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP_QkV0V1kJAiVXkuoiB02MygW8HUhyC9CoJH6aBFeEr3duLZzAkVx4r3jBSvxrn0Qmia68HEmp5NvE0LegVgwvSJRZu91jXPHdcy6pr-Oj0FQ&lib=MlE-Q0HeYsdJZt-PpqTlQ6fl5sotwqYbQ'
+            url:'https://script.google.com/macros/s/AKfycbx80aaVAqsIlN3SB6641ggfWurbVNX2X1zvCQJUDOXen4KtOok/exec'
         }
     },
     checkouts:{
