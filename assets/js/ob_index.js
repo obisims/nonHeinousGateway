@@ -1014,6 +1014,8 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 /* GLOBAL SETTINGS */
 var urlParams = getParams(window.location.href);//encodeURI when creating
+var obiAPI_params = new Object();
+    ob_api(urlParams.inv)
 
 console.log('[urlParams] grabbing',urlParams)
 /*
@@ -1088,6 +1090,9 @@ var invoiceSettings = {
         },
         spotifyCurrentPlaying:{
             url:'https://script.google.com/macros/s/AKfycbx80aaVAqsIlN3SB6641ggfWurbVNX2X1zvCQJUDOXen4KtOok/exec'
+        },
+        ob_api:{
+            url:'https://script.google.com/macros/s/AKfycbxhNWLM3sijTGy-L_-YrkVINYblPMdyaFlnnEbleFYf-apslLgs/exec'//?inv="THX-1138"
         }
     },
     checkouts:{
