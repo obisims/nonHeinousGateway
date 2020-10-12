@@ -1016,8 +1016,13 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 var urlParams = getParams(window.location.href);//encodeURI when creating
 var obiAPI_params = new Object();
     ob_api(urlParams.inv)
+    //OVERRITE URL PARAMS WITH API
+  
 
-console.log('[urlParams] grabbing',urlParams)
+
+    console.log('[urlParams] obiAPI_params',obiAPI_params)
+    
+    console.log('[urlParams] grabbing',urlParams)
 /*
 urlParam input
     inv_num = 'xxx-7696'
@@ -1057,29 +1062,42 @@ $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
      
    })
    
+   if(obiAPI_params['INV NUM']){
+    console.log('[ob_api]','obiAPI_params["INV NUM"] present',obiAPI_params)
+    /*  DUE: "22-10-2020"
+        ISSUED: "08-10-2020"
+        NUM: 1167
+        contact: {CLIENT: "Test Dudes Pty Ltd", CLIENT ID: 0, ATTENT ID: "Obi S [0] - TestDude", ATTENT EMAIL: "yomoma@gmail.com"}
+        docs: {ROW NUMBER: 7, FILE URL: "https://docs.google.com/document/d/19boC4iOwOU_YBl_YXIBe-H7aL-JVV1C6Ej3NpI-8mWA/edit?usp=drivesdk", FILE ID: "19boC4iOwOU_YBl_YXIBe-H7aL-JVV1C6Ej3NpI-8mWA"}
+        info: {PROJECT ID: 3, PROJECT: "Test Project", INV UNIQ ID: "f0397447-24af-4672-9e30-db9104392ca7"}
+        pay: {TOTAL: 50, STATUS: "TEST", PAID ON: "Invalid date"}
+    */
+   
+    }
+
 var invoiceSettings = {
     DOMAIN:(window.location.origin + window.location.pathname||'https://invoice.obisims.com/'),
     payStatus:{
-        STATUS:'UNPAID',
-        METHOD:'',
-        AMOUNT:0,
-        TIME:'',
-        RECEIPT:''
+        STATUS:obiAPI_params['STATUS']||'UNPAID',
+        METHOD:obiAPI_params['PAID METHOD'],
+        AMOUNT:obiAPI_params['TOTAL'],
+        TIME:obiAPI_params['PAID UPDATED'],
+        RECEIPT:obiAPI_params['PAID RECEIPT']
     },
     user:{
         ipInfo:''
     },
     invoice:{
-        NUM:urlParams.inv,
-        TOTAL:(urlParams.inv_total||0),
-        CLIENT_NAME:urlParams.client_name,
-        PROJECT_NAME:urlParams.project_name,
-        DRIVE_ID:urlParams.drive_id,//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
+        NUM:obiAPI_params['INV NUM']||urlParams.inv,
+        TOTAL:obiAPI_params['TOTAL']||(urlParams.inv_total||0),
+        CLIENT_NAME:obiAPI_params['CLIENT']||urlParams.client_name,
+        PROJECT_NAME:obiAPI_params['PROJECT']||urlParams.project_name,
+        DRIVE_ID:obiAPI_params['DRIVE ID']||urlParams.drive_id,//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
         DRIVE_IFRAME_URL:'',//'https://docs.google.com/viewer?srcid=1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
     },
     date:{
-        ISSUED:moment(urlParams.date_issued,'DDMMYYYY'),
-        DUE:moment(urlParams.date_due,'DDMMYYYY'),
+        ISSUED:moment(obiAPI_params['ISSUED'],'DD-MM-YYYY')||moment(urlParams.date_issued,'DDMMYYYY'),
+        DUE:moment(obiAPI_params['DUE'],'DD-MM-YYYY')||moment(urlParams.date_due,'DDMMYYYY'),
         PROGRESS:0,
     },
     extensions:{
@@ -1097,7 +1115,7 @@ var invoiceSettings = {
     },
     checkouts:{
         'Stripe':{
-            price_id:urlParams.stripe_price_id,
+            price_id:obiAPI_params['STRIPE CHECKOUT ID']||urlParams.stripe_price_id,
             //  api:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
             PUBLISHABLE_KEY:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
             surcharge:'1.75% + $0.30 surch'
@@ -1105,16 +1123,17 @@ var invoiceSettings = {
         'Coinbase':{
             price_id:'PRICE_ID needs to be grabbed',
             gateway:'https://commerce.coinbase.com/charges/',
-            url:"https://crypto.obisims.com/" + (urlParams.inv||'THX-1184'),
+            url:obiAPI_params['CRYPTO CHECKOUT']||"https://crypto.obisims.com/" + (urlParams.inv||'THX-1184'),
             surcharge:'0% surcharge'
            // url:"https://crypto.obisims.com/"+INVNUM
         },
         'Direct Debit':{
             price_id:uuidv4(),
+            id:obiAPI_params['POLIPAY ID']||'',
             api:'https://poliapi.apac.paywithpoli.com/api',
             surcharge:'0% surcharge',
-            url:"https://poli.to/"+urlParams.polipay_id,
-            apikey:'UzYxMDUyMzQ6NXIhQVBeOHQ5aSQ=',
+            url:"https://poli.to/"+obiAPI_params['POLIPAY ID']||"https://poli.to/"+urlParams.polipay_id||'',
+            apikey:'UzYxMDUyMzQ6NXIhQVBeOHQ5aSQ=',//poli
             data:{
                 /*Docs: http://www.polipaymentdeveloper.com/doku.php
                 Merchant Url: https://consoles.apac.paywithpoli.com */
