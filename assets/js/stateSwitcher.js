@@ -185,6 +185,61 @@ function loadOutEverythingtoUrl(url,ifNewWindow){
 
 
 
+    /* HOVER ELEM TOGGLE ACTION */
+    function slider_DownElemToggle(elem,override){
+        overriders = {
+            //flip the override bc it'll be acting as state
+            true:'false',
+            false:'true'
+        }
+        override = overriders[override]
+        /* variables */
+        var $elem = $(elem)
+        var slider_state = $elem.attr('slider-show')
+        var slider_lock = $elem.attr('slider-lock')
+        if(!slider_state){
+           $elem.attr('slider-show',false)
+           slider_state = $(elem).attr('slider-show')// switch to fresh $
+        }
+        if(!slider_lock){
+           $elem.attr('slider-lock',false)
+           slider_lock = $(elem).attr('slider-lock') // switch to fresh $ 
+        }
+        console.log('[slideDownElemToggle] started','state',{state:slider_state,lock:slider_lock},$elem)
+       /* check state */
+      //if(slider_state==true){console.log('[slideDownElemToggle] BLOCKED','initial check state ',slider_state); return }
+        /* check lock */
+        if(slider_lock==true){
+            console.log('[slideDownElemToggle] BLOCKED','initial check lock',slider_lock);
+            return
+           }
+        /* !run the fucking toggle! */
+        var switchRunner = override||slider_state
+        console.log('[slideDownElemToggle] switch',switchRunner)
+        switch(switchRunner) {
+           case 'true':
+               /* if state is shown */
+               //alert('hide due date')
+               //hideDueDateString(elem)
+               $elem.slideDown()
+               $elem.attr('slider-state',false)
+               
+             break;
+           case 'false':
+               /* if state is hidden */
+              // alert('show due date')
+               $elem.slideUp()
+               $elem.attr('slider-state',true)
+              // showDueDateString(elem)
+             break;
+           default:
+             // code block
+             //console.log('[slidData CLICK] BLOCK slidData',slidData)
+         }
+        //
+        //return $(elem).attr('slider-show')
+    }
+
 
 //////////////////////////////////////////
 //////////////////////////////////////////

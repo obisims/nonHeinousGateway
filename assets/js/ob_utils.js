@@ -1,4 +1,48 @@
 
+/* DUE DATE TIMER STUFF HERE */
+
+function dueTimer_kickStart(daysUntilDue,nowDate){
+	return dueTimer(moment(nowDate||moment()).add(daysUntilDue||14,'days'))//,time_now
+}//.toLowerCase()
+function dueTimer(dueDate,nowTime){
+	var prefix = 'Due '
+	var response = prefix
+	var nowDate = nowTime||moment()
+	var daysUntilDue = dueDate.diff(nowDate,'days')
+	//console.log(daysUntilDue)	
+	if(daysUntilDue>0){
+		if(daysUntilDue==0){//Day of
+			response = prefix+'Today'
+		}else if(daysUntilDue==1){//Day before
+			response = prefix+'Tomorrow'
+		}else if(daysUntilDue<5){//Last couple of days // Due Sunday
+			response = prefix+''+moment(dueDate).format('dddd')
+		}else if(daysUntilDue<7){// Last Week // 
+			response = prefix+' this Week'
+		}else if(daysUntilDue==7){// Exactly a week off
+			response = prefix+'in a Week'
+		}else if(daysUntilDue<13){// Under 2 weeks
+			response = prefix+'next Week'
+		}else if(daysUntilDue<=14){// exactly 2 weeks
+			response = prefix+'in a Fortnight'
+		}else{// over 2 weeks
+			response = prefix+'in more than a Fortnight'
+		}
+	}else{
+		//minus days
+		response = dueDate.calendar(nowDate,{
+			sameDay: '[Today]',
+			nextDay: '[Tomorrow]',
+			nextWeek: "dddd [the] Do",//'dddd'
+			lastDay: '[Yesterday]',
+			lastWeek: '[Last] dddd',
+			sameElse: "ddd Do [of] MMM 'YY",//ddd Do MMM 'YY ///'dd - MM - YYYY'
+		})
+	}
+return response//+ ' | '+daysUntilDue
+}
+
+
 function make_base_auth(user, password) {
   var tok = user + ':' + password;
   var hash = btoa(tok);

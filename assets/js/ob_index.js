@@ -64,281 +64,10 @@ index functions
 
 
 
-/*////////////////////////////////////////////////////////////////////
-//////////////////////////SPOTIFY CURRENT PLAYING
-*/////////////////////////////////////////////////////////////////////
-
-
-function spotifyCurrentPlaying() {
-    var apiUrl = invoiceSettings.extensions.spotifyCurrentPlaying.url
-    console.log('[spotifyCurrentPlaying] v0.6','initiating...')
- // Your code here
-   // Will execute myCallback every 10  seconds /0.5/
-//var intervalID = window.setInterval(spotifyCurrentPlaying(), 10000);
-
-//console.log('spotifyCurrentPlaying starting',intervalID)
-//$('#SpotifyCurrentlyPlaying').html('Now Playing: '+artist)
-/*
-fetch(url)
-.then(res => res.json())
-.then((out) => {
-  console.log('Checkout this JSON! ', out);
-})
-.catch(err => { throw err });
-*/
- $.getJSON(apiUrl, function(data) {
-    console.log('[spotifyCurrentPlaying]','data',data)
-    //var text = `Date: ${data.date}<br>
-    //            Time: ${data.time}<br>
-    //            Unix time: ${data.milliseconds_since_epoch}`
-    //construct html
-    pushSpotifyIntoDude(data)
-   
-
-   
-    //$(".mypanel").html(text);
-    });
-
-}
-function pushSpotifyIntoDude(data){
-    if(data.is_playing===false){
-        console.log('[spotifyCurrentPlaying] not playing',data)
-        $('#SpotifyCurrentlyPlaying').html('')
-        return 
-    }
-    var spotifyData = {
-        context:data.context,
-       // is_playing:data.is_playing,
-        artistName:data.item.artists[0].name,
-        trackName:data.item.name,
-        progress_ms:data.progress_ms,
-        duration_ms:data.item.duration_ms,
-
-        track:{
-            name:data.item.name,
-            url:data.item.external_urls.spotify
-        },
-        artist:{
-            name:data.item.artists[0].name,
-            url:data.item.artists[0].external_urls.spotify
-        },
-      }
-   
-    var percentagePlayed = spotifyData.progress_ms/spotifyData.duration_ms // 0.23 .. 
-    
-    //((spotifyData.progress_ms/1000)/60).toFixed(2)+' ━━━━●────── '+((spotifyData.duration_ms/1000)/60).toFixed(2)
-    var progressIn = ((percentagePlayed*10)/2).toFixed(0) // 2
-    var bar_prefix_count = (new Number(progressIn))-1
-    var bar_suffix_count = 5-(new Number(progressIn))
-    var bar_prefix = '━'
-    var bar_suffix = '─'
-    
-    var constructPlaybackBar = bar_prefix.repeat(bar_prefix_count)+'●'+bar_suffix.repeat(bar_suffix_count)
-   // console.log('pushing in ',constructPlaybackBar,spotifyData)
-    var constructListener = ` is listening to <a href="${spotifyData.track.url}" target="_blank">${spotifyData.track.name}</a> by <a href="${spotifyData.artist.url}" target="_blank">${spotifyData.artist.name}</a>  `+constructPlaybackBar
-    console.log('pushing in ',constructListener)
-    $('#SpotifyCurrentlyPlaying').html(constructListener)
-    //$('#SpotifyCurrentlyPlaying').html(' | listening now: '+spotifyData.trackName+' - '+spotifyData.artistName+' '+constructPlaybackBar)
-
-
-}
-
-
-
 
 /*////////////////////////////////////////
 /////////JQUERY ON DOCUMENT READY
 */////////////////////////////////////////
-
-/*////////////ON SCROLL///////////////*/
-$(document).on( 'scroll', function(){
-    screenHeight = window.screen.height // 896 <-this one seems to have the piuxels from the adress bar aswell... that should help with the weird scroll calcs
-    innerHeight = window.innerHeight //  719 //originally i was using this one
-    scroll = document.documentElement.scrollTop || document.body.scrollTop
-    //console.log('[scroll] scroll: ',scroll);
-    windowHeight = $(window).height() // 719 aswell, seems same as innerHeight
-    
-    var elemHeights = {/*vh and px vals 0.5 = 50vh */
-        shrunkSpacer:{px:50},
-        shrinkCompenA:{vh:0.035},
-        main:{vh:0.83},//93vh on desktop main intro
-        shrinkCompenB:{vh:0.035},
-        window:{vh:1,px:windowHeight},
-        screen:{vh:screenHeight/windowHeight,px:screenHeight,sh:1}
-    }
-    
-    /*function vhConvert(vh,converter){
-        var screenHeight = screenHeight
-    }*/
-    elemHeights.shrunkSpacer.vh = elemHeights.shrunkSpacer.px/windowHeight
-
-    elemHeights.shrinkCompenA.px = windowHeight*elemHeights.shrinkCompenA.vh
-    elemHeights.main.px = windowHeight*elemHeights.main.vh
-    elemHeights.shrinkCompenB.px = windowHeight*elemHeights.shrinkCompenB.vh
-    elemHeights.main.px = windowHeight*elemHeights.main.vh
-    elemHeights.full = elemHeights['shrunkSpacer'].px+elemHeights['shrinkCompenA'].px+elemHeights['main'].px+elemHeights['shrinkCompenB'].px
-    elemHeights.shrunkSpacer.sh = elemHeights.shrunkSpacer.px/screenHeight
-    elemHeights.shrinkCompenA.sh = elemHeights.shrinkCompenA.px/screenHeight
-    elemHeights.main.sh = elemHeights.main.px/screenHeight
-    elemHeights.shrinkCompenB.sh = elemHeights.shrinkCompenB.px/screenHeight
-    elemHeights.window.sh = elemHeights.window.px/screenHeight
-
-    if(!isMobile){
-        // for desktop
-       // vhInPixels_expandAt =  shrinkToHeight - (windowHeight*ExpandStuffAt); // shrinkToHeight -(ShrinkStuffAt*ExpandStuffAt) //(windowHeight * ExpandStuffAt); // 0.65 = 6.5vh
-       vhInPixels_expandAt =  shrinkToHeight - (shrinkToHeight*ExpandStuffAt);
-    }else{
-        // what is padding for mobile?
-        //it gets changed from 93 to 83 (-10% of page height)
-        //the two shrink comps are 3.5vh
-        //so 93 + 3.5 + 3.5 = 100
-        // 90? so add in 10vh to expand breakpoint?
-        //vhInPixels_expandAt =  (windowHeight*0.1)-(shrinkToHeight - (windowHeight*ExpandStuffAt));
-        
-        // > > vhInPixels_expandAt =  (shrinkToHeight - (screenHeight*ExpandStuffAt)); 
-        
-        
-        // this is kinda working... weverything is rad when the adress bar is there but it autocloses immiedtaly when the invoice opens...
-        //so i need to? what? ad in the extra bar space
-
-        //still buggy, noticed we were using innerHeight(719) when there is screenHeight(896) so lets see
-        //breakdown
-        //	(windowHeight*0.1) = 10th of minimum screen
-        //  shrinkToHeight  = height of the stuff above the viewer.
-        //	 - (windowHeight*ExpandStuffAt) = minimum screen height * 0.025 = 2.5% of minScreen
-        //  if scroll (50px) is less then x then re-expand the deadspace.
-        //	x needs to = the space above the padding (shrinkToSize) - a movement amount
-
-        //fuck... so i was using 15vh as an 'amount of screen gestured to swipe'  thing but sometimes that number sets the shit under 0 so now expand trigger fires...
-
-        // > > if(vhInPixels_expandAt<=0)vhInPixels_expandAt = shrinkToHeight*0.15
-
-        //switch the expandAt height to a percentage of the filler
-        //vhInPixels_expandAt = shrinkToHeight*ExpandStuffAt
-        //vhInPixels_expandAt = 1
-        //vhInPixels_expandAt = 0
-        //find out what mobile difference in vh is in sh
-        //93<83
-        // 
-        // (elemHeights.screen.vh*7) add ir somewhere
-
-        ///OH!!! fucking overscroll!, so we can just use minueses?
-        vhInPixels_expandAt = -1
-        //Fuck, my android doesn't support and it's forcing me to refresh wehen i scroll up
-        //i redesigned a bunch of the hight systems and stuff, lets see if that actully fixed what was up here and try my original intuitions.
-        //vhInPixels_expandAt =  0 //shrinkToHeight - (shrinkToHeight*ExpandStuffAt);
-
-    }
-    //if(vhInPixels_expandAt<=0)vhInPixels_expandAt = shrinkToHeight*0.1
-    vhInPixels_shrinkAt = (windowHeight * ShrinkStuffAt);
-    
-    var elemHeights = {/*vh and px vals 0.5 = 50vh */
-        shrunkSpacer:{px:50},
-        shrinkCompenA:{vh:0.035},
-        main:{vh:0.83},//93vh on desktop main intro
-        shrinkCompenB:{vh:0.035},
-        window:{vh:1,px:windowHeight},
-        screen:{vh:screenHeight/windowHeight,px:screenHeight}
-    }
-    var elemHeights = getScreenHeights()
-    
-
-    var sortingOutHeights = {
-        window:elemHeights.window.px,
-        screenHeight:elemHeights.screen.px,
-        shrinkToHeight:elemHeights.shrunkSpacer.px,
-        ExpandStuffAt:gateWaySettings.elements.deadSpace.expandAt,
-        ShrinkStuffAt:gateWaySettings.elements.deadSpace.shrinkAt,
-        expandAt:vhInPixels_expandAt,
-        shrinkAt:(windowHeight * ShrinkStuffAt)
-    }
-
-    var scrollThresholds = {
-        ExpandStuffAt:gateWaySettings.elements.deadSpace.expandAt,
-        ShrinkStuffAt:gateWaySettings.elements.deadSpace.shrinkAt,
-        expandAt:vhInPixels_expandAt,
-        shrinkAt:(windowHeight * ShrinkStuffAt)
-    }
-   
-    
-    //console.log('[onScroll] sortingOutHeights',sortingOutHeights)
-    var scrollster = {
-        //scroll:scroll,
-    //	shrunk:deadSpaceShrunk,
-        shrinkAt:vhInPixels_shrinkAt,//,
-        expandAt:vhInPixels_expandAt,
-        //shrinkToHeight:shrinkToHeight
-    }
-   
-    
-    console.log('[scroll]',scroll,{stateSettings:stateSettings,scrollster:scrollster,elemHeights:elemHeights})
-    
-    if(scroll>sortingOutHeights.shrinkAt&&stateSettings.status.deadSpace == 'full'){
-        console.log('[scroll] shrinking: ',scroll,{stateSettings:stateSettings,scrollster:scrollster});
-        //if space is there // obj{height: 100}
-        // and scroll if above shrink threshold (scroll=100, threshold=75) 
-        //then shrink the space  // obj{height: 50} // new scrolll is scroll-50
-        shrinkDeadSpace(true)
-        //deadSpaceShrunk==true
-        //stateSettings.status.deadSpace = 'shrunk'
-       // console.log('[!GLOBAL SET!][scroll]','deadSpaceShrunk:',deadSpaceShrunk)
-        
-    } else if(scroll<=sortingOutHeights.expandAt&&stateSettings.status.deadSpace == 'shrunk'){
-        console.log('[scroll] expanding: ',scroll,{stateSettings:stateSettings,scrollster:scrollster});
-        //if space is NOT there
-        // and scroll is BELOW shrink threshold (scroll=50, threshold=75)
-        //then shrink the space
-        shrinkDeadSpace(false)
-     
-            //if overscroll then
-           // $("#invoiceHeader, .progressBar_wrapper .progressBar, #headerOrnament .replace_clientName").on('click touchstart',function(){
-               /* var elem = '#dueTimer'
-                $(elem).attr('slider-lock',true)
-                slider_DownElemToggle(elem,false)
-                setTimeout(function() {
-                    var elem = '#dueTimer'
-                    $(elem).attr('slider-lock',false)
-                    slider_DownElemToggle(elem,true)
-                },2000)
-                */
-            //});
-        
-        //stateSettings.status.deadSpace = 'full'
-       // console.log('[!GLOBAL SET!][scroll]','deadSpaceShrunk:',deadSpaceShrunk)
-    }
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -351,20 +80,17 @@ var ipInfo = new Object();
 
 $(document).ready(function() {
 
-    console.warn('[$(document).ready]','version 0.215')
+    console.warn('[$(document).ready]','version 0.3a')
 
  // Will execute myCallback every 10  seconds /0.5/
+ console.warn('[$(document).ready]','spotifyCurrentPlaying','kickstarting')
  const interval = setInterval(function() {
-    console.log('spotifyCurrentPlaying repeating')
+    console.log('[spotifyCurrentPlaying] repeating')
      // method to be executed;
      spotifyCurrentPlaying()
  }, 10000);
 
 
-
-    $('#surcharge_stripe').html(invoiceSettings.checkouts['Stripe'].surcharge)
-$('#surcharge_directDebit').html(invoiceSettings.checkouts['Direct Debit'].surcharge)
-$('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 
     /*slack_invoiceLoad({
           invNum : 'THX-1138',
@@ -381,10 +107,6 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
         members: ['obi_sims']
     });
     */
-   var progressBar = progressTheProgressBar('.progressBar span.progressBar_progress',1900,0)
-   console.log('[progressBar]',{progressBar:progressBar})
-
-  
   // if(isFacebookApp()){
     // your action here if user using Facebook in-app browser
  //  alert('Are you using Facebook Browser? To get better experience, try press [...] and Open the blog in Chrome or Safari. Thank you!');
@@ -445,106 +167,7 @@ $('#surcharge_coinbase').html(invoiceSettings.checkouts['Coinbase'].surcharge)
 */
 
 
-    /////////////////////
-    /* MOBILE UI BUTTONS */
     
-    $('.mobile_UI_Share').click(function(){
-        var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
-        this one opens the doc in google docs on android
-        opens a new page with [df]
-        */
-       $('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
-   var fbxhr = new XMLHttpRequest ();
-fbxhr.open ("POST", "https://graph.facebook.com", true);
-fbxhr.setRequestHeader ("Content-type", "application / x-www-form-urlencoded");
-fbxhr.send ("id = "+"https:"+"&scrape=true");
-        //window.location.href = downloadURL
-        //window.open(downloadURL, 'Download')
-        var googlePdfViewerUrl = 'https://drive.google.com/file/d/'+invoiceSettings.invoice.DRIVE_ID+'/view'
-        //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
-        var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
-       // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-       if(navigator.share){
-           /// if share available then share pay.obi url
-            navigator.share({
-                title: invoiceSettings.invoice.NUM,
-                url: payUrl,
-               // text:invoiceSettings.invoice.NUM
-            })
-            .then(() => console.log('Share was successful.'))
-            .catch(function(error){
-            console.log('Sharing failed', error)
-                ///THIS IS HAPPENING ON IOS AFTER ANY SHARE
-
-            /// if error show pdfviewer url in new window (don't think this one actually runs)
-           // if(error)window.open(googlePdfViewerUrl, '_blank');//downloadURL
-            //alert('no share available')
-            });
-       }else{
-           /// if no share then
-           
-           window.open(googlePdfViewerUrl, '_blank');//downloadURL
-           
-       }
-       //postSlackNotification_gateway_share()
-       postSlackNotification_gateway_share(""+stateSettings.status.isMobile+"",ipInfo)
-       /*if (navigator.canShare) {
-         navigator.share({
-           //files: filesArray,
-           url:payUrl,
-         //  title: invoiceSettings.invoice.NUM,
-           //text: 'obi sims invoice gateway.',
-         })
-         .then(() => console.log('Share was successful.'))
-         .catch(function(error){
-             console.log('Sharing failed', error)
-             if(error)window.open(downloadURL, '_blank');
-             
-            });
-       } else {
-         window.open(downloadURL, '_blank');
-         //alert(`Your system doesn't support sharing files.`);
-       }
-       */
-    })
-    $('.mobile_UI_Download').click(function(){
-        var downloadURL = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-        /* //window.open('http://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf', 'Download');  
-        this one opens the doc in google docs on android
-        opens a new page with [df]
-        */
-        //window.location.href = downloadURL
-        //window.open(downloadURL, 'Download')
-        var googlePdfViewerUrl = 'https://drive.google.com/file/d/'+invoiceSettings.invoice.DRIVE_ID+'/view'
-        //http://docs.google.com/document/d/16bWRp0-Sraw9hiaFilyanhpnaVd43UQDcGZVUW9BaMI/export?format=pdf
-        var payUrl = 'https://pay.obisims.com/'+invoiceSettings.invoice.NUM
-       // var pdfUrl = 'https://docs.google.com/document/d/'+invoiceSettings.invoice.DRIVE_ID+'/export?format=pdf'
-       
-       ///if fake mobile then download .pdf file
-       //if ios then open pdf in new tab, hit the ios share button to do stuff with file // 
-       //android (if logged into gsuite/have gdocs) open gDocs
-       window.open(downloadURL, '_blank')
-
-       postSlackNotification_gateway_download(""+stateSettings.status.isMobile+"",ipInfo)
-       /*if(navigator.share){
-            navigator.share({title: invoiceSettings.invoice.NUM, file: downloadURL})
-            .then(() => console.log('Share was successful.'))
-            .catch(function(error){
-            console.log('Sharing failed', error)
-            if(error)window.open(downloadURL, '_blank');//downloadURL
-            
-            });
-       }else{
-           //if fake desktop or old mobile?
-           window.open(downloadURL, '_blank');//downloadURL
-           
-       }*/
-       
-        
-    })
-    
-
     /* button commands */
     /* pay show button */
  
@@ -552,110 +175,11 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
         // Animation complete.
      // });
    
-     function hideDueDateString(){
-        var slidData = $('#dueTimer').data('slid')
-        console.log('[hideDueDateString]',$(this))
-        if(slidData!='down'){
-            console.log('[hideDueDateString] BLOCK slidData',slidData)
-            return
-        }
-        //setTimeout(function() {
-            var $dueTimer = $('#dueTimer')
-
-           // if($dueTimer.data('slid')=='down'){}
-            if($dueTimer.data('slide-lock')!=true){
-                $dueTimer.data('slid','up')
-                console.log('[hideDueDateString] SUCCEED slidData',slidData)
-                $dueTimer.slideUp()
-                
-            } else{
-                console.log('[hideDueDateString] BLOCK slidData',slidData)
-            }  
-        //},6000) 
-     }
-   
-  
-
-
-     function showDueDateString(elem){
-        var $dueTimer = $(elem||'#dueTimer')
-        var slidData =$dueTimer.data('slid')
-         console.log('[showDueDateString] showing',$(this))
-       // if(slidData=='down'){
-       //     console.log('[showDueDateString] BLOCK slidData',slidData)
-       //     return
-       // }
-       
-       //if($dueTimer.data('slide-lock')!='true'&&$dueTimer.data('slid')=='up'){
-        console.log('[showDueDateString] SUCCEED slidData',slidData)
-        $dueTimer.attr('slider-show',true)
-       //     $dueTimer.slideDown()
-      //  }else{
-      //      console.log('[showDueDateString] BLOCK slidData',slidData)
-      //  }
-     }
-    
 
 
 
 
 
-
-
-    /* HOVER ELEM TOGGLE ACTION */
-     function slider_DownElemToggle(elem,override){
-         overriders = {
-             //flip the override bc it'll be acting as state
-             true:'false',
-             false:'true'
-         }
-         override = overriders[override]
-         /* variables */
-         var $elem = $(elem)
-         var slider_state = $elem.attr('slider-show')
-         var slider_lock = $elem.attr('slider-lock')
-         if(!slider_state){
-            $elem.attr('slider-show',false)
-            slider_state = $(elem).attr('slider-show')// switch to fresh $
-         }
-         if(!slider_lock){
-            $elem.attr('slider-lock',false)
-            slider_lock = $(elem).attr('slider-lock') // switch to fresh $ 
-         }
-         console.log('[slideDownElemToggle] started','state',{state:slider_state,lock:slider_lock},$elem)
-        /* check state */
-       //if(slider_state==true){console.log('[slideDownElemToggle] BLOCKED','initial check state ',slider_state); return }
-         /* check lock */
-         if(slider_lock==true){
-             console.log('[slideDownElemToggle] BLOCKED','initial check lock',slider_lock);
-             return
-            }
-         /* !run the fucking toggle! */
-         var switchRunner = override||slider_state
-         console.log('[slideDownElemToggle] switch',switchRunner)
-         switch(switchRunner) {
-            case 'true':
-                /* if state is shown */
-                //alert('hide due date')
-                //hideDueDateString(elem)
-                $elem.slideDown()
-                $elem.attr('slider-state',false)
-                
-              break;
-            case 'false':
-                /* if state is hidden */
-               // alert('show due date')
-                $elem.slideUp()
-                $elem.attr('slider-state',true)
-               // showDueDateString(elem)
-              break;
-            default:
-              // code block
-              //console.log('[slidData CLICK] BLOCK slidData',slidData)
-          }
-         //
-         //return $(elem).attr('slider-show')
-     }
 
      /////////
      var dueDate_over = function(){
@@ -961,7 +485,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 
 
-
+///?? end of doc ready, wtf
 
 })
 /////////////////////////////////////////
@@ -1014,14 +538,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
 
 /* GLOBAL SETTINGS */
 var urlParams = getParams(window.location.href);//encodeURI when creating
-var obiAPI_params = new Object();
-    ob_api(urlParams.inv)
-    //OVERRITE URL PARAMS WITH API
   
-
-
-    console.log('[urlParams] obiAPI_params',obiAPI_params)
-    
     console.log('[urlParams] grabbing',urlParams)
 /*
 urlParam input
@@ -1054,14 +571,21 @@ $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     invoiceSettings.user.ipInfo = ipInfo
      //ipInfo = data //GetUserIP()
     // console.log('[GetUserIP] data',ipInfo.ip,ipInfo)
-    if(urlParams){
-        if(!urlParams.stripe_checkout){
-            postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
-        }
-    }
+    //if(urlParams){
+    //    if(!urlParams.stripe_checkout){
+    //        postSlackNotification_gateway_opened(""+stateSettings.status.isMobile+"",ipInfo)
+    //    }
+    //}
      
    })
-   
+   var obiAPI_params = new Object();
+    ob_api(urlParams.inv)
+    //OVERRITE URL PARAMS WITH API
+  
+
+
+    console.log('[urlParams] obiAPI_params',obiAPI_params)
+  
    if(obiAPI_params['INV NUM']){
     console.log('[ob_api]','obiAPI_params["INV NUM"] present',obiAPI_params)
     /*  DUE: "22-10-2020"
@@ -1088,8 +612,8 @@ var invoiceSettings = {
         ipInfo:''
     },
     invoice:{
-        NUM:obiAPI_params['INV NUM']||urlParams.inv,
-        TOTAL:obiAPI_params['TOTAL']||(urlParams.inv_total||0),
+        NUM:obiAPI_params['INV NAME']||obiAPI_params['INV PREFIX']+'-'+obiAPI_params['INV NUM']||urlParams.inv,
+        TOTAL:obiAPI_params['TOTAL']||urlParams.inv_total||0,
         CLIENT_NAME:obiAPI_params['CLIENT']||urlParams.client_name,
         PROJECT_NAME:obiAPI_params['PROJECT']||urlParams.project_name,
         DRIVE_ID:obiAPI_params['DRIVE ID']||urlParams.drive_id,//'1GNeI5UAfcbLYnmqGsqXACsO5lQ7YyPlYCNmSvDHpkEU',
@@ -1116,6 +640,7 @@ var invoiceSettings = {
     checkouts:{
         'Stripe':{
             price_id:obiAPI_params['STRIPE CHECKOUT ID']||urlParams.stripe_price_id,
+            price:obiAPI_params['STRIPE PRICE']||'',
             //  api:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
             PUBLISHABLE_KEY:'pk_live_518wo3qEB9Gfp1i8QifDcWocfocfuhEtZr6Bospg60FsnR37S6Lwt69I0EZ6hqsvul8POOgnNURETpwQOlVM3qdkO00WTqwMzVB',
             surcharge:'1.75% + $0.30 surch'
@@ -1129,6 +654,7 @@ var invoiceSettings = {
         },
         'Direct Debit':{
             price_id:uuidv4(),
+            price:obiAPI_params['TOTAL']||'',
             id:obiAPI_params['POLIPAY ID']||'',
             api:'https://poliapi.apac.paywithpoli.com/api',
             surcharge:'0% surcharge',
@@ -1179,9 +705,7 @@ if(urlParams.inv){
 
 if(urlParams.client_name){
     $('.replace_clientName').text(urlParams.client_name)//invoiceSettings.invoice.CLIENT_NAME
-    $('#mobileInvoiceHeader').attr('data-before', urlParams.client_name);
-
-    
+    $('#mobileInvoiceHeader').attr('data-before', urlParams.client_name);    
 }else{
     $('.replace_clientName').text("EXAMPLE NAME")//Doppelgänger Doppelgänger Dudes Pty Ltd
 }
@@ -1217,48 +741,6 @@ if(!urlParams.polipay_id){
 //////////////////////////////////////////
 
 
-/* DUE DATE TIMER STUFF HERE */
-
-function dueTimer_kickStart(daysUntilDue,nowDate){
-	return dueTimer(moment(nowDate||moment()).add(daysUntilDue||14,'days'))//,time_now
-}//.toLowerCase()
-function dueTimer(dueDate,nowTime){
-	var prefix = 'Due '
-	var response = prefix
-	var nowDate = nowTime||moment()
-	var daysUntilDue = dueDate.diff(nowDate,'days')
-	//console.log(daysUntilDue)	
-	if(daysUntilDue>0){
-		if(daysUntilDue==0){//Day of
-			response = prefix+'Today'
-		}else if(daysUntilDue==1){//Day before
-			response = prefix+'Tomorrow'
-		}else if(daysUntilDue<5){//Last couple of days // Due Sunday
-			response = prefix+''+moment(dueDate).format('dddd')
-		}else if(daysUntilDue<7){// Last Week // 
-			response = prefix+' this Week'
-		}else if(daysUntilDue==7){// Exactly a week off
-			response = prefix+'in a Week'
-		}else if(daysUntilDue<13){// Under 2 weeks
-			response = prefix+'next Week'
-		}else if(daysUntilDue<=14){// exactly 2 weeks
-			response = prefix+'in a Fortnight'
-		}else{// over 2 weeks
-			response = prefix+'in more than a Fortnight'
-		}
-	}else{
-		//minus days
-		response = dueDate.calendar(nowDate,{
-			sameDay: '[Today]',
-			nextDay: '[Tomorrow]',
-			nextWeek: "dddd [the] Do",//'dddd'
-			lastDay: '[Yesterday]',
-			lastWeek: '[Last] dddd',
-			sameElse: "ddd Do [of] MMM 'YY",//ddd Do MMM 'YY ///'dd - MM - YYYY'
-		})
-	}
-return response//+ ' | '+daysUntilDue
-}
 
 
 
