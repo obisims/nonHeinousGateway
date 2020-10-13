@@ -84,11 +84,11 @@ $(document).ready(function() {
 
  // Will execute myCallback every 10  seconds /0.5/
  console.warn('[$(document).ready]','spotifyCurrentPlaying','kickstarting')
- const interval = setInterval(function() {
+ const spotifyInterval = setInterval(function() {
     console.log('[spotifyCurrentPlaying] repeating')
      // method to be executed;
      spotifyCurrentPlaying()
- }, 10000);
+ }, 15000);
 
 
 
