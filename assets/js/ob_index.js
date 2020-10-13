@@ -707,7 +707,7 @@ if(urlParams.client_name){
     $('.replace_clientName').text(urlParams.client_name)//invoiceSettings.invoice.CLIENT_NAME
     $('#mobileInvoiceHeader').attr('data-before', urlParams.client_name);    
 }else{
-    $('.replace_clientName').text("EXAMPLE NAME")//Doppelgänger Doppelgänger Dudes Pty Ltd
+    $('.replace_clientName').text("...")//Doppelgänger Doppelgänger Dudes Pty Ltd
 }
 if(!urlParams.polipay_id){
     $('.logo_auspost').remove()
