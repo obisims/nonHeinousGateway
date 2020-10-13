@@ -80,7 +80,7 @@ var ipInfo = new Object();
 
 $(document).ready(function() {
 
-    console.warn('[$(document).ready]','version 0.3a')
+    console.warn('[$(document).ready]','version 0.3b')
 
  // Will execute myCallback every 10  seconds /0.5/
  console.warn('[$(document).ready]','spotifyCurrentPlaying','kickstarting')
@@ -383,87 +383,7 @@ $(document).ready(function() {
     //$payButtons.each(function() {
    // })
   
-   setTimeout(function() {
-        const buttonTime = 750
-        var buttonIndex = 0
-        $('#headerSlideInWrapper').fadeTo( "fast" , 1, function() {
-            // Animation complete.
-           
-            setTimeout(function() {
-                
-                $('ul#paymentOptions li .button.payButton').each(function(index,button){
-                    buttonIndex++
-                    console.log(button)
-                    //$(button).fadeIn()
-                    setTimeout(function() {
-                        //$(button).fadeIn('slow')
-                        $(button).fadeIn( 1500, function() {
-                            // Animation complete
-                            //loadInFooter()
-                            });
-                    }, buttonTime*(index+1)) // or just index, depends on your needs
-                    
-                })
-              
-                //$('.progressBar').fadeIn()
-                var __progress = '.progressBar span.progressBar_progress'
-                var $progress = $(__progress)
-                
-                
-                $('.progressBar_wrapper').fadeIn()
-                var progressBarSettings = {
-                    moment:{
-                      creation_date:due_issued,//invoiceSettings.date.ISSUED,
-                      record_time:moment(),
-                      completion_date:due_date,//invoiceSettings.date.DUE,
-                    }
-                  };
-                  
-                 // $('.preLoadLineBreak_removeMe').remove()
-                 
-                 
-                   var progressBar = progressTheProgressBar(__progress,3000,null,progressBarSettings.moment)
-                   $('.progressBar_wrapper .progressBar').removeClass('blurred')
-                  console.log('[progressBar]',{progressBar:progressBar})
-                setTimeout(function() { //for footer
-                    
-                      //$('#dueTimer').fadeIn()
-                      
-                      var $dueTimer = $('#dueTimer')
-                        $dueTimer.removeClass('initialHide')
-                        $dueTimer.data('slider-lock',true)
-                        $dueTimer.slideDown()
-                        $dueTimer.data('slid','down')
-                        setTimeout(function() { 
-                            $dueTimer.slideUp()
-                            $dueTimer.data('slider-lock',false)
-                        },6000)
-
-                      $('#landingFooterObi').fadeIn( 1500, function() {
-                        // Animation complete
-                        
-                        setTimeout(function() {
-                            //$('#navAndMain').slideDown(1900)
-                            //$('#landing').removeClass('pushInvoiceDown')
-                            //slide-up
-                           
-      
-                              
-                            $('#landingScrollDownButton').fadeIn(1700)
-                            $('#landingFooterObi_mobile').fadeIn(1900)
-                            
-                        },1*buttonTime) 
-                    });
-                       
-                },(buttonIndex+2)*buttonTime) 
-            },buttonTime)
-        });
-        //$('#headerOrnament').slideDown(1000)
-        //$('#invoiceHeader').slideDown(1000)
-
-
-   },500)
-   
+  
   
 /*
     var time = 500;
