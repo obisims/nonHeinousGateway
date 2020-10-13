@@ -120,7 +120,7 @@ $(document).on( 'scroll', function(){
     }
    
     
-    console.log('[scroll]',scroll,{stateSettings:stateSettings,scrollster:scrollster,elemHeights:elemHeights})
+    //console.log('[scroll]',scroll,{stateSettings:stateSettings,scrollster:scrollster,elemHeights:elemHeights})
     
     if(scroll>sortingOutHeights.shrinkAt&&stateSettings.status.deadSpace == 'full'){
         console.log('[scroll] shrinking: ',scroll,{stateSettings:stateSettings,scrollster:scrollster});
