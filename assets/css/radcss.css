@@ -1025,3 +1025,11 @@ div#payInstructions p.footnote {
 
   font-size: 80%;
 }
+span:focus, img:focus, a:focus, button:focus, svg:focus {
+  outline: 0;
+}
+
+a::selection,a::-moz-selection,p::selection,p::-moz-selection,span::selection,span::-moz-selection {
+  color:var(--google-grey);
+  background: var(--brand-purple);
+}
