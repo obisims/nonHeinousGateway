@@ -246,7 +246,7 @@ function getScreenHeights(){
 		elemHeights.shrinkCompenB.sh = screenHeight*elemHeights.shrinkCompenB.vh
 */
 
-		console.log('[getScreenHeights]',scroll,elemHeights)
+	//	console.log('[getScreenHeights]',scroll,elemHeights)
 		
 return elemHeights
 }
