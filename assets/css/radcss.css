@@ -219,7 +219,8 @@ html{
   
 }
 #mainLogo img.socialIconSet{
-  height:  67px;/**/
+  height: 65px;
+  margin-top: 2px;
   filter: url(#obiBrandFilter-white);
 }
 #mainLogo .svgLink{
@@ -576,7 +577,7 @@ body{
   }
 
  
-  label{
+  div#binderCover div span label{
     position: relative;
     height: 125px;
     width: 125px;
@@ -599,7 +600,7 @@ body{
   }
   
 
-  label#iFrameLoadSpinner.shrinkOut{
+  div#binderCover div span label#iFrameLoadSpinner.shrinkOut{
     position: relative;
     border: 0px solid var(--google-grey);
     /*height: 0px;
@@ -608,10 +609,10 @@ body{
     transition: width .5s,height .5s,opacity .5s ease-out,border .5s ease-out;
   }
 
-  label .check-icon{
+  div#binderCover div span label .check-icon{
     display: none;
   }
-  label .check-icon:after{
+  div#binderCover div span label .check-icon:after{
     position: absolute;
     content: "";
     top: 50%;
@@ -647,13 +648,13 @@ body{
       opacity: 1;
     }
   }
-  input{
+  div#binderCover div input{
     display: none; 
   }
-  input:checked ~ label .check-icon{
+  div#binderCover div input:checked ~ label .check-icon{
     display: block;
   }
-  input:checked ~ label{
+  div#binderCover div input:checked ~ label{
     animation: none;
     border-color: #291a2b;
     transition: border 0.5s ease-out;
@@ -1044,3 +1045,26 @@ a::selection,a::-moz-selection,p::selection,p::-moz-selection,span::selection,sp
   fill: var(--brand-red);
   /*background:var(--google-grey);*/
 }
+input#callInvoice-number {
+  border-color: var(--google-grey);
+  box-shadow: 0 0 0 0.25px var(--google-grey);
+  text-align: center;
+}
+
+/*
+
+#callInvoice-number-wrapper { position: relative; }
+*/
+#callInvoice-number-wrapper label {
+  
+  color: var(--google-grey);
+
+    font-size: 9px;
+    text-transform: uppercase;
+
+}
+/*
+#callInvoice-number-wrapper input {
+  padding:0;
+  position: absolute; left: 0; top: 0;
+}*/

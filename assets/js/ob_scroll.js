@@ -133,7 +133,7 @@ $(document).on( 'scroll', function(){
        // console.log('[!GLOBAL SET!][scroll]','deadSpaceShrunk:',deadSpaceShrunk)
         
     } else if(scroll<=sortingOutHeights.expandAt&&stateSettings.status.deadSpace == 'shrunk'){
-        console.log('[scroll] expanding: ',scroll,{stateSettings:stateSettings,scrollster:scrollster});
+      //  console.log('[scroll] expanding: ',scroll,{stateSettings:stateSettings,scrollster:scrollster});
         //if space is NOT there
         // and scroll is BELOW shrink threshold (scroll=50, threshold=75)
         //then shrink the space

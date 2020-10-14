@@ -21,11 +21,23 @@ function ob_api(inv){
     $.getJSON(obi_api_apiUrl, function(data) {
         console.log('[ob_api]','invoice data',data)
         obiAPI_params = data[invNum]
-        updateGlobalParams(obiAPI_params)
+        if(!data[invNum]){
+             console.log('[ob_api]','no data[invNum] data')
+           // updateGlobalParams(obiAPI_params)
+           loadState_errorLanding()
+        }else{
+            console.log('[ob_api]','defined data[invNum] data')
+            updateGlobalParams(obiAPI_params)
+        }
 
     })
    
 }
+
+
+
+
+
 function refreshVariables(){
 
     console.log('[refreshVariables] refreshing...',obiAPI_params)
@@ -311,7 +323,7 @@ var invoiceSettings = invoiceSettings||new Object(); // SHOULD UPDATE HERE ASWEL
 function updateGlobalParams(obiAPI_params){
      /* UPDATE urlPram & invoiceSettings */
     console.log('[updateGlobalParams] updating',obiAPI_params,urlParams)
-    obiAPI_params['INV NAME'] = obiAPI_params['INV PREFIX']+'-'+obiAPI_params['INV NUM']
+    if(obiAPI_params['INV PREFIX']&&obiAPI_params['INV NUM'])obiAPI_params['INV NAME'] = obiAPI_params['INV PREFIX']+'-'+obiAPI_params['INV NUM']
     if(obiAPI_params['INV NUM'])urlParams.inv=obiAPI_params['INV NAME']
     if(obiAPI_params['TOTAL'])urlParams.inv_total=obiAPI_params['TOTAL']
     if(obiAPI_params['CLIENT'])urlParams.client_name=obiAPI_params['CLIENT']
@@ -416,3 +428,157 @@ function updateGlobalParams(obiAPI_params){
     stripe = Stripe(invoiceSettings.checkouts['Stripe'].PUBLISHABLE_KEY);
     refreshVariables()
 }
+
+
+
+function loadState_errorLanding(){
+    console.log('[ob_api][loadState_errorLanding]','loading error state')
+
+
+
+    setTimeout(function() {
+        const buttonTime = 750
+        var buttonIndex = 0
+        $('#headerSlideInWrapper').fadeTo( "fast" , 1, function() {
+            // Animation complete.
+        $('.replace_invoiceNum').text('BI SIMS')//ERR-1138
+        //$('.replace_invoiceNum').css('letter-spacing','5px')
+        
+        $('.replace_clientName').text('Sans-Bogus Digital Invoice')//invoiceSettings.invoice.CLIENT_NAME
+        $('#mobileInvoiceHeader').attr('data-before', "Sans-Bogus Digital Invoice");  
+       
+        //$('.progressBar_wrapper').html('<span><input style="width:100%" type="number"></input></span>')
+        $('.progressBar_wrapper').fadeOut() //.fadeIn()
+        $('#dueTimer').fadeOut()
+        $( "#landing_section" ).prepend( `<form action="javascript:console.log( '[form] action!' );" id="enterInvNum" method="post" action="#">
+        <section class="main errorFormWrapper">
+        <div class="row gtr-uniform">
+        <div class="col-2 col-12-xsmall"> </div>
+            <!--<div class="col-4 col-12-xsmall">
+                <input type="text" name="callInvoice-name" id="callInvoice-name" value="THX" style="text-align:right;background-color: rgba(255, 255, 255, 0.015);border-color: rgba(255, 255, 255, 0.25);" placeholder="THX">
+            </div>-->
+            <div id="callInvoice-number-wrapper" class="col-8 col-12-xsmall">
+            <label for="callInvoice-number">enter invoice num</label><input type="text" name="callInvoice-number" id="callInvoice-number" value="THX-" placeholder="1138">
+            </div>
+            <div class="col-12">
+													<ul class="actions stacked">
+														<li><input type="submit" value="Open Invoice" class="primary"></li>
+                                                        <!--<li><input type="reset" value="Reset"></li>-->
+                                                        
+                                                    </ul>
+                                                    
+												</div>
+            <!--<div class="col-12">
+                <select name="callInvoice-category" id="callInvoice-category">
+                    <option value="">- Category -</option>
+                    <option value="1">Manufacturing</option>
+                    <option value="1">Shipping</option>
+                    <option value="1">Administration</option>
+                    <option value="1">Human Resources</option>
+                </select>
+            </div>-->
+         <div class="col-2 col-12-xsmall"> </div>
+        </div>
+        </section>
+    </form>` );
+    $("#enterInvNum").submit(function(data){
+         // get all the inputs into an array.
+            var $inputs = $('#enterInvNum :input');
+
+            // not sure if you wanted this, but I thought I'd add it.
+            // get an associative array of just the values.
+            var values = {};
+            $inputs.each(function() {
+                values[this.name] = $(this).val();
+            });
+            //console.log('form data',values)
+            var invoiceInput = values['callInvoice-number']
+            console.log('form data',invoiceInput)
+           // alert('submitted')
+            ob_api(invoiceInput)
+            $('.progressBar_wrapper').fadeIn() //.fadeIn()
+            $('#dueTimer').fadeIn()
+            $('#enterInvNum').remove()
+      });
+            setTimeout(function() {
+                /* Commented out for error state
+                $('ul#paymentOptions li .button.payButton').each(function(index,button){
+                    buttonIndex++
+                    console.log(button)
+                    //$(button).fadeIn()
+                    setTimeout(function() {
+                        //$(button).fadeIn('slow')
+                        $(button).fadeIn( 1500, function() {
+                            // Animation complete
+                            //loadInFooter()
+                            });
+                    }, buttonTime*(index+1)) // or just index, depends on your needs
+                    
+                })*/
+            /* commented out for error state
+                //$('.progressBar').fadeIn()
+                var __progress = '.progressBar span.progressBar_progress'
+                var $progress = $(__progress)
+                
+                
+                $('.progressBar_wrapper').fadeIn()
+                var progressBarSettings = {
+                    moment:{
+                    creation_date:due_issued,//invoiceSettings.date.ISSUED,
+                    record_time:moment(),
+                    completion_date:due_date,//invoiceSettings.date.DUE,
+                    }
+                };
+                
+                // $('.preLoadLineBreak_removeMe').remove()
+                
+                
+                var progressBar = progressTheProgressBar(__progress,3000,null,progressBarSettings.moment)
+                $('.progressBar_wrapper .progressBar').removeClass('blurred')
+                console.log('[progressBar]',{progressBar:progressBar})
+                */
+                setTimeout(function() { //for footer
+                    
+                    //$('#dueTimer').fadeIn()
+                    /*commented out for error state
+                    var $dueTimer = $('#dueTimer')
+                        $dueTimer.removeClass('initialHide')
+                        $dueTimer.data('slider-lock',true)
+                        $dueTimer.slideDown()
+                        $dueTimer.data('slid','down')
+                        setTimeout(function() { 
+                            $dueTimer.slideUp()
+                            $dueTimer.data('slider-lock',false)
+                        },6000)
+                    */
+                    $('#landingFooterObi').fadeIn( 1500, function() {
+                        // Animation complete
+                        
+                        setTimeout(function() {
+                            //$('#navAndMain').slideDown(1900)
+                            //$('#landing').removeClass('pushInvoiceDown')
+                            //slide-up
+                        
+    
+                            
+                            $('#landingScrollDownButton').fadeIn(1700)
+                            //$('#landingFooterObi_mobile').fadeIn(1900)
+                            
+                        },1*buttonTime) 
+                    });
+                    
+                },(buttonIndex+2)*buttonTime) 
+            },buttonTime)
+        });
+        //$('#headerOrnament').slideDown(1000)
+        //$('#invoiceHeader').slideDown(1000)
+
+
+    },500)
+
+}
+
+
+
+
+
