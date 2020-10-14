@@ -1064,6 +1064,9 @@ input#callInvoice-number {
     text-transform: uppercase;
 
 }
+form#enterInvNum{
+margin:0;
+}
 /*
 #callInvoice-number-wrapper input {
   padding:0;

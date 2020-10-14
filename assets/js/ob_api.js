@@ -55,6 +55,10 @@ console.log('[progressBar]',{'progressBar':progressBar})
         invoiceSettings.invoice.DRIVE_ID = obiAPI_params['DRIVE ID']||urlParams.drive_id
         invoiceSettings.invoice.DRIVE_IFRAME_URL = 'https://docs.google.com/viewer?srcid='+obiAPI_params['DRIVE ID']+'&pid=explorer&efh=true&a=v&chrome=false&embedded=true&rm=minimal&widget=false'
         $('#pdfIframe').data('src', invoiceSettings.invoice.DRIVE_IFRAME_URL);
+        
+        if(stateSettings.status.iFrameLoaded==true){
+            $('#pdfIframe').attr('src', invoiceSettings.invoice.DRIVE_IFRAME_URL);
+        }
     }
     if(obiAPI_params['INV NAME']){
         $('.replace_invoiceNum').text(obiAPI_params['INV NAME'])//invoiceSettings.invoice.NUM
@@ -500,6 +504,7 @@ function loadState_errorLanding(){
             $('#dueTimer').fadeIn()
             $('#enterInvNum').remove()
       });
+      
             setTimeout(function() {
                 /* Commented out for error state
                 $('ul#paymentOptions li .button.payButton').each(function(index,button){
