@@ -687,6 +687,7 @@ body{
   text-transform: uppercase;
 }
   #invoiceHeader #invoiceTitle {
+    letter-spacing:5px;
     text-transform: uppercase;
     font-weight: 700;
     color:white;
