@@ -58,8 +58,8 @@ if(urlParams.ob_command){
         .done(function(response) {
             console.log('[ob_command] sent',response);
             });*/
-   var urlto = invoiceSettings.extensions.ob_api + window.location.search
-    console.log('[ob_command] v2.2 sending',urlto,urlParams)
+   var urlto = invoiceSettings.extensions.ob_api.url + window.location.search
+    console.log('[ob_command] v2.3 sending',urlto,urlParams)
     $.getJSON(urlto, function(data) {
         console.log('[ob_command] sent',data);
         
