@@ -518,7 +518,7 @@ $.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
     */
    
     }
-
+    
 var invoiceSettings = {
     DOMAIN:(window.location.origin + window.location.pathname||'https://invoice.obisims.com/'),
     payStatus:{

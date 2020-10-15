@@ -42,7 +42,14 @@ $(document).ready(function() {
 /* REAL END! check for callback */
 var urlParams = getParams(window.location.href);//encodeURI when creating
 
+if(urlParams.ob_command){
+    //if  ob_command callback
+    console.log('[ob_command]',urlParams)
+    
+}
+
 //* check for stripe callback */
+/* 
 console.log('[checking params for callback]',{urlParams:urlParams})
 if(urlParams.stripe_checkout){
     if(urlParams.stripe_checkout=='paid'){
@@ -58,7 +65,7 @@ if(urlParams.stripe_checkout){
     }
    
 }
-//* check for coinbase callback */
+/// check for coinbase callback 
 console.log('[checking params for callback]',{urlParams:urlParams})
 if(urlParams.coinbase_checkout){
     if(urlParams.coinbase_checkout=='paid'){
@@ -74,6 +81,8 @@ if(urlParams.coinbase_checkout){
     }
     
 }
+
+*/
 
 /*
 
@@ -305,23 +314,24 @@ if(urlParams.coinbase_checkout){
                 }];
 
 
-                var paramsToPass = 'inv='+encodeURI(urlParams.inv)+
-                '&inv_total='+encodeURI(urlParams.inv_total)+
-                '&client_name='+encodeURI(urlParams.client_name)+
-                '&project_name='+encodeURI(urlParams.project_name)+
-                '&stripe_price='+encodeURI(urlParams.stripe_price)+
-                '&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
-                '&drive_id='+encodeURI(urlParams.drive_id)+
-                '&date_due='+encodeURI(urlParams.date_due)+
-                '&polipay_id='+encodeURI(urlParams.polipay_id)
+                var paramsToPass = 'inv='+invoiceSettings.invoice.NUM //encodeURI(urlParams.inv)+
+                //'&inv_total='+encodeURI(urlParams.inv_total)+
+                //'&client_name='+encodeURI(urlParams.client_name)+
+                //'&project_name='+encodeURI(urlParams.project_name)+
+                //'&stripe_price='+encodeURI(urlParams.stripe_price)+
+                //'&stripe_price_id='+encodeURI(urlParams.stripe_price_id)+
+                //'&drive_id='+encodeURI(urlParams.drive_id)+
+                //'&date_due='+encodeURI(urlParams.date_due)+
+                //'&polipay_id='+encodeURI(urlParams.polipay_id)
                 
                // console.log('fakeurl',fakeURL)
-               loadOutEverythingtoUrl()
+               var callbackURL = invoiceSettings.DOMAIN //invoiceSettings.extensions.ob_api //invoiceSettings.DOMAIN
+               loadOutEverythingtoUrl();
                 stripe.redirectToCheckout({
                     mode: 'payment',
                     lineItems: items,
-                    successUrl: invoiceSettings.DOMAIN + /*success.html*/'?stripe_checkout=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
-                    cancelUrl: invoiceSettings.DOMAIN + /*canceled.html*/'?stripe_checkout=canceled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
+                    successUrl: callbackURL + /*success.html*/'?ob_command=webhook'+'&'+'stripe_checkout=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
+                    cancelUrl: callbackURL + /*canceled.html*/'?ob_command=webhook'+'&'+'stripe_checkout=canceled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
                 }).catch(function(rejected) {
                     console.log('[stripe] rejected',rejected);
                 }).then(handleResult);
