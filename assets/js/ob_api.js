@@ -129,8 +129,10 @@ if(obiAPI_params['CLIENT']){
         this one opens the doc in google docs on android
         opens a new page with [df]
         */
-       $('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
-   var fbxhr = new XMLHttpRequest ();
+       
+       //$('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
+       $('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/collection/28830953/1200x630?obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
+       var fbxhr = new XMLHttpRequest ();
 fbxhr.open ("POST", "https://graph.facebook.com", true);
 fbxhr.setRequestHeader ("Content-type", "application / x-www-form-urlencoded");
 fbxhr.send ("id = "+"https:"+"&scrape=true");
