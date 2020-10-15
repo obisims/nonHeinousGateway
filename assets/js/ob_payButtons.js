@@ -44,7 +44,7 @@ var urlParams = getParams(window.location.href);//encodeURI when creating
 
 if(urlParams.ob_command){
     //if  ob_command callback
-    console.log('[ob_command] v2.1 sending',urlParams)
+    
     
    // var invoice = urlParams.inv
    // var method = urlParams.method
@@ -58,7 +58,9 @@ if(urlParams.ob_command){
         .done(function(response) {
             console.log('[ob_command] sent',response);
             });*/
-    $.getJSON(invoiceSettings.extensions.ob_api + window.location.search, function(data) {
+   var urlto = invoiceSettings.extensions.ob_api + window.location.search
+    console.log('[ob_command] v2.2 sending',urlto,urlParams)
+    $.getJSON(urlto, function(data) {
         console.log('[ob_command] sent',data);
         
 
