@@ -17,8 +17,9 @@
     <meta property="article:author" content="obisims.com" />
     <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image">
-	<meta property="og:image" content="https://source.unsplash.com/featured/1200x630/?money,future,mild" />
-	<script>
+	<!--<meta property="og:image" content="https://source.unsplash.com/featured/1200x630/?money,future,mild" />-->
+	<meta property="og:image" content="https://source.unsplash.com/collection/28830953/1200x630" />
+    <script>
 		//$('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
 		const queryString = window.location.search;
 		console.log(queryString);	
@@ -30,7 +31,8 @@
 		document.getElementsByTagName('head')[0].appendChild(meta_url);
 		var meta_img = document.createElement('meta');
 		meta_img.setAttribute('property', 'og:url');
-		meta_img.content = 'https://source.unsplash.com/featured/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'';
+		//meta_img.content = 'https://source.unsplash.com/featured/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'';
+		meta_img.content = 'https://source.unsplash.com/collection/28830953/1200x630?obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'';
 		document.getElementsByTagName('head')[0].appendChild(meta_img);
 		
 		
