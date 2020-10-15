@@ -44,8 +44,27 @@ var urlParams = getParams(window.location.href);//encodeURI when creating
 
 if(urlParams.ob_command){
     //if  ob_command callback
-    console.log('[ob_command]',urlParams)
+    console.log('[ob_command] sending',urlParams)
     
+   // var invoice = urlParams.inv
+   // var method = urlParams.method
+   // var checkout = urlParams.checkout
+   // var apiURL = invoiceSettings.extensions.ob_api
+    ///var webhook = invoiceSettings.extensions.ob_api + window.location.search // '?ob_command=webhook'
+    //var v_name = $("#name").val();
+    $.post(invoiceSettings.extensions.ob_api,
+            {
+                //index: selecturlParamsedUser,
+                invoice: selectedUser.inv,
+                checkout: urlParams.checkout,
+                method: urlParams.method
+            },
+            function (data) {
+                console.log('[ob_command] response',data)
+                //console.log(data.name);
+               // console.log(data.name);
+            }, 'json');
+
 }
 
 //* check for stripe callback */
@@ -330,8 +349,8 @@ if(urlParams.coinbase_checkout){
                 stripe.redirectToCheckout({
                     mode: 'payment',
                     lineItems: items,
-                    successUrl: callbackURL + /*success.html*/'?ob_command=webhook'+'&'+'stripe_checkout=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
-                    cancelUrl: callbackURL + /*canceled.html*/'?ob_command=webhook'+'&'+'stripe_checkout=canceled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
+                    successUrl: callbackURL + /*success.html*/'?ob_command=webhook'+'&'+'method=stripe'+'&'+'checkout=paid' + '&' + paramsToPass, // window.location.search.substring(1),//session_id={CHECKOUT_SESSION_ID}&
+                    cancelUrl: callbackURL + /*canceled.html*/'?ob_command=webhook'+'&'+'method=stripe'+'&'+'checkout=cancelled' + '&' + paramsToPass, //window.location.search.substring(1), // session_id={CHECKOUT_SESSION_ID}
                 }).catch(function(rejected) {
                     console.log('[stripe] rejected',rejected);
                 }).then(handleResult);
