@@ -20,9 +20,13 @@
 	<meta property="og:image" content="https://source.unsplash.com/featured/1200x630/?money,future,mild" />
 	<script>
 		//$('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
+		const queryString = window.location.search;
+		console.log(queryString);	
+		const head_urlParams = new URLSearchParams(queryString);
+		var urlParams_inv = head_urlParams.get('inv');
 		var meta_url = document.createElement('meta');
 		meta_url.setAttribute('property', 'og:url');
-		meta_url.content = document.location.host;
+		meta_url.content = document.location.host+'/'+urlParams_inv;
 		document.getElementsByTagName('head')[0].appendChild(meta_url);
 		var meta_img = document.createElement('meta');
 		meta_img.setAttribute('property', 'og:url');
