@@ -44,7 +44,7 @@ var urlParams = getParams(window.location.href);//encodeURI when creating
 
 if(urlParams.ob_command){
     //if  ob_command callback
-    console.log('[ob_command] sending',urlParams)
+    console.log('[ob_command] v2.1 sending',urlParams)
     
    // var invoice = urlParams.inv
    // var method = urlParams.method
@@ -54,10 +54,15 @@ if(urlParams.ob_command){
     //var v_name = $("#name").val();
 
 //'https://script.google.com/a/acme.org/macros/s/AKfy***A4B***eo/exec?token=myprecioustoken&operation=findAll'
-    $.post(invoiceSettings.extensions.ob_api + window.location.search, null)
+    /*$.post(invoiceSettings.extensions.ob_api + window.location.search, null)
         .done(function(response) {
             console.log('[ob_command] sent',response);
-            });
+            });*/
+    $.getJSON(invoiceSettings.extensions.ob_api + window.location.search, function(data) {
+        console.log('[ob_command] sent',data);
+        
+
+    })
 /*
     $.post(invoiceSettings.extensions.ob_api,
             {
