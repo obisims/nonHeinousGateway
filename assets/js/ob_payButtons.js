@@ -52,6 +52,13 @@ if(urlParams.ob_command){
    // var apiURL = invoiceSettings.extensions.ob_api
     ///var webhook = invoiceSettings.extensions.ob_api + window.location.search // '?ob_command=webhook'
     //var v_name = $("#name").val();
+
+//'https://script.google.com/a/acme.org/macros/s/AKfy***A4B***eo/exec?token=myprecioustoken&operation=findAll'
+    $.post(invoiceSettings.extensions.ob_api + window.location.search, null)
+        .done(function(response) {
+            console.log('[ob_command] sent',response);
+            });
+/*
     $.post(invoiceSettings.extensions.ob_api,
             {
                 //index: selecturlParamsedUser,
@@ -63,7 +70,7 @@ if(urlParams.ob_command){
                 console.log('[ob_command] response',data)
                 //console.log(data.name);
                // console.log(data.name);
-            }, 'json');
+            }, 'json');*/
 
 }
 
