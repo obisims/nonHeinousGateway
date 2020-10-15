@@ -9,8 +9,8 @@
 		<title>Sans-Bogus Digital Invoice</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-		<meta property="description" content="Pay your obisims invoice digitally with Direct Deposit, Credit Card and supported Cryptocurrencies" />
-    <meta property="og:description" content="Pay your obisims invoice digitally with Direct Deposit, Credit Card and supported Cryptocurrencies" />
+		<meta property="description" content="Pay your obisims invoice digitally with Direct Deposit, Credit Card and supported Cryptocurrencies." />
+    <meta property="og:description" content="Pay your obisims invoice digitally with Direct Deposit, Credit Card and supported Cryptocurrencies." />
     <meta name="theme-color" content="#f15b58">
     <meta property="og:title" content="Sans-Bogus Digital Invoice" />
     <meta property="og:type" content="article" />
@@ -18,7 +18,24 @@
     <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image">
 	<meta property="og:image" content="https://source.unsplash.com/featured/1200x630/?money,future,mild" />
-	
+	<script>
+		//$('meta[property=og\\:image]').attr('content', 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'');
+		var meta_url = document.createElement('meta');
+		meta_url.setAttribute('property', 'og:url');
+		meta_url.content = document.location.host;
+		document.getElementsByTagName('head')[0].appendChild(meta_url);
+		var meta_img = document.createElement('meta');
+		meta_img.setAttribute('property', 'og:url');
+		meta_img.content = 'https://source.unsplash.com/1200x630/?money,future,mild&obVersion='+Math.floor(Math.random() * 1000).toFixed(0)+'';
+		document.getElementsByTagName('head')[0].appendChild(meta_img);
+		
+		
+		var fbxhr = new XMLHttpRequest ();
+		fbxhr.open ("POST", "https://graph.facebook.com", true);
+		fbxhr.setRequestHeader ("Content-type", "application / x-www-form-urlencoded");
+		fbxhr.send ("id = "+window.location.origin+window.location.pathname+"&scrape=true");
+		
+	</script>
 		<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400&display=swap" rel="stylesheet">
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="assets/css/main.css" />
