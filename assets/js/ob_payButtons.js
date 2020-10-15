@@ -55,7 +55,7 @@ if(urlParams.ob_command){
     $.post(invoiceSettings.extensions.ob_api,
             {
                 //index: selecturlParamsedUser,
-                invoice: selectedUser.inv,
+                invoice: urlParams.inv,
                 checkout: urlParams.checkout,
                 method: urlParams.method
             },
