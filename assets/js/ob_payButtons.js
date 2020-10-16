@@ -275,7 +275,13 @@ if(urlParams.coinbase_checkout){
                         TIME:confirmDate,
                         RECEIPT: uuidv4() //invoiceSettings.checkouts[paymentMethod].price_id
                     }
-                    
+                    var urlto = invoiceSettings.extensions.ob_api.url + '?ob_command=webhook'+'&'+'method='+'Direct Debit'+'&checkout=paid' + '&' +'inv='+urlParams.inv// paramsToPass//window.location.search
+                    console.log('[ob_command] v2.3 sending - confirm direct debit payment',urlto,urlParams)
+                    $.getJSON(urlto, function(data) {
+                        console.log('[ob_command] sent',data);
+                        
+                
+                    })
                     postSlackNotification_purchase_complete(paymentMethod) //  alert("Payment confirmed");
                     showApproved_state(invoiceSettings)
                 }else{
