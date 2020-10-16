@@ -16,7 +16,7 @@ function ob_api(inv){
     console.log('[ob_api]','invNum',invNum)
     
     var obi_api_apiUrl = 'https://script.google.com/macros/s/AKfycbxhNWLM3sijTGy-L_-YrkVINYblPMdyaFlnnEbleFYf-apslLgs/exec'
-    if(inv)obi_api_apiUrl = obi_api_apiUrl+'?'+'inv='+invNum+'&created_at='+moment().format('llll')//get just this inv
+    if(inv)obi_api_apiUrl = obi_api_apiUrl+'?'+'inv='+invNum //+'&created_at='+moment().format('llll')//get just this inv
     /* GET ALL INVOICES UNLESS INV SPECIFIED */
     $.getJSON(obi_api_apiUrl, function(data) {
         console.log('[ob_api]','invoice data',data)
