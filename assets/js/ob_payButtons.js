@@ -276,7 +276,8 @@ if(urlParams.coinbase_checkout){
                         TIME:confirmDate,
                         RECEIPT: directDebitReceipt //invoiceSettings.checkouts[paymentMethod].price_id
                     }
-                    var urlto = invoiceSettings.extensions.ob_api.url + '?ob_command=webhook'+'&'+'method='+'Direct Debit'+'&checkout=paid' + '&' +'inv='+urlParams.inv+'&'+'receipt='+encodeURI(directDebitReceipt)+'created_at='+moment().format('llll')// paramsToPass//window.location.search
+                    
+                    var urlto = invoiceSettings.extensions.ob_api.url + '?ob_command=webhook'+'&'+'method='+'Direct Debit'+'&checkout=paid' + '&' +'inv='+invoiceSettings.invoice.NUM+'&'+'receipt='+encodeURI(directDebitReceipt)+'created_at='+moment().format('llll')// paramsToPass//window.location.search
                     console.log('[ob_command] v2.3 sending - confirm direct debit payment',urlto,urlParams)
                     $.getJSON(urlto, function(data) {
                         console.log('[ob_command] sent',data);
