@@ -261,7 +261,7 @@ fbxhr.send ("id = "+"https:"+"&scrape=true");
           
             //$('.progressBar').fadeIn()
             var __progress = '.progressBar span.progressBar_progress'
-            var $progress = $(__progress)
+            //var $progress = $(__progress)
             
             
             $('.progressBar_wrapper').fadeIn()

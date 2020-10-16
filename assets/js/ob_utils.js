@@ -77,7 +77,9 @@ function make_base_auth(user, password) {
          moment:{},
          }
          progressBarSettings.animationTime = time||3000
-       if(completionPercentage){progressBarSettings.completionPercentage=completionPercentage}
+       if(completionPercentage){
+         progressBarSettings.completionPercentage=completionPercentage
+        }
       if(dates){
         console.log('[progressTheProgressBar]',[elems,completionPercentage,time])
         progressBarSettings.moment.creation_date = moment(dates.creation_date)||moment()
@@ -88,12 +90,14 @@ function make_base_auth(user, password) {
        var dateCalucalted_percentage_complete = (progressBarSettings.moment.record_time - progressBarSettings.moment.creation_date) / (progressBarSettings.moment.completion_date - progressBarSettings.moment.creation_date) * 100;
        console.log('dateCalucalted_percentage_complete',dateCalucalted_percentage_complete)
        var dateCalucalted_percentage_rounded = (Math.round(dateCalucalted_percentage_complete * 100) / 100); 
-      // percentage rounded to 2 decimal points
+       // percentage rounded to 2 decimal points
+       if(dateCalucalted_percentage_rounded>100)dateCalucalted_percentage_rounded=100
       progressBarSettings.completionPercentage=dateCalucalted_percentage_rounded
       }
         
        
       console.log('completionPercentage',dateCalucalted_percentage_rounded)
+    
       $(elems).data('width',progressBarSettings.completionPercentage) 
       
         animateProgressBar(elems,progressBarSettings.completionPercentage,progressBarSettings.animationTime)
